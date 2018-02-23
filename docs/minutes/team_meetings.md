@@ -1,6 +1,8 @@
 # Hestia Meeting
 
 ## Meeting 1 (2018-02-22)
+_NOTE:_ This first meeting included all current members developing for the Hestia project. These members were split into two teams, web and iOS development. Aside from this first meeting, this documentation will be focused on including details from the web development team's meetings.
+
 Scribe: Troy
 
 Members present: Andrew, Roman, Mark, Rens, Jur, Daan, Hannah, Andre, Tom, Feiko, Troy, Zino
