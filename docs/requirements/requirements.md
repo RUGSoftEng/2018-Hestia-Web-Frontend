@@ -46,5 +46,3 @@ The requirements for the system are specified from the perspective of those who 
 - [ ] As a user, I would like to be able to use the Hestia service without interruption.
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
 - [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
-
-### Change Log
