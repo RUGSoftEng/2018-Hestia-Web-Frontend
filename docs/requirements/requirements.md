@@ -26,7 +26,7 @@ Our goal in this project is to develop web interfacing to ensure that the users 
 
 The requirements for the system are specified from the perspective of those who are going to use the system, i.e. via user stories. The user stories involve the description of the user, their requirement, and the reasoning behind that requirement. The user stories reaffirm the context of the requirement and aids in prioritization and re-specification. More user stories will be added as more requirements are discovered through the development process and with further consultation with the client.
 
-## Critical user stories
+#### Critical user stories
 - [ ] As a user, I would like to be able to change the status of peripherals of all of my Hestia servers from one location, so that it’s easier for me to configure my home automation.
 - [ ] As a user, I would like to be able to add a Hestia server to be remotely controlled, 
 - [ ] As a user, I would like to be able to ensure that my Hestia servers cannot be controlled without my knowledge.
@@ -39,7 +39,7 @@ The requirements for the system are specified from the perspective of those who 
 - [ ] As a user, I would like to be able to use the Hestia service without interruption.
 - [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
 
-## Important user stories
+#### Important user stories
 - [ ] As a user, I would like to be able to view details about my Hestia servers from a central location, so that I can monitor their status easily.
 - [ ] As a user, I would like to be able to specify presets across my peripherals and apply those presets, so that I can quickly configure the peripherals to suit my preferences.
 - [ ] As a user, I would like to be able to submit feedback to plugin developers, so that they can improve their plugin.
@@ -47,7 +47,7 @@ The requirements for the system are specified from the perspective of those who 
 - [ ] As a developer, I would like to have consistent style between my products.
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
 
-## Useful user stories
+#### Useful user stories
 - [ ] As a user, I would like to be able to donate to plugin developers, to show my support.
 - [ ] As a user, I would like to be able to export and import configurations for my Hestia servers, to make it easier for me to deploy my systems.
 - [ ] As a user, I would like to be able to change the theme of the user-interface, so that it suits my preferences.
