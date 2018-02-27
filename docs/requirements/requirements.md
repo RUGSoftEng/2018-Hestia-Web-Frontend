@@ -1,12 +1,16 @@
-## Hestia Web Development Requirements Document
->*Version 1.0*
+<center>
+	<!-- Title image and text. -->
+	<img src="images/hestiaLogo.png"/>
+	<h1>Hestia Web Development Requirements Document</h1>
+	<span style="font-style: italic; color: #b34700">Version 1.0</span>
+</center>
 
 ### Clients
 - F. te Nijenhuis
 - L. Holdijk
 
 ### Authors
-* A. Lallis
+* A. Lalis
 * T.K. Harrison
 * R.T. Nijman
 * P. Oetinger
@@ -16,15 +20,26 @@
 * S. Oegema
 
 
-### Introduction
-The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The back end infrastructure to facilitate communicating and controlling the various hardware to be automated has been implemented by the clients. However, aside from an Android application (also developed by the clients), the system lacks consumer side interfacing. This limits ease of use and hinders adoption. 
+## Introduction
+The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local back end infrastructure to facilitate communicating and controlling the various hardware to be automated has been implemented by the clients. However, aside from an Android application (also developed by the clients), the system lacks consumer side interfacing. This limits ease of use and hinders widespread popular usage. 
 
-Our goal in this project is to develop web interfacing to ensure that the users of the *Hestia* System have a streamlined, usable, and secure experience. To that end this document details the requirements associated with the project.
+Our goal in this project is to develop web interfacing to ensure that the users of the *Hestia* System have a streamlined, usable, and secure experience. In brief, the users of the system should have quick, intuitive access to all the functionality provided by the clients' existing API system, so that anyone can simply navigate to a webpage and have the power to do what one could previously only do through manual HTTP requests. To that end this document details the requirements associated with the project.
 
 
-### User Stories
+## User Stories
 
-The requirements for the system are specified from the perspective of those who are going to use the system, i.e. via user stories. The user stories involve the description of the user, their requirement, and the reasoning behind that requirement. The user stories reaffirm the context of the requirement and aids in prioritization and re-specification. More user stories will be added as more requirements are discovered through the development process and with further consultation with the client.
+The requirements for the system are specified from the perspective of those who are going to use the system, i.e. via user stories. The user stories involve the description of the user, their requirement, and the reasoning behind that requirement. The user stories reaffirm the context of the requirement and aid in prioritization and re-specification. More user stories will be added as more requirements are discovered through the development process and with further consultation with the client.
+
+The actors referenced throughout the aforementioned user stories are defined in more detail below, so that the reasoning for each story is logical and motivated by realistic desire or need.
+
+#### User
+The majority of the stories are focused around the *User*, who is someone who makes use of the *Hestia* system to automate peripherals in their home. The user does not care about implementation or backend behaviour, as long as their experience with the interface is satisfactory. The user, in general, wants the system to be as intuitive and easy to use as possible, while still providing complete control over the devices in their home.
+
+#### Developer
+The developer is one who is responsible for designing the software that the user will interact with. They are most concerned with the structure and design of the system, and must make the application in such a way as to satisfy the user's needs and the clients' goals. Note that the developer in this scenario is not responsible for the pre-existing software provided by the clients.
+
+#### Plugin Developer
+The plugin developer is a person who has created a plugin that the Hestia system can manage. The plugin developer does not need to know a great deal about the user interface in order to develop plugins, and as such is more concerned with being able to publish their plugin and have it work successfully on all other Hestia local systems.
 
 #### Critical user stories
 - [ ] As a user, I would like to be able to change the status of peripherals of all of my Hestia servers from one location, so that it’s easier for me to configure my home automation.
@@ -56,3 +71,25 @@ The requirements for the system are specified from the perspective of those who 
 - [ ] As a user, I would like to be able to use the Hestia service without interruption.
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
 - [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
+
+## Change Log
+
+<style type="text/css">
+	.tg  {border-collapse:collapse;border-spacing:0;width:100%}
+	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal; background-color: white}
+	.tg th{font-family:Arial, sans-serif;font-size:18px;font-weight:bold;text-align:center;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
+</style>
+<table class="tg">
+	<tr>
+    		<th>Who</th>
+    		<th>When</th>
+    		<th>Where</th>
+    		<th>What</th>
+  	</tr>
+  	<tr>
+    		<td>Andrew Lalis<br></td>
+    		<td>27/2/2018</td>
+    		<td>Whole Document</td>
+    		<td>Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories.</td>
+  	</tr>
+</table>
