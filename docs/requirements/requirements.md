@@ -74,12 +74,8 @@ The plugin developer is a person who has created a plugin that the Hestia system
 
 ## Change Log
 
-<style type="text/css">
-	.tg  {border-collapse:collapse;border-spacing:0;width:100%}
-	.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal; background-color: white}
-	.tg th{font-family:Arial, sans-serif;font-size:18px;font-weight:bold;text-align:center;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;}
-</style>
-<table class="tg">
+<style>td {background-color:white;}</style>
+<table style="border-collapse:collapse;border-spacing:0;width:100%">
 	<tr>
     		<th>Who</th>
     		<th>When</th>
