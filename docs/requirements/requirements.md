@@ -73,18 +73,11 @@ The plugin developer is a person who has created a plugin that the Hestia system
 - [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
 
 ## Change Log
+# Timelog for Troy Karan Harrison (S2841886)
 
-<table style="border-collapse:collapse;border-spacing:0;width:100%">
-	<tr>
-    		<th>Who</th>
-    		<th>When</th>
-    		<th>Where</th>
-    		<th>What</th>
-  	</tr>
-  	<tr>
-    		<td>Andrew Lalis<br></td>
-    		<td>27/2/2018</td>
-    		<td>Whole Document</td>
-    		<td>Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories.</td>
-  	</tr>
-</table>
+| Who            |       When | Where          | What                                                                                |
+| :---           |       :--- | :---           | :---                                                                                |
+| Troy Harrison  | 2018-02-27 | Whole Document | Added initial description, and basic user stories.                                  |
+| Rens Nijman    | 2018-02-27 | Whole Document | Fixed typos and separated user stories by importance.                               |
+| Peter Oetinger | 2018-02-27 | Whole Document | Added user stories                                                                  |
+| Andrew Lalis   | 2018-02-27 | Whole Document | Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories. |
