@@ -46,6 +46,8 @@ The requirements for the system are specified from the perspective of those who 
 - [ ] As a plugin developer, I would like to be able to receive detailed and organised feedback, so I can improve my plugin.
 - [ ] As a developer, I would like to have consistent style between my products.
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
+- [ ] As a user, I would like to be able to view my favorite peripherals in one location
+- [ ] 
 
 #### Useful user stories
 - [ ] As a user, I would like to be able to donate to plugin developers, to show my support.
