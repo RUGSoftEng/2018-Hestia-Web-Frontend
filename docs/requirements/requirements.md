@@ -74,7 +74,6 @@ The plugin developer is a person who has created a plugin that the Hestia system
 
 ## Change Log
 
-<style>td {background-color:white;}</style>
 <table style="border-collapse:collapse;border-spacing:0;width:100%">
 	<tr>
     		<th>Who</th>
