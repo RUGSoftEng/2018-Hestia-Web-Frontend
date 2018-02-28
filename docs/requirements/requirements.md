@@ -73,7 +73,6 @@ The plugin developer is a person who has created a plugin that the Hestia system
 - [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
 
 ## Change Log
-# Timelog for Troy Karan Harrison (S2841886)
 
 | Who            |       When | Where          | What                                                                                |
 | :---           |       :--- | :---           | :---                                                                                |
