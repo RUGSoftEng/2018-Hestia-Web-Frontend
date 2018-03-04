@@ -19,6 +19,8 @@
 * R. Bell
 * S. Oegema
 
+### Teaching Assistant
+Feiko Ritsema
 
 ## Introduction
 The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local back end infrastructure to facilitate communicating and controlling the various hardware to be automated has been implemented by the clients. However, aside from an Android application (also developed by the clients), the system lacks consumer side interfacing. This limits ease of use and hinders widespread popular usage. 
@@ -70,7 +72,6 @@ The plugin developer is a person who has created a plugin that the Hestia system
 - [ ] As a developer, I would like to have consistent style between my products.
 - [ ] As a user, I would like to be able to use the Hestia service without interruption.
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
-- [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
 
 ## Change Log
 
