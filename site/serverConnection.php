@@ -51,10 +51,11 @@
 		}
 	}
 
-	if (!empty($_POST["query"])){
-		$json = sendRequest($_POST["method"], "https://0.0.0.0:8000/".$_POST["query"]);
+	if (!empty($_POST["query"]) && !empty($_POST["method"])){
+		$json = sendRequest($_POST["method"], $_POST["query"]);
 		echo($json);
 	} else {
-		echo("Send something next time.");
+		header("HTTP/1.1 500 Internal Server Error");
+		echo '...';
 	}
 ?>
