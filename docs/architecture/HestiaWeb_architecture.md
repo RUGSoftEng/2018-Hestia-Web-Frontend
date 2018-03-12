@@ -32,6 +32,15 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 * Back-end server that connects users to their local Hestia controllers and holds user and server information
 
 ## Website Front-End
+Some intro; especially front-end may deviate from initial choices/client requirements, based on further interactions.
+![some text](https://github.com/RUGSoftEng/2018-Hestia-Web/blob/frontend/docs/frontend_docs/concepts/Hestia%20login%20concept.png)
 
+### Design choices
+#### Structural choices
+Something about the structure of the information of the webpage; having a dash board.
+Making sure that everything could be tabbed through, make it as accessible as possible (e.g. good design).
+#### Aesthetical choices
+Choice of colour, elements, layout of the page, logos, images, etc.
+Maybe use bootstrap or something? Talk about why
 
 ## Website Back-End
