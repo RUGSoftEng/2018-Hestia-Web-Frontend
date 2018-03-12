@@ -6,3 +6,5 @@
 | *27-02-2018* | 2 | Setup Trello for project management. 
 | *07-03-2018* | 1 | Meeting with Lars and Feiko
 | *07-03-2018* | 2 | REST API lecture                                                                                        |
+| *10-03-2018* | 2 | Firebase authentication tutorials and mini projects to familiarize myself with authentication process|
+| *12-03-2018* | 1 | Meeting with backend. Discussed server, and worked on architecture. Switching to FLASK to handle API|

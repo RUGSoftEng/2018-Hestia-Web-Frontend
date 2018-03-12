@@ -6,3 +6,5 @@
 | *7/3/2018* | 11:00-12:00 | Meeting with Lars, then meeting with Feiko. |
 | *7/3/2018* | 13:00-15:00 | Lecture on RESTful design, applies heavily to our project. |
 | *8/3/2018* | 11:00-12:00 | Web server research, specifically looking at Firebase. |
+| *9/3/2018* | 11:00-13:00 | Created basic interface between website and local hestia server. |
+| *9/3/2018* | 18:00-20:00 | Improved printing of objects returned by local server. |

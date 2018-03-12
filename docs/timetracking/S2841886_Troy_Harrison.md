@@ -14,5 +14,18 @@
 |              | 15:30-16:00 | Work on requirements document. Formatting the user stories.                                                        |
 |              | 16:00-16:30 | Work on requirements document. Formatting the user stories.                                                        |
 |              | 16:30-17:00 | Work on requirements document. Formatting the user stories. Move the work over to Markdown on GitHub.              |
-|              |             |                                                                                                                    |
+| *2018-03-10* | 15:00-15:30 | Research REST API.                                                                                                 |
+|              | 15:30-16:00 | Research Electron.                                                                                                 |
+|              | 16:00-16:30 | Go through Electron tutorials.                                                                                     |
+|              | 16:30-17:00 | Go through Electron tutorials.                                                                                     |
+|              | 17:00-17:30 | Review PHP and frameworks facilitating REST.                                                                       |
+|              | 17:30-18:00 | Review PHP and frameworks facilitating REST.                                                                       |
+| *2018-03-11* | 11:00-11:30 | Go through server code of client provided Hestia backend.                                                          |
+|              | 11:30-12:00 | Go through server code of client provided Hestia backend.                                                          |
+|              | 13:00-13:30 | Research Flask.                                                                                                    |
+|              | 13:30-14:00 | Research Flask.                                                                                                    |
+|              | 14:00-14:30 | Research Firebase library integration with Flask.                                                                  |
+|              | 14:30-15:00 | Go through Flask examples (includes the Hestia server).                                                            |
+|              | 15:00-15:30 | Perform minimal testing with Flask.                                                                                |
+
 
