@@ -43,7 +43,7 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 
 ## Website Front-End
 Some intro; especially front-end may deviate from initial choices/client requirements, based on further interactions.
-![some text](https://github.com/RUGSoftEng/2018-Hestia-Web/blob/frontend/docs/frontend_docs/concepts/Hestia%20login%20concept.png)
+![alt text](https://github.com/RUGSoftEng/2018-Hestia-Web/blob/frontend/docs/frontend_docs/concepts/Hestia%20login%20concept.png)
 
 ### Design choices
 #### Structural choices
@@ -54,26 +54,27 @@ Choice of colour, elements, layout of the page, logos, images, etc.
 Maybe use bootstrap or something? Talk about why
 
 ## Website Back-End
-Webserver (main.py) and authentication
-
+The backend of the webapp will serve as a middleman to communicate with the Hestia server. This means that there needs to be an interface to be able to send queries to the server. Furthermore, there needs to be a database, where peripherals and such are stored, some form of user management, and an actual webpage in order to send queries.
 
 ### Design decisions
-Flask over PHP
-	We tested PHP - Familiarity with PHP
-	None with Flask/Python
-	PHP might be faster than Python - not analyzed explicitly
-	Scalability in Flask coupled with things such as Firebase, additionally, clients wrote Hestia in Python, using Flask (so familiar)
-	This means that clients could theoretically easily extend/adapt our code
+For the design of the webapp, we initially chose to implement in PHP, as there is familiarity in the team with PHP. Thus, a concise webpage was setup, using HTML and PHP. This website was designed to test querying the Hestia webserver, with for instance a *get* request. However, after the initial webpage, we decided to implement the webpage in Python, using Flask, even though all of us have less experience with Python, and little with Flask. 
 
-What is [Firebase](https://firebase.google.com/)?
-	- 2m users
-	- Authentication (provides easy auth)
-	- Other stuffe
-	- up to 50 users free (check); paid for more
-	- this might be an issue, as the clients have no business model
+The main reason for this is that the current Hestia webserver, developed by the clients, is also developed using Python and Flask. Using this same setup creates more consistency, allows for easier transition once the product is finished, and will allow easier management of the code.
+
+As a final remark on this topic, it is not absolutely clear yet whether PHP would be better suited for this job than Python. This is therefore an issue that requires more attention.
+
+For the design database we quickly narrowed down to a few options, such as MySQL and Firebase.
+
+#### What is Firebase?
+[Firebase](https://firebase.google.com/) is a platform that offers a rather complete backend solution. It offers an authentication service, Firebase Authentication, where users can login using passwords, phone numbers, and popular identity providers such as Google, Facebook, and others. Furthermore, Firebase gives a realtime database.
+
+Firebase has free and paid versions, where the free version allows up to 100 Simultaneous connections. During development of the Hestia system, this will clearly suffice. However, it has to be considered that a paid plan is going to be required. **SOMETHING ABOUT STORAGE? https://firebase.google.com/pricing/** 
+
+During further development it is essential to design the system in such a way, that switching from Firebase to an alternative, a different server and authentication service, does not incur large infrastructural cost. 
 There may be other viable alternatives, so we should design in such a way that switching from Firebase to alt doesn't incur large infrastructural cost.
 
-What are the advantages/disadvantages
+# TO DO
+Have not discussed 2m concurrent users requirement
 
 ## Change Log
 
@@ -82,4 +83,5 @@ What are the advantages/disadvantages
 | Troy Harrison  |  2018-03-12 | Whole document | Created initial document.           |
 | Andrew Lalis   |  2018-03-12 | Whole document | Updated content for document.       |
 | Rens Nijman    |  2018-03-12 | Front-End      | Add structure for front-end section.|
-| Rens Nijman    |  2018-03-12 | Back-End       | Add structure for back-end section.|
+| Rens Nijman    |  2018-03-12 | Back-End       | Add structure for back-end section. |
+| Rens Nijman    |  2018-03-12 | Whole document | More introduction and back-end.     |
