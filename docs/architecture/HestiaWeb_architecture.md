@@ -44,3 +44,14 @@ Choice of colour, elements, layout of the page, logos, images, etc.
 Maybe use bootstrap or something? Talk about why
 
 ## Website Back-End
+Intro
+### Overview (servers, controllers, concept)
+
+### Design decisions
+Rest over PHP
+Firebase or homerolling
+
+## Changelog
+
+
+
