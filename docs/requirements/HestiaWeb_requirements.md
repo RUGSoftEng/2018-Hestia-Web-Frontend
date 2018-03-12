@@ -80,6 +80,7 @@ This is some placeholder text because I'm not 100% sure what to put here. PLEASE
 Below are listed some requirements or concerns which the clients have told us about, but due to resource requirements, legal issues, or other barriers, we know in advance that such features cannot be reasonably implemented.
 
 * Add secret backdoor access to allow administrators to control the lights in any house where Hestia is installed.
+* Make website available by local host as well as through internet. (Client says this is not necessary, but we realize it would be good to improve accessibility)
 
 ## Change Log
 
@@ -90,3 +91,4 @@ Below are listed some requirements or concerns which the clients have told us ab
 | Peter Oetinger | 2018-02-27 | Whole Document | Added user stories                                                                  |
 | Andrew Lalis   | 2018-02-27 | Whole Document | Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories. |
 | Andrew Lalis   | 2018-03-04 | Whole Document | Added TA name, Won't Do section, removed duplicate user story, added non-functional requirements. |
+| Andrew Lalis   | 2018-03-12 | Document Name | Renamed to HestiaWeb_requirements, added local website to Won't Do. |
