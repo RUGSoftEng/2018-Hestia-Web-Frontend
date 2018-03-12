@@ -8,3 +8,4 @@
 | *8/3/2018* | 11:00-12:00 | Web server research, specifically looking at Firebase. |
 | *9/3/2018* | 11:00-13:00 | Created basic interface between website and local hestia server. |
 | *9/3/2018* | 18:00-20:00 | Improved printing of objects returned by local server. |
+| *12/3/2018* | 12:00-13:00 | Meeting for with server side people. |
