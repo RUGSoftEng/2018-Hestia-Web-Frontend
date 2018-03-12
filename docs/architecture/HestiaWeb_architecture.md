@@ -43,7 +43,8 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 
 ## Website Front-End
 Some intro; especially front-end may deviate from initial choices/client requirements, based on further interactions.
-![alt text](https://github.com/RUGSoftEng/2018-Hestia-Web/blob/frontend/docs/frontend_docs/concepts/Hestia%20login%20concept.png)
+
+![Website Design](images/Hestia login concept.png  "Website Front-End Design")
 
 ### Design choices
 #### Structural choices
@@ -54,7 +55,7 @@ Choice of colour, elements, layout of the page, logos, images, etc.
 Maybe use bootstrap or something? Talk about why
 
 ## Website Back-End
-The backend of the webapp will serve as a middleman to communicate with the Hestia server. This means that there needs to be an interface to be able to send queries to the server. Furthermore, there needs to be a database, where peripherals and such are stored, some form of user management, and an actual webpage in order to send queries.
+The backend of the webapp will serve as a middleman to communicate with the Hestia server. This means that there needs to be an interface to be able to send queries to the server. Furthermore, a user database is required in order to maintain a secure environment in which users may only have permission to interact with systems they own, and so that unauthorized access to server data, user data or any other sensitive information is completely forbidden.
 
 ### Design decisions
 For the design of the webapp, we initially chose to implement in PHP, as there is familiarity in the team with PHP. Thus, a concise webpage was setup, using HTML and PHP. This website was designed to test querying the Hestia webserver, with for instance a *get* request. However, after the initial webpage, we decided to implement the webpage in Python, using Flask, even though all of us have less experience with Python, and little with Flask. 
@@ -63,7 +64,7 @@ The main reason for this is that the current Hestia webserver, developed by the 
 
 As a final remark on this topic, it is not absolutely clear yet whether PHP would be better suited for this job than Python. This is therefore an issue that requires more attention.
 
-For the design database we quickly narrowed down to a few options, such as MySQL and Firebase.
+Regarding the database, while it would be possible to create a custom relational database schema and authentication system using pure PHP and MySQL, we believe that the development time required to not only do this, but make it completely secure, is not the most efficient way to proceed. Therefore, we have decided on using Google's Firebase platform for our database needs, as explained in the next section.
 
 #### What is Firebase?
 [Firebase](https://firebase.google.com/) is a platform that offers a rather complete backend solution. It offers an authentication service, Firebase Authentication, where users can login using passwords, phone numbers, and popular identity providers such as Google, Facebook, and others. Furthermore, Firebase gives a realtime database.
@@ -72,6 +73,15 @@ Firebase has free and paid versions, where the free version allows up to 100 Sim
 
 During further development it is essential to design the system in such a way, that switching from Firebase to an alternative, a different server and authentication service, does not incur large infrastructural cost. 
 There may be other viable alternatives, so we should design in such a way that switching from Firebase to alt doesn't incur large infrastructural cost.
+
+##Glossary
+Below are defined a list of commonly used terms that are especially esoteric to the Hestia Web system architecture.
+
+* *Controller*: The local Hestia Server in a user's house. The controller simply runs the Hestia Server previously developed by the client, and has a unique IP address and port number.
+
+* *Peripheral*: A peripheral is any device which can be connected to the Hestia system via a plugin. For example, a Phillips Hue light bulb would constitute a peripheral.
+
+* *User*: A user is someone who has installed a Hestia controller in their home, and accesses the website to control their system.
 
 # TO DO
 Have not discussed 2m concurrent users requirement
@@ -85,3 +95,4 @@ Have not discussed 2m concurrent users requirement
 | Rens Nijman    |  2018-03-12 | Front-End      | Add structure for front-end section.|
 | Rens Nijman    |  2018-03-12 | Back-End       | Add structure for back-end section. |
 | Rens Nijman    |  2018-03-12 | Whole document | More introduction and back-end.     |
+| Andrew Lalis | 2018-03-12 | Glossary | Added glossary. |

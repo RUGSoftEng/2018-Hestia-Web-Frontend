@@ -10,3 +10,4 @@
 | *9/3/2018* | 18:00-20:00 | Improved printing of objects returned by local server. |
 | *12/3/2018* | 12:00-13:00 | Meeting for with server side people. |
 | *12/3/2018* | 13:00-14:00 | Filled out basic architecture document. |
+| *12/3/2018* | 21:00-22:00 | Added glossary, some text to architecture document. |
