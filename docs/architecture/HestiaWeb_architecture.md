@@ -42,12 +42,12 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 * Back-end server that connects users to their local Hestia controllers and holds user and server information
 
 ## Website Front-End
-Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. The website will allow a user to log into a specific server, manage the devices there through a range of different controls (which will expand and streamline those already available through the basic Hestia operations), and do this in the knowledge that themselves and their information are being kept safe.
+Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. The website will allow a user to log into their home server through a web server, and then manage the devices on their home server through a range of different controls, and do this in the knowledge that themselves and their information are being kept safe.
 
 ![Website Design](images/Hestia login concept.png  "Website Front-End Design")
 
 ### Design choices
-We decided that the user should decide which server they are connecting to upon login, which prevents the added complexity caused by switching between servers (although this could be added later on). Therefore the main focus of the website will be on the list of devices present within this server (which can be found through GET), and on the operations that can be applied to them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but more functionality added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
+We decided that the user should decide which home server they are connecting to upon login, which prevents the added complexity caused by switching between servers (although this could be added later on). Therefore the main focus of the website will be on the list of devices present within this server (which can be found through GET), and on the operations that can be applied to them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but more functionality added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
 #### Structural choices
 The page is laid out in such a way that the user can easily cycle between personal information, their devices and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have very many of these devices
 #### Aesthetical choices
@@ -96,3 +96,4 @@ Have not discussed 2m concurrent users requirement. This can be kept in consider
 | Rens Nijman    |  2018-03-12 | Whole document | More introduction and back-end.     |
 | Andrew Lalis | 2018-03-12 | Glossary | Added glossary. |
 | Phil Oetinger  |  2018-03-13 | Whole Document | Cleaned up the grammar, removed redundant sentences, expanded upon some points |
+| Roman Bell     |  2018-03-13 | Frontend | Added content regarding the frontend section |
