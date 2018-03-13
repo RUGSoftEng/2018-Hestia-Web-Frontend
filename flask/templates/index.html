@@ -3,46 +3,84 @@
   <head>
   	<meta charset="utf-8">
   	<title>Hestia Test Page</title>
+    <style>
+      body{
+        margin: 0px;
+        background-color: #e8f0ff;
+      }
+      #mainPanel{
+        text-align: center;
+        width: 100%;
+      }
+      #resultArea{
+        width: 50%;
+        min-height: 250px;
+        background-color: white;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: left;
+
+      }
+      .subPanel{
+        max-width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
   </head>
   <body>
-  	Query to send:<br>
-    Query: <input type="text" id="queryInput" name="queryInput">  <br>
-    Request method: (GET, POST, PUT, etc)<br>
-    Method: <input type="text" id="methodInput" name="methodInput" />
-    <button onclick="sendRequest()" name= "form" value="Submit">Submit!!!</button>
-    <p id="result"></p>
+    <div id="mainPanel">
+    <img alt="Hestia Logo" src="https://files.slack.com/files-pri/T98C42N1F-F9N3ZLDFB/hestialogo.png">
+      <div id="queryPanel" class="subPanel">
+        <h3>Query</h3>
+        <input id="queryInput" type="text"><br>
+      </div>
+      <div id="methodPanel" class="subPanel">
+        <h3>Request Type</h3>
+        <input id="methodInput" type="text"><br>
+      </div>
+      <div id="payloadPanel" class="subPanel">
+        <h3>Optional Payload</h3>
+        <textarea id="payloadInput" rows=8 cols=50></textarea><br>
+      </div>
+      <button id="submitButton" onclick="sendRequest()">Submit Request</button>
+      <pre id="resultArea" class="prettyprint">
+      <!--result space for queries.-->
+    </pre>
+    </div>
   </body>
   <script>
-      function sendRequest(){
-        var request = new XMLHttpRequest();
-        var url = "/request";
 
-        request.onreadystatechange = function(){
-          if (this.readyState == 4 && this.status == 200){
-            result = this.responseText;
-            obj = JSON.parse(result);
-            document.getElementById("result").innerHTML = JSON.stringify(obj, undefined, 2);
-          }
-        };
 
-        var data = {
-          "query" : "https://94.212.164.28:8000/devices/",
-          "method" : "POST",
-          "payload" : {
-            "required_info" : {
-              "name":"Andrew's Device",
-              "ip":"localhost",
-              "port":"666"
-            },
-            "collection" : "mock",
-            "plugin_name" : "light"
-          }
-          
-        };
 
-        request.open("POST", url, true);
-        request.setRequestHeader("Content-type", "application/json");
-        request.send(JSON.stringify(data));
+    function sendRequest(){
+      var request = new XMLHttpRequest();
+      var url = "/request";
+
+      request.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+          result = this.responseText;
+          obj = JSON.parse(result);
+          document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
+        }
+      };
+
+      var data = {
+        "query" : document.getElementById("queryInput").value,
+        "method" : document.getElementById("methodInput").value
+      };
+
+      var payload = document.getElementById("payloadInput").value;
+      if (payload){
+        console.log("Payload is not empty.");
+        console.log(payload);
+        data["payload"] = JSON.parse(payload);
       }
+
+      request.open("POST", url, true);
+      request.setRequestHeader("Content-type", "application/json");
+      request.send(JSON.stringify(data));
+    }
   </script>
 </html>
