@@ -42,17 +42,16 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 * Back-end server that connects users to their local Hestia controllers and holds user and server information
 
 ## Website Front-End
-Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. 
+Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. The website will allow a user to log into a specific server, manage the devices there through a range of different controls (which will expand and streamline those already available through the basic Hestia operations), and do this in the knowledge that themselves and their information are being kept safe.
 
 ![Website Design](images/Hestia login concept.png  "Website Front-End Design")
 
 ### Design choices
-
+We decided that the user should decide which server they are connecting to upon login, which prevents the added complexity caused by switching between servers (although this could be added later on). Therefore the main focus of the website will be on the list of devices present within this server (which can be found through GET), and on the operations that can be applied to them
 #### Structural choices
-Something about the structure of the information of the webpage; having a dash board.
-Making sure that everything could be tabbed through, make it as accessible as possible (e.g. good design).
+The page is laid out in such a way that the user can easily cycle between personal information, their devices and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity. 
 #### Aesthetical choices
-The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. The logos we use, besides the main Hestia logo, have been taken from the Material Icons database (https://material.io/icons/), which provides a large set of intuitive, user frien dly icons.
+The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. The logos we use, besides the main Hestia logo, have been taken from the Material Icons database (https://material.io/icons/), which provides a large set of intuitive, user frien dly icons. 
 Choice of colour, elements, layout of the page, logos, images, etc.
 Maybe use bootstrap or something? Talk about why
 
