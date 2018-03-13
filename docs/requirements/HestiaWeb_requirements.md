@@ -53,15 +53,14 @@ The plugin developer is a person who has created a plugin that the Hestia system
 - [ ] As a user, I would like to be able to share access to my Hestia server, so that others who are affected by the peripherals can change things to suit them.
   - [ ] As a user, I would like to be able to set permissions for the servers or peripherals, so that I can limit what people with shared access can do on my servers.
 - [ ] As a user, I would like to be able to easily add or remove plugins from my Hestia servers, so that it’s easy for me to test various peripherals.
-- [ ] As a user, I would like to be able to use the Hestia service without interruption.
 - [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
+- [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
 
 #### Important User Stories
 - [ ] As a user, I would like to be able to view details about my Hestia servers from a central location, so that I can monitor their status easily.
 - [ ] As a user, I would like to be able to specify presets across my peripherals and apply those presets, so that I can quickly configure the peripherals to suit my preferences.
 - [ ] As a user, I would like to be able to submit feedback to plugin developers, so that they can improve their plugin.
 - [ ] As a plugin developer, I would like to be able to receive detailed and organised feedback, so I can improve my plugin.
-- [ ] As a developer, I would like to have consistent style between my products.
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
 - [ ] As a user, I would like to be able to view my favorite peripherals in one location.
 
@@ -69,12 +68,10 @@ The plugin developer is a person who has created a plugin that the Hestia system
 - [ ] As a user, I would like to be able to donate to plugin developers, to show my support.
 - [ ] As a user, I would like to be able to export and import configurations for my Hestia servers, to make it easier for me to deploy my systems.
 - [ ] As a user, I would like to be able to change the theme of the user-interface, so that it suits my preferences.
-- [ ] As a developer, I would like to have consistent style between my products.
-- [ ] As a user, I would like to be able to use the Hestia service without interruption.
-- [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
 
 ## Non-Functional Requirements
-This is some placeholder text because I'm not 100% sure what to put here. PLEASE CHANGE THIS BEFORE DOING A PULL REQUEST TO MASTER!
+- [ ] As a user, I would like to be able to use the Hestia service without interruption.
+- [ ] As a developer, I would like to have consistent style between my products.
 
 ## Won't Do
 Below are listed some requirements or concerns which the clients have told us about, but due to resource requirements, legal issues, or other barriers, we know in advance that such features cannot be reasonably implemented.
@@ -84,12 +81,13 @@ Below are listed some requirements or concerns which the clients have told us ab
 
 ## Change Log
 
-| Who            |       When | Where          | What                                                                                |
-| :---           |       :--- | :---           | :---                                                                                |
-| Troy Harrison  | 2018-02-27 | Whole Document | Added initial description, and basic user stories.                                  |
-| Rens Nijman    | 2018-02-27 | Whole Document | Fixed typos and separated user stories by importance.                               |
-| Peter Oetinger | 2018-02-27 | Whole Document | Added user stories                                                                  |
-| Andrew Lalis   | 2018-02-27 | Whole Document | Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories. |
+| Who            |       When | Where          | What                                                                                              |
+| :---           |       :--- | :---           | :---                                                                                              |
+| Troy Harrison  | 2018-02-27 | Whole Document | Added initial description, and basic user stories.                                                |
+| Rens Nijman    | 2018-02-27 | Whole Document | Fixed typos and separated user stories by importance.                                             |
+| Peter Oetinger | 2018-02-27 | Whole Document | Added user stories                                                                                |
+| Andrew Lalis   | 2018-02-27 | Whole Document | Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories.               |
 | Andrew Lalis   | 2018-03-04 | Whole Document | Added TA name, Won't Do section, removed duplicate user story, added non-functional requirements. |
-| Andrew Lalis   | 2018-03-12 | Document Name | Renamed to HestiaWeb_requirements, added local website to Won't Do. |
-|Rens Nijman                | 2018-03-12           | Won't Do      |   Removed a space.                                         |                                                                    |
+| Andrew Lalis   | 2018-03-12 | Document Name  | Renamed to HestiaWeb_requirements, added local website to Won't Do.                               |
+| Rens Nijman    | 2018-03-12 | Won't Do       | Removed a space.                                                                                  |
+| Troy Harrison  | 2018-03-13 | Requiments     | Move requirements to better reflect current focus.                                                |
