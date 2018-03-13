@@ -6,11 +6,43 @@
   </head>
   <body>
   	Query to send:<br>
-	 <form action="/request" method="post">
-        Query: <input type="text" name="queryInput">  <br>
-        Request method: (GET, POST, PUT, etc)<br>
-        Method: <input type="text" name="methodInput" />
-        <input type="submit" name= "form" value="Submit" />
-     </form>
+    Query: <input type="text" id="queryInput" name="queryInput">  <br>
+    Request method: (GET, POST, PUT, etc)<br>
+    Method: <input type="text" id="methodInput" name="methodInput" />
+    <button onclick="sendRequest()" name= "form" value="Submit">Submit!!!</button>
+    <p id="result"></p>
   </body>
+  <script>
+      function sendRequest(){
+        var request = new XMLHttpRequest();
+        var url = "/request";
+
+        request.onreadystatechange = function(){
+          if (this.readyState == 4 && this.status == 200){
+            result = this.responseText;
+            obj = JSON.parse(result);
+            document.getElementById("result").innerHTML = JSON.stringify(obj, undefined, 2);
+          }
+        };
+
+        var data = {
+          "query" : "https://94.212.164.28:8000/plugins/",
+          "method" : "GET",
+          "payload" : {
+            "required_info" : {
+              "name":"Andrew's Device",
+              "ip":"localhost",
+              "port":"666"
+            },
+            "collection" : "mock",
+            "plugin_name" : "light"
+          }
+          
+        };
+
+        request.open("POST", url, true);
+        request.setRequestHeader("Content-type", "application/json");
+        request.send(JSON.stringify(data));
+      }
+  </script>
 </html>

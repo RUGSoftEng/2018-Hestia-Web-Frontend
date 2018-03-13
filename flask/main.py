@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 import requests
 
 app = Flask(__name__)
@@ -8,9 +8,12 @@ def main():
 
 @app.route('/request', methods=['POST'])
 def hello():
-    query = request.form['queryInput']
-    method = request.form['methodInput']
-    return routeRequest(method, query)
+    json = request.get_json()
+    url = json["query"]
+    method = json["method"]
+    payload = json["payload"]
+    print(payload["required_info"]["name"])
+    return jsonify(json)
 
 def routeRequest(method, query):
 	switcher = {
