@@ -46,7 +46,11 @@ Since the frontend of the website is the first aspect of the product that the cu
 
 The website will allow a user to log into their home server through a web server, and then manage the devices on their home server through a range of different controls, and do this in the knowledge that themselves and their information are being kept safe.
 
-![Website Design](images/Hestia_login_concept.png  "Website Front-End Design")
+![Website Design](images/Hestia_login_concept.png  "Website Login Concept")
+
+![Website Design](images/Hestia_dash_concept.png  "Website Dash Concept")
+
+![Website Design](images/Hestia_control_concept.png  "Website Control Concept")
 
 ### Design choices
 We decided that the user should decide which controller they are connecting to upon login, which prevents the added complexity caused by switching between controllers (note that this functionality could be added down the line). Thus, the main focus of the website will be on listing the devices managed by the controller, and on the operations that can be applied on them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but with more streamlined interfacing added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
