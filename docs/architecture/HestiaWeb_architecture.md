@@ -49,7 +49,7 @@ Since the frontend of the website is the first aspect of the product that the cu
 ### Design choices
 We decided that the user should decide which home server they are connecting to upon login, which prevents the added complexity caused by switching between servers (although this could be added later on). Therefore the main focus of the website will be on the list of devices present within this server (which can be found through GET), and on the operations that can be applied to them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but more functionality added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
 #### Structural choices
-The page is laid out in such a way that the user can easily cycle between personal information, their devices and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have very many of these devices
+The page is laid out in such a way that the user can easily cycle between personal information, their devices, the home servers information, and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have very many of these devices
 #### Aesthetical choices
 The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. The logos we use, besides the main Hestia logo, have been taken from the Material Icons database (https://material.io/icons/), which provides a large set of intuitive, user friendly icons. 
 
@@ -72,6 +72,35 @@ Creating a custom relational database schema and authentication system, and maki
 Firebase has free and paid versions, where the free version allows up to 100 Simultaneous connections. During development of the Hestia system, this will clearly suffice. However, it has to be considered that a paid plan is going to be required once Hestia grows. Pricing is available through: *https://firebase.google.com/pricing/* 
 
 During development it is essential to design the system in such a way that switching from Firebase to an alternative service does not incur large infrastructural cost.
+
+### The server as a middleman
+Currently, we have developed a server that serves as the liaison between the Hestia server and the user's interface. Below we show a small ection of the code in Python.
+
+```
+@app.route('/request', methods=['POST'])
+def apiRequestHandler():
+    json = request.get_json()
+    url = json["query"]
+    method = json["method"]
+    payload = json["payload"]
+    return routeRequest(method, url, payload)
+```
+
+Every time a query is done on the webpage, server sees that the */request* is being pinged. The above piece of code breaks down what the information consists of. Firstly, it gets a JSON objects, where the *url* variable is set to be the URL, such that it can access either plugins or devices. Secondly, a certain method is set in the data that is being sent, such as GET, POST, PUT, or DELETE. Furthermore, depending on the method, there may be a payload, which contains the *body* of the message. For instance, for posting a new device, this would consist of a name, an ip, and a port number. Also, the corresponding plugin is required, which in this case also has to be part of the message sent from the ebapp to our server. This differs from for instance a GET request, which simply requires a URL and the method. 
+
+Based on this information we have a function routeRequest, which follows up with the corresponding action, and sends the appropriate data.
+
+```
+def routeRequest(method, query, payload):
+	switcher = {
+		'GET': requests.get(query, verify=False).text,
+		'POST': requests.post(query, verify=False, json=payload).text,
+		'PUT': requests.put(query, verify=False, json=payload).text,
+		'DELETE': requests.delete(query, verify=False).text,
+	}
+	return switcher.get(method, 'Invalid REST method');
+```
+
 
 ##Glossary
 Below are defined terms used in the architecture document:
