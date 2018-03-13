@@ -90,4 +90,4 @@ Below are listed some requirements or concerns which the clients have told us ab
 | Andrew Lalis   | 2018-03-04 | Whole Document | Added TA name, Won't Do section, removed duplicate user story, added non-functional requirements. |
 | Andrew Lalis   | 2018-03-12 | Document Name  | Renamed to HestiaWeb_requirements, added local website to Won't Do.                               |
 | Rens Nijman    | 2018-03-12 | Won't Do       | Removed a space.                                                                                  |
-| Troy Harrison  | 2018-03-13 | Requiments     | Move requirements to better reflect current focus.                                                |
+| Troy Harrison  | 2018-03-13 | Requirements   | Move requirements to better reflect current focus.                                                |
