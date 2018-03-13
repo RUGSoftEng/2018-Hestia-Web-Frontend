@@ -17,3 +17,11 @@
 | *2018-03-12* | 19:30-20:00 | Worked on architecture document. |
 | *2018-03-12* | 20:00-20:30 | Worked on architecture document. |
 | *2018-03-12* | 20:30-21:00 | Worked on architecture document. |
+| *2018-03-13* | 13:00-13:30 | Went over flask code. |
+| *2018-03-13* | 13:30-14:00 | Research for requests POST, PUT, DELETE. |
+| *2018-03-13* | 14:00-14:30 | Research for requests POST, PUT, DELETE. |
+| *2018-03-13* | 14:30-15:00 | Architecture document and further flask.|
+| *2018-03-13* | 15:00-15:30 | Architecture document and further flask.|
+| *2018-03-13* | 15:30-16:00 | Architecture document and further flask.|
+| *2018-03-13* | 16:00-16:30 | Architecture document and further flask.|
+| *2018-03-13* | 16:30-17:00 | Architecture document and further flask.|
