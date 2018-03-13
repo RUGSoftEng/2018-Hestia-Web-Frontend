@@ -32,6 +32,6 @@
 |              | 13:30-14:00 | Worked on translating webpage from PHP to Python.                                                                  |
 | *2018-03-13* | 20:00-20:30 | Revised requirements document.                                                                                     |
 |              | 20:30-21:30 | Revised architecture document.                                                                                     |
-|              | 21:30-22:00 | Cleaned up directory structure.                                                                                    |
+|              | 21:30-22:30 | Cleaned up directory structure.                                                                                    |
 
 
