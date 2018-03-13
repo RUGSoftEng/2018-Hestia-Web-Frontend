@@ -3,6 +3,7 @@
 | Date | Timestamp | Description |
 | :---:        |       :---: | :--- |
 | *2018-02-27* | 17:30-18:00 | Fixed some user stories and categorized user stories. |
+| *2018-03-07* | 11:00-11:30 | Meeting with team and Lars. |
 | *2018-03-12* | 12:00-13:00 | Meeting. |
 | *2018-03-12* | 13:00-13:30 | Worked on translating webpage from PHP to Python. |
 | *2018-03-12* | 13:30-14:00 | Worked on translating webpage from PHP to Python. |
