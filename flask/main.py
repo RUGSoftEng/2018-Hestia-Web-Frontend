@@ -7,19 +7,26 @@ def main():
     return render_template('index.html')
 
 @app.route('/request', methods=['POST'])
-def hello():
+def apiRequestHandler():
     json = request.get_json()
     url = json["query"]
     method = json["method"]
-    payload = json["payload"]
-    print(payload["required_info"]["name"])
-    return jsonify(json)
+    payload = None
+    if ("payload" in json):
+    	payload = json["payload"]
+    	print(payload)
+    return routeRequest(method, url, payload)
 
-def routeRequest(method, query):
-	switcher = {
-		'GET': requests.get(query, verify=False).text,
-		'POST': requests.post(query, verify=False).text,
-		'PUT': requests.put(query, verify=False).text,
-		'DELETE': requests.delete(query, verify=False).text,
-	}
-	return switcher.get(method, 'Invalid REST method');
+def routeRequest(method, query, payload):
+	result = ""
+	if (method == "GET"):
+		result = requests.get(query, verify=False).text
+	elif (method == "POST"):
+		result = requests.post(query, verify=False, json=payload).text
+	elif (method == "PUT"):
+		result = requests.put(query, verify=False, json=payload).text
+	elif (method == "DELETE"):
+		result = requests.delete(query, verify=False).text
+	else:
+		result = "Invalid REST method."
+	return result
