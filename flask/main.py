@@ -13,12 +13,12 @@ def hello():
     method = json["method"]
     payload = json["payload"]
     print(payload["required_info"]["name"])
-    return jsonify(json)
+    return routeRequest(method, url, payload)
 
-def routeRequest(method, query):
+def routeRequest(method, query, payload):
 	switcher = {
 		'GET': requests.get(query, verify=False).text,
-		'POST': requests.post(query, verify=False).text,
+		'POST': requests.post(query, verify=False, json=payload).text,
 		'PUT': requests.put(query, verify=False).text,
 		'DELETE': requests.delete(query, verify=False).text,
 	}
