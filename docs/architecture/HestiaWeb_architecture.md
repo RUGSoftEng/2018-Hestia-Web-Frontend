@@ -1,5 +1,6 @@
 <center>
 	<!-- Title image and text. -->
+	<img src="images/hestiaLogo.png"/>
 	<h1>Hestia Web Development Architecture Document</h1>
 	<span style="font-style: italic; color: #b34700">Version 1.0</span>
 </center>
