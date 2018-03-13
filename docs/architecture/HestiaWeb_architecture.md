@@ -74,7 +74,7 @@ Firebase has free and paid versions, where the free version allows up to 100 Sim
 During development it is essential to design the system in such a way that switching from Firebase to an alternative service does not incur large infrastructural cost.
 
 ### Functionality of the webapp
-Currently, we have developed a server that serves as the liaison between the Hestia server and the user's interface. Below we show a small section of the code in Python and below that some elaboration.
+Currently, we have developed a server that serves as the liaison between the Hestia local controller and the user's interface. Below we show a small section of the code in Python and below that some elaboration.
 
 ```
 @app.route('/request', methods=['POST'])
@@ -89,7 +89,13 @@ def apiRequestHandler():
     return routeRequest(method, url, payload)
 ```
 
-Every time a query is done on the webpage, the server gets a request where the */request* is being pinged. The above piece of code breaks down what the information consists of. Firstly, it gets a JSON objects, where the *url* variable is set to be the URL, such that it can access either plugins or devices. Secondly, a certain method is set in the data that is being sent, such as GET, POST, PUT, or DELETE. Furthermore, depending on the method, there may be a payload, which contains the *body* of the message. For instance, for posting a new device, this would consist of a name, an ip, and a port number. Also, the corresponding plugin is required, which in this case also has to be part of the message sent from the ebapp to our server. This differs from for instance a GET request, which simply requires a URL and the method.
+The front-end website will interact with this server exclusively through sending JSON objects in the payload of POST requests. These objects contain the following information.
+
+* *query*: The endpoint that the client intends to send a request to, on the Hestia local controller.
+* *method*: The method by which the user wishes to send the request.
+* *payload*: The payload is an optional item in the request that when supplied, is used for requests which require additional information, such as POSTing to /devices/ to create a new device, or updating a device's name. The exact content of the payload is identical in structure to the payload that would naturally be received by the 
+
+Every time a query is done on the webpage, the server gets a request where the */request* is being pinged. The above piece of code breaks down what the information consists of. Firstly, it gets a JSON object, where the *url* variable is set to be the URL, such that it can access either plugins or devices. Secondly, a certain method is set in the data that is being sent, such as GET, POST, PUT, or DELETE. Furthermore, depending on the method, there may be a payload, which contains the *body* of the message. For instance, for posting a new device, this would consist of a name, an ip, and a port number. Also, the corresponding plugin is required, which in this case also has to be part of the message sent from the webapp to our server. This differs from for instance a GET request, which simply requires a URL and the method.
 
 Based on this information we have a function routeRequest, which follows up with the corresponding action, and sends the appropriate data. 
 ```
@@ -107,7 +113,7 @@ def routeRequest(method, query, payload):
 		result = "Invalid REST method."
 	return result
 ```
-Currently, the verify flag is set to False, as there is no secure connection to the site yet, which obviously has to be changed. What the code above does is, based on the method, it will send a package with corresponding information to the corresponding URL.
+Currently, the verify flag is set to False, as there is no secure connection to the site yet, which obviously has to be changed. What the code above does is, based on the method, it will send a package with corresponding information to the corresponding URL, and return the result of that request back to the client who originally sent the request.
 
 
 ## Glossary
@@ -132,4 +138,4 @@ Below are defined terms used in the architecture document:
 | Phil Oetinger  |  2018-03-13 | Whole Document | Cleaned up the grammar, removed redundant sentences, expanded upon some points |
 | Roman Bell     |  2018-03-13 | Frontend | Added content regarding the frontend section |
 | Rens Nijman     |  2018-03-13 | Back-end | Added section on our server's functionality |
-
+| Andrew Lalis | 2018-03-13 | Back-end | Revised a few things. |

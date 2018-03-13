@@ -12,3 +12,4 @@
 | *12/3/2018* | 13:00-14:00 | Filled out basic architecture document. |
 | *12/3/2018* | 21:00-22:00 | Added glossary, some text to architecture document. |
 | *13/3/2018* | 13:00-16:30 | Made working prototype of flask server and ugly front end. |
+| *13/3/2018* | 18:30-19:30 | Made revisions to architecture document. |
