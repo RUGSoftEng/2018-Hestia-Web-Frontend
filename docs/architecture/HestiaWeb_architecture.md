@@ -73,8 +73,8 @@ Firebase has free and paid versions, where the free version allows up to 100 Sim
 
 During development it is essential to design the system in such a way that switching from Firebase to an alternative service does not incur large infrastructural cost.
 
-### The server as a middleman
-Currently, we have developed a server that serves as the liaison between the Hestia server and the user's interface. Below we show a small ection of the code in Python.
+### Functionality of the webapp
+Currently, we have developed a server that serves as the liaison between the Hestia server and the user's interface. Below we show a small section of the code in Python and below that some elaboration.
 
 ```
 @app.route('/request', methods=['POST'])
@@ -82,27 +82,35 @@ def apiRequestHandler():
     json = request.get_json()
     url = json["query"]
     method = json["method"]
-    payload = json["payload"]
+    payload = None
+    if ("payload" in json):
+    	payload = json["payload"]
+    	print(payload)
     return routeRequest(method, url, payload)
 ```
 
-Every time a query is done on the webpage, server sees that the */request* is being pinged. The above piece of code breaks down what the information consists of. Firstly, it gets a JSON objects, where the *url* variable is set to be the URL, such that it can access either plugins or devices. Secondly, a certain method is set in the data that is being sent, such as GET, POST, PUT, or DELETE. Furthermore, depending on the method, there may be a payload, which contains the *body* of the message. For instance, for posting a new device, this would consist of a name, an ip, and a port number. Also, the corresponding plugin is required, which in this case also has to be part of the message sent from the ebapp to our server. This differs from for instance a GET request, which simply requires a URL and the method. 
+Every time a query is done on the webpage, the server gets a request where the */request* is being pinged. The above piece of code breaks down what the information consists of. Firstly, it gets a JSON objects, where the *url* variable is set to be the URL, such that it can access either plugins or devices. Secondly, a certain method is set in the data that is being sent, such as GET, POST, PUT, or DELETE. Furthermore, depending on the method, there may be a payload, which contains the *body* of the message. For instance, for posting a new device, this would consist of a name, an ip, and a port number. Also, the corresponding plugin is required, which in this case also has to be part of the message sent from the ebapp to our server. This differs from for instance a GET request, which simply requires a URL and the method.
 
-Based on this information we have a function routeRequest, which follows up with the corresponding action, and sends the appropriate data.
-
+Based on this information we have a function routeRequest, which follows up with the corresponding action, and sends the appropriate data. 
 ```
 def routeRequest(method, query, payload):
-	switcher = {
-		'GET': requests.get(query, verify=False).text,
-		'POST': requests.post(query, verify=False, json=payload).text,
-		'PUT': requests.put(query, verify=False, json=payload).text,
-		'DELETE': requests.delete(query, verify=False).text,
-	}
-	return switcher.get(method, 'Invalid REST method');
+	result = ""
+	if (method == "GET"):
+		result = requests.get(query, verify=False).text
+	elif (method == "POST"):
+		result = requests.post(query, verify=False, json=payload).text
+	elif (method == "PUT"):
+		result = requests.put(query, verify=False, json=payload).text
+	elif (method == "DELETE"):
+		result = requests.delete(query, verify=False).text
+	else:
+		result = "Invalid REST method."
+	return result
 ```
+Currently, the verify flag is set to False, as there is no secure connection to the site yet, which obviously has to be changed. What the code above does is, based on the method, it will send a package with corresponding information to the corresponding URL.
 
 
-##Glossary
+## Glossary
 Below are defined terms used in the architecture document:
 
 * *Controller*: The local Hestia Server in a user's house. The controller simply runs the Hestia Server previously developed by the client, and has a unique IP address and port number.
@@ -110,9 +118,6 @@ Below are defined terms used in the architecture document:
 * *Peripheral*: A peripheral is any device which can be connected to the Hestia system via a plugin. For example, a Phillips Hue light bulb would constitute a peripheral.
 
 * *User*: A user is someone who has installed a Hestia controller in their home, and accesses the website to control their system.
-
-# TO DO
-Have not discussed 2m concurrent users requirement. This can be kept in consideration for development but needs further discussion with client.
 
 ## Change Log
 
@@ -126,3 +131,5 @@ Have not discussed 2m concurrent users requirement. This can be kept in consider
 | Andrew Lalis | 2018-03-12 | Glossary | Added glossary. |
 | Phil Oetinger  |  2018-03-13 | Whole Document | Cleaned up the grammar, removed redundant sentences, expanded upon some points |
 | Roman Bell     |  2018-03-13 | Frontend | Added content regarding the frontend section |
+| Rens Nijman     |  2018-03-13 | Back-end | Added section on our server's functionality |
+
