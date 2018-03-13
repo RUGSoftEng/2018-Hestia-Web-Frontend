@@ -47,13 +47,12 @@ Since the frontend of the website is the first aspect of the product that the cu
 ![Website Design](images/Hestia login concept.png  "Website Front-End Design")
 
 ### Design choices
-We decided that the user should decide which server they are connecting to upon login, which prevents the added complexity caused by switching between servers (although this could be added later on). Therefore the main focus of the website will be on the list of devices present within this server (which can be found through GET), and on the operations that can be applied to them
+We decided that the user should decide which server they are connecting to upon login, which prevents the added complexity caused by switching between servers (although this could be added later on). Therefore the main focus of the website will be on the list of devices present within this server (which can be found through GET), and on the operations that can be applied to them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but more functionality added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
 #### Structural choices
-The page is laid out in such a way that the user can easily cycle between personal information, their devices and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity. 
+The page is laid out in such a way that the user can easily cycle between personal information, their devices and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have very many of these devices
 #### Aesthetical choices
-The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. The logos we use, besides the main Hestia logo, have been taken from the Material Icons database (https://material.io/icons/), which provides a large set of intuitive, user frien dly icons. 
-Choice of colour, elements, layout of the page, logos, images, etc.
-Maybe use bootstrap or something? Talk about why
+The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. The logos we use, besides the main Hestia logo, have been taken from the Material Icons database (https://material.io/icons/), which provides a large set of intuitive, user friendly icons. 
+
 
 ## Website Back-End
 The backend of the webapp will serve as a middleman between the web frontend and the user's controller (local server). This means that there needs to be an interface to be able to send queries to the server. Furthermore, a user database is required in order to maintain a secure environment in which users may only have permission to interact with systems they own. Unauthorized access to server data, user data, or any other sensitive information is completely forbidden.
