@@ -44,7 +44,7 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 ## Website Front-End
 Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. The website will allow a user to log into their home server through a web server, and then manage the devices on their home server through a range of different controls, and do this in the knowledge that themselves and their information are being kept safe.
 
-![Website Design](images/Hestia login concept.png  "Website Front-End Design")
+![Website Design](images/Hestia_login_concept.png  "Website Front-End Design")
 
 ### Design choices
 We decided that the user should decide which home server they are connecting to upon login, which prevents the added complexity caused by switching between servers (although this could be added later on). Therefore the main focus of the website will be on the list of devices present within this server (which can be found through GET), and on the operations that can be applied to them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but more functionality added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
