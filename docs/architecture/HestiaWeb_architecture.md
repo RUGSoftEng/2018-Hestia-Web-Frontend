@@ -22,19 +22,18 @@
 Feiko Ritsema
 
 ## Introduction
-The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local server infrastructure that facilitates communication and control of the various peripherals has been implemented by the clients. In addition to this local server, an Android application has been pre-made by the client and is available for reference. The local server lacks consumer side interfacing, which limits the ease of use and hinders widespread usage outside of the local network.
+The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local server infrastructure that facilitates communication and control of the various peripherals in one's home has been implemented by the clients. In addition to this local server, an Android application has been pre-made by the client and is available for reference. As it stands users of Hestia are unable to access their home servers outside of their local network. This coupled with the lacking client side interfacing, limits ease of use and widespread adoption.
 
-To create this client side interface, there are two main systems under consideration: the front-end (user interface with which the client interacts), and the back-end (which serves as a middleman between local Hestia controllers and users on the website).
+To improve on this, there are two main systems under consideration: the front-end (user interface with which the client interacts), and the back-end (which serves as a middleman between local Hestia servers and their users).
 
-This document describes in detail how both of these sub-systems work, how they interact with each other, and motivates the design choices underlying.
-
+This document describes the functioning of these systems, their interaction, and motivates their underlying design choices.
 
 ### Overview
-Our goal for this project is to create the web interface. This web interface, which is hosted on a central server, should allow users to log in and connect their local Hestia servers. This allows users to intereact with their home automation system remotely.
+Our goal for this project is to create the web interface. This web interface, which is hosted on a central server, should allow users to log in and connect their local Hestia servers. This allows users to interact with their home automation system remotely.
 
-A Hestia server is a *controller* that manages a set of *peripherals*. Those peripherals are the facilities to be automated. These could for instance be lights, locks, or any mumber of programmable devices. This is possible because the design created by the client is peripheral independent because the Hestia server manages that peripheral through its own corresponding plugin.
+A Hestia server is a *controller* that manages a set of *peripherals*. Those peripherals are the facilities to be automated. These could for instance be lights, locks, or any mumber of programmable devices. This is possible because Hestia is designed to be peripheral independent via a plugin infrastructure.
 
-The clients have created this system using the REST API. This decoupling makes the development process less complicated; furthermore, it allows for development independent of the server. 
+The clients have created this system using the REST API. This decouples our work from the underlying infrastructure of Hestia.
 
 ## General Overview of the System
 The Hestia Web Interface can be divided into two main sub-systems as mentioned in the Introduction.
@@ -42,27 +41,33 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 * Back-end server that connects users to their local Hestia controllers and holds user and server information
 
 ## Website Front-End
-Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. The website will allow a user to log into their home server through a web server, and then manage the devices on their home server through a range of different controls, and do this in the knowledge that themselves and their information are being kept safe.
+Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. 
+
+The website will allow a user to log into their home server through a web server, and then manage the devices on their home server through a range of different controls, and do this in the knowledge that themselves and their information are being kept safe.
 
 ![Website Design](images/Hestia_login_concept.png  "Website Front-End Design")
 
 ### Design choices
-We decided that the user should decide which home server they are connecting to upon login, which prevents the added complexity caused by switching between servers (although this could be added later on). Therefore the main focus of the website will be on the list of devices present within this server (which can be found through GET), and on the operations that can be applied to them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but more functionality added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
+We decided that the user should decide which controller they are connecting to upon login, which prevents the added complexity caused by switching between controllers (note that this functionality could be added down the line). Thus, the main focus of the website will be on listing the devices managed by the controller, and on the operations that can be applied on them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but with more streamlined interfacing added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
+
 #### Structural choices
-The page is laid out in such a way that the user can easily cycle between personal information, their devices, the home servers information, and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have very many of these devices
+The page is laid out in such a way that the user can easily cycle between personal information, their devices, the home servers information, and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have many of these devices.
+
 #### Aesthetical choices
-The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. The logos we use, besides the main Hestia logo, have been taken from the Material Icons database (https://material.io/icons/), which provides a large set of intuitive, user friendly icons. 
+The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. Aside from the main Hestia logo, the icons used are from [Material Icons database](https://material.io/icons/), which provides a large set of intuitive, user friendly icons. 
 
 
 ## Website Back-End
-The backend of the webapp will serve as a middleman between the web frontend and the user's controller (local server). This means that there needs to be an interface to be able to send queries to the server. Furthermore, a user database is required in order to maintain a secure environment in which users may only have permission to interact with systems they own. Unauthorized access to server data, user data, or any other sensitive information is completely forbidden.
+The backend of the webapp will serve as a middleman between the web frontend and the user's controller. This means that there needs to be an interface to be able to send queries to the server. Furthermore, a user database is required in order to maintain a secure environment in which users may only have permission to interact with systems they own. Unauthorized access to server data, user data, or any other sensitive information is completely forbidden.
 
 ### Design decisions
-For the design of the webapp we initially chose to implement PHP since there is familiarity in the team with PHP. Thus, a concise webpage was setup using HTML and PHP. This website was designed to test querying the Hestia webserver (for instance a *get* request). After the initial webpage was created we decided to implement the webpage in Python using Flask. Though we have less experience with Python and Flask, this decision will provide extra benefits. 
+For the design of the webapp we initially chose to implement PHP since there was familiarity in the team with PHP. Thus, a concise webpage was setup using HTML and PHP. This website was designed to test querying a Hestia webserver (for instance a *GET* request). After the initial webpage was created we decided to implement the webpage in Python using Flask. There are two primary reasons for this:
 
-The main benefit to using Flask over PHP is that the client, having created the local server in Flask, is already familiar with the server and python. Using this same setup creates more consistency and allows for easier transition once the product is finished.
+1. The clients are familiar with working with both Python and Flask as they implemented Hestia using these tools.
+2. It adds to consistency throughout the Hestia project.
+3. Python appears to allow for rapid development with simpler deployment than PHP and Apache server.
 
-As a final remark on this topic, it is not absolutely clear yet whether PHP would be better suited for this job than Python. This is therefore an issue that requires more research and discussion with the client.
+However, we are currently unsure on whether Python and Flask will hinder scalable deployment when compared to using PHP.
 
 Creating a custom relational database schema and authentication system, and making it secure, is very costly in both time and resources. Since these services are also available through Firebase, we have decided on using Google's Firebase platform for our database needs, as explained in the next section.
 
@@ -74,7 +79,7 @@ Firebase has free and paid versions, where the free version allows up to 100 Sim
 During development it is essential to design the system in such a way that switching from Firebase to an alternative service does not incur large infrastructural cost.
 
 ### Functionality of the webapp
-Currently, we have developed a server that serves as the liaison between the Hestia local controller and the user's interface. Below we show a small section of the code in Python and below that some elaboration.
+Currently, we have developed a server that serves as the liaison between the Hestia local controller and the user's interface. Below we show a small section of the code in Python followed by explanation.
 
 ```
 @app.route('/request', methods=['POST'])
@@ -113,7 +118,7 @@ def routeRequest(method, query, payload):
 		result = "Invalid REST method."
 	return result
 ```
-Currently, the verify flag is set to False, as there is no secure connection to the site yet, which obviously has to be changed. What the code above does is, based on the method, it will send a package with corresponding information to the corresponding URL, and return the result of that request back to the client who originally sent the request.
+Currently, the verify flag is set to `False`, as there is no secure connection to the site yet, which obviously has to be changed. What the code above does is, based on the method, it will send a package with corresponding information to the corresponding URL, and return the result of that request back to the client who originally sent the request.
 
 
 ## Glossary
@@ -127,15 +132,16 @@ Below are defined terms used in the architecture document:
 
 ## Change Log
 
-| Who            |       When  | Where          | What                                |
-| :---           |       :---  | :---           | :---                                |
-| Troy Harrison  |  2018-03-12 | Whole document | Created initial document.           |
-| Andrew Lalis   |  2018-03-12 | Whole document | Updated content for document.       |
-| Rens Nijman    |  2018-03-12 | Front-End      | Add structure for front-end section.|
-| Rens Nijman    |  2018-03-12 | Back-End       | Add structure for back-end section. |
-| Rens Nijman    |  2018-03-12 | Whole document | More introduction and back-end.     |
-| Andrew Lalis | 2018-03-12 | Glossary | Added glossary. |
-| Phil Oetinger  |  2018-03-13 | Whole Document | Cleaned up the grammar, removed redundant sentences, expanded upon some points |
-| Roman Bell     |  2018-03-13 | Frontend | Added content regarding the frontend section |
-| Rens Nijman     |  2018-03-13 | Back-end | Added section on our server's functionality |
-| Andrew Lalis | 2018-03-13 | Back-end | Revised a few things. |
+| Who           |       When | Where          | What                                                                           |
+| :---          |       :--- | :---           | :---                                                                           |
+| Troy Harrison | 2018-03-12 | Whole document | Created initial document.                                                      |
+| Andrew Lalis  | 2018-03-12 | Whole document | Updated content for document.                                                  |
+| Rens Nijman   | 2018-03-12 | Front-End      | Add structure for front-end section.                                           |
+| Rens Nijman   | 2018-03-12 | Back-End       | Add structure for back-end section.                                            |
+| Rens Nijman   | 2018-03-12 | Whole document | More introduction and back-end.                                                |
+| Andrew Lalis  | 2018-03-12 | Glossary       | Added glossary.                                                                |
+| Phil Oetinger | 2018-03-13 | Whole Document | Cleaned up the grammar, removed redundant sentences, expanded upon some points |
+| Roman Bell    | 2018-03-13 | Frontend       | Added content regarding the frontend section                                   |
+| Rens Nijman   | 2018-03-13 | Back-end       | Added section on our server's functionality                                    |
+| Andrew Lalis  | 2018-03-13 | Back-end       | Revised a few things.                                                          |
+| Troy Harrison | 2018-03-13 | Whole Document | Cleaned up document.                                                               |
