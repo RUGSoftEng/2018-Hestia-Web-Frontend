@@ -22,19 +22,19 @@
 Feiko Ritsema
 
 ## Introduction
-The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local server infrastructure to facilitate communicating and controlling the various hardware to be automated has been implemented by the clients. However, aside from an Android application (also developed by the clients), the system lacks consumer side interfacing. This limits ease of use and hinders widespread usage.
+The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local server infrastructure that facilitates communication and control of the various peripherals has been implemented by the clients. In addition to this local server, an Android application has been pre-made by the client and is available for reference. The local server lacks consumer side interfacing, which limits the ease of use and hinders widespread usage outside of the local network.
 
-To create this client side intefrace there are two main systems under consideration; the front-end, or user interface with which the client interacts, and the back-end, which serves as a middleman or liason between local Hestia controllers and users on the website.
+To create this client side interface, there are two main systems under consideration: the front-end (user interface with which the client interacts), and the back-end (which serves as a middleman between local Hestia controllers and users on the website).
 
 This document describes in detail how both of these sub-systems work, how they interact with each other, and motivates the design choices underlying.
 
 
 ### Overview
-Our goal in this project is to create the web interface. This web interface, which is hosted on a central server, should allow users to log in and connect their local Hestia servers, thereby allowing remote management.
+Our goal for this project is to create the web interface. This web interface, which is hosted on a central server, should allow users to log in and connect their local Hestia servers. This allows users to intereact with their home automation system remotely.
 
-A Hestia server is a *controller* that manages a set of *peripherals*. Those peripherals are the facilities to be automated. These could for instance be lights, locks, or any mumber of programmable devices. The reason why this is possible is because the design created by the client is peripheral independent, as the Hestia server manages that peripheral through its corresponding plugin.
+A Hestia server is a *controller* that manages a set of *peripherals*. Those peripherals are the facilities to be automated. These could for instance be lights, locks, or any mumber of programmable devices. This is possible because the design created by the client is peripheral independent because the Hestia server manages that peripheral through its own corresponding plugin.
 
-The clients have created this system using the REST API. This decoupling makes the development process less complicated, as it allows for development effectively independent of the server. 
+The clients have created this system using the REST API. This decoupling makes the development process less complicated; furthermore, it allows for development independent of the server. 
 
 ## General Overview of the System
 The Hestia Web Interface can be divided into two main sub-systems as mentioned in the Introduction.
@@ -55,27 +55,26 @@ Choice of colour, elements, layout of the page, logos, images, etc.
 Maybe use bootstrap or something? Talk about why
 
 ## Website Back-End
-The backend of the webapp will serve as a middleman to communicate with the Hestia server. This means that there needs to be an interface to be able to send queries to the server. Furthermore, a user database is required in order to maintain a secure environment in which users may only have permission to interact with systems they own, and so that unauthorized access to server data, user data or any other sensitive information is completely forbidden.
+The backend of the webapp will serve as a middleman between the web frontend and the user's controller (local server). This means that there needs to be an interface to be able to send queries to the server. Furthermore, a user database is required in order to maintain a secure environment in which users may only have permission to interact with systems they own. Unauthorized access to server data, user data, or any other sensitive information is completely forbidden.
 
 ### Design decisions
-For the design of the webapp, we initially chose to implement in PHP, as there is familiarity in the team with PHP. Thus, a concise webpage was setup, using HTML and PHP. This website was designed to test querying the Hestia webserver, with for instance a *get* request. However, after the initial webpage, we decided to implement the webpage in Python, using Flask, even though all of us have less experience with Python, and little with Flask. 
+For the design of the webapp we initially chose to implement PHP since there is familiarity in the team with PHP. Thus, a concise webpage was setup using HTML and PHP. This website was designed to test querying the Hestia webserver (for instance a *get* request). After the initial webpage was created we decided to implement the webpage in Python using Flask. Though we have less experience with Python and Flask, this decision will provide extra benefits. 
 
-The main reason for this is that the current Hestia webserver, developed by the clients, is also developed using Python and Flask. Using this same setup creates more consistency, allows for easier transition once the product is finished, and will allow easier management of the code.
+The main benefit to using Flask over PHP is that the client, having created the local server in Flask, is already familiar with the server and python. Using this same setup creates more consistency and allows for easier transition once the product is finished.
 
-As a final remark on this topic, it is not absolutely clear yet whether PHP would be better suited for this job than Python. This is therefore an issue that requires more attention.
+As a final remark on this topic, it is not absolutely clear yet whether PHP would be better suited for this job than Python. This is therefore an issue that requires more research and discussion with the client.
 
-Regarding the database, while it would be possible to create a custom relational database schema and authentication system using pure PHP and MySQL, we believe that the development time required to not only do this, but make it completely secure, is not the most efficient way to proceed. Therefore, we have decided on using Google's Firebase platform for our database needs, as explained in the next section.
+Creating a custom relational database schema and authentication system, and making it secure, is very costly in both time and resources. Since these services are also available through Firebase, we have decided on using Google's Firebase platform for our database needs, as explained in the next section.
 
 #### What is Firebase?
-[Firebase](https://firebase.google.com/) is a platform that offers a rather complete backend solution. It offers an authentication service, Firebase Authentication, where users can login using passwords, phone numbers, and popular identity providers such as Google, Facebook, and others. Furthermore, Firebase gives a realtime database.
+[Firebase](https://firebase.google.com/) is a platform that offers a rather complete backend solution. It offers an authentication service called Firebase Authentication. Users can login using passwords, phone numbers, and popular identity providers such as Google and Facebook. Furthermore, Firebase gives a realtime database.
 
-Firebase has free and paid versions, where the free version allows up to 100 Simultaneous connections. During development of the Hestia system, this will clearly suffice. However, it has to be considered that a paid plan is going to be required. **SOMETHING ABOUT STORAGE? https://firebase.google.com/pricing/** 
+Firebase has free and paid versions, where the free version allows up to 100 Simultaneous connections. During development of the Hestia system, this will clearly suffice. However, it has to be considered that a paid plan is going to be required once Hestia grows. Pricing is available through: *https://firebase.google.com/pricing/* 
 
-During further development it is essential to design the system in such a way, that switching from Firebase to an alternative, a different server and authentication service, does not incur large infrastructural cost. 
-There may be other viable alternatives, so we should design in such a way that switching from Firebase to alt doesn't incur large infrastructural cost.
+During development it is essential to design the system in such a way that switching from Firebase to an alternative service does not incur large infrastructural cost.
 
 ##Glossary
-Below are defined a list of commonly used terms that are especially esoteric to the Hestia Web system architecture.
+Below are defined terms used in the architecture document:
 
 * *Controller*: The local Hestia Server in a user's house. The controller simply runs the Hestia Server previously developed by the client, and has a unique IP address and port number.
 
@@ -84,7 +83,7 @@ Below are defined a list of commonly used terms that are especially esoteric to 
 * *User*: A user is someone who has installed a Hestia controller in their home, and accesses the website to control their system.
 
 # TO DO
-Have not discussed 2m concurrent users requirement
+Have not discussed 2m concurrent users requirement. This can be kept in consideration for development but needs further discussion with client.
 
 ## Change Log
 
@@ -96,3 +95,4 @@ Have not discussed 2m concurrent users requirement
 | Rens Nijman    |  2018-03-12 | Back-End       | Add structure for back-end section. |
 | Rens Nijman    |  2018-03-12 | Whole document | More introduction and back-end.     |
 | Andrew Lalis | 2018-03-12 | Glossary | Added glossary. |
+| Phil Oetinger  |  2018-03-13 | Whole Document | Cleaned up the grammer, removed redundent sentences, expanded upon some points|
