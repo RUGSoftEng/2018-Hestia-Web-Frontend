@@ -42,15 +42,17 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 * Back-end server that connects users to their local Hestia controllers and holds user and server information
 
 ## Website Front-End
-Some intro; especially front-end may deviate from initial choices/client requirements, based on further interactions.
+Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. 
 
 ![Website Design](images/Hestia login concept.png  "Website Front-End Design")
 
 ### Design choices
+
 #### Structural choices
 Something about the structure of the information of the webpage; having a dash board.
 Making sure that everything could be tabbed through, make it as accessible as possible (e.g. good design).
 #### Aesthetical choices
+The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. The logos we use, besides the main Hestia logo, have been taken from the Material Icons database (https://material.io/icons/), which provides a large set of intuitive, user frien dly icons.
 Choice of colour, elements, layout of the page, logos, images, etc.
 Maybe use bootstrap or something? Talk about why
 
