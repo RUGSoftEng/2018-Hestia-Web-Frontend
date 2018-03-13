@@ -95,4 +95,4 @@ Have not discussed 2m concurrent users requirement. This can be kept in consider
 | Rens Nijman    |  2018-03-12 | Back-End       | Add structure for back-end section. |
 | Rens Nijman    |  2018-03-12 | Whole document | More introduction and back-end.     |
 | Andrew Lalis | 2018-03-12 | Glossary | Added glossary. |
-| Phil Oetinger  |  2018-03-13 | Whole Document | Cleaned up the grammer, removed redundent sentences, expanded upon some points|
+| Phil Oetinger  |  2018-03-13 | Whole Document | Cleaned up the grammar, removed redundant sentences, expanded upon some points |
