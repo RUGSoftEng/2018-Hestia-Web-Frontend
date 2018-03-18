@@ -8,3 +8,5 @@
 | *07-03-2018* | 2 | REST API lecture                                                                                        |
 | *10-03-2018* | 2 | Firebase authentication tutorials and mini projects to familiarize myself with authentication process|
 | *12-03-2018* | 1 | Meeting with backend. Discussed server, and worked on architecture. Switching to FLASK to handle API|
+| *15-03-2018* | 2 | Research Flask, introduction to php and html|
+| *18-03-2018* | 3 | Talked with Andrew about authentication, researching database storage using firebase database|
