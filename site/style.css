@@ -206,3 +206,12 @@ h2 {
 #login_button {
 	float:right;
 }
+
+#firebase-auth-container {
+	position: absolute;
+	display: none;
+	max-width: 25%;
+	height: 50%;
+	float: right;
+	top: 50px;
+}
