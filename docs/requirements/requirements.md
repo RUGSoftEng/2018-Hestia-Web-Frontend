@@ -21,16 +21,16 @@
 
 
 ## Introduction
-The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local back end infrastructure to facilitate communicating and controlling the various hardware to be automated has been implemented by the clients. However, aside from an Android application (also developed by the clients), the system lacks consumer side interfacing. This limits ease of use and hinders widespread popular usage. 
+The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local server based back end infrastructure to facilitate communicating and controlling the various devices connected to that server has been implemented by the clients. However, besides an Android application (also developed by the clients), the system lacks consumer side interfacing. This limits ease of use and hinders widespread popular usage.
 
-Our goal in this project is to develop a web interface to ensure that the users of the Hestia System have a streamlined, usable, and secure experience. In brief, the users of the system should have quick, intuitive access to all the functionality provided by the clients' existing API system, so that anyone can simply navigate to a webpage and have the power to do what one could previously only do through manual HTTP requests, in a more intuitive and user friendly manner. To that end this document details the requirements associated with the project.
+Our goal in this project is to develop a web interface to ensure that the users of the Hestia System have a streamlined, usable, and secure experience. In brief, the users of the system should have quick, intuitive access to all the functionality provided by the clients' existing API system, so that anyone can simply navigate to a webpage and have the power to do what one could previously only do through manual HTTP requests. To that end this document details the requirements associated with this project.
 
 
 ## User Stories
 
 The requirements for the system are specified from the perspective of all those who are going to use the system, i.e. via user stories. The user stories involve the description of the user, their requirement, and the reasoning behind that requirement. The user stories reaffirm the context of the requirement and aid in prioritization and re-specification. More user stories will be added as more requirements are discovered throughout the development process and with further consultation with the client.
 
-The actors referenced throughout the aforementioned user stories are defined in more detail below, so that the reasoning for each story is logical and motivated by realistic desire or need.
+The actors referenced throughout the aforementioned user stories are defined in more detail below, so that the reasoning for each story is logical and motivated by a realistic desire or need.
 
 #### User
 The majority of the stories are focused around the *User*, who is someone who makes use of the Hestia system to automate peripherals in their home. The user does not care about implementation or backend behaviour, as long as their experience with the interface is satisfactory. The user, in general, wants the system to be as intuitive and easy to use as possible, while still providing complete control over the devices in their home.
@@ -58,7 +58,6 @@ The *Plugin Developer* is a person who has created a plugin that the Hestia syst
 
 #### Important user stories
 - [ ] As a user, I would like to be able to view details about my Hestia servers from a central location, so that I can monitor their status easily.
-- [ ] As a user, I would like to be able to specify presets for my peripherals and apply those presets, so that I can quickly configure the peripherals to suit my preferences.
 - [ ] As a user, I would like to be able to submit feedback to plugin developers, so that they can improve their plugin.
 - [ ] As a plugin developer, I would like to be able to receive detailed and organised feedback, so I can improve my plugin.
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
@@ -69,9 +68,10 @@ The *Plugin Developer* is a person who has created a plugin that the Hestia syst
 #### Useful user stories
 - [ ] As a user, I would like to be able to donate to plugin developers, to show my support.
 - [ ] As a user, I would like to be able to export and import configurations for my Hestia servers, to make it easier for me to deploy my systems.
+- [ ] As a user, I would like to be able to specify presets for my peripherals and apply those presets, so that I can quickly configure the peripherals to suit my preferences.
 - [ ] As a user, I would like to be able to change the theme of the user-interface, so that it suits my preferences.
 - [ ] As a developer, I would like to have consistent style between my products.
-- [ ] As a plugin developer, I want the Hestia website to be able to show all the available options for my plugin in order that the user can use it correctly.
+- [ ] As a plugin developer, I want the Hestia website to be able to present my plugin properly in order that the user can use it correctly.
 
 ## Change Log
 
