@@ -25,7 +25,7 @@ Feiko Ritsema
 ## Introduction
 The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local back end infrastructure to facilitate communicating and controlling the various hardware to be automated has been implemented by the clients. However, aside from an Android application (also developed by the clients), the system lacks consumer side interfacing. This limits ease of use and hinders widespread popular usage. 
 
-Our goal in this project is to develop web interfacing to ensure that the users of the *Hestia* System have a streamlined, usable, and secure experience. In brief, the users of the system should have quick, intuitive access to all the functionality provided by the clients' existing API system, so that anyone can simply navigate to a webpage and have the power to do what one could previously only do through manual HTTP requests. To that end this document details the requirements associated with the project.
+Our goal in this project is to develop a web interface to ensure that the users of the *Hestia* System have a streamlined, usable, and secure experience. In brief, the users of the system should have quick, intuitive access to all the functionality provided by the clients' existing API system, so that anyone can simply navigate to a webpage and have the power to do what one could previously only do through manual HTTP requests, in a more intuitive and user friendly manner. To that end this document details the requirements associated with the project.
 
 
 ## User Stories
@@ -45,13 +45,13 @@ The plugin developer is a person who has created a plugin that the Hestia system
 
 #### Critical User Stories
 - [ ] As a user, I would like to be able to change the status of peripherals of all of my Hestia servers from one location, so that it’s easier for me to configure my home automation.
-- [ ] As a user, I would like to be able to add a Hestia server to be remotely controlled, 
+- [ ] As a user, I would like to be able to add a Hestia server to be remotely controlled.
 - [ ] As a user, I would like to be able to ensure that my Hestia servers cannot be controlled without my knowledge.
   - [ ] As a user, I would like to be able to access a log of events associated with my servers, so that I can see what changes have occurred.
 - [ ] As a user, I would like to be able to ensure that my Hestia servers cannot be accessed without my consent.
   - [ ] As a user, I would like to be able to set my authentication credentials, to ensure that I am the only one who can be authenticated by those credentials.
-- [ ] As a user, I would like to be able to share access to my Hestia server, so that others who are affected by the peripherals can change things to suit them.
-  - [ ] As a user, I would like to be able to set permissions for the servers or peripherals, so that I can limit what people with shared access can do on my servers.
+- [ ] As a user, I would like to be able to share access to my Hestia server to other people who I trust, so that others who are affected by the peripherals can change things to suit them.
+  - [ ] As a user, I would like to be able to set permissions for the servers or peripherals, so that I can limit what people who I have shared access with can do on my servers.
 - [ ] As a user, I would like to be able to easily add or remove plugins from my Hestia servers, so that it’s easy for me to test various peripherals.
 - [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
@@ -62,7 +62,7 @@ The plugin developer is a person who has created a plugin that the Hestia system
 - [ ] As a user, I would like to be able to submit feedback to plugin developers, so that they can improve their plugin.
 - [ ] As a plugin developer, I would like to be able to receive detailed and organised feedback, so I can improve my plugin.
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
-- [ ] As a user, I would like to be able to view my favorite peripherals in one location.
+- [ ] As a user, I would like to be able to view my favourite peripherals in one location.
 
 #### Useful User Stories
 - [ ] As a user, I would like to be able to donate to plugin developers, to show my support.
@@ -91,3 +91,4 @@ Below are listed some requirements or concerns which the clients have told us ab
 | Andrew Lalis   | 2018-03-12 | Document Name  | Renamed to HestiaWeb_requirements, added local website to Won't Do.                               |
 | Rens Nijman    | 2018-03-12 | Won't Do       | Removed a space.                                                                                  |
 | Troy Harrison  | 2018-03-13 | Requirements   | Move requirements to better reflect current focus.                                                |
+| Roman Bell     | 2018-03-23 | Whole Document | Edited in preparation for final hand in                                                           |
