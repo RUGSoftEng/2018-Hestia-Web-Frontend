@@ -44,7 +44,7 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 ## Website Front-End
 Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. 
 
-The website will allow a user to log into their home server through a web server, and then manage the devices on their home server through a range of different controls, and do this in the knowledge that themselves and their information are being kept safe.
+The website will allow a user to connect to their controllers through a web server, and then manage the devices on their controllers through a range of different controls, and do this in the knowledge that themselves and their information are being kept safe.
 
 ![Website Design](images/Hestia_login_concept.png  "Website Login Concept")
 
@@ -53,17 +53,18 @@ The website will allow a user to log into their home server through a web server
 ![Website Design](images/Hestia_control_concept.png  "Website Control Concept")
 
 ### Design choices
-We decided that the user should decide which controller they are connecting to upon login, which prevents the added complexity caused by switching between controllers (note that this functionality could be added down the line). Thus, the main focus of the website will be on listing the devices managed by the controller, and on the operations that can be applied on them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but with more streamlined interfacing added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
+Due to the Firebase server, once the user has logged in then they will be able to see devices from every server they own, without having to switch between them. Thus, the main focus of the website will be on listing the devices managed by their controllers, and on the operations that can be applied on them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but with more streamlined interfacing added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
+
 
 #### Structural choices
-The page is laid out in such a way that the user can easily cycle between personal information, their devices, the home servers information, and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have many of these devices.
+The page is laid out in such a way that the user can easily cycle between personal information, their devices, their controllers' information, and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have many of these devices. This means they can also group them by controller.
 
 #### Aesthetical choices
 The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. Aside from the main Hestia logo, the icons used are from [Material Icons database](https://material.io/icons/), which provides a large set of intuitive, user friendly icons. 
 
 
 ## Website Back-End
-The backend of the webapp will serve as a middleman between the web frontend and the user's controller. This means that there needs to be an interface to be able to send queries to the server. Furthermore, a user database is required in order to maintain a secure environment in which users may only have permission to interact with systems they own. Unauthorized access to server data, user data, or any other sensitive information is completely forbidden.
+The backend of the webapp will serve as a middleman between the web frontend and the user's controllers. This means that there needs to be an interface to be able to send queries to the server. Furthermore, a user database is required in order to maintain a secure environment in which users may only have permission to interact with systems they own. Unauthorized access to server data, user data, or any other sensitive information is completely forbidden.
 
 ### Design decisions
 For the design of the webapp we initially chose to implement PHP since there was familiarity in the team with PHP. Thus, a concise webpage was setup using HTML and PHP. This website was designed to test querying a Hestia webserver (for instance a *GET* request). After the initial webpage was created we decided to implement the webpage in Python using Flask. There are two primary reasons for this:
@@ -129,7 +130,7 @@ Below are defined terms used in the architecture document:
 
 * *User*: A user is someone who has installed a Hestia controller in their home, and accesses the website to control their system.
 
-* Hello world.
+
 
 ## Change Log
 
@@ -145,4 +146,5 @@ Below are defined terms used in the architecture document:
 | Roman Bell    | 2018-03-13 | Frontend       | Added content regarding the frontend section                                   |
 | Rens Nijman   | 2018-03-13 | Back-end       | Added section on our server's functionality                                    |
 | Andrew Lalis  | 2018-03-13 | Back-end       | Revised a few things.                                                          |
-| Troy Harrison | 2018-03-13 | Whole Document | Cleaned up document.                                                               |
+| Troy Harrison | 2018-03-13 | Whole Document | Cleaned up document.                                                           |
+| Roman Bell    | 2018-03-23 | Whole Document | Added stuff regarding Firebase                                                 |
