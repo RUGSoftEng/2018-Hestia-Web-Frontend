@@ -8,6 +8,7 @@
       rel="stylesheet" />
    	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />-->
    	<link type="text/css" rel="stylesheet" href="style.css" />
+    <link type="text/css" rel="stylesheet" href="resources/stylesheets/toggle_switch.css" />
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="resources/scripts/main.js"></script>
@@ -33,14 +34,28 @@
 	  		</div>
 	  	</div>
       <div id="content">
-        <div class="content_module" onload="">
-          <div class="module_title"><h2>Devices</h2></div>
-          <div class="module_content">
-            <ul class="device_list">
-              <li class="device_row active">Big Light</li>
-              <li class="device_row">Side Light</li>
-              <li class="device_row">Thermostat</li>
-            </ul>
+        <div class="section">
+          <div class="content_module" onload="">
+            <div class="module_title"><h2>Devices</h2></div>
+            
+              <ul class="device_list">
+                <li class="device_row">Big Light</li>
+                <li class="device_row active">Side Light</li>
+                <li class="device_row">Thermostat</li>
+              </ul>
+            
+          </div>
+          <div class="content_module" onload="">
+            <div class="module_title"><h2>Side Light</h2></div>
+            <div class="module_content">
+              <div class="device_control_row">
+                Power
+                <label class="switch">
+                  <input type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+              </div>
+            </div>
           </div>
         </div>
       </div>

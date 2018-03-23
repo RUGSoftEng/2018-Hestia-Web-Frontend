@@ -158,16 +158,30 @@ ul {
 	width:90%;
 	display:block;
 	line-height:50px;
-	vertical-align:center;
+	color:#888;
+	font-weight:600;
 	padding-left:10%;
 	margin:0;
 	font-size:16pt;
+	box-shadow: 2px 2px #ccc;
+	cursor:pointer;
 }
 
 .device_row.active {
-	width:95%;
+	width:92%;
 	color:#fff;
 	background-color:#ff8f40;
+}
+
+.device_control_row {
+	width:100%;
+	display:block;
+	line-height:40px;
+	color:#888;
+	font-weight:600;
+	margin:0;
+	font-size:16pt;
+	box-shadow: 0px 2px #ccc;
 }
 
 #login_container {
@@ -192,7 +206,7 @@ ul {
 .module_content {
 	position: relative;
 	margin:0;
-	padding:0;
+	padding:25px;
 }
 
 #login_container button , input[type=submit] {
