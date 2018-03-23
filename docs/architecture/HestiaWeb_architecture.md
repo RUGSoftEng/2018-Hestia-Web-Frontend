@@ -91,16 +91,16 @@ During development it is essential to design the system in such a way that switc
 We will use Firebase for the initial login process, where the user enters their details. ( More to do here, will fill in when authentification is actually done, as then we will know what technique we are actually using )
 
 #### Database
-Firebase provides a realtime database solution, in which data is stored in JSON format. We will use this currently to store the information about the servers which the user has. This will have the following layout: there will be an overarching Users section which contains all users, then nested within this there will be each user, identified by their user id. Each user will contain a list of the IP addresses of that users servers. This is quite a simple structure, which will make it easy if (as specified above) we switch to an alternative service. Furthermore, the reason all users are nested within Users is to give the possibility of adding further structures to the database. Since a server may be held by multiple users, there may be some redundancy as servers may be listed more than once, though since the database will be used only to search for users this will not cause ineficiency.
+Firebase provides a realtime database solution, in which data is stored in JSON format. We will use this currently to store the information about the servers which the user has. This will have the following layout: there will be an overarching Users section which contains all users, then nested within this there will be each user, identified by their user id. Each user will contain a list of the IP addresses of that users servers. This is quite a simple structure, which will make it easy if (as specified above) we switch to an alternative service. Furthermore, the reason all users are nested within Users is to give the possibility of adding further structures to the database. Since a server may be held by multiple users, there may be some redundancy as servers may be listed more than once, though since the database will be used only to search for users this will not cause inefficiency.
 
-![Data Base](images/db.png  "The database")
+![Data Base](images/db.png  "An example database, hosted on the Firebase website")
 
 ### Functionality of the Webapp
 Currently, we have developed a server that serves as the liaison between the Hestia local controller and the user's interface. The front-end website will interact with this server exclusively through sending JSON objects in the payload of POST requests. These objects contain the following information.
 
 * *query*: The endpoint that the client intends to send a request to, on the Hestia local controller.
 * *method*: The method by which the user wishes to send the request.
-* *payload*: The payload is an optional item in the request that when supplied, is used for requests which require additional information, such as POSTing to /devices/ to create a new device, or updating a device's name. The exact content of the payload is identical in structure to the payload that would naturally be received by the 
+* *payload*: The payload is an optional item in the request that when supplied, is used for requests which require additional information, such as POSTing to /devices/ to create a new device, or updating a device's name. The exact content of the payload is identical in structure to the payload that would naturally be received by the controller.
 
 Every time a query is done on the webpage, the server gets a request where the */request* endpoint is being pinged. The above piece of code breaks down what the information consists of. Firstly, it gets a JSON object, where the *url* variable is set to be the URL, such that it can access either plugins or devices. Secondly, a certain method is set in the data that is being sent, such as GET, POST, PUT, or DELETE. Furthermore, depending on the method, there may be a payload, which contains the *body* of the message. For instance, for posting a new device, this would consist of a name, an ip, and a port number. Also, the corresponding plugin is required, which in this case also has to be part of the message sent from the webapp to our server. This differs from for instance a GET request, which simply requires a URL and the method.
 
@@ -126,7 +126,7 @@ Currently, the verify flag is set to `False`, as there is no secure connection t
 ## Glossary
 Below are defined terms used in the architecture document:
 
-* *Controller*: The local Hestia Server in a user's house. The controller simply runs the Hestia Server previously developed by the client, and has a unique IP address and port number.
+* *Controller*: The local Hestia server in a user's house. The controller simply runs the Hestia Server previously developed by the client, and has a unique IP address and port number.
 
 * *Peripheral*: A peripheral is any device which can be connected to the Hestia system via a plugin. For example, a Phillips Hue light bulb would constitute a peripheral.
 
@@ -149,4 +149,4 @@ Below are defined terms used in the architecture document:
 | Rens Nijman   | 2018-03-13 | Back-end       | Added section on our server's functionality                                    |
 | Andrew Lalis  | 2018-03-13 | Back-end       | Revised a few things.                                                          |
 | Troy Harrison | 2018-03-13 | Whole Document | Cleaned up document.                                                           |
-| Roman Bell    | 2018-03-23 | Whole Document | Added stuff regarding Firebase                                                 |
+| Roman Bell    | 2018-03-23 | Whole Document | Added stuff regarding Firebase, cleared up grammar and syntax throughout       |
