@@ -22,6 +22,9 @@
 	<!-- Firebase authentication -->
 	<script src="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.js"></script>
 	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.css" />
+
+	<!-- Custom database script. -->
+	<script src="database.js"></script>
   </head>
 
   <body>
@@ -93,7 +96,7 @@
 			var ui = new firebaseui.auth.AuthUI(firebase.auth());
 			// The start method will wait until the DOM is loaded.
 			ui.start('#firebaseui-auth-container', uiConfig);
-			displaySignIn();			
+			displaySignIn();
 		}
 
 		function signout(){
@@ -111,7 +114,6 @@
 			if (currentUser){
 				//user is logged in.
 				console.log("User logged in:"+currentUser.displayName);
-				
 			} else {
 				//user is not logged in, prepare a sign-in popup.
 				showAuth();
