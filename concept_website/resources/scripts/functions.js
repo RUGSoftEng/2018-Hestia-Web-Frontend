@@ -49,3 +49,72 @@ function getDevicesFromServer(){
       request.setRequestHeader("Content-type", "application/json");
       request.send(JSON.stringify(data));
     }
+
+function createDeviceList(deviceList){
+    document.getElementById("resultArea").innerHTML = "HOI";
+    var item, i = 0;
+    for(item in deviceList){
+        item = deviceList[i];
+        var p = document.createElement('li');
+        var lu = document.getElementById('device_list');
+        p.appendChild(document.createTextNode(item.name));
+        p.setAttribute("class", "device_row");
+        p.setAttribute("onclick", `getActivator(${i})`);
+        lu.appendChild(p);
+        i++;
+    }
+}
+
+
+
+// Data needed for testing device listing
+var array = ([
+    {
+        "activators": [
+            {
+                "activatorId": "5ab37fcde82b3f07245b9d37",
+                "rank": 0,
+                "type": "bool",
+                "name": "On/Off",
+                "state": true
+            },
+            {
+                "activatorId": "5ab37fcde82b3f07245b9d38",
+                "rank": 1,
+                "type": "float",
+                "name": "Dimmer",
+                "state": 0.5
+            }
+        ],
+        "type": "Light",
+        "name": "test2",
+        "deviceId": "5ab37fcde82b3f07245b9d39"
+    },
+    {
+        "activators": [
+            {
+                "activatorId": "5ab50835e82b3f10a33397a8",
+                "rank": 0,
+                "type": "bool",
+                "name": "On/Off",
+                "state": true
+            },
+            {
+                "activatorId": "5ab50835e82b3f10a33397a9",
+                "rank": 1,
+                "type": "float",
+                "name": "Dimmer",
+                "state": 0.5
+            }
+        ],
+        "type": "Light",
+        "name": "test3",
+        "deviceId": "5ab50835e82b3f10a33397aa"
+    }
+]);
+
+function testThis(){
+    createDeviceList(array);
+}
+
+
