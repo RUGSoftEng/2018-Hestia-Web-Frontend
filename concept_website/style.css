@@ -37,7 +37,8 @@ ul {
 	position:absolute;
 	margin-left:125px;
 	margin-top:75px;
-	padding:25px;*/
+	padding:25px;
+	z-index:-1;
 }
 
 .section {
@@ -151,19 +152,22 @@ ul {
 .devices_list {
 	margin:0;
 	padding:0;
-	text-indent:0;
 }
 
 .device_row {
+	width:90%;
+	display:block;
+	line-height:50px;
+	vertical-align:center;
+	padding-left:10%;
 	margin:0;
-	padding:0;
-	text-indent:0;
-	color:#ccc;
 	font-size:16pt;
 }
 
-.device_row .active {
-	padding:2px;
+.device_row.active {
+	width:95%;
+	color:#fff;
+	background-color:#ff8f40;
 }
 
 #login_container {
