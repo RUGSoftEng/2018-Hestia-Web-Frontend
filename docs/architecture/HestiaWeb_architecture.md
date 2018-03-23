@@ -23,21 +23,21 @@
 Feiko Ritsema
 
 ## Introduction
-The Hestia Home Automation System, developed by the clients, aims to make home automation simple again. The local server infrastructure that facilitates communication and control of the various peripherals in one's home has been implemented by the clients. In addition to this local server, an Android application has been pre-made by the client and is available for reference. As it stands users of Hestia are unable to access their home servers outside of their local network. This coupled with the lacking client side interfacing, limits ease of use and widespread adoption.
+The Hestia Home Automation System, developed by the clients, aims to make home automation simple again. The local server infrastructure that facilitates communication and control of the various peripherals in one's home has been implemented by the clients. In addition to this local server, an Android application has been pre-made by the client and is available for reference. As it stands users of Hestia are unable to access their home servers outside of their local network. This coupled with the lack of client side interfacing, limits ease of use and widespread adoption of the Hestia system.
 
-To improve on this, there are two main systems under consideration: the front-end (user interface with which the client interacts), and the back-end (which serves as a middleman between local Hestia servers and their users).
+To improve on this, we will develop a web based interface for Hestia. For this, sthere are two main systems under consideration: the front-end (the user interface with which the client interacts), and the back-end (which serves as a middleman between local Hestia servers and their users).
 
-This document describes the functioning of these systems, their interaction, and motivates their underlying design choices.
+This document describes the functioning of these systems, their interaction, and the motivation behind their underlying design choices.
 
 ### Overview
-Our goal for this project is to create the web interface. This web interface, which is hosted on a central server, should allow users to log in and connect their local Hestia servers. This allows users to interact with their home automation system remotely.
+Our goal for this project is to create a web interface for Hestia. This web interface, which is hosted on a central server, should allow users to log in and connect to their local Hestia servers. This allows users to interact with their home automation system remotely.
 
-A Hestia server is a *controller* that manages a set of *peripherals*. Those peripherals are the facilities to be automated. These could for instance be lights, locks, or any mumber of programmable devices. This is possible because Hestia is designed to be peripheral independent via a plugin infrastructure.
+A Hestia server is a *controller* that manages a set of *peripherals*. Those peripherals are the facilities to be automated. These could for example be lights, locks, or any number of programmable devices. This is possible because Hestia is designed to be peripheral independent via a plugin infrastructure.
 
 The clients have created this system using the REST API. This decouples our work from the underlying infrastructure of Hestia.
 
 ## General Overview of the System
-The Hestia Web Interface can be divided into two main sub-systems as mentioned in the Introduction.
+The Hestia Web Interface can be divided into two main sub-systems as mentioned in the introduction.
 * Front-end user interface, with which the user interacts
 * Back-end server that connects users to their local Hestia controllers and holds user and server information
 
@@ -53,11 +53,11 @@ The website will allow a user to connect to their controllers through a web serv
 ![Website Design](images/Hestia_control_concept.png  "Website Control Concept")
 
 ### Design choices
-Due to the Firebase server, once the user has logged in then they will be able to see devices from every server they own, without having to switch between them. Thus, the main focus of the website will be on listing the devices managed by their controllers, and on the operations that can be applied on them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but with more streamlined interfacing added, such as using buttons and sliders in order to change the activators of a device, instead of having to enter values.
+Due to the Firebase server, once the user has logged in then they will be able to see devices from every server they own, without having to switch between them. Thus, the main focus of the website will be on listing the devices managed by their controllers, and on the operations that can be applied on them. These will mirror those already implemented by Hestia, such as renaming or deleting a device, but with more streamlined interfacing added, such as using buttons and sliders in order to change the activators of a device, instead of having to directly enter values.
 
 
 #### Structural choices
-The page is laid out in such a way that the user can easily cycle between personal information, their devices, their controllers' information, and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have many of these devices. This means they can also group them by controller.
+The page is laid out in such a way that the user can easily cycle between personal information, their devices, their controllers' information, and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have many of these devices. This means they can also group them by controller, if they wish.
 
 #### Aesthetical choices
 The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. Aside from the main Hestia logo, the icons used are from [Material Icons database](https://material.io/icons/), which provides a large set of intuitive, user friendly icons. 
@@ -92,6 +92,8 @@ We will use Firebase for the initial login process, where the user enters their 
 
 #### Database
 Firebase provides a realtime database solution, in which data is stored in JSON format. We will use this currently to store the information about the servers which the user has. This will have the following layout: there will be an overarching Users section which contains all users, then nested within this there will be each user, identified by their user id. Each user will contain a list of the IP addresses of that users servers. This is quite a simple structure, which will make it easy if (as specified above) we switch to an alternative service. Furthermore, the reason all users are nested within Users is to give the possibility of adding further structures to the database. Since a server may be held by multiple users, there may be some redundancy as servers may be listed more than once, though since the database will be used only to search for users this will not cause ineficiency.
+
+![Website Design](images/db.png  "The database")
 
 ### Functionality of the Webapp
 Currently, we have developed a server that serves as the liaison between the Hestia local controller and the user's interface. The front-end website will interact with this server exclusively through sending JSON objects in the payload of POST requests. These objects contain the following information.
