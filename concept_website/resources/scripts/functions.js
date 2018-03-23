@@ -50,20 +50,22 @@ function getDevicesFromServer(){
       request.send(JSON.stringify(data));
     }
 
+
 function createDeviceList(deviceList){
     document.getElementById("resultArea").innerHTML = "HOI";
     var item, i = 0;
     for(item in deviceList){
         item = deviceList[i];
         var p = document.createElement('li');
-        var lu = document.getElementById('device_list');
+        var lu = document.getElementsByClassName("device_list");
         p.appendChild(document.createTextNode(item.name));
         p.setAttribute("class", "device_row");
         p.setAttribute("onclick", `getActivator(${i})`);
-        lu.appendChild(p);
+        lu[0].appendChild(p);
         i++;
     }
 }
+
 
 
 
