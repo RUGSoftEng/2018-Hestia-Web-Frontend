@@ -23,7 +23,7 @@
 Feiko Ritsema
 
 ## Introduction
-The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local server infrastructure that facilitates communication and control of the various peripherals in one's home has been implemented by the clients. In addition to this local server, an Android application has been pre-made by the client and is available for reference. As it stands users of Hestia are unable to access their home servers outside of their local network. This coupled with the lacking client side interfacing, limits ease of use and widespread adoption.
+The Hestia Home Automation System, developed by the clients, aims to make home automation simple again. The local server infrastructure that facilitates communication and control of the various peripherals in one's home has been implemented by the clients. In addition to this local server, an Android application has been pre-made by the client and is available for reference. As it stands users of Hestia are unable to access their home servers outside of their local network. This coupled with the lacking client side interfacing, limits ease of use and widespread adoption.
 
 To improve on this, there are two main systems under consideration: the front-end (user interface with which the client interacts), and the back-end (which serves as a middleman between local Hestia servers and their users).
 
@@ -74,6 +74,9 @@ For the design of the webapp we initially chose to implement PHP since there was
 
 However, we are currently unsure on whether Python and Flask will hinder scalable deployment when compared to using PHP.
 
+### Why Not Go Directly From Browser to Controller?
+Because the client's website will use javascript to send AJAX requests to the webserver, it is also perfectly capable of sending those requests directly to whatever controller the user wishes to control. However, in practice, this is not recommended, because some browsers, including Firefox, disable *Cross Origin Resource Sharing*. This could potentially be a large security vulnerability, and as such we avoid the issue by adding a layer of abstraction and forcing the user to communicate **only** with the website/webserver as opposed to both the website and the local controller. From Mozilla's website regarding CORS, or security reasons, browsers restrict cross-origin HTTP requests initiated from within scripts. For example, XMLHttpRequest and the Fetch API follow the same-origin policy.
+
 Creating a custom relational database schema and authentication system, and making it secure, is very costly in both time and resources. Since these services are also available through Firebase, we have decided on using Google's Firebase platform for our database needs, as explained in the next section.
 
 #### What is Firebase?
@@ -83,29 +86,14 @@ Firebase has free and paid versions, where the free version allows up to 100 Sim
 
 During development it is essential to design the system in such a way that switching from Firebase to an alternative service does not incur large infrastructural cost.
 
-### Functionality of the webapp
-Currently, we have developed a server that serves as the liaison between the Hestia local controller and the user's interface. Below we show a small section of the code in Python followed by explanation.
-
-```
-@app.route('/request', methods=['POST'])
-def apiRequestHandler():
-    json = request.get_json()
-    url = json["query"]
-    method = json["method"]
-    payload = None
-    if ("payload" in json):
-    	payload = json["payload"]
-    	print(payload)
-    return routeRequest(method, url, payload)
-```
-
-The front-end website will interact with this server exclusively through sending JSON objects in the payload of POST requests. These objects contain the following information.
+### Functionality of the Webapp
+Currently, we have developed a server that serves as the liaison between the Hestia local controller and the user's interface. The front-end website will interact with this server exclusively through sending JSON objects in the payload of POST requests. These objects contain the following information.
 
 * *query*: The endpoint that the client intends to send a request to, on the Hestia local controller.
 * *method*: The method by which the user wishes to send the request.
 * *payload*: The payload is an optional item in the request that when supplied, is used for requests which require additional information, such as POSTing to /devices/ to create a new device, or updating a device's name. The exact content of the payload is identical in structure to the payload that would naturally be received by the 
 
-Every time a query is done on the webpage, the server gets a request where the */request* is being pinged. The above piece of code breaks down what the information consists of. Firstly, it gets a JSON object, where the *url* variable is set to be the URL, such that it can access either plugins or devices. Secondly, a certain method is set in the data that is being sent, such as GET, POST, PUT, or DELETE. Furthermore, depending on the method, there may be a payload, which contains the *body* of the message. For instance, for posting a new device, this would consist of a name, an ip, and a port number. Also, the corresponding plugin is required, which in this case also has to be part of the message sent from the webapp to our server. This differs from for instance a GET request, which simply requires a URL and the method.
+Every time a query is done on the webpage, the server gets a request where the */request* endpoint is being pinged. The above piece of code breaks down what the information consists of. Firstly, it gets a JSON object, where the *url* variable is set to be the URL, such that it can access either plugins or devices. Secondly, a certain method is set in the data that is being sent, such as GET, POST, PUT, or DELETE. Furthermore, depending on the method, there may be a payload, which contains the *body* of the message. For instance, for posting a new device, this would consist of a name, an ip, and a port number. Also, the corresponding plugin is required, which in this case also has to be part of the message sent from the webapp to our server. This differs from for instance a GET request, which simply requires a URL and the method.
 
 Based on this information we have a function routeRequest, which follows up with the corresponding action, and sends the appropriate data. 
 ```
