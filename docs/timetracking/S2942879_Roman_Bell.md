@@ -6,4 +6,5 @@
 | *10/03/2018* | 14:00-17:00 | Designed a simple possible concept for the website, while discussing requirements online with backend|
 | *13/03/2018* | 18:30-21:30 | met with Nik to discuss how we would go on with the concept of developing the frontend |
 | *14/03/2018* | 13:00-17.30| Met with most of the web team, worked on architecture document and put together the website |
+| *19/03/2018* | 11:00-12.00| Met with team, organised further meetings |
 | *22/03/2018* | 11:00-11.30| Met with the client   |
