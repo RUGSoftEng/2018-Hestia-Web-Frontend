@@ -27,5 +27,11 @@
 |              | 14:00-14:30 | Research Firebase library integration with Flask.                                                                  |
 |              | 14:30-15:00 | Go through Flask examples (includes the Hestia server).                                                            |
 |              | 15:00-15:30 | Perform minimal testing with Flask.                                                                                |
+| *2018-03-12* | 12:00-13:00 | Meeting with backend team.                                                                                         |
+|              | 13:00-13:30 | Worked on translating webpage from PHP to Python.                                                                  |
+|              | 13:30-14:00 | Worked on translating webpage from PHP to Python.                                                                  |
+| *2018-03-13* | 20:00-20:30 | Revised requirements document.                                                                                     |
+|              | 20:30-21:30 | Revised architecture document.                                                                                     |
+|              | 21:30-22:30 | Cleaned up directory structure.                                                                                    |
 
 
