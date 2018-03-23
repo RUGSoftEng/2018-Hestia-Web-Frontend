@@ -35,10 +35,12 @@
 			<script type="text/javascript">
 				// FirebaseUI config.
 				var uiConfig = {
+					signInFlow: 'popup',
 					signInSuccessUrl: 'index.html',
 					signInOptions: [
 						// Leave the lines as is for the providers you want to offer your users.
-						firebase.auth.GoogleAuthProvider.PROVIDER_ID
+						firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+						firebase.auth.EmailAuthProvider.PROVIDER_ID
 					],
 					// Terms of service url.
 					tosUrl: 'settings.html'
@@ -64,22 +66,8 @@
          <div class="module_title"> 
            <h2>Login</h2> 
          </div> 
-         <div id="login_server"> 
-           <button>CHOOSE SERVER</button> 
-           <div id="server_info_login"> 
-             <p><strong>Current Server:</strong><br /> 
-             localhost</p> 
-           </div> 
-         </div> 
-         <div id="login_input"> 
-           <form action="index.html"> 
-             <input type="username" placeholder="Username" /> 
-             <input type="password" placeholder="Password" /> 
-             <input id="login_button" type="submit" name="login" value="LOGIN" /> 
-           </form> 
-         </div> 
+         <div id="firebaseui-auth-container"></div>
        </div>
-			<div id="firebaseui-auth-container"></div>
   	</div>
   </body>
 

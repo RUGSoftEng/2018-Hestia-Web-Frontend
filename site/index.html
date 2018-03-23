@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+  	<title>Hestia | Dashboard</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet" />
+   	<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />-->
+   	<link type="text/css" rel="stylesheet" href="style.css" />
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<!-- Firebase Modules -->
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+
+	<!-- Firebase Initialization Code -->
+	<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+
+	<!-- Firebase authentication -->
+	<script src="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.css" />
+  </head>
+
+  <body>
+  	<div id="container">
+  		<div id="firebaseui-auth-container"></div>
+  		<div id="interface">
+	  		<a href="index.html">
+		  		<div id="logo_float">
+		  			<img src="resources/images/logo_temp.png" />
+		  		</div>
+		  	</a>
+	  		<div id="top_bar">
+	  			<h1 id="current_page" onclick="signout()">Dashboard</h1>
+	  			<button id="sign_out_button" onclick="signout()">Sign Out</button>
+	  		</div>
+	  		<div id="side_menu">
+	  			<a href="index.html"><div class="menu_button current"><i class=material-icons>dashboard</i></div></a>
+	  			<a href="devices.html"><div class="menu_button"><i class=material-icons>settings_remote</i></div></a>
+	  			<a href="server.html"><div class="menu_button"><i class=material-icons>storage</i></div></a>
+	  			<a href="settings.html"><div class="menu_button"><i class=material-icons>settings</i></div></a>
+	  		</div>
+	  	</div>
+  	</div>
+  </body>
+
+  <script>
+
+  		function displaySignIn(){
+  			document.getElementById("firebaseui-auth-container").setAttribute("display", "block");
+  			var container = document.getElementById("container");
+  			container.setAttribute("background-color", "black");
+  			container.setAttribute("opacity", "0.25");
+  		}
+
+  		function hideSignIn(){
+  			document.getElementById("firebaseui-auth-container").setAttribute("display", "none");
+  			var container = document.getElementById("container");
+  			container.setAttribute("background-color", "FFF");
+  			container.setAttribute("opacity", "1");
+  		}
+
+		function initFirebase(){
+			var config = {
+				apiKey: "AIzaSyAJzJqrgr5aX3IIaIVO0IYTNfYmStFwsI0",
+				authDomain: "hestia-web-2018.firebaseapp.com",
+				databaseURL: "https://hestia-web-2018.firebaseio.com",
+				projectId: "hestia-web-2018",
+				storageBucket: "hestia-web-2018.appspot.com",
+				messagingSenderId: "971236925335"
+			};
+			firebase.initializeApp(config);
+		}
+
+		function showAuth(){
+			// FirebaseUI config.
+			var uiConfig = {
+				signInFlow: 'popup',
+				signInSuccessUrl: 'index.html',
+				signInOptions: [
+					// Leave the lines as is for the providers you want to offer your users.
+					firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+					firebase.auth.EmailAuthProvider.PROVIDER_ID
+				],
+				// Terms of service url.
+				tosUrl: 'settings.html'
+			};
+
+			// Initialize the FirebaseUI Widget using Firebase.
+			var ui = new firebaseui.auth.AuthUI(firebase.auth());
+			// The start method will wait until the DOM is loaded.
+			ui.start('#firebaseui-auth-container', uiConfig);
+			displaySignIn();			
+		}
+
+		function signout(){
+			firebase.auth().signOut().then(function(){
+				console.log("Signed out.");
+			}, function(error){
+				console.log("Error while signing out.");
+			});
+		}
+
+		initFirebase();
+		
+		//Check if the user is authenticated.
+		firebase.auth().onAuthStateChanged(function(currentUser){
+			if (currentUser){
+				//user is logged in.
+				console.log("User logged in:"+currentUser.displayName);
+				
+			} else {
+				//user is not logged in, prepare a sign-in popup.
+				showAuth();
+			}
+		});
+  </script>
+
+</html>
