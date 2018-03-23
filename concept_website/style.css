@@ -22,8 +22,26 @@ h2 {
 	color:#ff6a00;
 }
 
+ul {
+	display:block;
+	text-decoration:none;
+	list-style:none;
+	padding:0;
+}
+
 #interface {
 	margin:0;
+}
+
+#content {
+	position:absolute;
+	margin-left:125px;
+	margin-top:75px;
+	padding:25px;*/
+}
+
+.section {
+	clear:left;
 }
 
 #logo_float {
@@ -122,9 +140,30 @@ h2 {
 
 .content_module {
 	position:relative;
+	min-height:300px;
+	min-width:300px;
 	margin:25px 0px 0px 25px;
 	background-color:#fff;
 	box-shadow: 2px 2px #ccc;
+	float:left;
+}
+
+.devices_list {
+	margin:0;
+	padding:0;
+	text-indent:0;
+}
+
+.device_row {
+	margin:0;
+	padding:0;
+	text-indent:0;
+	color:#ccc;
+	font-size:16pt;
+}
+
+.device_row .active {
+	padding:2px;
 }
 
 #login_container {
@@ -144,6 +183,12 @@ h2 {
 	height:75px;
 	margin:0% 5% 0% 5%;
 	box-shadow: 0px 2px #ff6a00;
+}
+
+.module_content {
+	position: relative;
+	margin:0;
+	padding:0;
 }
 
 #login_container button , input[type=submit] {
