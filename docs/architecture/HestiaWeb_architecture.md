@@ -135,6 +135,8 @@ Below are defined terms used in the architecture document:
 
 * *User*: A user is someone who has installed a Hestia controller in their home, and accesses the website to control their system.
 
+* Hello world.
+
 ## Change Log
 
 | Who           |       When | Where          | What                                                                           |
