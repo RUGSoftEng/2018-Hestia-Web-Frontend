@@ -13,4 +13,4 @@
 | *18-03-2018* | 3 | Discussion with Andrew about Firebase Auth, research database storage options in firebase|
 | *20-03-2018* | 1 | Web meeting on campus
 | *22-03-2018* | 3 | More research for web development: javascript, flask, apache, git, python scripting, typed minutes|
-| *23-03-2018* | 6 | Friday work meeting. Refined Git, created Git plan for after sprint. Resarch experimental javascript for displaying devices. More research into web developement|
+| *23-03-2018* | 6 | Friday work meeting. Refined Git, created Git plan for after sprint. Experimented with javascript for displaying devices. More research into web developement|
