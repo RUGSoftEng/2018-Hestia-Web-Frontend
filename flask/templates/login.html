@@ -16,31 +16,32 @@
   <body>
     <div id="container">
       <div id="interface">
-        <a href="index.html">
-          <div id="logo_float">
+        <div id="top_bar_login">
+          <a href="login.html">
             <img src="images/logo_temp.png" />
-          </div>
-        </a>
-        <div id="top_bar">
-          <h1 id="current_page">Dashboard</h1>
-        </div>
-        <div id="side_menu">
-          <a href="index.html"><div class="menu_button current"><i class=material-icons>dashboard</i></div></a>
-          <a href="devices.html"><div class="menu_button"><i class=material-icons>settings_remote</i></div></a>
-          <a href="server.html"><div class="menu_button"><i class=material-icons>storage</i></div></a>
-          <a href="settings.html"><div class="menu_button"><i class=material-icons>settings</i></div></a>
+          </a>
         </div>
       </div>
-      <div id="content">
-        <div class="section">
-          <div class="content_module">
-            <div class="module_title"><h2>My Hestia</h2></div>
+      <div id="login_container">
+        <div class="module_title">
+          <h2>Login</h2>
+        </div>
+        <div id="login_server">
+          <button>CHOOSE SERVER</button>
+          <div id="server_info_login">
+            <p><strong>Current Server:</strong><br />
+            localhost</p>
           </div>
-          <div class="content_module">
-            <div class="module_title"><h2>Quick Navigation</h2></div>
-          </div>
+        </div>
+        <div id="login_input">
+          <form action="index.html">
+            <input type="username" placeholder="Username" />
+            <input type="password" placeholder="Password" />
+            <input id="login_button" type="submit" name="login" value="LOGIN" />
+          </form>
         </div>
       </div>
     </div>
   </body>
+
 </html>
