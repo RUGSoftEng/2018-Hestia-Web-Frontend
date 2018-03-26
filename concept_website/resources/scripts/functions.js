@@ -102,12 +102,11 @@ function removeChildren(node){
 
 //Gets a device object by id from some data.
 function getDeviceById(id){
-    array.forEach(function(device){
-        if (device.deviceId == id){
-            console.log(device);
-            return device;
+    for (var i = 0; i < array.length; i++){
+        if (array[i].deviceId == id){
+            return array[i];
         }
-    });
+    }
     return null;
 }
 
@@ -129,9 +128,7 @@ function populateDevices(data){
             }
             elem.className = "device_row active";
 
-            console.log("User clicked on device id: " + elem.id);
             var dev = getDeviceById(elem.id);
-            console.log(dev);
             
             viewDeviceActivators(dev.name, dev.deviceId, dev.activators);
         };
@@ -140,7 +137,7 @@ function populateDevices(data){
         namesListElem.appendChild(elem);
     });
     
-    namesListElem.click();
+    namesListElem.firstChild.click();
 }
 
 //Updates the device's activators module.
@@ -149,7 +146,8 @@ function viewDeviceActivators(deviceName, deviceId, activators){
     var activatorsTitle = document.getElementById("activatorsTitle");
     activatorsTitle.firstChild.innerHTML = deviceName;
     removeChildren(activatorsElem);
-    activators.forEach(function(activator){
+    for (var i = 0; i < activators.length; i++){
+        var activator = activators[i];
         var elem = document.createElement("div");
         elem.className = "device_control_row";
         elem.appendChild(document.createTextNode(activator.name));
@@ -157,21 +155,34 @@ function viewDeviceActivators(deviceName, deviceId, activators){
             case "bool":
                 var label = document.createElement("label");
                 label.className = "switch";
-                elem.appendChild(label);
                 var input = document.createElement("input");
                 input.type = "checkbox";
-                input.onchange = onToggleInteracted(input.checked, input.id);
-                input.id = deviceId;
+                input.oninput = onToggleInteracted;
+                input.id = activator.activatorId;
                 label.appendChild(input);
                 var span = document.createElement("span");
                 span.className = "switchSlider round";
                 label.append(span);
+                elem.appendChild(label);
                 break;
-            case "float":
                 
+            case "float":
+                var slideContainer = document.createElement("div");
+                slideContainer.className = "slidecontainer";
+                var input = document.createElement("input");
+                input.type = "range";
+                input.min = 0;
+                input.max = 255;
+                input.value = 127;
+                input.className = "slider";
+                input.id = activator.activatorId;
+                input.oninput = onSliderInteracted;
+                slideContainer.appendChild(input);
+                elem.appendChild(slideContainer);
                 break;
         }
-    });    
+        activatorsElem.appendChild(elem);
+    }
 }
 
 //Event handling functions for input elements for devices.
@@ -180,14 +191,13 @@ function viewDeviceActivators(deviceName, deviceId, activators){
 //  can be used to identify the device to which it is linked.
 
 //When the user toggles an on/off switch.
-function onToggleInteracted(value, id){
-    console.log("User toggled device: " + id + ", Current state: " + value);
-    populateDevices(array);
+function onToggleInteracted(){
+    console.log("User toggled device: " + this.id + ", Current state: " + this.checked);
 }
 
 //When the user changes a slider's value.
-function onSliderInteracted(value, id){
-    console.log("User changed slider: " + id + ", Current state: " + value);
+function onSliderInteracted(){
+    console.log("User changed slider: " + this.id + ", Current state: " + this.value);
 }
 
 // Data needed for testing device listing
@@ -236,8 +246,7 @@ var array = ([
     }
 ]);
 
-function testThis(){
-    createDeviceList(array);
-}
-
+window.onload = function(){
+    populateDevices(array);
+};
 
