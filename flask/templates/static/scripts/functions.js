@@ -185,6 +185,7 @@ function populateDevices(data){
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
 
+    console.log(data);
     data.forEach(function(device){
         console.log(device.name);
         var elem = document.createElement("li");
@@ -319,7 +320,12 @@ var array = ([
     }
 ]);
 
-window.onload = function() {
-    populateDevices(array);
-    //sendRequest("https://94.212.164.28:8000", "/devices/", "GET", {}, populateDevices);
-};
+function updateDeviceList () {
+    var devices = getServerDevices(document.getElementById("serverAddress").value);
+    devices.then(result => {
+        populateDevices(result);
+    })
+        .catch(err =>{
+            console.log(err);
+        });
+}
