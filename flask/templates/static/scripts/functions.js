@@ -219,14 +219,14 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 input.type = "checkbox";
                 input.onclick = onToggleInteracted;
                 input.id = activator.activatorId;
+                if(activator.state == 1){
+                    input.checked = true;
+                }
                 label.appendChild(input);
                 var span = document.createElement("span");
                 span.className = "switchSlider round";
                 label.append(span);
                 elem.appendChild(label);
-                if(activator.state == 1){
-                    input.checked = "1";
-                }
                 break;
 
             case "float":
