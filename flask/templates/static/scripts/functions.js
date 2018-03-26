@@ -227,7 +227,8 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 label.className = "switch";
                 var input = document.createElement("input");
                 input.type = "checkbox";
-                input.onclick = onToggleInteracted;
+                input.value= deviceId;
+                input.onclick = onToggleInteracted(this.checked, this.id, this.value);
                 input.id = activator.activatorId;
                 input.checked = activator.state;
                 label.appendChild(input);
@@ -235,6 +236,9 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 span.className = "switchSlider round";
                 label.append(span);
                 elem.appendChild(label);
+                //var hiddenInput = document.createElement("input");
+                //hiddenInput.type="hidden";
+                //hiddenInput.value=deviceId;
                 break;
 
             case "float":
