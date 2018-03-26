@@ -224,6 +224,9 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 span.className = "switchSlider round";
                 label.append(span);
                 elem.appendChild(label);
+                if(activator.state == 1){
+                    input.checked = "1";
+                }
                 break;
 
             case "float":
@@ -234,7 +237,7 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 input.min = 0;
                 input.max = 100;
                 input.step = 10;
-                input.value = 50; // TODO Based on object
+                input.value = activator.state; // TODO Based on object
                 input.className = "slider";
                 input.id = activator.activatorId;
                 input.oninput = onSliderInteracted;
