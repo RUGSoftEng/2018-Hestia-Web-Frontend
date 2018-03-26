@@ -28,6 +28,7 @@
     }
 </style>
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<script type="text/javascript" src="{{url_for('static', filename='functions.js') }}"></script>
 </head>
 <body>
     <div id="mainPanel">
@@ -44,135 +45,10 @@
             <h3>Optional Payload</h3>
             <textarea id="payloadInput" rows=8 cols=50></textarea><br>
         </div>
-        <button id="submitButton" onclick="lightToggle()">Submit Request</button>
+        <button id="submitButton" onclick="dimmer('https://94.212.164.28:8000','5ab37fcde82b3f07245b9d39', .6)">Submit Request</button>
         <pre id="resultArea" class="prettyprint">
           <!--result space for queries.-->
       </pre>
   </div>
-</body> 
-<script>
-
-    // promises a device
-    function getDevice(deviceId){
-      console.log("getDevice() is called");
-      
-      return new Promise(function(resolve, reject) {
-        var request = new XMLHttpRequest();
-        var url = "/request"
-        
-        request.onreadystatechange = function(){
-          if (this.readyState == 4 && this.status == 200){
-            result = this.responseText;
-            obj = JSON.parse(result);
-
-            if(obj) {
-              resolve(obj);
-          } else {
-              let error = new Error('Could not fetch device');
-              reject(error);
-              return;
-          }
-      }
-  }
-
-      // builds corresponding device id
-      fullDeviceId = "https://94.212.164.28:8000/devices/" + deviceId;
-
-      var data = {
-        // add deviceId below to get specific device
-        "query" : fullDeviceId,
-        "method" : "GET"
-    };
-
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(JSON.stringify(data));
-});
-  };
-
-
-  function lightToggle(){
-    var request = new XMLHttpRequest();
-    var url = "/request";
-
-    var device = getDevice('5ab37fcde82b3f07245b9d39');
-
-    device.then(result => {
-        console.log(JSON.stringify(result));
-
-        var payload = JSON.stringify({"state" : !(result.activators[0].state)});
-        console.log(payload);
-
-        var data = {
-        // "query" : "https://94.212.164.28:8000/devices/" + deviceId + "/activators/" + activatorId,
-        "query" : "https://94.212.164.28:8000/devices/5ab37fcde82b3f07245b9d39/activators/5ab37fcde82b3f07245b9d37",
-        "method" : "POST"
-    };
-
-    data["payload"] = JSON.parse(payload);
-
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(JSON.stringify(data));
-
-    })
-    .catch(err => {
-        console.log(err);
-    });
-  };
-
-
-function getServerDevices(){
-  var request = new XMLHttpRequest();
-  var url = "/request";
-
-  request.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200){
-      result = this.responseText;
-      obj = JSON.parse(result);
-      document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-  }
-};
-
-var data = {
-    "query" : "https://94.212.164.28:8000/devices/",
-    "method" : "GET"
-};
-
-request.open("POST", url, true);
-request.setRequestHeader("Content-type", "application/json");
-request.send(JSON.stringify(data));
-};
-
-
-function sendRequest(){
-  var request = new XMLHttpRequest();
-  var url = "/request";
-
-  request.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200){
-      result = this.responseText;
-      obj = JSON.parse(result);
-      document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-  }
-};
-
-var data = {
-    "query" : document.getElementById("queryInput").value,
-    "method" : document.getElementById("methodInput").value
-};
-
-var payload = document.getElementById("payloadInput").value;
-if (payload){
-    console.log("Payload is not empty.");
-    console.log(payload);
-    data["payload"] = JSON.parse(payload);
-}
-
-request.open("POST", url, true);
-request.setRequestHeader("Content-type", "application/json");
-request.send(JSON.stringify(data));
-};
-
-</script>
+</body>
 </html>
