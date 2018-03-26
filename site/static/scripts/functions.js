@@ -1,5 +1,25 @@
+//The most recent json object received by the client.
+var LAST_DATA_RECEIVED = null;
+
 function globalServer() {
-    return document.getElementById("serverInput").value;
+    return document.getElementById("serverAddress").value;
+}
+
+//Sends an asynchronous request to the webserver, intended to reach a local controller.
+function sendRequest(serverAddress, endpoint, method, callback, payload={}){
+    var data = {
+        query: serverAddress + endpoint,
+        method: method,
+        payload: payload
+    };
+    $.ajax({
+        url: "/request.php",
+        type: "post",
+        cache: false,
+        data: data,
+        dataType: "json",
+        success: callback
+    });
 }
 
 // promises a device
@@ -98,60 +118,6 @@ function toggle(server, deviceId){
         });
 };
 
-
-function getServerDevices(){
-    var request = new XMLHttpRequest();
-    var url = "/request";
-
-    request.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
-            result = this.responseText;
-            obj = JSON.parse(result);
-            document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-        }
-    };
-
-    var data = {
-        "query" : "https://94.212.164.28:8000/devices/",
-        "method" : "GET"
-    };
-
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(JSON.stringify(data));
-};
-
-
-function sendRequest(){
-    var request = new XMLHttpRequest();
-    var url = "/request";
-
-    request.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
-            result = this.responseText;
-            obj = JSON.parse(result);
-            document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-        }
-    };
-
-    var data = {
-        "query" : document.getElementById("queryInput").value,
-        "method" : document.getElementById("methodInput").value
-    };
-
-    var payload = document.getElementById("payloadInput").value;
-    if (payload){
-        console.log("Payload is not empty.");
-        console.log(payload);
-        data["payload"] = JSON.parse(payload);
-    }
-
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(JSON.stringify(data));
-};
-
-
 //Removes all children from an element.
 function removeChildren(node){
     while(node.firstChild){
@@ -161,9 +127,9 @@ function removeChildren(node){
 
 //Gets a device object by id from some data.
 function getDeviceById(id){
-    for (var i = 0; i < array.length; i++){
-        if (array[i].deviceId == id){
-            return array[i];
+    for (var i = 0; i < LAST_DATA_RECEIVED.length; i++){
+        if (LAST_DATA_RECEIVED[i].deviceId == id){
+            return LAST_DATA_RECEIVED[i];
         }
     }
     return null;
@@ -172,7 +138,7 @@ function getDeviceById(id){
 //Populates the list of devices from some data received from the server.
 //  data is a list of devices as received from the server.
 function populateDevices(data){
-    array = data;
+    LAST_DATA_RECEIVED = data;
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
 
@@ -264,65 +230,6 @@ function onSliderInteracted(){
     console.log("User changed slider: " + this.id + ", Current state: " + this.value);
 }
 
-// Data needed for testing device listing
-var array = ([
-    {
-        "activators": [
-            {
-                "activatorId": "5ab37fcde82b3f07245b9d37",
-                "rank": 0,
-                "type": "bool",
-                "name": "On/Off",
-                "state": true
-            },
-            {
-                "activatorId": "5ab37fcde82b3f07245b9d38",
-                "rank": 1,
-                "type": "float",
-                "name": "Dimmer",
-                "state": 0.5
-            }
-        ],
-        "type": "Light",
-        "name": "test2",
-        "deviceId": "5ab37fcde82b3f07245b9d39"
-    },
-    {
-        "activators": [
-            {
-                "activatorId": "5ab50835e82b3f10a33397a8",
-                "rank": 0,
-                "type": "bool",
-                "name": "On/Off",
-                "state": true
-            },
-            {
-                "activatorId": "5ab50835e82b3f10a33397a9",
-                "rank": 1,
-                "type": "float",
-                "name": "Dimmer",
-                "state": 0.5
-            }
-        ],
-        "type": "Light",
-        "name": "test3",
-        "deviceId": "5ab50835e82b3f10a33397aa"
-    }
-]);
-
 window.onload = function() {
-    //Start by populating devices.
-    var data = {
-        query: "https://94.212.164.28:8000/devices/",
-        method: "GET",
-        payload: {}
-    };
-    $.ajax({
-        url: "/request.php",
-        type: "POST",
-        data: data,
-        cache: false,
-        dataType: "json",
-        success: populateDevices
-    });
+    sendRequest(globalServer(), "/devices/", "GET", populateDevices);
 };
