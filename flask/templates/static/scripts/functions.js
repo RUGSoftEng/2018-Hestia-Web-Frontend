@@ -217,7 +217,7 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 label.className = "switch";
                 var input = document.createElement("input");
                 input.type = "checkbox";
-                input.oninput = onToggleInteracted;
+                input.onclick = onToggleInteracted;
                 input.id = activator.activatorId;
                 label.appendChild(input);
                 var span = document.createElement("span");
@@ -232,8 +232,9 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 var input = document.createElement("input");
                 input.type = "range";
                 input.min = 0;
-                input.max = 255;
-                input.value = 127;
+                input.max = 100;
+                input.step = 10;
+                input.value = 50; // TODO Based on object
                 input.className = "slider";
                 input.id = activator.activatorId;
                 input.oninput = onSliderInteracted;
