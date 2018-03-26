@@ -1,49 +1,45 @@
 // promises a device
-    function getDevice(deviceId){
-      console.log("getDevice() is called");
-      
-      return new Promise(function(resolve, reject) {
+function getDevice(deviceId){
+    console.log("getDevice() is called");
+
+    return new Promise(function(resolve, reject) {
         var request = new XMLHttpRequest();
         var url = "/request";
-        
+
         request.onreadystatechange = function(){
-          if (this.readyState == 4 && this.status == 200){
-            result = this.responseText;
-            obj = JSON.parse(result);
+            if (this.readyState == 4 && this.status == 200){
+                result = this.responseText;
+                obj = JSON.parse(result);
 
-            if(obj) {
-              resolve(obj);
-          } else {
-              let error = new Error('Could not fetch device');
-              reject(error);
-              return;
-          }
-      }
-    }
+                if(obj) {
+                    resolve(obj);
+                } else {
+                    let error = new Error('Could not fetch device');
+                    reject(error);
+                    return;
+                }
+            }
+        };
 
-      // builds corresponding device id
-      fullDeviceId = "https://94.212.164.28:8000/devices/" + deviceId;
+        // builds corresponding device id
+        fullDeviceId = "https://94.212.164.28:8000/devices/" + deviceId;
 
-      var data = {
-        // add deviceId below to get specific device
-        "query" : fullDeviceId,
-        "method" : "GET"
-    };
+        var data = {
+            // add deviceId below to get specific device
+            "query" : fullDeviceId,
+            "method" : "GET"
+        };
 
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(JSON.stringify(data));
+        request.open("POST", url, true);
+        request.setRequestHeader("Content-type", "application/json");
+        request.send(JSON.stringify(data));
     });
-  };
+};
 
 
-  function changeActivator(server, deviceId, activatorId, state){
+function changeActivator(server, deviceId, activatorId, state){
     var request = new XMLHttpRequest();
-    var url = "/request"
-    console.log(server)
-    console.log(deviceId)
-    console.log(activatorId)
-    console.log(state)
+    var url = "/request";
 
     var data = {
         "query" : server + "/devices/" + deviceId + "/activators/" + activatorId,
@@ -56,10 +52,10 @@
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(data));
-  }
+}
 
 
-  function dimmer(server, deviceId, payload){
+function dimmer(server, deviceId, payload){
     var request = new XMLHttpRequest();
     var url = "/request";
 
@@ -72,13 +68,13 @@
         changeActivator(server, deviceId, activatorFloat.activatorId, payload);
 
     })
-    .catch(err => {
-        console.log(err);
-    });
-  }
+        .catch(err => {
+            console.log(err);
+        });
+}
 
 
-  function toggle(server, deviceId){
+function toggle(server, deviceId){
     var request = new XMLHttpRequest();
     var url = "/request";
 
@@ -93,60 +89,60 @@
         changeActivator(server, deviceId, activatorBool.activatorId, payload);
 
     })
-    .catch(err => {
-        console.log(err);
-    });
-  };
+        .catch(err => {
+            console.log(err);
+        });
+};
 
 
 function getServerDevices(){
-  var request = new XMLHttpRequest();
-  var url = "/request";
+    var request = new XMLHttpRequest();
+    var url = "/request";
 
-  request.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200){
-      result = this.responseText;
-      obj = JSON.parse(result);
-      document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-  }
-};
+    request.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            result = this.responseText;
+            obj = JSON.parse(result);
+            document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
+        }
+    };
 
-var data = {
-    "query" : "https://94.212.164.28:8000/devices/",
-    "method" : "GET"
-};
+    var data = {
+        "query" : "https://94.212.164.28:8000/devices/",
+        "method" : "GET"
+    };
 
-request.open("POST", url, true);
-request.setRequestHeader("Content-type", "application/json");
-request.send(JSON.stringify(data));
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(JSON.stringify(data));
 };
 
 
 function sendRequest(){
-  var request = new XMLHttpRequest();
-  var url = "/request";
+    var request = new XMLHttpRequest();
+    var url = "/request";
 
-  request.onreadystatechange = function(){
-    if (this.readyState == 4 && this.status == 200){
-      result = this.responseText;
-      obj = JSON.parse(result);
-      document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-  }
-};
+    request.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            result = this.responseText;
+            obj = JSON.parse(result);
+            document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
+        }
+    };
 
-var data = {
-    "query" : document.getElementById("queryInput").value,
-    "method" : document.getElementById("methodInput").value
-};
+    var data = {
+        "query" : document.getElementById("queryInput").value,
+        "method" : document.getElementById("methodInput").value
+    };
 
-var payload = document.getElementById("payloadInput").value;
-if (payload){
-    console.log("Payload is not empty.");
-    console.log(payload);
-    data["payload"] = JSON.parse(payload);
-}
+    var payload = document.getElementById("payloadInput").value;
+    if (payload){
+        console.log("Payload is not empty.");
+        console.log(payload);
+        data["payload"] = JSON.parse(payload);
+    }
 
-request.open("POST", url, true);
-request.setRequestHeader("Content-type", "application/json");
-request.send(JSON.stringify(data));
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(JSON.stringify(data));
 };
