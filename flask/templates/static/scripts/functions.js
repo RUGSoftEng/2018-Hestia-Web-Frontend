@@ -127,8 +127,8 @@ function getServerDevices(server){
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(data));
-    }
-};
+    });
+}
 
 
 function sendRequest(){
