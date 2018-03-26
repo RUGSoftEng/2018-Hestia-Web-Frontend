@@ -52,7 +52,7 @@
 	}
 
 	if (!empty($_POST["query"]) && !empty($_POST["method"])){
-		$json = sendRequest($_POST["method"], $_POST["query"]);
+		$json = sendRequest($_POST["method"], $_POST["query"], $_POST["payload"]);
 		echo($json);
 	} else {
 		header("HTTP/1.1 500 Internal Server Error");
