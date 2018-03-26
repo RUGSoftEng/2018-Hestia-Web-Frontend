@@ -7,7 +7,6 @@ function getDevicesFromServer(){
           result = this.responseText;
           obj = JSON.parse(result);
           document.getElementById("resultArea").innerHTML = obj[2].name;
-
         }
       };
 
@@ -20,50 +19,6 @@ function getDevicesFromServer(){
       request.setRequestHeader("Content-type", "application/json");
       request.send(JSON.stringify(data));
     }
-
-function sendRequest(){
-      var request = new XMLHttpRequest();
-      var url = "/request";
-
-      request.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
-          result = this.responseText;
-          obj = JSON.parse(result);
-          document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-        }
-      };
-
-      var data = {
-        "query" : document.getElementById("queryInput").value,
-        "method" : document.getElementById("methodInput").value
-      };
-
-      var payload = document.getElementById("payloadInput").value;
-      if (payload){
-        console.log("Payload is not empty.");
-        console.log(payload);
-        data["payload"] = JSON.parse(payload);
-      }
-
-      request.open("POST", url, true);
-      request.setRequestHeader("Content-type", "application/json");
-      request.send(JSON.stringify(data));
-    }
-
-function createDeviceList(deviceList){
-    document.getElementById("resultArea").innerHTML = "HOI";
-    var item, i = 0;
-    for(item in deviceList){
-        item = deviceList[i];
-        var p = document.createElement('li');
-        var lu = document.getElementsByClassName("device_list");
-        p.appendChild(document.createTextNode(item.name));
-        p.setAttribute("class", "device_row");
-        p.setAttribute("onclick", `getActivator(${i})`);
-        lu[0].appendChild(p);
-        i++;
-    }
-}
 
 //Server interaction functions:
 //  These functions are used to abstract getting data from the server
@@ -113,6 +68,7 @@ function getDeviceById(id){
 //Populates the list of devices from some data received from the server.
 //  data is a list of devices as received from the server.
 function populateDevices(data){
+    array = data;
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
     
@@ -128,7 +84,7 @@ function populateDevices(data){
             }
             elem.className = "device_row active";
 
-            var dev = getDeviceById(elem.id);
+            var dev = getDeviceById(elem.id, data);
             
             viewDeviceActivators(dev.name, dev.deviceId, dev.activators);
         };
@@ -247,6 +203,6 @@ var array = ([
 ]);
 
 window.onload = function(){
-    populateDevices(array);
+    sendRequest("https://94.212.164.28:8000", "/devices/", "GET", {}, populateDevices);
 };
 
