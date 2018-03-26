@@ -228,10 +228,7 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 input.type = "checkbox";
                 input.onclick = onToggleInteracted;
                 input.id = activator.activatorId;
-                input.checked=true;
-                //if(activator.state == 1){
-                //    input.checked = true;
-                //}
+                input.checked = activator.state;
                 label.appendChild(input);
                 var span = document.createElement("span");
                 span.className = "switchSlider round";
@@ -254,6 +251,8 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 slideContainer.appendChild(input);
                 elem.appendChild(slideContainer);
                 break;
+          default:
+            console.log("Unknown activator type: " + activator.type);
         }
         activatorsElem.appendChild(elem);
     }
@@ -283,7 +282,7 @@ var array = ([
                 "rank": 0,
                 "type": "bool",
                 "name": "On/Off",
-                "state": true
+                "state": false
             },
             {
                 "activatorId": "5ab37fcde82b3f07245b9d38",
@@ -311,7 +310,7 @@ var array = ([
                 "rank": 1,
                 "type": "float",
                 "name": "Dimmer",
-                "state": 0.5
+                "state": 50
             }
         ],
         "type": "Light",
