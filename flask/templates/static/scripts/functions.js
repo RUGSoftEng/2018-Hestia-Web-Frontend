@@ -228,9 +228,10 @@ function viewDeviceActivators(deviceName, deviceId, activators){
                 input.type = "checkbox";
                 input.onclick = onToggleInteracted;
                 input.id = activator.activatorId;
-                if(activator.state == 1){
-                    input.checked = true;
-                }
+                input.checked=true;
+                //if(activator.state == 1){
+                //    input.checked = true;
+                //}
                 label.appendChild(input);
                 var span = document.createElement("span");
                 span.className = "switchSlider round";
