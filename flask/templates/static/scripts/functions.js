@@ -99,7 +99,7 @@ function toggle(server, deviceId){
 };
 
 
-function getServerDevices(){
+function getServerDevices(server){
     var request = new XMLHttpRequest();
     var url = "/request";
 
@@ -112,7 +112,7 @@ function getServerDevices(){
     };
 
     var data = {
-        "query" : "https://94.212.164.28:8000/devices/",
+        "query" : server + "/devices/",
         "method" : "GET"
     };
 
