@@ -203,6 +203,7 @@ var array = ([
 ]);
 
 window.onload = function(){
-    sendRequest("https://94.212.164.28:8000", "/devices/", "GET", {}, populateDevices);
+    populateDevices(array);
+    //sendRequest("https://94.212.164.28:8000", "/devices/", "GET", {}, populateDevices);
 };
 
