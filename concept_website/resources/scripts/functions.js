@@ -100,22 +100,78 @@ function removeChildren(node){
     }
 }
 
+//Gets a device object by id from some data.
+function getDeviceById(id){
+    array.forEach(function(device){
+        if (device.deviceId == id){
+            console.log(device);
+            return device;
+        }
+    });
+    return null;
+}
+
 //Populates the list of devices from some data received from the server.
 //  data is a list of devices as received from the server.
 function populateDevices(data){
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
-    var activatorsListElem = document.getElementById("activatorsList");
-    //removeChildren(activatorsListElem);
+    
     data.forEach(function(device){
         console.log(device.name);
         var elem = document.createElement("li");
         elem.className="device_row";
+        elem.id = device.deviceId;
+        elem.onclick = function() {
+            var children = namesListElem.children;
+            for (var i = 0; i < children.length; i++){
+                children[i].className = "device_row";
+            }
+            elem.className = "device_row active";
+
+            console.log("User clicked on device id: " + elem.id);
+            var dev = getDeviceById(elem.id);
+            console.log(dev);
+            
+            viewDeviceActivators(dev.name, dev.deviceId, dev.activators);
+        };
+        
         elem.appendChild(document.createTextNode(device.name));
         namesListElem.appendChild(elem);
     });
-    namesListElem.firstChild.className="device_row active";
     
+    namesListElem.click();
+}
+
+//Updates the device's activators module.
+function viewDeviceActivators(deviceName, deviceId, activators){
+    var activatorsElem = document.getElementById("activatorsList");
+    var activatorsTitle = document.getElementById("activatorsTitle");
+    activatorsTitle.firstChild.innerHTML = deviceName;
+    removeChildren(activatorsElem);
+    activators.forEach(function(activator){
+        var elem = document.createElement("div");
+        elem.className = "device_control_row";
+        elem.appendChild(document.createTextNode(activator.name));
+        switch (activator.type){
+            case "bool":
+                var label = document.createElement("label");
+                label.className = "switch";
+                elem.appendChild(label);
+                var input = document.createElement("input");
+                input.type = "checkbox";
+                input.onchange = onToggleInteracted(input.checked, input.id);
+                input.id = deviceId;
+                label.appendChild(input);
+                var span = document.createElement("span");
+                span.className = "switchSlider round";
+                label.append(span);
+                break;
+            case "float":
+                
+                break;
+        }
+    });    
 }
 
 //Event handling functions for input elements for devices.
