@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request, jsonify
 import requests
 
-app = Flask(__name__)
+app = Flask(__name__, 
+	static_url_path='',
+	static_folder='templates/static')
+
 @app.route('/')
 def main():
     return render_template('index.html')
+
 
 @app.route('/request', methods=['POST'])
 def apiRequestHandler():
