@@ -93,12 +93,29 @@ function sendRequest(serverAddress, endpoint, method, payload={}, callback){
     request.send(JSON.stringify(data));
 }
 
+//Removes all children from an element.
+function removeChildren(node){
+    while(node.firstChild){
+        node.removeChild(node.firstChild);
+    }
+}
+
 //Populates the list of devices from some data received from the server.
 //  data is a list of devices as received from the server.
 function populateDevices(data){
+    var namesListElem = document.getElementById("deviceNamesList");
+    removeChildren(namesListElem);
+    var activatorsListElem = document.getElementById("activatorsList");
+    //removeChildren(activatorsListElem);
     data.forEach(function(device){
         console.log(device.name);
+        var elem = document.createElement("li");
+        elem.className="device_row";
+        elem.appendChild(document.createTextNode(device.name));
+        namesListElem.appendChild(elem);
     });
+    namesListElem.firstChild.className="device_row active";
+    
 }
 
 //Event handling functions for input elements for devices.

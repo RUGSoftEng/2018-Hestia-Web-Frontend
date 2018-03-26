@@ -40,7 +40,7 @@
           <div class="content_module" onload="">
             <div class="module_title"><h2>Devices</h2></div>
             
-              <ul class="device_list">
+              <ul id="deviceNamesList" class="device_list">
                 <li class="device_row">Big Light</li>
                 <li class="device_row active">Side Light</li>
                 <li class="device_row">Thermostat</li>
@@ -49,11 +49,11 @@
           </div>
           <div class="content_module" onload="">
             <div class="module_title"><h2>Side Light</h2></div>
-            <div class="module_content">
+            <div id="activatorsList" class="module_content">
               <div class="device_control_row">
                 Power
                 <label class="switch">
-                  <input id="sideLightToggle" type="checkbox" oninput="onToggleInteracted(this.value, this.id)" />
+                  <input id="sideLightToggle" type="checkbox" onchange="onToggleInteracted(this.checked, this.id)" />
                   <span class="switchSlider round"></span>
                 </label>
               </div>
