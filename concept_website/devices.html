@@ -13,8 +13,8 @@
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="resources/scripts/main.js"></script>
-    <script type="text/javascript" src="resrouces/scripts/functions.js"></script>
-    <script type="text/javascript" src="resrouces/scripts/ctrl_slider.js"></script>
+    <script type="text/javascript" src="resources/scripts/functions.js"></script>
+    <script type="text/javascript" src="resources/scripts/ctrl_slider.js"></script>
   </head>
 
   <body>
@@ -53,14 +53,14 @@
               <div class="device_control_row">
                 Power
                 <label class="switch">
-                  <input type="checkbox">
+                  <input id="sideLightToggle" type="checkbox" oninput="onToggleInteracted(this.value, this.id)" />
                   <span class="switchSlider round"></span>
                 </label>
               </div>
               <div class="device_control_row">
                 <div class="control_text">Brightness</div>
                 <div class="slidecontainer">
-                  <input type="range" min="1" max="100" value="50" class="slider" id="myRange" />
+                  <input type="range" min="0" max="255" value="50" class="slider" id="myRange" oninput="onSliderInteracted(this.value, this.id)" />
                 </div>
               </div>
             </div>

@@ -21,7 +21,7 @@ function getDevicesFromServer(){
       request.send(JSON.stringify(data));
     }
 
-    function sendRequest(){
+function sendRequest(){
       var request = new XMLHttpRequest();
       var url = "/request";
 
@@ -50,7 +50,6 @@ function getDevicesFromServer(){
       request.send(JSON.stringify(data));
     }
 
-
 function createDeviceList(deviceList){
     document.getElementById("resultArea").innerHTML = "HOI";
     var item, i = 0;
@@ -66,8 +65,57 @@ function createDeviceList(deviceList){
     }
 }
 
+//Server interaction functions:
+//  These functions are used to abstract getting data from the server
+//  and generating a dynamic object representation.
 
+//Sends a request to a server, to the specific endpoint. 
+function sendRequest(serverAddress, endpoint, method, payload={}, callback){
+    var request = new XMLHttpRequest();
+    var url = "/request";
 
+    request.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            result = this.responseText;
+            obj = JSON.parse(result);
+            callback(obj);
+        }
+    };
+
+    var data = {
+        query : serverAddress + endpoint,
+        method : method,
+        payload : payload
+    };
+
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(JSON.stringify(data));
+}
+
+//Populates the list of devices from some data received from the server.
+//  data is a list of devices as received from the server.
+function populateDevices(data){
+    data.forEach(function(device){
+        console.log(device.name);
+    });
+}
+
+//Event handling functions for input elements for devices.
+//  Each function requires a value, usually 'this.value', and an id,
+//  usually 'this.id', where the id is unique for the given object and
+//  can be used to identify the device to which it is linked.
+
+//When the user toggles an on/off switch.
+function onToggleInteracted(value, id){
+    console.log("User toggled device: " + id + ", Current state: " + value);
+    populateDevices(array);
+}
+
+//When the user changes a slider's value.
+function onSliderInteracted(value, id){
+    console.log("User changed slider: " + id + ", Current state: " + value);
+}
 
 // Data needed for testing device listing
 var array = ([
