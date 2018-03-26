@@ -45,6 +45,7 @@ function changeActivator(server, deviceId, activatorId, state){
     var request = new XMLHttpRequest();
     var url = "/request";
 
+    console.log("YEAH " + deviceId);
     var data = {
         "query" : server + "/devices/" + deviceId + "/activators/" + activatorId,
         "method" : "POST",
@@ -78,24 +79,8 @@ function dimmer(server, deviceId, payload){
 }
 
 
-function toggle(server, deviceId){
-    var request = new XMLHttpRequest();
-    var url = "/request";
-
-    var device = getDevice(server, deviceId);
-
-    device.then(result => {
-        console.log(JSON.stringify(result));
-        var activatorBool = result.activators[0];
-        var payload = !(activatorBool.state);
-
-        console.log('payload:' + payload);
-        changeActivator(server, deviceId, activatorBool.activatorId, payload);
-
-    })
-    .catch(err => {
-        console.log(err);
-    });
+function toggle(server, deviceId, activatorId, payload){
+    changeActivator(server, deviceId, activatorId, payload);
 };
 
 
@@ -124,9 +109,9 @@ function getServerDevices(server){
             "method" : "GET"
         };
 
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(JSON.stringify(data));
+        request.open("POST", url, true);
+        request.setRequestHeader("Content-type", "application/json");
+        request.send(JSON.stringify(data));
     });
 }
 
@@ -163,8 +148,10 @@ function sendRequest(){
 
 //Removes all children from an element.
 function removeChildren(node){
-    while(node.firstChild){
-        node.removeChild(node.firstChild);
+    if (node) {
+        while(node.firstChild){
+            node.removeChild(node.firstChild);
+        }
     }
 }
 
@@ -222,41 +209,41 @@ function viewDeviceActivators(deviceName, deviceId, activators){
         elem.className = "device_control_row";
         elem.appendChild(document.createTextNode(activator.name));
         switch (activator.type){
-            case "bool":
-                var label = document.createElement("label");
-                label.className = "switch";
-                var input = document.createElement("input");
-                input.type = "checkbox";
-                input.value= deviceId;
-                input.onclick = onToggleInteracted(this.checked, this.id, this.value);
-                input.id = activator.activatorId;
-                input.checked = activator.state;
-                label.appendChild(input);
-                var span = document.createElement("span");
-                span.className = "switchSlider round";
-                label.append(span);
-                elem.appendChild(label);
-                //var hiddenInput = document.createElement("input");
-                //hiddenInput.type="hidden";
-                //hiddenInput.value=deviceId;
-                break;
+        case "bool":
+            var label = document.createElement("label");
+            label.className = "switch";
+            var input = document.createElement("input");
+            input.type = "checkbox";
+            input.name = deviceId;
+            input.onclick = onToggleInteracted;
+            input.id = activator.activatorId;
+            input.checked = activator.state;
+            label.appendChild(input);
+            var span = document.createElement("span");
+            span.className = "switchSlider round";
+            label.append(span);
+            elem.appendChild(label);
+            //var hiddenInput = document.createElement("input");
+            //hiddenInput.type="hidden";
+            //hiddenInput.value=deviceId;
+            break;
 
-            case "float":
-                var slideContainer = document.createElement("div");
-                slideContainer.className = "slidecontainer";
-                var input = document.createElement("input");
-                input.type = "range";
-                input.min = 0;
-                input.max = 100;
-                input.step = 10;
-                input.value = activator.state; // TODO Based on object
-                input.className = "slider";
-                input.id = activator.activatorId;
-                input.oninput = onSliderInteracted;
-                slideContainer.appendChild(input);
-                elem.appendChild(slideContainer);
-                break;
-          default:
+        case "float":
+            var slideContainer = document.createElement("div");
+            slideContainer.className = "slidecontainer";
+            var input = document.createElement("input");
+            input.type = "range";
+            input.min = 0;
+            input.max = 100;
+            input.step = 10;
+            input.value = activator.state; // TODO Based on object
+            input.className = "slider";
+            input.id = activator.activatorId;
+            input.oninput = onSliderInteracted;
+            slideContainer.appendChild(input);
+            elem.appendChild(slideContainer);
+            break;
+        default:
             console.log("Unknown activator type: " + activator.type);
         }
         activatorsElem.appendChild(elem);
@@ -270,11 +257,13 @@ function viewDeviceActivators(deviceName, deviceId, activators){
 
 //When the user toggles an on/off switch.
 function onToggleInteracted(){
-    console.log("User toggled device: " + this.id + ", Current state: " + this.checked);
+    console.log(this.name +" " + this.id + " " +this.checked);
+    toggle(document.getElementById("serverAddress").value, this.name, this.id, this.checked);
 }
 
 //When the user changes a slider's value.
 function onSliderInteracted(){
+    // toggle(document.getElementById("serverAddress").value, this.value, this.id, this.checked);
     console.log("User changed slider: " + this.id + ", Current state: " + this.value);
 }
 
