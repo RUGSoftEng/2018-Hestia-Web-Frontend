@@ -19,7 +19,7 @@ function getDevice(deviceId){
                     return;
                 }
             }
-        }
+        };
 
         // builds corresponding device id
         fullDeviceId = "https://94.212.164.28:8000/devices/" + deviceId;
@@ -39,11 +39,7 @@ function getDevice(deviceId){
 
 function changeActivator(server, deviceId, activatorId, state){
     var request = new XMLHttpRequest();
-    var url = "/request"
-    console.log(server)
-    console.log(deviceId)
-    console.log(activatorId)
-    console.log(state)
+    var url = "/request";
 
     var data = {
         "query" : server + "/devices/" + deviceId + "/activators/" + activatorId,
@@ -59,11 +55,9 @@ function changeActivator(server, deviceId, activatorId, state){
 }
 
 
-function dimmer(payload){
+function dimmer(server, deviceId, payload){
     var request = new XMLHttpRequest();
     var url = "/request";
-    var server = 'https://94.212.164.28:8000';
-    deviceId = '5ab37fcde82b3f07245b9d39';
 
     var device = getDevice(deviceId);
 
@@ -83,8 +77,6 @@ function dimmer(payload){
 function toggle(server, deviceId){
     var request = new XMLHttpRequest();
     var url = "/request";
-    var server = 'https://94.212.164.28:8000';
-    deviceId = '5ab37fcde82b3f07245b9d39';
 
     var device = getDevice(deviceId);
 
