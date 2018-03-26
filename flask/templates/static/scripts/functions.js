@@ -93,32 +93,41 @@ function toggle(server, deviceId){
         changeActivator(server, deviceId, activatorBool.activatorId, payload);
 
     })
-        .catch(err => {
-            console.log(err);
-        });
+    .catch(err => {
+        console.log(err);
+    });
 };
 
 
 function getServerDevices(server){
-    var request = new XMLHttpRequest();
-    var url = "/request";
+    return new Promise(function(resolve, reject) {
+        var request = new XMLHttpRequest();
+        var url = "/request";
 
-    request.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
-            result = this.responseText;
-            obj = JSON.parse(result);
-            document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-        }
-    };
+        request.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200){
+                result = this.responseText;
+                obj = JSON.parse(result);
 
-    var data = {
-        "query" : server + "/devices/",
-        "method" : "GET"
-    };
+                if(obj) {
+                    resolve(obj);
+                } else {
+                    let error = new Error('Could not fetch device');
+                    reject(error);
+                    return;
+                }
+            }
+        };
+
+        var data = {
+            "query" : server + "/devices/",
+            "method" : "GET"
+        };
 
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(data));
+    }
 };
 
 
