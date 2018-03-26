@@ -56,6 +56,6 @@
 		echo($json);
 	} else {
 		header("HTTP/1.1 500 Internal Server Error");
-		echo '...';
+		echo 'Error: invalid data provided. Please offer a query, method, and optional payload.';
 	}
 ?>

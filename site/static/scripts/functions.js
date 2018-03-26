@@ -311,6 +311,18 @@ var array = ([
 ]);
 
 window.onload = function() {
-    populateDevices(array);
-    //sendRequest("https://94.212.164.28:8000", "/devices/", "GET", {}, populateDevices);
+    //Start by populating devices.
+    var data = {
+        query: "https://94.212.164.28:8000/devices/",
+        method: "GET",
+        payload: {}
+    };
+    $.ajax({
+        url: "/request.php",
+        type: "POST",
+        data: data,
+        cache: false,
+        dataType: "json",
+        success: populateDevices
+    });
 };
