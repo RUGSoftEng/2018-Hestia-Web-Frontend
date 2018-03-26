@@ -44,7 +44,7 @@
             <h3>Optional Payload</h3>
             <textarea id="payloadInput" rows=8 cols=50></textarea><br>
         </div>
-        <button id="submitButton" onclick="lightToggle()">Submit Request</button>
+        <button id="submitButton" onclick="dimmer(.7)">Submit Request</button>
         <pre id="resultArea" class="prettyprint">
           <!--result space for queries.-->
       </pre>
@@ -58,7 +58,7 @@
       
       return new Promise(function(resolve, reject) {
         var request = new XMLHttpRequest();
-        var url = "/request"
+        var url = "/request";
         
         request.onreadystatechange = function(){
           if (this.readyState == 4 && this.status == 200){
@@ -73,7 +73,7 @@
               return;
           }
       }
-  }
+    }
 
       // builds corresponding device id
       fullDeviceId = "https://94.212.164.28:8000/devices/" + deviceId;
@@ -87,33 +87,67 @@
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(data));
-});
+    });
   };
 
 
-  function lightToggle(){
+  function changeActivator(server, deviceId, activatorId, state){
     var request = new XMLHttpRequest();
-    var url = "/request";
+    var url = "/request"
+    console.log(server)
+    console.log(deviceId)
+    console.log(activatorId)
+    console.log(state)
 
-    var device = getDevice('5ab37fcde82b3f07245b9d39');
-
-    device.then(result => {
-        console.log(JSON.stringify(result));
-
-        var payload = JSON.stringify({"state" : !(result.activators[0].state)});
-        console.log(payload);
-
-        var data = {
-        // "query" : "https://94.212.164.28:8000/devices/" + deviceId + "/activators/" + activatorId,
-        "query" : "https://94.212.164.28:8000/devices/5ab37fcde82b3f07245b9d39/activators/5ab37fcde82b3f07245b9d37",
-        "method" : "POST"
+    var data = {
+        "query" : server + "/devices/" + deviceId + "/activators/" + activatorId,
+        "method" : "POST",
+        "payload" : {"state" : state}
     };
 
-    data["payload"] = JSON.parse(payload);
+    console.log(data);
 
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(data));
+  }
+
+  function dimmer(payload){
+    var request = new XMLHttpRequest();
+    var url = "/request";
+    var server = 'https://94.212.164.28:8000';
+    deviceId = '5ab37fcde82b3f07245b9d39';
+
+    var device = getDevice(deviceId);
+
+    device.then(result => {
+        console.log(JSON.stringify(result));
+        var activatorFloat = result.activators[1];
+
+        console.log('payload:' + payload);
+        changeActivator(server, deviceId, activatorFloat.activatorId, payload);
+
+    })
+    .catch(err => {
+        console.log(err);
+    });
+  }
+
+  function lightToggle(){
+    var request = new XMLHttpRequest();
+    var url = "/request";
+    var server = 'https://94.212.164.28:8000';
+    deviceId = '5ab37fcde82b3f07245b9d39';
+
+    var device = getDevice(deviceId);
+
+    device.then(result => {
+        console.log(JSON.stringify(result));
+        var activatorBool = result.activators[0];
+        var payload = !(activatorBool.state);
+
+        console.log('payload:' + payload);
+        changeActivator(server, deviceId, activatorBool.activatorId, payload);
 
     })
     .catch(err => {
