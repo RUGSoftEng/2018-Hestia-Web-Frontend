@@ -1,18 +1,18 @@
 <!doctype html>
 <html>
-  <head>
-  	  <meta charset="utf-8">
-  	  <title>Hestia Test Page</title>
+<head>
+    <meta charset="utf-8">
+    <title>Hestia Test Page</title>
     <style>
-      body{
+    body{
         margin: 0px;
         background-color: #e8f0ff;
-      }
-      #mainPanel{
+    }
+    #mainPanel{
         text-align: center;
         width: 100%;
-      }
-      #resultArea{
+    }
+    #resultArea{
         width: 50%;
         min-height: 250px;
         background-color: white;
@@ -20,67 +20,159 @@
         margin-right: auto;
         text-align: left;
 
-      }
-      .subPanel{
+    }
+    .subPanel{
         max-width: 50%;
         margin-left: auto;
         margin-right: auto;
-      }
-    </style>
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-  </head>
-  <body>
+    }
+</style>
+<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+</head>
+<body>
     <div id="mainPanel">
-    <img alt="Hestia Logo" src="https://files.slack.com/files-pri/T98C42N1F-F9N3ZLDFB/hestialogo.png">
-      <div id="queryPanel" class="subPanel">
-        <h3>Query</h3>
-        <input id="queryInput" type="text"><br>
-      </div>
-      <div id="methodPanel" class="subPanel">
-        <h3>Request Type</h3>
-        <input id="methodInput" type="text"><br>
-      </div>
-      <div id="payloadPanel" class="subPanel">
-        <h3>Optional Payload</h3>
-        <textarea id="payloadInput" rows=8 cols=50></textarea><br>
-      </div>
-      <button id="submitButton" onclick="sendRequest()">Submit Request</button>
-      <pre id="resultArea" class="prettyprint">
-      <!--result space for queries.-->
-    </pre>
-    </div>
-  </body>
-  <script>
+        <img alt="Hestia Logo" src="https://files.slack.com/files-pri/T98C42N1F-F9N3ZLDFB/hestialogo.png">
+        <div id="queryPanel" class="subPanel">
+            <h3>Query</h3>
+            <input id="queryInput" type="text"><br>
+        </div>
+        <div id="methodPanel" class="subPanel">
+            <h3>Request Type</h3>
+            <input id="methodInput" type="text"><br>
+        </div>
+        <div id="payloadPanel" class="subPanel">
+            <h3>Optional Payload</h3>
+            <textarea id="payloadInput" rows=8 cols=50></textarea><br>
+        </div>
+        <button id="submitButton" onclick="lightToggle()">Submit Request</button>
+        <pre id="resultArea" class="prettyprint">
+          <!--result space for queries.-->
+      </pre>
+  </div>
+</body> 
+<script>
 
+    // promises a device
+    function getDevice(deviceId){
+      console.log("getDevice() is called");
+      
+      return new Promise(function(resolve, reject) {
+        var request = new XMLHttpRequest();
+        var url = "/request"
+        
+        request.onreadystatechange = function(){
+          if (this.readyState == 4 && this.status == 200){
+            result = this.responseText;
+            obj = JSON.parse(result);
 
+            if(obj) {
+              resolve(obj);
+          } else {
+              let error = new Error('Could not fetch device');
+              reject(error);
+              return;
+          }
+      }
+  }
 
-    function sendRequest(){
-      var request = new XMLHttpRequest();
-      var url = "/request";
-
-      request.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
-          result = this.responseText;
-          obj = JSON.parse(result);
-          document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-        }
-      };
+      // builds corresponding device id
+      fullDeviceId = "https://94.212.164.28:8000/devices/" + deviceId;
 
       var data = {
-        "query" : document.getElementById("queryInput").value,
-        "method" : document.getElementById("methodInput").value
-      };
+        // add deviceId below to get specific device
+        "query" : fullDeviceId,
+        "method" : "GET"
+    };
 
-      var payload = document.getElementById("payloadInput").value;
-      if (payload){
-        console.log("Payload is not empty.");
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(JSON.stringify(data));
+});
+  };
+
+
+  function lightToggle(){
+    var request = new XMLHttpRequest();
+    var url = "/request";
+
+    var device = getDevice('5ab37fcde82b3f07245b9d39');
+
+    device.then(result => {
+        console.log(JSON.stringify(result));
+
+        var payload = JSON.stringify({"state" : !(result.activators[0].state)});
         console.log(payload);
-        data["payload"] = JSON.parse(payload);
-      }
 
-      request.open("POST", url, true);
-      request.setRequestHeader("Content-type", "application/json");
-      request.send(JSON.stringify(data));
-    }
-  </script>
+        var data = {
+        // "query" : "https://94.212.164.28:8000/devices/" + deviceId + "/activators/" + activatorId,
+        "query" : "https://94.212.164.28:8000/devices/5ab37fcde82b3f07245b9d39/activators/5ab37fcde82b3f07245b9d37",
+        "method" : "POST"
+    };
+
+    data["payload"] = JSON.parse(payload);
+
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(JSON.stringify(data));
+
+    })
+    .catch(err => {
+        console.log(err);
+    });
+  };
+
+
+function getServerDevices(){
+  var request = new XMLHttpRequest();
+  var url = "/request";
+
+  request.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      result = this.responseText;
+      obj = JSON.parse(result);
+      document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
+  }
+};
+
+var data = {
+    "query" : "https://94.212.164.28:8000/devices/",
+    "method" : "GET"
+};
+
+request.open("POST", url, true);
+request.setRequestHeader("Content-type", "application/json");
+request.send(JSON.stringify(data));
+};
+
+
+function sendRequest(){
+  var request = new XMLHttpRequest();
+  var url = "/request";
+
+  request.onreadystatechange = function(){
+    if (this.readyState == 4 && this.status == 200){
+      result = this.responseText;
+      obj = JSON.parse(result);
+      document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
+  }
+};
+
+var data = {
+    "query" : document.getElementById("queryInput").value,
+    "method" : document.getElementById("methodInput").value
+};
+
+var payload = document.getElementById("payloadInput").value;
+if (payload){
+    console.log("Payload is not empty.");
+    console.log(payload);
+    data["payload"] = JSON.parse(payload);
+}
+
+request.open("POST", url, true);
+request.setRequestHeader("Content-type", "application/json");
+request.send(JSON.stringify(data));
+};
+
+</script>
 </html>
