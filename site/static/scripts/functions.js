@@ -1,5 +1,6 @@
 //The most recent json object received by the client.
 var LAST_DATA_RECEIVED = null;
+var SELECTED_DEVICE = null;
 
 function globalServer() {
     return document.getElementById("serverAddress").value;
@@ -12,6 +13,8 @@ function sendRequest(serverAddress, endpoint, method, callback, payload={}){
         method: method,
         payload: payload
     };
+    console.log("Sending request:");
+    console.log(data);
     $.ajax({
         url: "/request.php",
         type: "post",
@@ -20,6 +23,19 @@ function sendRequest(serverAddress, endpoint, method, callback, payload={}){
         dataType: "json",
         success: callback
     });
+}
+
+//Updates a device activator using an abstracted call to send a request.
+function updateDeviceActivator(serverAddress, deviceId, activatorId, newState){
+    console.log("Sending request to: "+serverAddress);
+    console.log("endpoint: "+"/devices/" + deviceId + "/activators/" + activatorId);
+    sendRequest(serverAddress,
+        "/devices/" + deviceId + "/activators/" + activatorId,
+        "POST",
+        function(response){
+            console.log("Response from updating device activator.");
+            console.log(response);
+        });
 }
 
 // promises a device
@@ -155,6 +171,7 @@ function populateDevices(data){
             elem.className = "device_row active";
 
             var dev = getDeviceById(elem.id, data);
+            SELECTED_DEVICE = dev.deviceId;
 
             viewDeviceActivators(dev.name, dev.deviceId, dev.activators);
         };
@@ -164,6 +181,7 @@ function populateDevices(data){
     });
 
     namesListElem.firstChild.click();
+    SELECTED_DEVICE = namesListElem.firstChild.id;
 }
 
 //Updates the device's activators module.
@@ -228,6 +246,7 @@ function onToggleInteracted(){
 //When the user changes a slider's value.
 function onSliderInteracted(){
     console.log("User changed slider: " + this.id + ", Current state: " + this.value);
+    updateDeviceActivator(globalServer(), SELECTED_DEVICE, this.id, 0.1);
 }
 
 window.onload = function() {
