@@ -1,5 +1,9 @@
+function globalServer() {
+    return document.getElementById("serverInput").value;
+}
+
 // promises a device
-function getDevice(deviceId){
+function getDevice(server, deviceId){
     console.log("getDevice() is called");
 
     return new Promise(function(resolve, reject) {
@@ -22,7 +26,7 @@ function getDevice(deviceId){
         };
 
         // builds corresponding device id
-        fullDeviceId = "https://94.212.164.28:8000/devices/" + deviceId;
+        fullDeviceId = server + "/devices/" + deviceId;
 
         var data = {
             // add deviceId below to get specific device
@@ -59,7 +63,7 @@ function dimmer(server, deviceId, payload){
     var request = new XMLHttpRequest();
     var url = "/request";
 
-    var device = getDevice(deviceId);
+    var device = getDevice(server, deviceId);
 
     device.then(result => {
         console.log(JSON.stringify(result));
@@ -78,7 +82,7 @@ function toggle(server, deviceId){
     var request = new XMLHttpRequest();
     var url = "/request";
 
-    var device = getDevice(deviceId);
+    var device = getDevice(server, deviceId);
 
     device.then(result => {
         console.log(JSON.stringify(result));
