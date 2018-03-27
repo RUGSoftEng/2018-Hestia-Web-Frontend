@@ -189,6 +189,10 @@ ul {
 	position:relative;
 }
 
+#payload_input {
+	min-height:300px;
+}
+
 #login_container {
 	position:relative;
 	display:block;
