@@ -26,3 +26,43 @@
 | *2018-03-13* | 15:30-16:00 | Architecture document and further flask.|
 | *2018-03-13* | 16:00-16:30 | Architecture document and further flask.|
 | *2018-03-13* | 16:30-17:00 | Architecture document and further flask.|
+| *2018-03-23* | 11:00-11:30 | Team meeting.|
+| *2018-03-23* | 11:30-12:00 | Team meeting.|
+| *2018-03-23* | 12:00-12:30 | Worked on JavaScript functionality.|
+| *2018-03-23* | 12:30-13:00 | Worked on JavaScript functionality.|
+| *2018-03-23* | 13:00-13:30 | Worked on JavaScript functionality.|
+| *2018-03-23* | 13:30-14:00 | Worked on JavaScript functionality.|
+| *2018-03-23* | 14:00-14:30 | Worked on JavaScript functionality.|
+| *2018-03-23* | 14:30-15:00 | Worked on JavaScript functionality.|
+| *2018-03-23* | 15:00-15:30 | Worked on JavaScript functionality.|
+| *2018-03-23* | 15:30-16:00 | Worked on JavaScript functionality.|
+| *2018-03-23* | 16:00-16:30 | Worked on JavaScript functionality.|
+| *2018-03-23* | 16:30-17:00 | Worked on JavaScript functionality.|
+| *2018-03-23* | 17:00-17:30 | Worked on JavaScript functionality.|
+| *2018-03-23* | 17:30-18:00 | Worked on JavaScript functionality.|
+| *2018-03-23* | 18:00-18:30 | Worked on JavaScript functionality.|
+| *2018-03-23* | 18:30-19:00 | Worked on JavaScript functionality.|
+| *2018-03-26* | 11:00-11:30 | Team meeting.|
+| *2018-03-26* | 11:30-12:00 | Team meeting.|
+| *2018-03-26* | 12:00-12:30 | Worked on JavaScript functionality.|
+| *2018-03-26* | 12:30-13:00 | Worked on JavaScript functionality.|
+| *2018-03-26* | 13:00-13:30 | Worked on JavaScript functionality.|
+| *2018-03-26* | 13:30-14:00 | Worked on JavaScript functionality.|
+| *2018-03-26* | 14:00-14:30 | Worked on JavaScript functionality.|
+| *2018-03-26* | 14:30-15:00 | Worked on JavaScript functionality.|
+| *2018-03-26* | 15:00-15:30 | Implementing JS functions into html pages.|
+| *2018-03-26* | 15:30-16:00 | Implementing JS functions into html pages.|
+| *2018-03-26* | 16:00-16:30 | Implementing JS functions into html pages.|
+| *2018-03-26* | 16:30-17:00 | Implementing JS functions into html pages.|
+| *2018-03-26* | 17:00-17:30 | Implementing JS functions into html pages.|
+| *2018-03-26* | 17:30-18:00 | Implementing JS functions into html pages.|
+| *2018-03-26* | 18:00-18:30 | Implementing JS functions into html pages.|
+| *2018-03-26* | 18:30-19:00 | Implementing JS functions into html pages.|
+| *2018-03-26* | 19:00-19:30 | Implementing JS functions into html pages.|
+| *2018-03-26* | 19:30-20:00 | Implementing JS functions into html pages.|
+| *2018-03-27* | 17:00-17:30 | Add extra JS functionality.|
+| *2018-03-27* | 17:30-18:00 | Finalize JS front end intergration.|
+| *2018-03-27* | 18:00-18:30 | Finalize JS front end intergration.|
+| *2018-03-27* | 18:30-19:00 | Finalize JS front end intergration.|
+| *2018-03-27* | 19:00-19:30 | Finalize JS front end intergration.|
+| *2018-03-27* | 19:30-20:00 | Finalize JS front end intergration.
