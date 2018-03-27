@@ -241,7 +241,8 @@ function viewDeviceActivators(deviceName, deviceId, activators){
             input.min = 0;
             input.max = 100;
             input.step = 10;
-            input.value = activator.state; // TODO Based on object
+            input.name = deviceId;
+            input.value = activator.state*100; // TODO Based on object
             input.className = "slider";
             input.id = activator.activatorId;
             input.onchange = onSliderInteracted;
@@ -269,8 +270,8 @@ function onToggleInteracted(){
 //When the user changes a slider's value.
 function onSliderInteracted(){
     // toggle(document.getElementById("serverAddress").value, this.value, this.id, this.checked);
-    console.log("User changed slider: " + this.id + ", Current state: " + this.value);
-    dimmer(document.getElementById("serverAddress").value, this.name, this.id, this.value);
+    console.log("User changed slider: " + this.id + ", Current state: " + this.value/100);
+    dimmer(document.getElementById("serverAddress").value, this.name, this.id, this.value/100);
 }
 
 // Data needed for testing device listing
@@ -310,7 +311,7 @@ var array = ([
                 "rank": 1,
                 "type": "float",
                 "name": "Dimmer",
-                "state": 50
+                "state": 0.5
             }
         ],
         "type": "Light",
