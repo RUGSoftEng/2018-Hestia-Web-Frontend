@@ -19,6 +19,8 @@
 * R. Bell
 * S. Oegema
 
+### Teaching Assistant
+Feiko Ritsema
 
 ## Introduction
 The *Hestia* Home Automation System, developed by the clients, aims to make home automation simple again. The local back end infrastructure to facilitate communicating and controlling the various hardware to be automated has been implemented by the clients. However, aside from an Android application (also developed by the clients), the system lacks consumer side interfacing. This limits ease of use and hinders widespread popular usage. 
@@ -41,7 +43,7 @@ The developer is one who is responsible for designing the software that the user
 #### Plugin Developer
 The plugin developer is a person who has created a plugin that the Hestia system can manage. The plugin developer does not need to know a great deal about the user interface in order to develop plugins, and as such is more concerned with being able to publish their plugin and have it work successfully on all other Hestia local systems.
 
-#### Critical user stories
+#### Critical User Stories
 - [ ] As a user, I would like to be able to change the status of peripherals of all of my Hestia servers from one location, so that it’s easier for me to configure my home automation.
 - [ ] As a user, I would like to be able to add a Hestia server to be remotely controlled.
 - [ ] As a user, I would like to be able to ensure that my Hestia servers cannot be controlled without my knowledge.
@@ -51,10 +53,10 @@ The plugin developer is a person who has created a plugin that the Hestia system
 - [ ] As a user, I would like to be able to share access to my Hestia server to other people who I trust, so that others who are affected by the peripherals can change things to suit them.
   - [ ] As a user, I would like to be able to set permissions for the servers or peripherals, so that I can limit what people who I have shared access with can do on my servers.
 - [ ] As a user, I would like to be able to easily add or remove plugins from my Hestia servers, so that it’s easy for me to test various peripherals.
-- [ ] As a user, I would like to be able to use the Hestia service without interruption.
 - [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
+- [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
 
-#### Important user stories
+#### Important User Stories
 - [ ] As a user, I would like to be able to view details about my Hestia servers from a central location, so that I can monitor their status easily.
 - [ ] As a user, I would like to be able to specify presets across my peripherals and apply those presets, so that I can quickly configure the peripherals to suit my preferences.
 - [ ] As a user, I would like to be able to submit feedback to plugin developers, so that they can improve their plugin.
@@ -62,21 +64,31 @@ The plugin developer is a person who has created a plugin that the Hestia system
 - [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
 - [ ] As a user, I would like to be able to view my favourite peripherals in one location.
 
-#### Useful user stories
+#### Useful User Stories
 - [ ] As a user, I would like to be able to donate to plugin developers, to show my support.
 - [ ] As a user, I would like to be able to export and import configurations for my Hestia servers, to make it easier for me to deploy my systems.
 - [ ] As a user, I would like to be able to change the theme of the user-interface, so that it suits my preferences.
-- [ ] As a developer, I would like to have consistent style between my products.
+
+## Non-Functional Requirements
 - [ ] As a user, I would like to be able to use the Hestia service without interruption.
-- [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
-- [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
+- [ ] As a developer, I would like to have consistent style between my products.
+
+## Won't Do
+Below are listed some requirements or concerns which the clients have told us about, but due to resource requirements, legal issues, or other barriers, we know in advance that such features cannot be reasonably implemented.
+
+* Add secret backdoor access to allow administrators to control the lights in any house where Hestia is installed.
+* Make website available by localhost as well as through internet. (Client says this is not necessary, but we realize it would be good to improve accessibility)
 
 ## Change Log
 
-| Who            |       When | Where          | What                                                                                |
-| :---           |       :--- | :---           | :---                                                                                |
-| Troy Harrison  | 2018-02-27 | Whole Document | Added initial description, and basic user stories.                                  |
-| Rens Nijman    | 2018-02-27 | Whole Document | Fixed typos and separated user stories by importance.                               |
-| Peter Oetinger | 2018-02-27 | Whole Document | Added user stories                                                                  |
-| Andrew Lalis   | 2018-02-27 | Whole Document | Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories. |
-| Roman Bell     | 2018-03-23 | Whole Document | Edited in preparation for final hand in                                             |
+| Who            |       When | Where          | What                                                                                              |
+| :---           |       :--- | :---           | :---                                                                                              |
+| Troy Harrison  | 2018-02-27 | Whole Document | Added initial description, and basic user stories.                                                |
+| Rens Nijman    | 2018-02-27 | Whole Document | Fixed typos and separated user stories by importance.                                             |
+| Peter Oetinger | 2018-02-27 | Whole Document | Added user stories                                                                                |
+| Andrew Lalis   | 2018-02-27 | Whole Document | Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories.               |
+| Andrew Lalis   | 2018-03-04 | Whole Document | Added TA name, Won't Do section, removed duplicate user story, added non-functional requirements. |
+| Andrew Lalis   | 2018-03-12 | Document Name  | Renamed to HestiaWeb_requirements, added local website to Won't Do.                               |
+| Rens Nijman    | 2018-03-12 | Won't Do       | Removed a space.                                                                                  |
+| Troy Harrison  | 2018-03-13 | Requirements   | Move requirements to better reflect current focus.                                                |
+| Roman Bell     | 2018-03-23 | Whole Document | Edited in preparation for final hand in                                                           |
