@@ -25,7 +25,7 @@ Feiko Ritsema
 ## Introduction
 The Hestia Home Automation System, developed by the clients, aims to make home automation simple again. The local server infrastructure that facilitates communication and control of the various peripherals in one's home has been implemented by the clients. In addition to this local server, an Android application has been pre-made by the client and is available for reference. As it stands users of Hestia are unable to access their home servers outside of their local network. This coupled with the lack of client side interfacing, limits ease of use and widespread adoption of the Hestia system.
 
-To improve on this, we will develop a web based interface for Hestia. For this, sthere are two main systems under consideration: the front-end (the user interface with which the client interacts), and the back-end (which serves as a middleman between local Hestia servers and their users).
+To improve on this, we will develop a web based interface for Hestia. For this, there are two main systems under consideration: the front-end (the user interface with which the client interacts), and the back-end (which serves as a middleman between local Hestia servers and their users).
 
 This document describes the functioning of these systems, their interaction, and the motivation behind their underlying design choices.
 
@@ -88,7 +88,7 @@ Firebase has free and paid versions, where the free version allows up to 100 sim
 During development it is essential to design the system in such a way that switching from Firebase to an alternative service does not incur large infrastructural cost.
 
 #### Authentication
-We will use Firebase for the initial login process, where the user enters their details. ( More to do here, will fill in when authentication is actually done, as then we will know what technique we are actually using )
+We will use Firebase for the initial login process, where the user enters their details. The information regarding each users servers will be stored on firebase, so once the user enters their details, their server(s) will be found and connected to. If the user does not have their information stored already, then a new entry will be made for them with no servers listed.
 
 #### Database
 Firebase provides a realtime database solution, in which data is stored in JSON format. We will use this currently to store the information about the servers which the user has. This will have the following layout: there will be an overarching Users section which contains all users, then nested within this there will be each user, identified by their user id. Each user will contain a list of the IP addresses of that users servers. This is quite a simple structure, which will make it easy if (as specified above) we switch to an alternative service. Furthermore, the reason all users are nested within Users is to give the possibility of adding further structures to the database. Since a server may be held by multiple users, there may be some redundancy as servers may be listed more than once, though since the database will be used only to search for users this will not cause inefficiency.
