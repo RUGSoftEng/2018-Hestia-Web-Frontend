@@ -175,7 +175,7 @@ function populateDevices(data){
 
     //Insert placeholder in temporary payload input to add devices
     var inputPlaceholder = '{\n "plugin_name": "light",\n "collection": "mock",\n "required_info": {\n   "ip": "123",\n   "port": "456",\n   "name": "not_a_kitchen_light"\n  }\n}';
-    document.getElementById("payload_input").placeholder = inputPlaceholder;
+    document.getElementById("payload_input").value = inputPlaceholder;
 
     console.log(data);
     data.forEach(function(device){
