@@ -27,7 +27,6 @@ The *Hestia* Home Automation System, developed by the clients, aims to make home
 
 Our goal in this project is to develop a web interface to ensure that the users of the Hestia System have a streamlined, usable, and secure experience. In brief, the users of the system should have quick, intuitive access to all the functionality provided by the clients' existing API system, so that anyone can simply navigate to a webpage and have the power to do what one could previously only do through manual HTTP requests. To that end this document details the requirements associated with this project.
 
-
 ## User Stories
 
 The requirements for the system are specified from the perspective of all those who are going to use the system, i.e. via user stories. The user stories involve the description of the user, their requirement, and the reasoning behind that requirement. The user stories reaffirm the context of the requirement and aid in prioritization and re-specification. More user stories will be added as more requirements are discovered throughout the development process and with further consultation with the client.

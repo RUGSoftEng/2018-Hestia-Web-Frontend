@@ -38,6 +38,7 @@ The clients have created this system using the REST API. This decouples our work
 
 ## General Overview of the System
 The Hestia Web Interface can be divided into two main sub-systems as mentioned in the introduction.
+
 * Front-end user interface, with which the user interacts
 * Back-end server that connects users to their local Hestia controllers and holds user and server information
 
@@ -65,6 +66,7 @@ The design overall will be quite minimalist, with some elements such as colour t
 
 ## Website Back-End
 The backend of the webapp will serve as a middleman between the web frontend and the user's controllers. This means that there needs to be an interface to be able to send queries to the server. Furthermore, a user database is required in order to maintain a secure environment in which users may only have permission to interact with systems they own. Unauthorized access to server data, user data, or any other sensitive information is completely forbidden.
+
 
 ### Design decisions
 For the design of the webapp we initially chose to implement PHP since there was familiarity in the team with PHP. Thus, a concise webpage was setup using HTML and PHP. This website was designed to test querying a Hestia webserver (for instance a *GET* request). After the initial webpage was created we decided to implement the webpage in Python using Flask. There are two primary reasons for this:
@@ -132,8 +134,6 @@ Below are defined terms used in the architecture document:
 
 * *User*: A user is someone who has installed a Hestia controller in their home, and accesses the website to control their system.
 
-
-
 ## Change Log
 
 | Who           |       When | Where          | What                                                                           |
@@ -150,3 +150,4 @@ Below are defined terms used in the architecture document:
 | Andrew Lalis  | 2018-03-13 | Back-end       | Revised a few things.                                                          |
 | Troy Harrison | 2018-03-13 | Whole Document | Cleaned up document.                                                           |
 | Roman Bell    | 2018-03-23 | Whole Document | Added stuff regarding Firebase, cleared up grammar and syntax throughout       |
+

@@ -74,4 +74,3 @@
 |              | 19:30-20:00 | Finalize Javascript front end integration.                                                                         |
 |              |             |                                                                                                                    |
 
-

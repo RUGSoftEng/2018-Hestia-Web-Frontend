@@ -19,5 +19,3 @@
 | *23/03/2018* | 12:00-19:00| Worked with whole team. Focussed on javascript functions to retrieve devices and create the unlinked list with each device added to it as an list ellement.|
 | *26/03/2018* | 9:00-10:00| Going through the project code to see how everything works as a preparation for this afternoon.|
 | *26/03/2018* | 14:30-18:00| Worked on the device list javascript functions together with Andrew. Also some research into html5 data* atributes and javascript interaction with the data* atributes.|
-
-

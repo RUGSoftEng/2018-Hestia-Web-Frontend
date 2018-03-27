@@ -1,0 +1,289 @@
+@charset "UTF-8";
+
+body {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: "Myriad Pro Regular", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    background-color: #eee;
+}
+
+h1 {
+    font-size: 24pt;
+    font-weight: 600 !important;
+    color: #ff6a00;
+}
+
+h2 {
+    font-size: 26pt;
+    font-weight: 100 !important;
+    color: #ff6a00;
+}
+
+ul {
+    display: block;
+    text-decoration: none;
+    list-style: none;
+    padding: 0;
+}
+
+#interface {
+    margin: 0;
+}
+
+#content {
+    position: absolute;
+    margin-left: 125px;
+    margin-top: 75px;
+    padding: 25px;
+    z-index: -1;
+}
+
+.section {
+    clear: left;
+}
+
+#logo_float {
+    position: fixed;
+    height: 125px;
+    width: 250px;
+    background-color: #fff;
+    box-shadow: 2px 2px #ccc;
+    border-radius: 18px 18px 150px 18px;
+    z-index: 10;
+    margin: -5px;
+    -webkit-transition: all .15s;
+}
+
+#logo_float img {
+    position: fixed;
+    height: 65px;
+    width: auto;
+    padding: 20px 20px;
+}
+
+#logo_float:hover {
+    margin: 0;
+}
+
+#side_menu {
+    position: fixed;
+    width: 125px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0px #ccc;
+    padding-top: 120px;
+}
+
+.menu_button {
+    position: relative;
+    height: 75px;
+    box-shadow: 0px 2px #ccc;
+    color: #bfbfbf;
+    padding: 25px 25px;
+    margin-left: 0px;
+    text-align: center;
+    -webkit-transition: all .15s;
+}
+
+.menu_button:hover {
+    position: relative;
+    height: 75px;
+    box-shadow: 0px 2px #ccc;
+    color: #ff8f40;
+    padding: 25px 25px;
+    margin-left: 5px;
+    text-align: center;
+}
+
+.menu_button i {
+    font-size: 5em;
+}
+
+#top_bar {
+    position: fixed;
+    height: 75px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0px 2px #ccc;
+}
+
+#top_bar_login {
+    position: relative;
+    height: 80px;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px 0px;
+    box-shadow: 0px 2px #ccc;
+}
+
+#top_bar_login img {
+    display: block;
+    height: 80px;
+    margin: 0 auto;
+}
+
+#current_page {
+    position: relative;
+    float: right;
+    margin: 30px 30px 0px 0px;
+    top: 5px;
+}
+
+.menu_button.current {
+    color: #ff8f40;
+}
+
+.menu_button.current:hover {
+    color: #ff6a00;
+}
+
+.content_module {
+    position: relative;
+    min-height: 300px;
+    min-width: 300px;
+    margin: 25px 0px 0px 25px;
+    background-color: #fff;
+    box-shadow: 2px 2px #ccc;
+    float: left;
+}
+
+.devices_list {
+    margin: 0;
+    padding: 0;
+}
+
+.device_row {
+    width: 90%;
+    display: block;
+    line-height: 50px;
+    color: #888;
+    font-weight: 600;
+    padding-left: 10%;
+    margin: 0;
+    font-size: 16pt;
+    box-shadow: 2px 2px #ccc;
+    cursor: pointer;
+}
+
+.device_row.active {
+    width: 91%;
+    color: #fff;
+    background-color: #ff8f40;
+}
+
+.device_control_row {
+    width: 100%;
+    display: block;
+    line-height: 40px;
+    color: #888;
+    font-weight: 600;
+    padding: 5px 0px;
+    font-size: 16pt;
+    box-shadow: 0px 2px #ccc;
+}
+
+.control_text {
+    display: inline;
+    position: relative;
+}
+
+#payload_input {
+    /*height:400px;*/
+}
+
+#login_container {
+    position: relative;
+    display: block;
+    width: 400px;
+    height: 470px;
+    margin: 25px auto;
+    background-color: #fff;
+    box-shadow: 2px 2px #ccc;
+}
+
+.module_title {
+    display: inline-block;
+    position: relative;
+    width: 90%;
+    height: 75px;
+    margin: 0% 5% 0% 5%;
+    box-shadow: 0px 2px #ff6a00;
+}
+
+.module_content {
+    position: relative;
+    margin: 0;
+    padding: 25px;
+}
+
+#login_container button,
+input[type=submit] {
+    position: relative;
+    display: block;
+    padding: 10px 20px;
+    font-size: 18pt;
+    font-weight: bold;
+    color: #fff;
+    margin: 10% auto 10% auto;
+    border: none;
+    -webkit-box-sizing: border-box;
+    background-color: #ff8f40;
+    -webkit-transition: all .05s;
+}
+
+#login_container button:hover,
+input[type=submit]:hover {
+    background-color: #fff;
+    color: #ff8f40;
+    cursor: pointer;
+}
+
+#login_server {
+    width: 100%;
+}
+
+#login_input {
+    position: relative;
+    padding: 0px 25px 25px 25px;
+}
+
+#server_info_login {
+    text-align: center;
+}
+
+::placeholder {
+    font-size: 1em;
+    color: #ff8f40;
+}
+
+#login_input input[type=text],
+input[type=username],
+input[type=password] {
+    display: block;
+    height: 1.5em;
+    width: 100%;
+    font-size: 1.5em;
+    color: #ff8f40;
+    padding: 5px;
+    margin: 15px auto;
+    -webkit-box-sizing: border-box;
+    border: none;
+    border-left: 3px solid #ff8f40;
+    border-bottom: 1px solid #ff8f40;
+}
+
+#login_input input[type=text]:focus,
+input[type=username]:focus,
+input[type=password]:focus,
+input[type=text]:active,
+input[type=username]:active,
+input[type=password]:active {
+    outline: 1px solid #ff8f40;
+}
+
+#login_button {
+    float: right;
+}

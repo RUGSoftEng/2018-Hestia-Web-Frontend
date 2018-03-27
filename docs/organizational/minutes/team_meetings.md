@@ -1,4 +1,4 @@
-# Hestia Meeting 22-02-2018
+# Hestia Meeting
 
 ## Meeting 1 (2018-02-22)
 _NOTE:_ This first meeting included all current members developing for the Hestia project. These members were split into two teams, web and iOS development. Aside from this first meeting, this documentation will be focused on including details from the web development team's meetings.
