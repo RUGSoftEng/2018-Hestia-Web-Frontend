@@ -60,8 +60,8 @@ function changeActivator(server, deviceId, activatorId, state){
 }
 
 
-function dimmer(server, deviceId, payload){
-    var request = new XMLHttpRequest();
+function dimmer(server, deviceId, activatorId, payload){
+    /*var request = new XMLHttpRequest();
     var url = "/request";
 
     var device = getDevice(server, deviceId);
@@ -75,7 +75,8 @@ function dimmer(server, deviceId, payload){
     })
         .catch(err => {
             console.log(err);
-        });
+        });*/
+    changeActivator(server, deviceId, activatorId, payload);
 }
 
 
@@ -243,7 +244,7 @@ function viewDeviceActivators(deviceName, deviceId, activators){
             input.value = activator.state; // TODO Based on object
             input.className = "slider";
             input.id = activator.activatorId;
-            input.oninput = onSliderInteracted;
+            input.onchange = onSliderInteracted;
             slideContainer.appendChild(input);
             elem.appendChild(slideContainer);
             break;
@@ -269,6 +270,7 @@ function onToggleInteracted(){
 function onSliderInteracted(){
     // toggle(document.getElementById("serverAddress").value, this.value, this.id, this.checked);
     console.log("User changed slider: " + this.id + ", Current state: " + this.value);
+    dimmer(document.getElementById("serverAddress").value, this.name, this.id, this.value);
 }
 
 // Data needed for testing device listing
