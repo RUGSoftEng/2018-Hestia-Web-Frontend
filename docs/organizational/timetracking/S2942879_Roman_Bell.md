@@ -6,3 +6,6 @@
 | *10/03/2018* | 14:00-17:00 | Designed a simple possible concept for the website, while discussing requirements online with backend|
 | *13/03/2018* | 18:30-21:30 | met with Nik to discuss how we would go on with the concept of developing the frontend |
 | *14/03/2018* | 13:00-17.30| Met with most of the web team, worked on architecture document and put together the website |
+| *23/03/2018* | 13:00-20:00| Met with whole team, updated requirements document, researched firebase for the arch. document, experimented with the JS of the Firebase login system |
+| *26/03/2018* | 15:00-17:00| Did some more documentation work |
+| *27/03/2018* | 17:00-19:00| Updated requirements document with list of features which have been implemented |
