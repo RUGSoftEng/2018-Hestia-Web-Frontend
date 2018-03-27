@@ -321,6 +321,7 @@ var array = ([
 ]);
 
 function updateDeviceList () {
+    console.log("updating devices");
     var devices = getServerDevices(document.getElementById("serverAddress").value);
     devices.then(result => {
         populateDevices(result);
@@ -329,3 +330,33 @@ function updateDeviceList () {
             console.log(err);
         });
 }
+
+function postDevice(server){
+    server = document.getElementById("serverAddress").value;
+    var request = new XMLHttpRequest();
+    var url = "/request";
+
+    request.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200){
+            result = this.responseText;
+            obj = JSON.parse(result);
+        }
+    };
+
+    var data = {
+        "query" : server + "/devices/",
+        "method" : "POST"
+    };
+
+    var payload = document.getElementById("payload_input").value;
+    console.log(payload);
+    if (payload){
+        console.log("Payload is not empty.");
+        console.log(payload);
+        data["payload"] = JSON.parse(payload);
+    }
+
+    request.open("POST", url, true);
+    request.setRequestHeader("Content-type", "application/json");
+    request.send(JSON.stringify(data));
+};
