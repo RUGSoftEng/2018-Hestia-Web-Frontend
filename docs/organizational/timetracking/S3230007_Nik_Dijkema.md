@@ -8,4 +8,7 @@
 | *10/03/2018* | 13:00-18:00 | Further work on front-end design concept. |
 | *12/03/2018* | 19:00-21:00 | Further work on front-end design concept, meeting with Roman. |
 | *13/03/2018* | 13:00-17:00 | Create tangible front-end non-functional design. |
-
+| *23/03/2018* | 13:00-18:30 | Further work on tangible design. |
+| *25/03/2018* | 18:30-19:45 | Further preparing tangible design for functionality. |
+| *26/03/2017* | 17:15-20:00 | Implementing functionality and further work on design including functionality and troubleshooting. |
+| *27/03/2018* | 11:30-12:15 | Final functional implementations and further troubleshooting and design fixes for minimum requirements pull request. |

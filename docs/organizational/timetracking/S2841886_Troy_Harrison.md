@@ -1,7 +1,7 @@
 # Timelog for Troy Karan Harrison (S2841886)
 
-| Date         |   Timestamp | Description                                                                                                        |
-| :---:        |       :---: | :---                                                                                                               |
+| Date         | Timestamp   | Description                                                                                                        |
+| :---:        | :---:       | :---                                                                                                               |
 | *2018-02-23* | 15:00-15:45 | Attended first meeting with clients (alongside team leader Andrew).                                                |
 |              | 16:00-16:30 | Had discussion with Andrew about systems and client requirements.                                                  |
 |              | 16:30-17:00 | Created google docs to collaborate on the requirements document. We noted down some quick impressions and ideas.   |
@@ -33,5 +33,44 @@
 | *2018-03-13* | 20:00-20:30 | Revised requirements document.                                                                                     |
 |              | 20:30-21:30 | Revised architecture document.                                                                                     |
 |              | 21:30-22:30 | Cleaned up directory structure.                                                                                    |
-
+| *2018-03-23* | 11:00-11:30 | Administrated branches.                                                                                            |
+|              | 11:30-12:00 | Directed teams.                                                                                                    |
+|              | 12:30-13:00 | Assisted with Javascript functionality.                                                                            |
+|              | 13:00-13:30 | Assisted with Javascript functionality.                                                                            |
+|              | 13:30-14:00 | Assisted with Javascript functionality.                                                                            |
+|              | 14:00-14:30 | Assisted with Javascript functionality.                                                                            |
+|              | 14:30-15:00 | Assisted with Javascript functionality.                                                                            |
+|              | 15:00-15:30 | Assisted with Javascript functionality.                                                                            |
+|              | 15:30-16:00 | Assisted with Javascript functionality.                                                                            |
+|              | 16:00-17:30 | Assisted with Javascript functionality.                                                                            |
+|              | 17:30-18:00 | Research hooking flask into the new front end.                                                                     |
+|              | 18:00-18:30 | Research hooking flask into the new front end.                                                                     |
+|              | 18:30-19:00 | Research hooking flask into the new front end.                                                                     |
+|              | 19:00-19:30 | Research hooking flask into the new front end.                                                                     |
+|              | 19:30-20:00 | Research hooking flask into the new front end.                                                                     |
+| *2018-03-26* | 11:00-11:30 | Team meeting.                                                                                                      |
+|              | 11:30-12:00 | Team meeting.                                                                                                      |
+|              | 12:00-12:30 | Worked on Javascript functionality.                                                                                |
+|              | 12:30-13:00 | Worked on Javascript functionality.                                                                                |
+|              | 13:00-13:30 | Worked on Javascript functionality.                                                                                |
+|              | 13:30-14:00 | Worked on Javascript functionality.                                                                                |
+|              | 14:00-14:30 | Worked on Javascript functionality.                                                                                |
+|              | 14:30-15:00 | Worked on Javascript functionality.                                                                                |
+|              | 15:00-15:30 | Implementing Javascript functions into html pages.                                                                 |
+|              | 15:30-16:00 | Implementing Javascript functions into html pages.                                                                 |
+|              | 16:00-16:30 | Implementing Javascript functions into html pages.                                                                 |
+|              | 16:30-17:00 | Implementing Javascript functions into html pages.                                                                 |
+|              | 17:00-17:30 | Implementing Javascript functions into html pages.                                                                 |
+|              | 17:30-18:00 | Implementing Javascript functions into html pages.                                                                 |
+|              | 18:00-18:30 | Implementing Javascript functions into html pages.                                                                 |
+|              | 18:30-19:00 | Implementing Javascript functions into html pages.                                                                 |
+|              | 19:00-19:30 | Implementing Javascript functions into html pages.                                                                 |
+|              | 19:30-20:00 | Implementing Javascript functions into html pages.                                                                 |
+| *2018-03-27* | 17:00-17:30 | Add extra Javascript functionality.                                                                                |
+|              | 17:30-18:00 | Finalize Javascript front end integration.                                                                         |
+|              | 18:00-18:30 | Finalize Javascript front end integration.                                                                         |
+|              | 18:30-19:00 | Finalize Javascript front end integration.                                                                         |
+|              | 19:00-19:30 | Finalize Javascript front end integration.                                                                         |
+|              | 19:30-20:00 | Finalize Javascript front end integration.                                                                         |
+|              |             |                                                                                                                    |
 

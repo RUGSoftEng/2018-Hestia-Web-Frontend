@@ -22,8 +22,27 @@ h2 {
 	color:#ff6a00;
 }
 
+ul {
+	display:block;
+	text-decoration:none;
+	list-style:none;
+	padding:0;
+}
+
 #interface {
 	margin:0;
+}
+
+#content {
+	position:absolute;
+	margin-left:125px;
+	margin-top:75px;
+	padding:25px;
+	z-index:-1;
+}
+
+.section {
+	clear:left;
 }
 
 #logo_float {
@@ -122,9 +141,52 @@ h2 {
 
 .content_module {
 	position:relative;
+	min-height:300px;
+	min-width:300px;
 	margin:25px 0px 0px 25px;
 	background-color:#fff;
 	box-shadow: 2px 2px #ccc;
+	float:left;
+}
+
+.devices_list {
+	margin:0;
+	padding:0;
+}
+
+.device_row {
+	width:90%;
+	display:block;
+	line-height:50px;
+	color:#888;
+	font-weight:600;
+	padding-left:10%;
+	margin:0;
+	font-size:16pt;
+	box-shadow: 2px 2px #ccc;
+	cursor:pointer;
+}
+
+.device_row.active {
+	width:91%;
+	color:#fff;
+	background-color:#ff8f40;
+}
+
+.device_control_row {
+	width:100%;
+	display:block;
+	line-height:40px;
+	color:#888;
+	font-weight:600;
+	padding:5px 0px;
+	font-size:16pt;
+	box-shadow: 0px 2px #ccc;
+}
+
+.control_text {
+	display:inline;
+	position:relative;
 }
 
 #login_container {
@@ -144,6 +206,12 @@ h2 {
 	height:75px;
 	margin:0% 5% 0% 5%;
 	box-shadow: 0px 2px #ff6a00;
+}
+
+.module_content {
+	position: relative;
+	margin:0;
+	padding:25px;
 }
 
 #login_container button , input[type=submit] {
