@@ -36,7 +36,6 @@ function getDevice(server, deviceId){
         };
 
         var data = {
-            // add deviceId below to get specific device
             "query" : server + "/devices/" + deviceId,
             "method" : "GET"
         };
@@ -48,6 +47,14 @@ function getDevice(server, deviceId){
 }
 
 
+/**
+ * This function sends a request to a server to change the state of the
+ * activator with activatorId for the device with deviceId.
+ * @param {} server
+ * @param {} deviceId
+ * @param {} activatorId
+ * @param {} state
+ */
 function changeActivator(server, deviceId, activatorId, state){
     var request = new XMLHttpRequest();
     var url = "/request";
@@ -67,31 +74,42 @@ function changeActivator(server, deviceId, activatorId, state){
 }
 
 
+/**
+ * This is an alias for the dimmers. How we choose to define these functions in
+ * the future (e.g. an alias, a direct call, or something else) is subject to
+ * change.
+ * @param {} server
+ * @param {} deviceId
+ * @param {} activatorId
+ * @param {} payload
+ */
 function dimmer(server, deviceId, activatorId, payload){
-    /*var request = new XMLHttpRequest();
-    var url = "/request";
-
-    var device = getDevice(server, deviceId);
-
-    device.then(result => {
-        console.log(JSON.stringify(result));
-        var activatorFloat = result.activators[1];
-
-        changeActivator(server, deviceId, activatorFloat.activatorId, payload);
-
-    })
-        .catch(err => {
-            console.log(err);
-        });*/
     changeActivator(server, deviceId, activatorId, payload);
 }
 
 
+/**
+ * This is an alias for the toggle switches. How we choose to define these functions in
+ * the future (e.g. an alias, a direct call, or something else) is subject to
+ * change.
+ * @param {} server
+ * @param {} deviceId
+ * @param {} activatorId
+ * @param {} payload
+ */
 function toggle(server, deviceId, activatorId, payload){
     changeActivator(server, deviceId, activatorId, payload);
-};
+}
 
 
+
+/**
+ * Gets all devices for a given server. This uses promises as the request is
+ * asynchronous. If the promise is not fulfilled it rejects the promise and
+ * errors.
+ * @param {} server
+ * @returns {} promised json object
+ */
 function getServerDevices(server){
     return new Promise(function(resolve, reject) {
         var request = new XMLHttpRequest();
@@ -124,36 +142,6 @@ function getServerDevices(server){
 }
 
 
-function sendRequest(){
-    var request = new XMLHttpRequest();
-    var url = "/request";
-
-    request.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
-            result = this.responseText;
-            obj = JSON.parse(result);
-            document.getElementById("resultArea").innerHTML = JSON.stringify(obj, undefined, 2);
-        }
-    };
-
-    var data = {
-        "query" : document.getElementById("queryInput").value,
-        "method" : document.getElementById("methodInput").value
-    };
-
-    var payload = document.getElementById("payloadInput").value;
-    if (payload){
-        console.log("Payload is not empty.");
-        console.log(payload);
-        data["payload"] = JSON.parse(payload);
-    }
-
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(JSON.stringify(data));
-};
-
-
 //Removes all children from an element.
 function removeChildren(node){
     if (node) {
@@ -164,7 +152,8 @@ function removeChildren(node){
 }
 
 //Gets a device object by id from some data.
-function getDeviceById(id){
+function getDeviceById(id, array){
+    console.log(array);
     for (var i = 0; i < array.length; i++){
         if (array[i].deviceId == id){
             return array[i];
@@ -176,7 +165,6 @@ function getDeviceById(id){
 //Populates the list of devices from some data received from the server.
 //  data is a list of devices as received from the server.
 function populateDevices(data){
-    array = data;
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
 
@@ -286,52 +274,10 @@ function onClickInteracted(){
     postDevice(document.getElementById("serverAddress").value , document.getElementById("payload_input").value);
 }
 
-// Data needed for testing device listing
-var array = ([
-    {
-        "activators": [
-            {
-                "activatorId": "5ab37fcde82b3f07245b9d37",
-                "rank": 0,
-                "type": "bool",
-                "name": "On/Off",
-                "state": false
-            },
-            {
-                "activatorId": "5ab37fcde82b3f07245b9d38",
-                "rank": 1,
-                "type": "float",
-                "name": "Dimmer",
-                "state": 0.5
-            }
-        ],
-        "type": "Light",
-        "name": "test2",
-        "deviceId": "5ab37fcde82b3f07245b9d39"
-    },
-    {
-        "activators": [
-            {
-                "activatorId": "5ab50835e82b3f10a33397a8",
-                "rank": 0,
-                "type": "bool",
-                "name": "On/Off",
-                "state": true
-            },
-            {
-                "activatorId": "5ab50835e82b3f10a33397a9",
-                "rank": 1,
-                "type": "float",
-                "name": "Dimmer",
-                "state": 0.5
-            }
-        ],
-        "type": "Light",
-        "name": "test3",
-        "deviceId": "5ab50835e82b3f10a33397aa"
-    }
-]);
-
+/**
+ * Wrapper to update the re-populated the device list based on a promised json
+ * object from the server.
+ */
 function updateDeviceList () {
     console.log("updating devices");
     var devices = getServerDevices(document.getElementById("serverAddress").value);
@@ -343,6 +289,11 @@ function updateDeviceList () {
         });
 }
 
+/**
+ * Sends the request to add new device described by payload to the server.
+ * @param {} server
+ * @param {} payload
+ */
 function postDevice(server, payload){
     console.log(server);
     console.log(payload);
@@ -365,10 +316,10 @@ function postDevice(server, payload){
     if (payload){
         console.log("Payload is not empty.");
         console.log(payload);
-        data["payload"] = JSON.parse(payload);
+        data.payload = JSON.parse(payload);
     }
 
     request.open("POST", url, true);
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(data));
-};
+}
