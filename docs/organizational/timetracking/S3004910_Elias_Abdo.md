@@ -2,15 +2,11 @@
 
 | Date         |   Hours     | Description                                                                                                        |
 | :---:        |       :---: | :---                                                                                                               |
-| *26-02-2018* | 1 | Familiarization with last week's missed meetings and work. Read documentation from 2017.                                     |
-| *27-02-2018* | 2 | Setup Trello for project management. 
+| *26-02-2018* | 1 | Read documentation from 2017.                                     |
 | *07-03-2018* | 1 | Meeting with Lars and Feiko
 | *07-03-2018* | 2 | REST API lecture                                                                                        |
-| *10-03-2018* | 2 | Firebase authentication tutorials and mini projects to familiarize myself with authentication process|
-| *12-03-2018* | 1 | Meeting with backend. Discussed server, and worked on architecture. Switching to FLASK to handle API|
-| *13-03-2018* | 2 | Worked on architecture document, read through and reviewed front end progress. |
-| *15-03-2018* | 2 | Flash research, introduction to PHP and HTML
-| *18-03-2018* | 3 | Discussion with Andrew about Firebase Auth, research database storage options in firebase|
+| *11-03-2018* | 2 | Read about using API with python|
+| *12-03-2018* | 2 | Read and played around about Flask and API's|
+| *17-03-2018* | 3 | Played around with the API of HESTIA. Did some tests
 | *20-03-2018* | 1 | Web meeting on campus
-| *22-03-2018* | 3 | More research for web development: javascript, flask, apache, git, python scripting, typed minutes|
-| *23-03-2018* | 6 | Friday work meeting. Refined Git, created Git plan for after sprint. Experimented with javascript for displaying devices. More research into web developement|
+| *23-03-2018* | 8 | Friday work meeting. Made functionality for the project|
