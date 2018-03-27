@@ -1,8 +1,18 @@
-function globalServer() {
-    return document.getElementById("serverInput").value;
-}
+/**
+ * @fileOverview
+ * @name functions.js
+ * The file contains all the javascript needed to communicate with the Flask and
+ * the remote Hestia controller. It needs refactoring and rearchitecturing.
+ */
 
-// promises a device
+/**
+ * Gets a device with a particular deviceId from a server. This uses promises as
+ * the request is asynchronous. If the promise is not fulfilled it rejects the
+ * promise and errors.
+ * @param {} server
+ * @param {} deviceId
+ * @returns {} promised device
+ */
 function getDevice(server, deviceId){
     console.log("getDevice() is called");
 
@@ -25,12 +35,9 @@ function getDevice(server, deviceId){
             }
         };
 
-        // builds corresponding device id
-        fullDeviceId = server + "/devices/" + deviceId;
-
         var data = {
             // add deviceId below to get specific device
-            "query" : fullDeviceId,
+            "query" : server + "/devices/" + deviceId,
             "method" : "GET"
         };
 
@@ -38,7 +45,7 @@ function getDevice(server, deviceId){
         request.setRequestHeader("Content-type", "application/json");
         request.send(JSON.stringify(data));
     });
-};
+}
 
 
 function changeActivator(server, deviceId, activatorId, state){
