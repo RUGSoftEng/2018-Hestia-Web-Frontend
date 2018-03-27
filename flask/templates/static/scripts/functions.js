@@ -274,6 +274,11 @@ function onSliderInteracted(){
     dimmer(document.getElementById("serverAddress").value, this.name, this.id, this.value/100);
 }
 
+function onClickInteracted(){
+    console.log("Hello");
+    postDevice(document.getElementById("serverAddress").value , document.getElementById("payload_input").value);
+}
+
 // Data needed for testing device listing
 var array = ([
     {
@@ -331,8 +336,9 @@ function updateDeviceList () {
         });
 }
 
-function postDevice(server){
-    server = document.getElementById("serverAddress").value;
+function postDevice(server, payload){
+    console.log(server);
+    console.log(payload);
     var request = new XMLHttpRequest();
     var url = "/request";
 
@@ -348,8 +354,7 @@ function postDevice(server){
         "method" : "POST"
     };
 
-    var payload = document.getElementById("payload_input").value;
-    console.log(payload);
+
     if (payload){
         console.log("Payload is not empty.");
         console.log(payload);
