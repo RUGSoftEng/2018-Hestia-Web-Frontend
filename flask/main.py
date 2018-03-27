@@ -21,12 +21,18 @@ def index():
 @app.route('/devices.html')
 def devices():
     return render_template('devices.html')
+
 @app.route('/server.html')
 def server():
     return render_template('server.html')
+
 @app.route('/settings.html')
 def settings():
     return render_template('settings.html')
+
+@app.route('/login.html')
+def login():
+    return render_template('login.html')
 
 @app.route('/request', methods=['POST'])
 def apiRequestHandler():
