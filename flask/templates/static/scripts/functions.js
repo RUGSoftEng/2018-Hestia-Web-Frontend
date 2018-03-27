@@ -13,19 +13,19 @@
  * @param {} deviceId
  * @returns {} promised device
  */
-function getDevice(server, deviceId){
+function getDevice(server, deviceId) {
     console.log("getDevice() is called");
 
     return new Promise(function(resolve, reject) {
         var request = new XMLHttpRequest();
         var url = "/request";
 
-        request.onreadystatechange = function(){
-            if (this.readyState == 4 && this.status == 200){
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
                 result = this.responseText;
                 obj = JSON.parse(result);
 
-                if(obj) {
+                if (obj) {
                     resolve(obj);
                 } else {
                     let error = new Error('Could not fetch device');
@@ -36,8 +36,8 @@ function getDevice(server, deviceId){
         };
 
         var data = {
-            "query" : server + "/devices/" + deviceId,
-            "method" : "GET"
+            "query": server + "/devices/" + deviceId,
+            "method": "GET"
         };
 
         request.open("POST", url, true);
@@ -55,15 +55,16 @@ function getDevice(server, deviceId){
  * @param {} activatorId
  * @param {} state
  */
-function changeActivator(server, deviceId, activatorId, state){
+function changeActivator(server, deviceId, activatorId, state) {
     var request = new XMLHttpRequest();
     var url = "/request";
 
-    console.log("YEAH " + deviceId);
     var data = {
-        "query" : server + "/devices/" + deviceId + "/activators/" + activatorId,
-        "method" : "POST",
-        "payload" : {"state" : state}
+        "query": server + "/devices/" + deviceId + "/activators/" + activatorId,
+        "method": "POST",
+        "payload": {
+            "state": state
+        }
     };
 
     console.log(data);
@@ -83,7 +84,7 @@ function changeActivator(server, deviceId, activatorId, state){
  * @param {} activatorId
  * @param {} payload
  */
-function dimmer(server, deviceId, activatorId, payload){
+function dimmer(server, deviceId, activatorId, payload) {
     changeActivator(server, deviceId, activatorId, payload);
 }
 
@@ -97,7 +98,7 @@ function dimmer(server, deviceId, activatorId, payload){
  * @param {} activatorId
  * @param {} payload
  */
-function toggle(server, deviceId, activatorId, payload){
+function toggle(server, deviceId, activatorId, payload) {
     changeActivator(server, deviceId, activatorId, payload);
 }
 
@@ -110,17 +111,17 @@ function toggle(server, deviceId, activatorId, payload){
  * @param {} server
  * @returns {} promised json object
  */
-function getServerDevices(server){
+function getServerDevices(server) {
     return new Promise(function(resolve, reject) {
         var request = new XMLHttpRequest();
         var url = "/request";
 
-        request.onreadystatechange = function(){
-            if (this.readyState == 4 && this.status == 200){
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
                 result = this.responseText;
                 obj = JSON.parse(result);
 
-                if(obj) {
+                if (obj) {
                     resolve(obj);
                 } else {
                     let error = new Error('Could not fetch device');
@@ -131,8 +132,8 @@ function getServerDevices(server){
         };
 
         var data = {
-            "query" : server + "/devices/",
-            "method" : "GET"
+            "query": server + "/devices/",
+            "method": "GET"
         };
 
         request.open("POST", url, true);
@@ -142,29 +143,38 @@ function getServerDevices(server){
 }
 
 
-//Removes all children from an element.
-function removeChildren(node){
+/**
+ * Removes all children from a node. Used in the gui.
+ * @param {} node
+ */
+function removeChildren(node) {
     if (node) {
-        while(node.firstChild){
+        while (node.firstChild) {
             node.removeChild(node.firstChild);
         }
     }
 }
 
-//Gets a device object by id from some data.
-function getDeviceById(id, array){
-    console.log(array);
-    for (var i = 0; i < array.length; i++){
-        if (array[i].deviceId == id){
+/**
+ * Finds a device by its id in an array. Returns null if it is not found.
+ * @param {} id
+ * @param {} array
+ * @returns {} json object
+ */
+function getDeviceById(id, array) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i].deviceId == id) {
             return array[i];
         }
     }
     return null;
 }
 
-//Populates the list of devices from some data received from the server.
-//  data is a list of devices as received from the server.
-function populateDevices(data){
+/**
+ * Generates the html to view all of the devices in data.
+ * @param {} data
+ */
+function populateDevices(data) {
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
 
@@ -173,14 +183,13 @@ function populateDevices(data){
     document.getElementById("payload_input").value = inputPlaceholder;
 
     console.log(data);
-    data.forEach(function(device){
-        console.log(device.name);
+    data.forEach(function(device) {
         var elem = document.createElement("li");
-        elem.className="device_row";
+        elem.className = "device_row";
         elem.id = device.deviceId;
         elem.onclick = function() {
             var children = namesListElem.children;
-            for (var i = 0; i < children.length; i++){
+            for (var i = 0; i < children.length; i++) {
                 children[i].className = "device_row";
             }
             elem.className = "device_row active";
@@ -197,94 +206,97 @@ function populateDevices(data){
     namesListElem.firstChild.click();
 }
 
-//Updates the device's activators module.
-function viewDeviceActivators(deviceName, deviceId, activators){
+/**
+ * Generates the html to view a device with a particular deviceName and for its
+ * associated activators. deviceId is passed so that we may interact with the
+ * activators and know their device. This will be refactored.
+ * @param {} deviceName
+ * @param {} deviceId
+ * @param {} activators
+ */
+function viewDeviceActivators(deviceName, deviceId, activators) {
     var activatorsElem = document.getElementById("activatorsList");
     var activatorsTitle = document.getElementById("activatorsTitle");
     activatorsTitle.firstChild.innerHTML = deviceName;
     removeChildren(activatorsElem);
-    for (var i = 0; i < activators.length; i++){
+    for (var i = 0; i < activators.length; i++) {
         var activator = activators[i];
         var elem = document.createElement("div");
         elem.className = "device_control_row";
         elem.appendChild(document.createTextNode(activator.name));
-        switch (activator.type){
-        case "bool":
-            var label = document.createElement("label");
-            label.className = "switch";
-            var input = document.createElement("input");
-            input.type = "checkbox";
-            input.name = deviceId;
-            input.onclick = onToggleInteracted;
-            input.id = activator.activatorId;
-            input.checked = activator.state;
-            label.appendChild(input);
-            var span = document.createElement("span");
-            span.className = "switchSlider round";
-            label.append(span);
-            elem.appendChild(label);
-            //var hiddenInput = document.createElement("input");
-            //hiddenInput.type="hidden";
-            //hiddenInput.value=deviceId;
-            break;
-
-        case "float":
-            var slideContainer = document.createElement("div");
-            slideContainer.className = "slidecontainer";
-            var input = document.createElement("input");
-            input.type = "range";
-            input.min = 0;
-            input.max = 100;
-            input.step = 10;
-            input.name = deviceId;
-            input.value = activator.state*100; // TODO Based on object
-            input.className = "slider";
-            input.id = activator.activatorId;
-            input.onchange = onSliderInteracted;
-            slideContainer.appendChild(input);
-            elem.appendChild(slideContainer);
-            break;
-        default:
-            console.log("Unknown activator type: " + activator.type);
+        switch (activator.type) {
+            case "bool":
+                var label = document.createElement("label");
+                label.className = "switch";
+                var input = document.createElement("input");
+                input.type = "checkbox";
+                input.name = deviceId;
+                input.onclick = onToggleInteracted;
+                input.id = activator.activatorId;
+                input.checked = activator.state;
+                label.appendChild(input);
+                var span = document.createElement("span");
+                span.className = "switchSlider round";
+                label.append(span);
+                elem.appendChild(label);
+                break;
+            case "float":
+                var slideContainer = document.createElement("div");
+                slideContainer.className = "slidecontainer";
+                var input = document.createElement("input");
+                input.type = "range";
+                input.min = 0;
+                input.max = 100;
+                input.step = 10;
+                input.name = deviceId;
+                input.value = activator.state * 100; // TODO Based on object
+                input.className = "slider";
+                input.id = activator.activatorId;
+                input.onchange = onSliderInteracted;
+                slideContainer.appendChild(input);
+                elem.appendChild(slideContainer);
+                break;
+            default:
+                console.log("Unknown activator type: " + activator.type);
         }
         activatorsElem.appendChild(elem);
     }
 }
 
-//Event handling functions for input elements for devices.
-//  Each function requires a value, usually 'this.value', and an id,
-//  usually 'this.id', where the id is unique for the given object and
-//  can be used to identify the device to which it is linked.
-
-//When the user toggles an on/off switch.
-function onToggleInteracted(){
-    console.log(this.name +" " + this.id + " " +this.checked);
+/**
+ * Is a wrapper for the function our toggles calls. We currently have only one
+ * type of toggle so the name is bad.
+ */
+function onToggleInteracted() {
     toggle(document.getElementById("serverAddress").value, this.name, this.id, this.checked);
 }
 
-//When the user changes a slider's value.
-function onSliderInteracted(){
-    // toggle(document.getElementById("serverAddress").value, this.value, this.id, this.checked);
-    console.log("User changed slider: " + this.id + ", Current state: " + this.value/100);
-    dimmer(document.getElementById("serverAddress").value, this.name, this.id, this.value/100);
+/**
+ * Is a wrapper for the function our sliders calls. We currently have only one
+ * type of slider so the name is bad.
+ */
+function onSliderInteracted() {
+    dimmer(document.getElementById("serverAddress").value, this.name, this.id, this.value / 100);
 }
 
-function onClickInteracted(){
-    console.log("Hello");
-    postDevice(document.getElementById("serverAddress").value , document.getElementById("payload_input").value);
+/**
+ * Is a wrapper for the function our button calls. We currently have only one
+ * functionality for the buttons so the name is bad.
+ */
+function onClickInteracted() {
+    postDevice(document.getElementById("serverAddress").value, document.getElementById("payload_input").value);
 }
 
 /**
  * Wrapper to update the re-populated the device list based on a promised json
  * object from the server.
  */
-function updateDeviceList () {
-    console.log("updating devices");
+function updateDeviceList() {
     var devices = getServerDevices(document.getElementById("serverAddress").value);
     devices.then(result => {
-        populateDevices(result);
-    })
-        .catch(err =>{
+            populateDevices(result);
+        })
+        .catch(err => {
             console.log(err);
         });
 }
@@ -294,28 +306,26 @@ function updateDeviceList () {
  * @param {} server
  * @param {} payload
  */
-function postDevice(server, payload){
-    console.log(server);
-    console.log(payload);
+function postDevice(server, payload) {
     var request = new XMLHttpRequest();
     var url = "/request";
 
-    request.onreadystatechange = function(){
-        if (this.readyState == 4 && this.status == 200){
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
             result = this.responseText;
             obj = JSON.parse(result);
         }
     };
 
     var data = {
-        "query" : server + "/devices/",
-        "method" : "POST"
+        "query": server + "/devices/",
+        "method": "POST"
     };
 
+    console.log(data);
 
-    if (payload){
-        console.log("Payload is not empty.");
-        console.log(payload);
+    if (payload) {
+        // Payload is not empty
         data.payload = JSON.parse(payload);
     }
 
