@@ -10,3 +10,4 @@
 | *17-03-2018* | 3 | Played around with the API of HESTIA. Did some tests
 | *20-03-2018* | 1 | Web meeting on campus
 | *23-03-2018* | 8 | Friday work meeting. Made functionality for the project|
+| *27-03-2018* | 1 | Final touches and short meeting.
