@@ -42,27 +42,27 @@ The *Developer* is one who is responsible for designing the software that the us
 The *Plugin Developer* is a person who has created a plugin that the Hestia system can manage. The plugin developer does not need to know a great deal about the user interface in order to develop plugins, and as such is more concerned with being able to publish their plugin and have it work successfully on all other Hestia local systems.
 
 #### Critical user stories
-- [ ] As a user, I would like to be able to change the status of peripherals of all of my Hestia servers from one location, so that it’s easier for me to configure my home automation.
-- [ ] As a user, I would like to be able to add a new Hestia server to be remotely controlled.
-- [ ] As a user, I would like to be able to ensure that my Hestia servers and their devices cannot be controlled without my knowledge.
+- [x] As a user, I would like to be able to change the status of peripherals of all of my Hestia servers from one location, so that it’s easier for me to configure my home automation.
+- [x] As a user, I would like to be able to add a new Hestia server to be remotely controlled.
+- [x] As a user, I would like to be able to ensure that my Hestia servers and their devices cannot be controlled without my knowledge.
   - [ ] As a user, I would like to be able to access a log of events associated with my servers, so that I can see what changes have occurred.
-- [ ] As a user, I would like to be able to ensure that my Hestia servers cannot be accessed without my consent.
-  - [ ] As a user, I would like to be able to set my authentication credentials, to ensure that I am the only one who can be authenticated by those credentials.
-- [ ] As a user, I would like to be able to share access to my Hestia server to other people who I trust, so that others who are affected by the peripherals can change things to suit them.
+- [x] As a user, I would like to be able to ensure that my Hestia servers cannot be accessed without my consent.
+  - [x] As a user, I would like to be able to set my authentication credentials, to ensure that I am the only one who can be authenticated by those credentials.
+- [x] As a user, I would like to be able to share access to my Hestia server to other people who I trust, so that others who are affected by the peripherals can change things to suit them.
   - [ ] As a user, I would like to be able to set permissions for the servers or peripherals, so that I can limit what people who I have shared access with can do on my servers.
-- [ ] As a user, I would like to be able to easily add or remove plugins from my Hestia servers, so that it’s easy for me to test various peripherals.
-- [ ] As a user, I would like to be able to use the Hestia service without interruption.
-  - [ ] As a user, I would like fast responses to any input I make.
-- [ ] As a developer, I would like the server to be able to host a large number of users and still be able to fulfil their requests and requirements.
+- [x] As a user, I would like to be able to easily add or remove plugins from my Hestia servers, so that it’s easy for me to test various peripherals.
+- [x] As a user, I would like to be able to use the Hestia service without interruption.
+  - [x] As a user, I would like fast responses to any input I make.
+- [x] As a developer, I would like the server to be able to host a large number of users and still be able to fulfil their requests and requirements.
 
 
 #### Important user stories
-- [ ] As a user, I would like to be able to view details about my Hestia servers from a central location, so that I can monitor their status easily.
+- [x] As a user, I would like to be able to view details about my Hestia servers from a central location, so that I can monitor their status easily.
 - [ ] As a user, I would like to be able to submit feedback to plugin developers, so that they can improve their plugin.
 - [ ] As a plugin developer, I would like to be able to receive detailed and organised feedback, so I can improve my plugin.
-- [ ] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
+- [x] As a user, I would like to be able to control my Hestia systems even when I’m not on their local network.
 - [ ] As a user, I would like to be able to be able to be able to put my devices into groups of my choice, in order to be able to find specific devices more easily.
-- [ ] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
+- [x] As a developer, I would like the web front end to communicate to the servers via the REST API, to have consistency in the system.
 
 
 #### Useful user stories
@@ -70,7 +70,7 @@ The *Plugin Developer* is a person who has created a plugin that the Hestia syst
 - [ ] As a user, I would like to be able to export and import configurations for my Hestia servers, to make it easier for me to deploy my systems.
 - [ ] As a user, I would like to be able to specify presets for my peripherals and apply those presets, so that I can quickly configure the peripherals to suit my preferences.
 - [ ] As a user, I would like to be able to change the theme of the user-interface, so that it suits my preferences.
-- [ ] As a developer, I would like to have consistent style between my products.
+- [x] As a developer, I would like to have consistent style between my products.
 - [ ] As a plugin developer, I want the Hestia website to be able to present my plugin properly in order that the user can use it correctly.
 
 ## Change Log
@@ -82,3 +82,4 @@ The *Plugin Developer* is a person who has created a plugin that the Hestia syst
 | Peter Oetinger | 2018-02-27 | Whole Document | Added user stories                                                                  |
 | Andrew Lalis   | 2018-02-27 | Whole Document | Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories. |
 | Roman Bell     | 2018-03-23 | Whole Document | Edited in preparation for final hand in                                             |
+| Roman Bell     | 2018-03-27 | User stories | Did checkoxes of features                                             |
