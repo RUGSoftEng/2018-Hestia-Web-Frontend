@@ -88,11 +88,11 @@ Below are listed some requirements or concerns which the clients have told us ab
 | :---           |       :--- | :---           | :---                                                                                              |
 | Troy Harrison  | 2018-02-27 | Whole Document | Added initial description, and basic user stories.                                                |
 | Rens Nijman    | 2018-02-27 | Whole Document | Fixed typos and separated user stories by importance.                                             |
-| Peter Oetinger | 2018-02-27 | Whole Document | Added user stories                                                                                |
+| Peter Oetinger | 2018-02-27 | Whole Document | Added user stories.                                                                               |
 | Andrew Lalis   | 2018-02-27 | Whole Document | Added Hestia Logo, fixed grammar, added changelog. Defined actors for user stories.               |
 | Andrew Lalis   | 2018-03-04 | Whole Document | Added TA name, Won't Do section, removed duplicate user story, added non-functional requirements. |
 | Andrew Lalis   | 2018-03-12 | Document Name  | Renamed to HestiaWeb_requirements, added local website to Won't Do.                               |
 | Rens Nijman    | 2018-03-12 | Won't Do       | Removed a space.                                                                                  |
 | Troy Harrison  | 2018-03-13 | Requirements   | Move requirements to better reflect current focus.                                                |
-| Roman Bell     | 2018-03-23 | Whole Document | Edited in preparation for final hand in                                                           |
-| Roman Bell     | 2018-03-27 | User stories   | Did checkoxes of features                                                                         |
+| Roman Bell     | 2018-03-23 | Whole Document | Edited in preparation for final hand in.                                                          |
+| Roman Bell     | 2018-03-27 | User stories   | Did checkboxes of features.                                                                       |
