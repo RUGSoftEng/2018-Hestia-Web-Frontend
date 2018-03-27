@@ -16,3 +16,5 @@
 | *15/3/2018* | 14:00-15:00 | First attempt at Firebase authentication. |
 | *18/3/2018* | 12:00-14:00 | Made rudimentary log in system with firebase. |
 | *20/3/2018* | 13:00-14:00 | Meeting with the whole web team. |
+| *23/3/2018* | 12:00-17:00 | Updated requirement document, made javascript to interact with database, organized others. |
+| *26/3/2018* | 11:00-16:00 | Created code to autogenerate UI elements, worked on PHP alternative in case of emergency. |
