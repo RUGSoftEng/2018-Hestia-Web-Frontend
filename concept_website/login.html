@@ -17,17 +17,19 @@
 			<!-- Firebase Initialization Code -->
 			<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
 			<script>
-				// Initialize Firebase
-				var config = {
-					apiKey: "AIzaSyAJzJqrgr5aX3IIaIVO0IYTNfYmStFwsI0",
-					authDomain: "hestia-web-2018.firebaseapp.com",
-					databaseURL: "https://hestia-web-2018.firebaseio.com",
-					projectId: "hestia-web-2018",
-					storageBucket: "hestia-web-2018.appspot.com",
-					messagingSenderId: "971236925335"
-				};
-				firebase.initializeApp(config);
+			  // Initialize Firebase
+			  var config = {
+			    apiKey: "AIzaSyAJzJqrgr5aX3IIaIVO0IYTNfYmStFwsI0",
+			    authDomain: "hestia-web-2018.firebaseapp.com",
+			    databaseURL: "https://hestia-web-2018.firebaseio.com",
+			    projectId: "hestia-web-2018",
+			    storageBucket: "hestia-web-2018.appspot.com",
+			    messagingSenderId: "971236925335"
+			  };
+			  firebase.initializeApp(config);
 			</script>
+
+			<!-- Firebase authentication -->
 			<script src="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.js"></script>
 			<link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.6.3/firebaseui.css" />
 			<script type="text/javascript">
@@ -58,25 +60,25 @@
   		  	</a>
 	  		</div>
 	  	</div>
-      <!-- <div id="login_container"> -->
-        <!-- <div class="module_title"> -->
-          <!-- <h2>Login</h2> -->
-        <!-- </div> -->
-        <!-- <div id="login_server"> -->
-          <!-- <button>CHOOSE SERVER</button> -->
-          <!-- <div id="server_info_login"> -->
-            <!-- <p><strong>Current Server:</strong><br /> -->
-            <!-- localhost</p> -->
-          <!-- </div> -->
-        <!-- </div> -->
-        <!-- <div id="login_input"> -->
-          <!-- <form action="index.html"> -->
-            <!-- <input type="username" placeholder="Username" /> -->
-            <!-- <input type="password" placeholder="Password" /> -->
-            <!-- <input id="login_button" type="submit" name="login" value="LOGIN" /> -->
-          <!-- </form> -->
-        <!-- </div> -->
-      <!-- </div> -->
+       <div id="login_container"> 
+         <div class="module_title"> 
+           <h2>Login</h2> 
+         </div> 
+         <div id="login_server"> 
+           <button>CHOOSE SERVER</button> 
+           <div id="server_info_login"> 
+             <p><strong>Current Server:</strong><br /> 
+             localhost</p> 
+           </div> 
+         </div> 
+         <div id="login_input"> 
+           <form action="index.html"> 
+             <input type="username" placeholder="Username" /> 
+             <input type="password" placeholder="Password" /> 
+             <input id="login_button" type="submit" name="login" value="LOGIN" /> 
+           </form> 
+         </div> 
+       </div>
 			<div id="firebaseui-auth-container"></div>
   	</div>
   </body>
