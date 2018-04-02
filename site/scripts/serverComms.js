@@ -45,50 +45,6 @@ function updateDeviceActivator(serverAddress, deviceId, activatorId, newState){
         });
 }
 
-
-
-/**
- * Gets a device with a particular deviceId from a server. This uses promises as
- * the request is asynchronous. If the promise is not fulfilled it rejects the
- * promise and errors.
- * @param {} server
- * @param {} deviceId
- * @returns {} promised device
- */
-function getDevice(serverAddress, deviceId) {
-    console.log("getDevice() is called");
-
-    return new Promise(function(resolve, reject) {
-        var request = new XMLHttpRequest();
-        var url = "/request";
-
-        request.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                result = this.responseText;
-                obj = JSON.parse(result);
-
-                if (obj) {
-                    resolve(obj);
-                } else {
-                    let error = new Error('Could not fetch device');
-                    reject(error);
-                    return;
-                }
-            }
-        };
-
-        var data = {
-            "query": serverAddress + "/devices/" + deviceId,
-            "method": "GET"
-        };
-
-        request.open("POST", url, true);
-        request.setRequestHeader("Content-type", "application/json");
-        request.send(JSON.stringify(data));
-    });
-}
-
-
 /**
  * This function sends a request to a server to change the state of the
  * activator with activatorId for the device with deviceId.
