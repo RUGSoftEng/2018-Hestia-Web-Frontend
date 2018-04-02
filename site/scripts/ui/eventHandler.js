@@ -3,6 +3,7 @@
  * @name eventHandler.js
  * The file contains functions which are called when user interface events take place.
  * It depends on functions provided by serverComms.js to send and receive data.
+ */
 
 /**
  * Is a wrapper for the function our toggles calls. We currently have only one
