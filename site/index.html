@@ -24,7 +24,8 @@
 
   	<!-- Our scripts -->
     <script type="text/javascript" src="scripts/functions.js"></script>
-  	<script src="scripts/database.js"></script>
+  	<script src="scripts/firebase/database.js"></script>
+    <script src="scripts/firebase/auth.js"></script>
 
 </head>
 
@@ -128,7 +129,7 @@
 			});
 		}
 
-		initFirebase();
+		//initFirebase();
 		
 		//Check if the user is authenticated.
 		// firebase.auth().onAuthStateChanged(function(currentUser){
