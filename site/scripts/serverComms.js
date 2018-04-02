@@ -160,32 +160,13 @@ function getServerDevices(server) {
  * @param {} server
  * @param {} payload
  */
-function postDevice(server, payload) {
-    var request = new XMLHttpRequest();
-    var url = "/request";
-
-    request.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            result = this.responseText;
-            obj = JSON.parse(result);
-        }
-    };
-
-    var data = {
-        "query": server + "/devices/",
-        "method": "POST"
-    };
-
-    console.log(data);
-
-    if (payload) {
-        // Payload is not empty
-        data.payload = JSON.parse(payload);
-    }
-
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(JSON.stringify(data));
+function postDevice(server, rawpayload) {
+    sendRequest(server,
+        "/devices/",
+        "POST",
+        null,
+        JSON.parse(rawpayload));
+    updateDeviceList();
 }
 
 

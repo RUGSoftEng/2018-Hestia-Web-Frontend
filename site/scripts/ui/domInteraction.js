@@ -53,8 +53,6 @@ function updateDeviceList() {
  */
 function populateDevices(data){
     LAST_DATA_RECEIVED = data;
-    console.log("Populating devices:");
-    console.log(data);
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
 
@@ -83,8 +81,11 @@ function populateDevices(data){
         namesListElem.appendChild(elem);
     });
 
-    namesListElem.firstChild.click();
-    SELECTED_DEVICE = namesListElem.firstChild.id;
+    if (SELECTED_DEVICE == null){
+        namesListElem.firstChild.click();
+    } else {
+        document.getElementById(SELECTED_DEVICE).click();
+    }
 }
 
 /**
