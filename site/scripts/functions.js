@@ -1,4 +1,10 @@
-<<<<<<< HEAD:site/static/scripts/functions.js
+/**
+ * @fileOverview
+ * @name functions.js
+ * The file contains all the javascript needed to communicate with the Flask and
+ * the remote Hestia controller. It needs refactoring and rearchitecturing.
+ */
+
 //The most recent json object received by the client.
 var LAST_DATA_RECEIVED = null;
 var SELECTED_DEVICE = null;
@@ -39,15 +45,7 @@ function updateDeviceActivator(serverAddress, deviceId, activatorId, newState){
         });
 }
 
-// promises a device
-function getDevice(server, deviceId){
-=======
-/**
- * @fileOverview
- * @name functions.js
- * The file contains all the javascript needed to communicate with the Flask and
- * the remote Hestia controller. It needs refactoring and rearchitecturing.
- */
+
 
 /**
  * Gets a device with a particular deviceId from a server. This uses promises as
@@ -58,7 +56,6 @@ function getDevice(server, deviceId){
  * @returns {} promised device
  */
 function getDevice(server, deviceId) {
->>>>>>> feature/sprint2:flask/templates/static/scripts/functions.js
     console.log("getDevice() is called");
 
     return new Promise(function(resolve, reject) {
@@ -147,8 +144,6 @@ function toggle(server, deviceId, activatorId, payload) {
     changeActivator(server, deviceId, activatorId, payload);
 }
 
-
-<<<<<<< HEAD:site/static/scripts/functions.js
 //Removes all children from an element.
 function removeChildren(node){
     while(node.firstChild){
@@ -156,12 +151,6 @@ function removeChildren(node){
     }
 }
 
-//Gets a device object by id from some data.
-function getDeviceById(id){
-    for (var i = 0; i < LAST_DATA_RECEIVED.length; i++){
-        if (LAST_DATA_RECEIVED[i].deviceId == id){
-            return LAST_DATA_RECEIVED[i];
-=======
 
 /**
  * Gets all devices for a given server. This uses promises as the request is
@@ -224,24 +213,17 @@ function getDeviceById(id, array) {
     for (var i = 0; i < array.length; i++) {
         if (array[i].deviceId == id) {
             return array[i];
->>>>>>> feature/sprint2:flask/templates/static/scripts/functions.js
         }
     }
     return null;
 }
 
-<<<<<<< HEAD:site/static/scripts/functions.js
-//Populates the list of devices from some data received from the server.
-//  data is a list of devices as received from the server.
-function populateDevices(data){
-    LAST_DATA_RECEIVED = data;
-=======
 /**
  * Generates the html to view all of the devices in data.
  * @param {} data
  */
-function populateDevices(data) {
->>>>>>> feature/sprint2:flask/templates/static/scripts/functions.js
+function populateDevices(data){
+    LAST_DATA_RECEIVED = data;
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
 
@@ -348,7 +330,6 @@ function onSliderInteracted() {
     dimmer(document.getElementById("serverAddress").value, this.name, this.id, this.value / 100);
 }
 
-<<<<<<< HEAD:site/static/scripts/functions.js
 //When the user changes a slider's value.
 function onSliderInteracted(){
     console.log("User changed slider: " + this.id + ", Current state: " + this.value);
@@ -358,7 +339,6 @@ function onSliderInteracted(){
 window.onload = function() {
     sendRequest(globalServer(), "/devices/", "GET", populateDevices);
 };
-=======
 /**
  * Is a wrapper for the function our button calls. We currently have only one
  * functionality for the buttons so the name is bad.
@@ -413,4 +393,3 @@ function postDevice(server, payload) {
     request.setRequestHeader("Content-type", "application/json");
     request.send(JSON.stringify(data));
 }
->>>>>>> feature/sprint2:flask/templates/static/scripts/functions.js
