@@ -1,9 +1,4 @@
 # Hestia Webserver
-To run the webserver, clone the repository, and go to the root directory of it, and issue the following commands:
+To run the webserver, you will need to use an Apache2 Webserver, with at least PHP7.0 enabled, and PHP-Curl.
 
-```
-./dev_setup.sh
-./launch.sh
-```
-
-A flask server will be started, which will host the website.
+Then, simply configure another site to point to the `site` directory in this repository.
