@@ -18,3 +18,4 @@
 | *20/3/2018* | 13:00-14:00 | Meeting with the whole web team. |
 | *23/3/2018* | 12:00-17:00 | Updated requirement document, made javascript to interact with database, organized others. |
 | *26/3/2018* | 11:00-16:00 | Created code to autogenerate UI elements, worked on PHP alternative in case of emergency. |
+| *02/4/2018* | 10:00-15:00 | Updated Apache server version, fixed bugs, reorganized code, added to presentation slides. |
