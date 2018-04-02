@@ -4,6 +4,8 @@
  * This file contains functions to interact with the webpage to dynamically load devices.
  */
 
+var SELECTED_DEVICE = null;
+
 /**
  * Removes all children from a node. Used in the gui.
  * @param {} node
@@ -51,6 +53,8 @@ function updateDeviceList() {
  */
 function populateDevices(data){
     LAST_DATA_RECEIVED = data;
+    console.log("Populating devices:");
+    console.log(data);
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
 
@@ -58,7 +62,6 @@ function populateDevices(data){
     var inputPlaceholder = '{\n "plugin_name": "light",\n "collection": "mock",\n "required_info": {\n   "ip": "123",\n   "port": "456",\n   "name": "not_a_kitchen_light"\n  }\n}';
     document.getElementById("payload_input").value = inputPlaceholder;
 
-    console.log(data);
     data.forEach(function(device) {
         var elem = document.createElement("li");
         elem.className = "device_row";

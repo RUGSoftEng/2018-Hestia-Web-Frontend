@@ -7,14 +7,13 @@
 
 //The most recent json object received by the client.
 var LAST_DATA_RECEIVED = null;
-var SELECTED_DEVICE = null;
 
 function globalServer() {
     return document.getElementById("serverAddress").value;
 }
 
 //Sends an asynchronous request to the webserver, intended to reach a local controller.
-function sendRequest(serverAddress, endpoint, method, callback, payload={}){
+function sendRequest(serverAddress, endpoint, method, callback=null, payload={}, errorCallback=null){
     var data = {
         query: serverAddress + endpoint,
         method: method,
@@ -28,7 +27,8 @@ function sendRequest(serverAddress, endpoint, method, callback, payload={}){
         cache: false,
         data: data,
         dataType: "json",
-        success: callback
+        success: callback,
+        error: errorCallback
     });
 }
 
@@ -55,7 +55,7 @@ function updateDeviceActivator(serverAddress, deviceId, activatorId, newState){
  * @param {} deviceId
  * @returns {} promised device
  */
-function getDevice(server, deviceId) {
+function getDevice(serverAddress, deviceId) {
     console.log("getDevice() is called");
 
     return new Promise(function(resolve, reject) {
@@ -78,7 +78,7 @@ function getDevice(server, deviceId) {
         };
 
         var data = {
-            "query": server + "/devices/" + deviceId,
+            "query": serverAddress + "/devices/" + deviceId,
             "method": "GET"
         };
 
@@ -98,22 +98,15 @@ function getDevice(server, deviceId) {
  * @param {} state
  */
 function changeActivator(server, deviceId, activatorId, state) {
-    var request = new XMLHttpRequest();
-    var url = "/request";
-
-    var data = {
-        "query": server + "/devices/" + deviceId + "/activators/" + activatorId,
-        "method": "POST",
-        "payload": {
+    sendRequest(server,
+        "/devices/" + deviceId + "/activators/" + activatorId,
+        "POST",
+        function(resp){
+            console.log(resp);
+        },
+        {
             "state": state
-        }
-    };
-
-    console.log(data);
-
-    request.open("POST", url, true);
-    request.setRequestHeader("Content-type", "application/json");
-    request.send(JSON.stringify(data));
+        });
 }
 
 
@@ -153,32 +146,12 @@ function toggle(server, deviceId, activatorId, payload) {
  */
 function getServerDevices(server) {
     return new Promise(function(resolve, reject) {
-        var request = new XMLHttpRequest();
-        var url = "/request";
-
-        request.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                result = this.responseText;
-                obj = JSON.parse(result);
-
-                if (obj) {
-                    resolve(obj);
-                } else {
-                    let error = new Error('Could not fetch device');
-                    reject(error);
-                    return;
-                }
-            }
-        };
-
-        var data = {
-            "query": server + "/devices/",
-            "method": "GET"
-        };
-
-        request.open("POST", url, true);
-        request.setRequestHeader("Content-type", "application/json");
-        request.send(JSON.stringify(data));
+        sendRequest(server,
+            "/devices/",
+            "GET",
+            resolve,
+            {},
+            reject);
     });
 }
 
@@ -215,6 +188,4 @@ function postDevice(server, payload) {
     request.send(JSON.stringify(data));
 }
 
-window.onload = function() {
-    sendRequest(globalServer(), "/devices/", "GET", populateDevices);
-};
+

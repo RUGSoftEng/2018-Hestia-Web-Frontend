@@ -21,12 +21,6 @@ function onSliderInteracted() {
     dimmer(document.getElementById("serverAddress").value, this.name, this.id, this.value / 100);
 }
 
-//When the user changes a slider's value.
-function onSliderInteracted(){
-    console.log("User changed slider: " + this.id + ", Current state: " + this.value);
-    updateDeviceActivator(globalServer(), SELECTED_DEVICE, this.id, 0.1);
-}
-
 /**
  * Is a wrapper for the function our button calls. We currently have only one
  * functionality for the buttons so the name is bad.

@@ -13,6 +13,7 @@
 				case "POST":
 					curl_setopt($curl, CURLOPT_POST, true);
 					if ($data){
+						echo("Payload: ".$data);
 						curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 					}
 					break;
@@ -47,15 +48,38 @@
 			echo(sprintf("Curl failed with error #%d: %s", 
 				$e->getCode(), 
 				$e->getMessage()));
+			var_dump($_POST);
 			return FALSE;
 		}
 	}
 
-	if (!empty($_POST["query"]) && !empty($_POST["method"])){
-		$json = sendRequest($_POST["method"], $_POST["query"], $_POST["payload"]);
-		echo($json);
-	} else {
-		header("HTTP/1.1 500 Internal Server Error");
-		echo 'Error: invalid data provided. Please offer a query, method, and optional payload.';
+	//Converts string true or false to boolean.
+	function toBool($str){
+		return ($str === "true");
 	}
+
+	//Determines if a string represents a boolean.
+	function isBool($str){
+		return ($str === "true" or $str === "false");
+	}
+
+	//If the required fields are filled, proceed to relay the request to the hestia server.
+	$encodedPayload = NULL;
+	if (!empty($_POST["payload"])){
+		$payload = $_POST["payload"];
+		if (!empty($payload["state"])){
+			//Convert any strings to either boolean or float.
+			if (isBool($payload["state"])){
+				$payload["state"] = toBool($payload["state"]);
+			} else {
+				$payload["state"] = (float)$payload["state"];
+
+			}
+		}
+		var_dump($payload);
+		$encodedPayload = json_encode($payload);
+	}
+	$json = sendRequest($_POST["method"], $_POST["query"], $encodedPayload);
+	echo($json);
+	
 ?>
