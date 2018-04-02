@@ -14,6 +14,8 @@
 					curl_setopt($curl, CURLOPT_POST, true);
 					if ($data){
 						echo("Payload: ".$data);
+
+						$data = str_replace('{"state":"0"}', '{"state":0.0}', $data);
 						curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
 					}
 					break;
@@ -78,6 +80,11 @@
 		}
 		var_dump($payload);
 		$encodedPayload = json_encode($payload);
+		//Replace whole numbers with decimals because API doesn't support whole numbers for some reason.
+		if (!empty($payload["state"])){
+			$encodedPayload = str_replace('{"state":1}', '{"state":1.0}', $encodedPayload);
+			//$encodedPayload = str_replace('{"state":0}', '{"state":0.0}', $encodedPayload);
+		}
 	}
 	$json = sendRequest($_POST["method"], $_POST["query"], $encodedPayload);
 	echo($json);
