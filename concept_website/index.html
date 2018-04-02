@@ -10,6 +10,8 @@
    	<link type="text/css" rel="stylesheet" href="style.css" />
   	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="resources/scripts/main.js"></script>
+    <script type="text/javascript" src="resrouces/scripts/functions.js"></script>
   </head>
 
   <body>
@@ -30,7 +32,35 @@
 	  			<a href="settings.html"><div class="menu_button"><i class=material-icons>settings</i></div></a>
 	  		</div>
 	  	</div>
+      <div id="content">
+        <div class="section">
+          <div class="content_module">
+            <div class="module_title"><h2>My Hestia</h2></div>
+          </div>
+          <div class="content_module">
+            <div class="module_title"><h2>Quick Navigation</h2></div>
+          </div>
+        </div>
+      </div>
   	</div>
   </body>
-
+	<!-- Firebase Modules -->
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.10.1/firebase-database.js"></script>
+	<!-- Firebase Initialization Code -->
+	<script src="https://www.gstatic.com/firebasejs/4.11.0/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		var config = {
+			apiKey: "AIzaSyAJzJqrgr5aX3IIaIVO0IYTNfYmStFwsI0",
+			authDomain: "hestia-web-2018.firebaseapp.com",
+			databaseURL: "https://hestia-web-2018.firebaseio.com",
+			projectId: "hestia-web-2018",
+			storageBucket: "hestia-web-2018.appspot.com",
+			messagingSenderId: "971236925335"
+		};
+		firebase.initializeApp(config);
+		
+	</script>
 </html>
