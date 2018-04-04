@@ -114,6 +114,7 @@ function getServerDevices(server) {
 
 /**
  * Sends the request to add new device described by payload to the server.
+ * Updates the devices list after sending the data.
  * @param {} server
  * @param {} payload
  */
@@ -126,4 +127,33 @@ function postDevice(server, rawpayload) {
     updateDeviceList();
 }
 
+/**
+ * Deletes a device with a given id, and update the devices list.
+ * @param {} server
+ * @param {} deviceId
+ */
+function deleteDevice(server, deviceId) {
+	sendRequest(server,
+		"/devices/"+deviceId,
+		"DELETE",
+		null,
+		{});
+	updateDeviceList();
+}
 
+/**
+ * Renames a device.
+ * @param {} server
+ * @param {} deviceId
+ * @param {} newName
+ */
+function renameDevice(server, deviceId, newName){
+	sendRequest(server,
+		"/devices/"+deviceId,
+		"PUT",
+		null,
+		{
+			"name": newName
+		});
+	updateDeviceList();
+}
