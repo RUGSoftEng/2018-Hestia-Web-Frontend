@@ -19,3 +19,5 @@
 | *23/3/2018* | 12:00-17:00 | Updated requirement document, made javascript to interact with database, organized others. |
 | *26/3/2018* | 11:00-16:00 | Created code to autogenerate UI elements, worked on PHP alternative in case of emergency. |
 | *02/4/2018* | 10:00-15:00 | Updated Apache server version, fixed bugs, reorganized code, added to presentation slides. |
+| *03/4/2018* | 8:30-12:30 | Presentation of Hestia Web. |
+| *04/4/2018* | 9:00-12:30 | Conversion of apache server to flask and jinja2 integration. |
