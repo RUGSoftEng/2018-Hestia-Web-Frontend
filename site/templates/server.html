@@ -1,5 +1,7 @@
 {% extends "utils/layout.html" %}
 
+{% set withoutNormalAuth = true %}
+
 {% block head %}
     {{ super() }}
     <title> {% block title %} Servers {% endblock title %} </title>
@@ -9,4 +11,12 @@
 {% endblock container %}
 
 {% block afterBody %}
+	<script>
+		beginAuth().then(user =>{
+			getUserServers(firebase, user).then(servers =>{
+				console.log(user.displayName+" has servers: ");
+				console.log(servers);
+			});
+		});
+	</script>
 {% endblock afterBody %}
