@@ -11,6 +11,28 @@ function initFirebase(){
 	firebase.initializeApp(config);
 }
 
+//Initializes the login ui, and links it with a div with the id: firebaseui-auth-container.
+function initLoginUi(){
+	initFirebase();
+	// FirebaseUI config.
+	var uiConfig = {
+		signInFlow: 'popup',
+		signInSuccessUrl: 'index.html',
+		signInOptions: [
+			// Leave the lines as is for the providers you want to offer your users.
+			firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+			firebase.auth.EmailAuthProvider.PROVIDER_ID
+		],
+		// Terms of service url.
+		tosUrl: 'settings.html'
+	};
+
+	// Initialize the FirebaseUI Widget using Firebase.
+	var ui = new firebaseui.auth.AuthUI(firebase.auth());
+	// The start method will wait until the DOM is loaded.
+	ui.start('#firebaseui-auth-container', uiConfig);
+}
+
 //Promises to check login status, and either the user is logged in, or is not.
 function waitForLogin(){
 	return new Promise(function(resolve, reject){

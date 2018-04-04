@@ -3,7 +3,9 @@
 
 <head>
 	{% block head %}
-    <title>Hestia | {% block title %}{% endblock %}</title>
+    
+    <title>Hestia | {% block title %}{% endblock title %}</title>
+
     {% include 'utils/resources.html' %}
 
   	<!-- Our files -->
@@ -16,36 +18,43 @@
 
 <body>
     <div id="container">
-        <div id="interface">
-            <a href="index.html">
-                <div id="logo_float">
-                    <img src="{{ url_for('static', filename='images/logo.png') }}" />
-                </div>
-            </a>
-            <div id="top_bar">
-                <h1 id="current_page">{{ self.title() }}</h1>
-            </div>
-            <div id="side_menu">
-                <a href="index.html">
-                    <div class="menu_button current"><i class=material-icons>dashboard</i></div>
-                </a>
-                <a href="devices.html">
-                    <div class="menu_button"><i class=material-icons>settings_remote</i></div>
-                </a>
-                <a href="server.html">
-                    <div class="menu_button"><i class=material-icons>storage</i></div>
-                </a>
-                <a href="settings.html">
-                    <div class="menu_button"><i class=material-icons>settings</i></div>
-                </a>
-            </div>
-        </div>
-        <div id="content">
-        	{% block content %}
-            {% endblock content %}
-        </div>
+    	{% if not withoutInterface %}
+    		<div id="interface">
+			    <a href="index.html">
+			        <div id="logo_float">
+			            <img src="{{ url_for('static', filename='images/logo.png') }}" />
+			        </div>
+			    </a>
+			    <div id="top_bar">
+			        <h1 id="current_page">{{ self.title() }}</h1>
+			    </div>
+			    <div id="side_menu">
+			        <a href="index.html">
+			            <div class="menu_button current"><i class=material-icons>dashboard</i></div>
+			        </a>
+			        <a href="devices.html">
+			            <div class="menu_button"><i class=material-icons>settings_remote</i></div>
+			        </a>
+			        <a href="server.html">
+			            <div class="menu_button"><i class=material-icons>storage</i></div>
+			        </a>
+			        <a href="settings.html">
+			            <div class="menu_button"><i class=material-icons>settings</i></div>
+			        </a>
+			    </div>
+			</div>
+    	{% endif %}
+    	{% block container %}
+        {% endblock container %}
     </div>
 </body>
+<!-- If the page does not specify that auth is required, it will init firebase and check for login. -->
+{% if not withoutAuth %}
+	<script>
+		beginAuth();
+	</script>
+{% endif %}
+
 {% block afterBody %}
 {% endblock afterBody %}
 

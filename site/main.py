@@ -12,11 +12,11 @@ app = Flask(__name__,
 # Create endpoints
 @app.route('/')
 def main():
-    return render_template('newIndex.html')
+    return render_template('index.html')
 
 @app.route('/index.html')
 def index():
-    return render_template('newIndex.html')
+    return render_template('index.html')
 
 @app.route('/devices.html')
 def devices():
