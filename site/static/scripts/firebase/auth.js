@@ -50,6 +50,7 @@ function waitForLogin(){
 function signout(){
 	firebase.auth().signOut().then(function(){
 		console.log("Signed out.");
+		window.location.replace("login.html");
 	}, function(error){
 		console.log("Error while signing out.");
 	});

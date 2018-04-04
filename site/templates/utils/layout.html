@@ -16,6 +16,10 @@
     {% endblock head %}
 </head>
 
+{% macro menuButton(path) -%}
+	"{{ 'menu_button current'if request.path == path else 'menu_button' }}"
+{%- endmacro %}
+
 <body>
     <div id="container">
     	{% if not withoutInterface %}
@@ -27,19 +31,20 @@
 			    </a>
 			    <div id="top_bar">
 			        <h1 id="current_page">{{ self.title() }}</h1>
+			        <button id="signout_button", onclick="signout()">Sign Out</button>
 			    </div>
 			    <div id="side_menu">
 			        <a href="index.html">
-			            <div class="menu_button current"><i class=material-icons>dashboard</i></div>
+			            <div class={{ menuButton('/index.html') }}><i class=material-icons>dashboard</i></div>
 			        </a>
 			        <a href="devices.html">
-			            <div class="menu_button"><i class=material-icons>settings_remote</i></div>
+			            <div class={{ menuButton('/devices.html') }}><i class=material-icons>settings_remote</i></div>
 			        </a>
 			        <a href="server.html">
-			            <div class="menu_button"><i class=material-icons>storage</i></div>
+			            <div class={{ menuButton('/server.html') }}><i class=material-icons>storage</i></div>
 			        </a>
 			        <a href="settings.html">
-			            <div class="menu_button"><i class=material-icons>settings</i></div>
+			            <div class={{ menuButton('/settings.html') }}><i class=material-icons>settings</i></div>
 			        </a>
 			    </div>
 			</div>

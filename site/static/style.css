@@ -132,6 +132,12 @@ ul {
     top: 5px;
 }
 
+#signout_button {
+    position: relative;
+    float: right;
+    top: 20px;
+}
+
 .menu_button.current {
     color: #ff8f40;
 }

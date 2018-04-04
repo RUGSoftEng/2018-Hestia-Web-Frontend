@@ -52,6 +52,8 @@
 
 {% block afterBody %}
     <script>
-        document.body.onchange = updateDeviceList();
+        beginAuth().then(function(user){
+            document.body.onchange = updateDeviceList();
+        });
     </script>
 {% endblock afterBody %}
