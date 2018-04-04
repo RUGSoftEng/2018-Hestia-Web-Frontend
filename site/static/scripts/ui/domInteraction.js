@@ -5,6 +5,7 @@
  */
 
 var SELECTED_DEVICE = null;
+var SELECTED_SERVER = null;
 
 /**
  * Removes all children from a node. Used in the gui.
@@ -15,6 +16,18 @@ function removeChildren(node) {
         while (node.firstChild) {
             node.removeChild(node.firstChild);
         }
+    }
+}
+
+/**
+ * Sets all children of a node to have a particular class.
+ * @param {} node
+ * @param {} className
+ */
+function setAllChildrenToClass(node, className) {
+    var children = node.children;
+    for (var i = 0; i < children.length; i++){
+        children[i].className = className;
     }
 }
 
@@ -38,7 +51,7 @@ function getDeviceById(id, array) {
  * object from the server.
  */
 function updateDeviceList() {
-    var devices = getServerDevices(document.getElementById("serverAddress").value);
+    var devices = getServerDevices(SELECTED_SERVER.address);
     devices.then(result => {
             console.log("Got devices from server: ");
             console.log(result);
@@ -49,12 +62,49 @@ function updateDeviceList() {
         });
 }
 
+function updateServerList() {
+    getUserServers(firebase, firebase.auth().currentUser).then(servers =>{
+        populateServers(servers);
+    });
+}
+
+function populateServers(servers){
+    var serversListElem = document.getElementById("serverNamesList");
+    removeChildren(serversListElem);
+
+    for (var name in servers){
+        var elem = document.createElement("li");
+        elem.className = "device_row";
+        elem.id = name;
+        console.log("Found server with name: " + name);
+        elem.onclick = function(){
+            setAllChildrenToClass(serversListElem, "device_row");
+            this.className = "device_row active";
+
+            var server = servers[this.id];
+            SELECTED_SERVER = server;
+            SELECTED_DEVICE = null;
+
+            updateDeviceList();
+        };
+        elem.appendChild(document.createTextNode(name));
+        serversListElem.appendChild(elem);
+    }
+
+    if (SELECTED_SERVER == null){
+        if (serversListElem.firstChild != null){
+            serversListElem.firstChild.click();
+        }
+    } else {
+        document.getElementById(SELECTED_SERVER).click();
+    }
+}
+
 /**
  * Generates the html to view all of the devices in data.
  * @param {} data
  */
 function populateDevices(data){
-    LAST_DATA_RECEIVED = data;
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
 
@@ -67,10 +117,7 @@ function populateDevices(data){
         elem.className = "device_row";
         elem.id = device.deviceId;
         elem.onclick = function() {
-            var children = namesListElem.children;
-            for (var i = 0; i < children.length; i++) {
-                children[i].className = "device_row";
-            }
+            setAllChildrenToClass(namesListElem, "device_row");
             elem.className = "device_row active";
 
             var dev = getDeviceById(elem.id, data);

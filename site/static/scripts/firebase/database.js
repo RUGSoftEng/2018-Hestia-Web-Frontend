@@ -1,3 +1,5 @@
+
+
 //Adds a server to the list of servers.
 function addUserServer(firebase, user, serverName, serverAddress){
 	firebase.database().ref('users/'+user.uid+'/'+serverName).set({

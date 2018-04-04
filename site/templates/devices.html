@@ -19,8 +19,14 @@
 
 {% block container %}
     <div id="content">
-        <input id="serverAddress" type="text" placeholder="server address" value="https://94.212.164.28:8000" style="margin-left: 200px;" />
         <div class="section">
+            <div class="content_module" onload="">
+                <div class="module_title">
+                    <h2>Servers</h2>
+                </div>
+                <ul id="serverNamesList" class="device_list">
+                </ul>
+            </div>
             <div class="content_module" onload="">
                 <div class="module_title">
                     <h2>Devices</h2>
@@ -53,7 +59,8 @@
 {% block afterBody %}
     <script>
         beginAuth().then(function(user){
-            document.body.onchange = updateDeviceList();
+            updateServerList();
+            //document.body.onchange = updateDeviceList();
         });
     </script>
 {% endblock afterBody %}

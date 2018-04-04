@@ -10,7 +10,7 @@
  * type of toggle so the name is bad.
  */
 function onToggleInteracted() {
-    toggle(document.getElementById("serverAddress").value, this.name, this.id, this.checked);
+    toggle(SELECTED_SERVER.address, this.name, this.id, this.checked);
 }
 
 /**
@@ -18,7 +18,7 @@ function onToggleInteracted() {
  * type of slider so the name is bad.
  */
 function onSliderInteracted() {
-    dimmer(document.getElementById("serverAddress").value, this.name, this.id, this.value / 100);
+    dimmer(SELECTED_SERVER.address, this.name, this.id, this.value / 100);
 }
 
 /**
@@ -26,5 +26,5 @@ function onSliderInteracted() {
  * functionality for the buttons so the name is bad.
  */
 function onClickInteracted() {
-    postDevice(document.getElementById("serverAddress").value, document.getElementById("payload_input").value);
+    postDevice(SELECTED_SERVER.address, document.getElementById("payload_input").value);
 }

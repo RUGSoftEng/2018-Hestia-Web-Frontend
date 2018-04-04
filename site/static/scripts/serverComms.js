@@ -5,9 +5,6 @@
  * the remote Hestia controller. It needs refactoring and rearchitecturing.
  */
 
-//The most recent json object received by the client.
-var LAST_DATA_RECEIVED = null;
-
 function globalServer() {
     return document.getElementById("serverAddress").value;
 }
