@@ -22,10 +22,11 @@ function sendRequest(serverAddress, endpoint, method, callback=null, payload={},
     console.log("Sending request:");
     console.log(data);
     $.ajax({
-        url: "/request.php",
+        url: "/request",
+        contentType: "application/json; charset=utf-8",
         type: "post",
         cache: false,
-        data: data,
+        data: JSON.stringify(data),
         dataType: "json",
         success: callback,
         error: errorCallback

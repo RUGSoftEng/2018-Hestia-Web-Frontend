@@ -49,7 +49,7 @@
     </div>
 </body>
 <!-- If the page does not specify that auth is required, it will init firebase and check for login. -->
-{% if not withoutAuth %}
+{% if not withoutNormalAuth %}
 	<script>
 		beginAuth();
 	</script>

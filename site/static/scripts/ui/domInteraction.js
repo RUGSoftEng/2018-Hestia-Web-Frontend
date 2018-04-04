@@ -40,6 +40,8 @@ function getDeviceById(id, array) {
 function updateDeviceList() {
     var devices = getServerDevices(document.getElementById("serverAddress").value);
     devices.then(result => {
+            console.log("Got devices from server: ");
+            console.log(result);
             populateDevices(result);
         })
         .catch(err => {
@@ -82,7 +84,9 @@ function populateDevices(data){
     });
 
     if (SELECTED_DEVICE == null){
-        namesListElem.firstChild.click();
+        if (namesListElem.firstChild != null){
+            namesListElem.firstChild.click();
+        }
     } else {
         document.getElementById(SELECTED_DEVICE).click();
     }

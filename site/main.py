@@ -47,6 +47,7 @@ def apiRequestHandler():
 # Handle routing requests according to rest principles
 def routeRequest(method, query, payload):
     result = ""
+    print("Sending request to server:", method, ", ", query, ", ", payload);
     if (method == "GET"):
         result = requests.get(query, verify=False).text
     elif (method == "POST"):

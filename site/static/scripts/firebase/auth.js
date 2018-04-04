@@ -59,10 +59,14 @@ function signout(){
 function beginAuth(){
 	initFirebase();
 
-	waitForLogin().then(user =>{
-		console.log("User is logged in: "+user.displayName);
-	}).catch(err =>{
-		console.log(err);
-		window.location.replace("login.html");
+	return new Promise(function(resolve, reject){
+		waitForLogin().then(user =>{
+			console.log("User is logged in: "+user.displayName);
+			resolve(user);
+		}).catch(err =>{
+			console.log(err);
+			reject(err);
+			window.location.replace("login.html");
+		});
 	});
 }
