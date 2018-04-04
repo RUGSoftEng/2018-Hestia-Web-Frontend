@@ -1,4 +1,7 @@
 # Hestia Webserver
-To run the webserver, you will need to use an Apache2 Webserver, with at least PHP7.0 enabled, and PHP-Curl.
+To run the webserver, please use the following commands:
 
-Then, simply configure another site to point to the `site` directory in this repository.
+First to build a virtual environment in which the Flask server can run:
+`./dev_setup.sh`
+Then to run the server:
+`./launch.sh`
