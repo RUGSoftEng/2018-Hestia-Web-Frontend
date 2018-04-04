@@ -6,17 +6,17 @@ import requests
 
 app = Flask(__name__,
     static_url_path='',
-    static_folder='templates/static')
+    static_folder='static')
 
 
 # Create endpoints
 @app.route('/')
 def main():
-    return render_template('index.html')
+    return render_template('newIndex.html')
 
 @app.route('/index.html')
 def index():
-    return render_template('index.html')
+    return render_template('newIndex.html')
 
 @app.route('/devices.html')
 def devices():

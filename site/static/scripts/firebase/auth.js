@@ -33,11 +33,14 @@ function signout(){
 	});
 }
 
-initFirebase();
+//Function to call to start the authorization process. This should be done after the page loads.
+function beginAuth(){
+	initFirebase();
 
-waitForLogin().then(user =>{
-	console.log("User is logged in: "+user.displayName);
-}).catch(err =>{
-	console.log(err);
-	window.location.replace("login.html");
-})
+	waitForLogin().then(user =>{
+		console.log("User is logged in: "+user.displayName);
+	}).catch(err =>{
+		console.log(err);
+		window.location.replace("login.html");
+	});
+}
