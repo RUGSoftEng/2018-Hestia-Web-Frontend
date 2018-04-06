@@ -163,12 +163,12 @@ function getPluginInfo(serverAddress, collectionName, pluginName) {
  * @param {} serverAddress
  * @param {} payload
  */
-function postDevice(serverAddress, rawpayload) {
+function postDevice(serverAddress, payload) {
     sendRequest(serverAddress,
         "/devices/",
         "POST",
         null,
-        JSON.parse(rawpayload));
+        payload);
     updateDeviceList();
 }
 

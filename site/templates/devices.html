@@ -48,12 +48,10 @@
                 <div class="module_content">
                     <select id="serverCollectionsSelect" onchange="updatePluginsSelect()">
                     </select>
-                    <select id="pluginsSelect">
+                    <select id="pluginsSelect" onchange="updateAddDeviceForm()">
                     </select>
-                    <p>Input your add device payload here:<br /></p>
-                    <textarea id="payload_input" placeholder="" rows="15" name="payload_input"></textarea>
-                    <Br />
-                    <button onclick="onClickInteracted()">ADD</button>
+                    <form id="addDeviceForm" onsubmit="submitNewDevice(); return false;">
+                    </form>
                 </div>
             </div>
         </div>

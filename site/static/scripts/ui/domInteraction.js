@@ -68,6 +68,7 @@ function updateServerList() {
     });
 }
 
+//Updates the add device module by getting collections from the hestia server.
 function updateAddDeviceModule() {
     getServerCollections(SELECTED_SERVER.address).then(collections => {
         console.log("Collections:");
@@ -77,12 +78,68 @@ function updateAddDeviceModule() {
     });
 }
 
+//Updates the plugins selector after the collection has been selected.
 function updatePluginsSelect(){
     var selectedCollection = document.getElementById("serverCollectionsSelect").value;
     getServerCollectionPlugins(SELECTED_SERVER.address, selectedCollection).then(plugins => {
         populatePluginsSelect(plugins);
+        updateAddDeviceForm();
     });
 
+}
+
+//Refreshes the 'Add Device' input form after the plugin has been selected.
+function updateAddDeviceForm(){
+    console.log("Updating Add Device Form.");
+    var selectedPlugin = document.getElementById("pluginsSelect").value;
+    var selectedCollection = document.getElementById("serverCollectionsSelect").value;
+    getPluginInfo(SELECTED_SERVER.address, selectedCollection, selectedPlugin).then(data => {
+        ri = data.required_info;
+        populateAddDeviceForm(ri);
+    });
+}
+
+//Reads values from inputs and submits request for new device.
+function submitNewDevice(){
+    console.log("Adding new device");
+    var selectedPlugin = document.getElementById("pluginsSelect").value;
+    var selectedCollection = document.getElementById("serverCollectionsSelect").value;
+    var form = document.getElementById("addDeviceForm");
+    var inputs = form.getElementsByTagName("input");
+    var payload = {
+        "plugin_name": selectedPlugin,
+        "collection": selectedCollection,
+        "required_info": {}
+    };
+    //console.log(inputs);
+    for (var i = 0; i < inputs.length; i++){
+        if (inputs[i].type == "text"){
+            payload["required_info"][inputs[i].id] = inputs[i].value;
+        }
+    }
+    //console.log(payload);
+    postDevice(SELECTED_SERVER.address, payload);
+}
+
+function populateAddDeviceForm(requiredInfo){
+    var form = document.getElementById("addDeviceForm");
+    console.log(form);
+    removeChildren(form);
+    for (var infoType in requiredInfo){
+        var input = document.createElement("input");
+        var label = document.createElement("label");
+        input.type = "text";
+        input.id = infoType;
+        label.htmlFor = infoType;
+        label.appendChild(document.createTextNode(infoType));
+        form.appendChild(label);
+        form.appendChild(input);
+        form.appendChild(document.createElement("br"));
+    }
+    var submit = document.createElement("input");
+    submit.type = "submit";
+    submit.value = "Add";
+    form.appendChild(submit);
 }
 
 function populatePluginsSelect(plugins){
@@ -149,10 +206,6 @@ function populateServers(servers){
 function populateDevices(data){
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
-
-    //Insert placeholder in temporary payload input to add devices
-    var inputPlaceholder = '{\n "plugin_name": "light",\n "collection": "mock",\n "required_info": {\n   "ip": "123",\n   "port": "456",\n   "name": "not_a_kitchen_light"\n  }\n}';
-    document.getElementById("payload_input").value = inputPlaceholder;
 
     data.forEach(function(device) {
         var elem = document.createElement("li");
