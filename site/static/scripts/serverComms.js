@@ -111,7 +111,7 @@ function getServerDevices(serverAddress) {
 
 /**
  * Gets all collections available on a Hestia server. This uses a promise.
- *
+ * @param {} serverAddress
  */
 function getServerCollections(serverAddress) {
     return new Promise(function(resolve, reject) {
@@ -126,7 +126,8 @@ function getServerCollections(serverAddress) {
 
 /**
  * Gets all plugins for a specific collection. This uses a promise.
- *
+ * @param {} serverAddress
+ * @param {} collectionName
  */
 function getServerCollectionPlugins(serverAddress, collectionName) {
     return new Promise(function(resolve, reject) {
@@ -135,6 +136,23 @@ function getServerCollectionPlugins(serverAddress, collectionName) {
             "GET",
             resolve,
             {},
+            reject);
+    });
+}
+
+/**
+ * Gets the info for a particular plugin. This uses a promise.
+ * @param {} serverAddress
+ * @param {} collectionName
+ * @param {} pluginName
+ */
+function getPluginInfo(serverAddress, collectionName, pluginName) {
+    return new Promise(function(resolve, reject) {
+        sendRequest(serverAddress,
+            "/plugins/" + collectionName + "/plugins/" + pluginName,
+            "GET",
+            resolve,
+            {}
             reject);
     });
 }
