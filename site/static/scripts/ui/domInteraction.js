@@ -68,6 +68,48 @@ function updateServerList() {
     });
 }
 
+function updateAddDeviceModule() {
+    getServerCollections(SELECTED_SERVER.address).then(collections => {
+        console.log("Collections:");
+        console.log(collections);
+        populateServerCollectionsSelect(collections);
+        updatePluginsSelect();
+    });
+}
+
+function updatePluginsSelect(){
+    var selectedCollection = document.getElementById("serverCollectionsSelect").value;
+    getServerCollectionPlugins(SELECTED_SERVER.address, selectedCollection).then(plugins => {
+        populatePluginsSelect(plugins);
+    });
+
+}
+
+function populatePluginsSelect(plugins){
+    var pluginsSelect = document.getElementById("pluginsSelect");
+    removeChildren(pluginsSelect);
+    for (var i = 0; i < plugins.length; i++){
+        var opt = document.createElement("option");
+        var pName = plugins[i];
+        opt.value = pName;
+        opt.appendChild(document.createTextNode(pName));
+        pluginsSelect.appendChild(opt);
+    }
+}
+
+function populateServerCollectionsSelect(collections){
+    var collectionsSelect = document.getElementById("serverCollectionsSelect");
+    removeChildren(collectionsSelect);
+    for (var i = 0; i < collections.length; i++){
+        var opt = document.createElement("option");
+        var cName = collections[i];
+        opt.value = cName;
+        opt.appendChild(document.createTextNode(cName));
+        collectionsSelect.appendChild(opt);
+    }
+}
+
+//Generates the html to view the list of servers.
 function populateServers(servers){
     var serversListElem = document.getElementById("serverNamesList");
     removeChildren(serversListElem);
@@ -76,7 +118,6 @@ function populateServers(servers){
         var elem = document.createElement("li");
         elem.className = "device_row";
         elem.id = name;
-        console.log("Found server with name: " + name);
         elem.onclick = function(){
             setAllChildrenToClass(serversListElem, "device_row");
             this.className = "device_row active";
@@ -86,6 +127,7 @@ function populateServers(servers){
             SELECTED_DEVICE = null;
 
             updateDeviceList();
+            updateAddDeviceModule();
         };
         elem.appendChild(document.createTextNode(name));
         serversListElem.appendChild(elem);

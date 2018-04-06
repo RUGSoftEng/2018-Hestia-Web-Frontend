@@ -152,7 +152,7 @@ function getPluginInfo(serverAddress, collectionName, pluginName) {
             "/plugins/" + collectionName + "/plugins/" + pluginName,
             "GET",
             resolve,
-            {}
+            {},
             reject);
     });
 }
