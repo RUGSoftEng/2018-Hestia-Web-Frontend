@@ -245,6 +245,13 @@ function populateDevices(data){
 function viewDeviceActivators(deviceName, deviceId, activators) {
     var activatorsElem = document.getElementById("activatorsList");
     var activatorsTitle = document.getElementById("activatorsTitle");
+    //Sort the activators alphabetically.
+    activators.sort(function(a, b){
+    	var nameA = a.name.toLowerCase(), nameB = b.name.toLowerCase();
+    	if (nameA < nameB) return -1;
+    	if (nameA > nameB) return 1;
+    	return 0;
+    })
     activatorsTitle.firstChild.innerHTML = deviceName;
     removeChildren(activatorsElem);
     for (var i = 0; i < activators.length; i++) {
