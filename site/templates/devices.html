@@ -1,0 +1,59 @@
+{% extends "utils/layout.html" %}
+
+{% set withoutNormalAuth = true %}
+
+{% block head %}
+    {{ super() }}
+    <title> {% block title %} Devices {% endblock title %} </title>
+
+    <!-- css exclusively for this view. -->
+    <link type="text/css", rel="stylesheet", href="stylesheets/ctrl_slider.css">
+    <link type="text/css", rel="stylesheet", href="stylesheets/ctrl_toggle.css">
+
+    <!-- Communication and interaction scripts. Only used on this page. -->
+    <script type="text/javascript" src="scripts/ui/domInteraction.js"></script>
+    <script type="text/javascript" src="scripts/ui/eventHandler.js"></script>
+    <script type="text/javascript" src="scripts/serverComms.js"></script>
+
+{% endblock head %}
+
+{% block container %}
+    <div id="content">
+        <input id="serverAddress" type="text" placeholder="server address" value="https://94.212.164.28:8000" style="margin-left: 200px;" />
+        <div class="section">
+            <div class="content_module" onload="">
+                <div class="module_title">
+                    <h2>Devices</h2>
+                </div>
+                <ul id="deviceNamesList" class="device_list">
+                </ul>
+            </div>
+            <div class="content_module" onload="">
+                <div id="activatorsTitle" class="module_title">
+                    <h2>Side Light</h2>
+                </div>
+                <div id="activatorsList" class="module_content">
+                </div>
+            </div>
+            <div class="content_module" onload="">
+                <div class="module_title">
+                    <h2>Add device</h2>
+                </div>
+                <div class="module_content">
+                    <p>Input your add device payload here:<br /></p>
+                    <textarea id="payload_input" placeholder="" rows="15" name="payload_input"></textarea>
+                    <Br />
+                    <button onclick="onClickInteracted()">ADD</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock container %}
+
+{% block afterBody %}
+    <script>
+        beginAuth().then(function(user){
+            document.body.onchange = updateDeviceList();
+        });
+    </script>
+{% endblock afterBody %}
