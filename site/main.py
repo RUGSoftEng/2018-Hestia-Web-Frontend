@@ -8,6 +8,8 @@ app = Flask(__name__,
     static_url_path='',
     static_folder='static')
 
+#Timeout for requests.
+TIMEOUT = 0.001
 
 # Create endpoints
 @app.route('/')
@@ -49,13 +51,13 @@ def routeRequest(method, query, payload):
     result = ""
     print("Sending request to server:", method, ", ", query, ", ", payload);
     if (method == "GET"):
-        result = requests.get(query, verify=False).text
+        result = requests.get(query, verify=False, timeout=TIMEOUT).text
     elif (method == "POST"):
-        result = requests.post(query, verify=False, json=payload).text
+        result = requests.post(query, verify=False, json=payload, timeout=TIMEOUT).text
     elif (method == "PUT"):
-        result = requests.put(query, verify=False, json=payload).text
+        result = requests.put(query, verify=False, json=payload, timeout=TIMEOUT).text
     elif (method == "DELETE"):
-        result = requests.delete(query, verify=False).text
+        result = requests.delete(query, verify=False, timeout=TIMEOUT).text
     else:
         result = "Invalid REST method."
     return result
