@@ -5,9 +5,6 @@
  * the remote Hestia controller. It needs refactoring and rearchitecturing.
  */
 
-//The most recent json object received by the client.
-var LAST_DATA_RECEIVED = null;
-
 function globalServer() {
     return document.getElementById("serverAddress").value;
 }
@@ -49,13 +46,13 @@ function updateDeviceActivator(serverAddress, deviceId, activatorId, newState){
 /**
  * This function sends a request to a server to change the state of the
  * activator with activatorId for the device with deviceId.
- * @param {} server
+ * @param {} serverAddress
  * @param {} deviceId
  * @param {} activatorId
  * @param {} state
  */
-function changeActivator(server, deviceId, activatorId, state) {
-    sendRequest(server,
+function changeActivator(serverAddress, deviceId, activatorId, state) {
+    sendRequest(serverAddress,
         "/devices/" + deviceId + "/activators/" + activatorId,
         "POST",
         function(resp){
@@ -71,13 +68,13 @@ function changeActivator(server, deviceId, activatorId, state) {
  * This is an alias for the dimmers. How we choose to define these functions in
  * the future (e.g. an alias, a direct call, or something else) is subject to
  * change.
- * @param {} server
+ * @param {} serverAddress
  * @param {} deviceId
  * @param {} activatorId
  * @param {} payload
  */
-function dimmer(server, deviceId, activatorId, payload) {
-    changeActivator(server, deviceId, activatorId, payload);
+function dimmer(serverAddress, deviceId, activatorId, payload) {
+    changeActivator(serverAddress, deviceId, activatorId, payload);
 }
 
 
@@ -85,25 +82,25 @@ function dimmer(server, deviceId, activatorId, payload) {
  * This is an alias for the toggle switches. How we choose to define these functions in
  * the future (e.g. an alias, a direct call, or something else) is subject to
  * change.
- * @param {} server
+ * @param {} serverAddress
  * @param {} deviceId
  * @param {} activatorId
  * @param {} payload
  */
-function toggle(server, deviceId, activatorId, payload) {
-    changeActivator(server, deviceId, activatorId, payload);
+function toggle(serverAddress, deviceId, activatorId, payload) {
+    changeActivator(serverAddress, deviceId, activatorId, payload);
 }
 
 /**
  * Gets all devices for a given server. This uses promises as the request is
  * asynchronous. If the promise is not fulfilled it rejects the promise and
  * errors.
- * @param {} server
+ * @param {} serverAddress
  * @returns {} promised json object
  */
-function getServerDevices(server) {
+function getServerDevices(serverAddress) {
     return new Promise(function(resolve, reject) {
-        sendRequest(server,
+        sendRequest(serverAddress,
             "/devices/",
             "GET",
             resolve,
@@ -113,17 +110,95 @@ function getServerDevices(server) {
 }
 
 /**
+ * Gets all collections available on a Hestia server. This uses a promise.
+ * @param {} serverAddress
+ */
+function getServerCollections(serverAddress) {
+    return new Promise(function(resolve, reject) {
+        sendRequest(serverAddress,
+            "/plugins/",
+            "GET",
+            resolve,
+            {},
+            reject);
+    });
+}
+
+/**
+ * Gets all plugins for a specific collection. This uses a promise.
+ * @param {} serverAddress
+ * @param {} collectionName
+ */
+function getServerCollectionPlugins(serverAddress, collectionName) {
+    return new Promise(function(resolve, reject) {
+        sendRequest(serverAddress,
+            "/plugins/" + collectionName + "/",
+            "GET",
+            resolve,
+            {},
+            reject);
+    });
+}
+
+/**
+ * Gets the info for a particular plugin. This uses a promise.
+ * @param {} serverAddress
+ * @param {} collectionName
+ * @param {} pluginName
+ */
+function getPluginInfo(serverAddress, collectionName, pluginName) {
+    return new Promise(function(resolve, reject) {
+        sendRequest(serverAddress,
+            "/plugins/" + collectionName + "/plugins/" + pluginName,
+            "GET",
+            resolve,
+            {},
+            reject);
+    });
+}
+
+/**
  * Sends the request to add new device described by payload to the server.
- * @param {} server
+ * Updates the devices list after sending the data.
+ * @param {} serverAddress
  * @param {} payload
  */
-function postDevice(server, rawpayload) {
-    sendRequest(server,
+function postDevice(serverAddress, payload) {
+    sendRequest(serverAddress,
         "/devices/",
         "POST",
         null,
-        JSON.parse(rawpayload));
+        payload);
     updateDeviceList();
 }
 
+/**
+ * Deletes a device with a given id, and update the devices list.
+ * @param {} serverAddress
+ * @param {} deviceId
+ */
+function deleteDevice(serverAddress, deviceId) {
+	sendRequest(serverAddress,
+		"/devices/"+deviceId,
+		"DELETE",
+		null,
+		{});
+	updateDeviceList();
+}
 
+/**
+ * Renames a device.
+ * @param {} serverAddress
+ * @param {} deviceId
+ * @param {} newName
+ */
+function renameDevice(serverAddress, deviceId, newName){
+	sendRequest(serverAddress,
+		"/devices/"+deviceId,
+		"PUT",
+		null,
+		{
+			"name": newName
+		});
+	updateDeviceList();
+}

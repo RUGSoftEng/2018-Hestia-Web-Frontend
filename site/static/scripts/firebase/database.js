@@ -1,19 +1,23 @@
+
+
 //Adds a server to the list of servers.
-function addUserServer(firebase, user, serverName, serverIp, serverPort){
+function addUserServer(firebase, user, serverName, serverAddress){
 	firebase.database().ref('users/'+user.uid+'/'+serverName).set({
-		ip: serverIp,
-		port: serverPort
+		address: serverAddress
 	});
 }
 
 //Gets all servers from the firebase database, and can be used via the function provided.
-//onDataReceived allows only one type of 
-function getUserServers(firebase, user, onDataReceived){
+//Returns a promise for when the data is received.
+function getUserServers(firebase, user){
 	var userRef = firebase.database().ref('users/'+user.uid);
-	userRef.on('value', function(snapshot){
-		onDataReceived(snapshot.val());
-	}, function(error){
-		console.log("Error: "+error.code);
+	return new Promise(function(resolve, reject){
+		userRef.on('value', function(snapshot){
+			resolve(snapshot.val());
+		}, function(error){
+			console.log("Error: "+error.code);
+			reject(error);
+		});
 	});
 }
 
