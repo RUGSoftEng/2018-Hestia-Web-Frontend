@@ -12,3 +12,4 @@
 | *20-03-2018* | 1 | Web meeting on campus
 | *23-03-2018* | 8 | Friday work meeting. Made functionality for the project|
 | *27-03-2018* | 1 | Final touches and short meeting.
+| *14-04-2018* | 2 | Cathing up with all new functionalities after the exams
