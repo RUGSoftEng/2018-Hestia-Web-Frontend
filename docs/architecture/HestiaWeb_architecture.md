@@ -42,6 +42,8 @@ The Hestia Web Interface can be divided into two main sub-systems as mentioned i
 * Front-end user interface, with which the user interacts
 * Back-end server that connects users to their local Hestia controllers and holds user and server information
 
+![Website Design](images/diagram.png  "Structure of the system")
+
 ## Website Front-End
 Since the frontend of the website is the first aspect of the product that the customer will interact with, and will be one of the main sources of content or discontent throughout their user experience, a variety of design choices have to be made. 
 
@@ -58,7 +60,7 @@ Due to the Firebase server, once the user has logged in then they will be able t
 
 
 #### Structural choices
-The page is laid out in such a way that the user can easily cycle between personal information, their devices, their controllers' information, and settings. Devices can also be grouped by the user, for example by what room they are in or their function (such as lights), which will help reduce complexity, as a large house or an office could have many of these devices. This means they can also group them by controller, if they wish.
+The page is laid out in such a way that the user can easily cycle between personal information, their devices, their controllers' information, and settings. Devices are grouped by what controller they belong to which will help reduce complexity, as a large house or an office could have several different controllers. 
 
 #### Aesthetical choices
 The design overall will be quite minimalist, with some elements such as colour taken from the Hestia logo. Aside from the main Hestia logo, the icons used are from [Material Icons database](https://material.io/icons/), which provides a large set of intuitive, user friendly icons. 
@@ -150,4 +152,5 @@ Below are defined terms used in the architecture document:
 | Andrew Lalis  | 2018-03-13 | Back-end       | Revised a few things.                                                          |
 | Troy Harrison | 2018-03-13 | Whole Document | Cleaned up document.                                                           |
 | Roman Bell    | 2018-03-23 | Whole Document | Added stuff regarding Firebase, cleared up grammar and syntax throughout       |
+| Roman Bell    | 2018-04-14 | Overview       | Added diagram								       |
 
