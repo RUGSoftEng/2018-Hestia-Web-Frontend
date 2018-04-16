@@ -297,3 +297,13 @@ function viewDeviceActivators(deviceName, deviceId, activators) {
         activatorsElem.appendChild(elem);
     }
 }
+
+//Reads values from inputs and submits request for new server.
+function submitNewServer(){
+    console.log("Adding new server");
+    var serverName = document.getElementById("serverNameInput").value;
+    var serverAddress = document.getElementById("serverAddressInput").value;
+    addUserServer(firebase, firebase.auth().currentUser, serverName.toString(), serverAddress.toString());
+}
+
+
