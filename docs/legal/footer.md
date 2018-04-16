@@ -1,0 +1,1 @@
+This will be the footer, probably of the format "copyright Rugged Software / Hestia (current year)"
