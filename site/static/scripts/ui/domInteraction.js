@@ -343,7 +343,7 @@ function submitDeleteDevice() {
 }
 
 function submitDeleteServer() {
-    var serverName = SELECTED_SERVER.id;
+    var serverName = this.parentNode.id;
     console.log("Trying to delete: " + serverName);
     deleteUserServer(firebase, firebase.auth().currentUser, serverName);
     SELECTED_DEVICE=null;
