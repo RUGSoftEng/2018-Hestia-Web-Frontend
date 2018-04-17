@@ -329,8 +329,12 @@ function submitNewServer(){
 
 function submitRenameDevice() {
     var deviceId = this.parentNode.id;
+    var newName = prompt("Enter name:","Device");
+
+    // Todo: Deal with empty input
+
     console.log("Rename Entered with ID:" + deviceId);
-    renameDevice(SELECTED_SERVER.address, deviceId, "We get 10?")
+    renameDevice(SELECTED_SERVER.address, deviceId, newName);
 }
 
 function submitDeleteDevice() {
