@@ -217,6 +217,11 @@ function populateDevices(data){
         var elem = document.createElement("li");
         elem.className = "device_row";
         elem.id = device.deviceId;
+        var btn = document.createElement("BUTTON");
+        btn.innerText="x";
+        btn.onclick = submitDeleteDevice;
+        elem.appendChild(btn);
+
         elem.onclick = function() {
             setAllChildrenToClass(namesListElem, "device_row");
             elem.className = "device_row active";
@@ -302,4 +307,19 @@ function populateDeviceActivators(deviceName, deviceId, activators) {
         }
         activatorsElem.appendChild(elem);
     }
+}
+
+//Reads values from inputs and submits request for new server.
+function submitNewServer(){
+    console.log("Adding new server");
+    var serverName = document.getElementById("serverNameInput").value;
+    var serverAddress = document.getElementById("serverAddressInput").value;
+    addUserServer(firebase, firebase.auth().currentUser, serverName.toString(), serverAddress.toString());
+}
+
+
+
+function submitDeleteDevice() {
+    var deviceId = this.parentNode.id;
+    deleteDevice(SELECTED_SERVER.address, deviceId);
 }
