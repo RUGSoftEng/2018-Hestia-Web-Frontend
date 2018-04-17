@@ -6,9 +6,9 @@ The frontend is built using the [vue framework](http://vuejs.org). For the proje
 
 ## Setting up yarn
 
-Before using yarn you first need to setup npm. Install npm [here](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions).
+Before using yarn you first need to setup node and npm. Install node and npm [here](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions) 
 
-Now install yarn
+Now install yarn (**make sure to run this as admin**)
 ```bash 
 npm install --global yarn
 ```
@@ -47,3 +47,7 @@ yarn build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
+
+## Development tools for vue
+Checkout [the vue browser dev tools](https://github.com/vuejs/vue-devtools)
+
