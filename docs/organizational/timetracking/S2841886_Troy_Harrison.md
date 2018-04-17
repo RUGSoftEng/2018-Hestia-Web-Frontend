@@ -1,7 +1,7 @@
 # Timelog for Troy Karan Harrison (S2841886)
 
-| Date         | Timestamp   | Description                                                                                                        |
-| :---:        | :---:       | :---                                                                                                               |
+| Date         |   Timestamp | Description                                                                                                        |
+| :---:        |       :---: | :---                                                                                                               |
 | *2018-02-23* | 15:00-15:45 | Attended first meeting with clients (alongside team leader Andrew).                                                |
 |              | 16:00-16:30 | Had discussion with Andrew about systems and client requirements.                                                  |
 |              | 16:30-17:00 | Created google docs to collaborate on the requirements document. We noted down some quick impressions and ideas.   |
@@ -72,5 +72,27 @@
 |              | 18:30-19:00 | Finalize Javascript front end integration.                                                                         |
 |              | 19:00-19:30 | Finalize Javascript front end integration.                                                                         |
 |              | 19:30-20:00 | Finalize Javascript front end integration.                                                                         |
-|              |             |                                                                                                                    |
-
+| *2018-04-16* | 10:00-10:30 | Worked on extending some functionality                                                                             |
+|              | 13:00-13:30 | Worked on extending some functionality                                                                             |
+|              | 13:30-14:00 | Worked on extending some functionality                                                                             |
+|              | 14:00-14:30 | Worked on extending some functionality                                                                             |
+|              | 14:30-15:00 | Worked on extending some functionality                                                                             |
+|              | 15:00-15:30 | Worked on extending some functionality                                                                             |
+|              | 15:30-16:00 | Worked on extending some functionality                                                                             |
+|              | 16:00-16:30 | Worked on extending some functionality                                                                             |
+|              | 16:30-17:00 | Worked on extending some functionality                                                                             |
+|              | 17:00-17:30 | Worked on extending some functionality                                                                             |
+|              | 17:30-18:00 | Worked on extending some functionality                                                                             |
+|              | 18:00-18:30 | Worked on extending some functionality                                                                             |
+|              | 18:30-19:00 | Worked on extending some functionality                                                                             |
+| *17-04-2018* | 09:30-10:00 | Discussed Vue.js and RESTplus with team, guide them through setting up the tooling and through tutorials           |
+|              | 10:00-10:30 | Discussed Vue.js and RESTplus with team, guide them through setting up the tooling and through tutorials           |
+|              | 10:30-11:00 | Discussed Vue.js and RESTplus with team, guide them through setting up the tooling and through tutorials           |
+|              | 11:00-11:30 | Discussed Vue.js and RESTplus with team, guide them through setting up the tooling and through tutorials           |
+|              | 12:00-12:30 | Discussed Vue.js and RESTplus with team, guide them through setting up the tooling and through tutorials           |
+|              | 13:00-13:30 | Discussed Vue.js and RESTplus with team, guide them through setting up the tooling and through tutorials           |
+|              | 13:30-14:00 | Discussed Vue.js and RESTplus with team, guide them through setting up the tooling and through tutorials           |
+|              | 14:30-15:00 | Discussed Vue.js and RESTplus with team, guide them through setting up the tooling and through tutorials           |
+| *17-04-2018* | 21:00-21:30 | Assisted with bug squashing.                                                                                       |
+|              | 21:30-22:00 | Assisted with bug squashing.                                                                                       |
+|              | 22:00-22:30 | Git cleanup                                                                                                        |

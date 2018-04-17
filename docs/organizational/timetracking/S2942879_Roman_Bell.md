@@ -12,3 +12,9 @@
 | *23/03/2018* | 13:00-20:00| Worked with whole team, updated requirements doc and worked on Firebase section for architecture document, worked with the Firebase login system and changed CSS slightly for login to solve some textual issues |
 | *26/03/2018* | 15:00-17:00| Did some more documentation work |
 | *27/03/2018* | 17:00-19:00| Updated requirements document with list of features which have been implemented |
+| *27/03/2018* | 17:00-19:00| Updated requirements document with list of features which have been implemented |
+| *15/04/2018* | 17:00-19:00| Updated architecture document in order to reflect new design choices |
+| *16/03/2018* | 09:00-11:00| Attended meeting, typed up notes from meeting |
+| *16/03/2018* | 03:00-15:00| Started researching legal documentation for website, made initial notes |
+| *17/03/2018* | 07:00-19:00| Made css fix for logout button |
+

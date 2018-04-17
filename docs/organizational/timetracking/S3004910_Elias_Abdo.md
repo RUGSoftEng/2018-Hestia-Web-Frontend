@@ -13,3 +13,4 @@
 | *23-03-2018* | 8 | Friday work meeting. Made functionality for the project, Implementing JS functions into html pages.|
 | *27-03-2018* | 1 | Final touches and short meeting.
 | *14-04-2018* | 2 | Cathing up with all new functionalities and testing after the exams
+| *16-04-2018* | 6 | worked on add/delete devices. start to learn about vue.js, semantics ui
