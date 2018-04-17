@@ -66,3 +66,31 @@
 | *2018-03-27* | 18:30-19:00 | Finalize JS front end intergration.                   |
 | *2018-03-27* | 19:00-19:30 | Finalize JS front end intergration.                   |
 | *2018-03-27* | 19:30-20:00 | Finalize JS front end intergration.                   |
+| *2018-04-12* | 13:00-13:30 | Research on extensibility Flask.                      |
+| *2018-04-12* | 13:30-14:00 | Research on extensibility Flask.                      |
+| *2018-04-12* | 14:00-14:30 | Research on extensibility Flask.                      |
+| *2018-04-12* | 14:00-14:30 | Research on Jinja2 with Flask.                        |
+| *2018-04-13* | 17:00-17:30 | Research on Jinja2 with Flask.                        |
+| *2018-04-13* | 17:30-18:00 | Research on Jinja2 with Flask.                        |
+| *2018-04-15* | 14:00-14:30 | Research on Jinja2 with Flask.                        |
+| *2018-04-15* | 14:30-15:00 | Research on Vue.js                                    |
+| *2018-04-16* | 09:00-09:30 | Meeting                                               |
+| *2018-04-16* | 09:30-10:00 | Meeting                                               |
+| *2018-04-16* | 10:00-10:30 | Worked on extending some functionality                |
+| *2018-04-16* | 13:00-13:30 | Worked on extending some functionality                |
+| *2018-04-16* | 13:30-14:00 | Worked on extending some functionality                |
+| *2018-04-16* | 14:00-14:30 | Worked on extending some functionality                |
+| *2018-04-16* | 14:30-15:00 | Worked on extending some functionality                |
+| *2018-04-16* | 15:00-15:30 | Worked on extending some functionality                |
+| *2018-04-16* | 15:30-16:00 | Worked on extending some functionality                |
+| *2018-04-16* | 16:00-16:30 | Worked on extending some functionality                |
+| *2018-04-16* | 16:30-17:00 | Worked on extending some functionality                |
+| *2018-04-16* | 17:00-17:30 | Worked on extending some functionality                |
+| *2018-04-16* | 17:30-18:00 | Worked on extending some functionality                |
+| *2018-04-16* | 18:00-18:30 | Worked on extending some functionality                |
+| *2018-04-16* | 18:30-19:00 | Worked on extending some functionality                |
+| *2018-04-17* | 10:30-11:00 | Setting up Vue.js                                     |
+| *2018-04-17* | 11:00-11:30 | Setting up Vue.js                                     |
+| *2018-04-17* | 11:30-12:00 | Research Vue.js                                       |
+| *2018-04-17* | 12:00-12:30 | Research Vue.js                                       |
+| *2018-04-17* | 12:30-13:00 | Research Vue.js                                       |
