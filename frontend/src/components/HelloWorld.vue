@@ -1,6 +1,10 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
+    <h2>Example Buttons</h2>
+    <sui-button>Click Here</sui-button>
+    <sui-button content="Content as a prop" />
+    <div is="sui-button">This is a div</div>
     <h2>Essential Links</h2>
     <ul>
       <li>
