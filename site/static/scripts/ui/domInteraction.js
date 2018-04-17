@@ -328,8 +328,8 @@ function submitNewServer(){
 }
 
 function domRenameDevice(){
-    console.log("Rename Entered with ID:" + this.parentNode.id);
     var deviceId = SELECTED_DEVICE.id;
+    console.log("Rename Entered with ID:" + deviceId);
     renameDevice(SELECTED_SERVER, deviceId, "Success")
 }
 
