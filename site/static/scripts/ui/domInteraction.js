@@ -172,9 +172,18 @@ function populateServers(servers){
     removeChildren(serversListElem);
 
     for (var name in servers){
+        // Create element for each device
         var elem = document.createElement("li");
         elem.className = "device_row";
         elem.id = name;
+
+        // Creates button to delete server
+        var btn = document.createElement("BUTTON");
+        btn.innerText="x";
+        btn.onclick = submitDeleteServer;
+        elem.appendChild(btn);
+
+        // Function for click on device row
         elem.onclick = function(){
             setAllChildrenToClass(serversListElem, "device_row");
             this.className = "device_row active";
@@ -316,4 +325,10 @@ function submitNewServer(){
 function submitDeleteDevice() {
     var deviceId = this.parentNode.id;
     deleteDevice(SELECTED_SERVER.address, deviceId);
+}
+
+function submitDeleteServer() {
+    var serverName = this.parentNode.id;
+    console.log("Trying to delete: " + serverName);
+    deleteUserServer(firebase, firebase.auth().currentUser, serverName);
 }
