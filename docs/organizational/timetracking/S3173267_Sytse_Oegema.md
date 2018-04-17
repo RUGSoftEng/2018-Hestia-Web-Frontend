@@ -19,3 +19,7 @@
 | *23/03/2018* | 12:00-19:00| Worked with whole team. Focussed on javascript functions to retrieve devices and create the unlinked list with each device added to it as an list ellement.|
 | *26/03/2018* | 9:00-10:00| Going through the project code to see how everything works as a preparation for this afternoon.|
 | *26/03/2018* | 14:30-18:00| Worked on the device list javascript functions together with Andrew. Also some research into html5 data* atributes and javascript interaction with the data* atributes.|
+| *01/04/2018* | 14:30-15:30| Looking through the presentations in best practices and reading about presentation guidelines.|
+| *02/04/2018* | 10:00-11:30| Determining the subjects to discus durring the presentation and the structure of the presentation.|
+| *03/04/2018* | 8:30-12:30| Presentation preparation and the presentations.|
+| *17/04/2018* | 11:30-17:30| First meeting up with the group and later on making the feature frontend branch with Troy. Also doing research on vue.|
