@@ -59,12 +59,13 @@ function updateDeviceList() {
         })
         .catch(err => {
             console.log(err);
+            populateDevices([]);
         });
 }
 
-function updateServerList() {
+function updateServerList(updateDevices) {
     getUserServers(firebase, firebase.auth().currentUser).then(servers =>{
-        populateServers(servers);
+        populateServers(servers, updateDevices);
     });
 }
 
@@ -167,7 +168,7 @@ function populateServerCollectionsSelect(collections){
 }
 
 //Generates the html to view the list of servers.
-function populateServers(servers){
+function populateServers(servers, updateDevices){
     var serversListElem = document.getElementById("serverNamesList");
     removeChildren(serversListElem);
 
@@ -180,11 +181,14 @@ function populateServers(servers){
             this.className = "device_row active";
 
             var server = servers[this.id];
+            
             SELECTED_SERVER = server;
             SELECTED_DEVICE = null;
 
-            updateDeviceList();
-            updateAddDeviceModule();
+            if (updateDevices){
+                updateDeviceList();
+                updateAddDeviceModule();
+            }
         };
         elem.appendChild(document.createTextNode(name));
         serversListElem.appendChild(elem);
@@ -207,6 +211,8 @@ function populateDevices(data){
     var namesListElem = document.getElementById("deviceNamesList");
     removeChildren(namesListElem);
 
+    removeChildren(document.getElementById("activatorsList"));
+
     data.forEach(function(device) {
         var elem = document.createElement("li");
         elem.className = "device_row";
@@ -223,7 +229,7 @@ function populateDevices(data){
             var dev = getDeviceById(elem.id, data);
             SELECTED_DEVICE = dev.deviceId;
 
-            viewDeviceActivators(dev.name, dev.deviceId, dev.activators);
+            populateDeviceActivators(dev.name, dev.deviceId, dev.activators);
         };
 
         elem.appendChild(document.createTextNode(device.name));
@@ -247,7 +253,7 @@ function populateDevices(data){
  * @param {} deviceId
  * @param {} activators
  */
-function viewDeviceActivators(deviceName, deviceId, activators) {
+function populateDeviceActivators(deviceName, deviceId, activators) {
     var activatorsElem = document.getElementById("activatorsList");
     var activatorsTitle = document.getElementById("activatorsTitle");
     //Sort the activators alphabetically.

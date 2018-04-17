@@ -3,17 +3,25 @@
 {% set withoutNormalAuth = true %}
 
 {% block head %}
-{{ super() }}
-<title> {% block title %} Servers {% endblock title %} </title>
-
-<!-- Communication and interaction scripts. Only used on this page. -->
-<script type="text/javascript" src="scripts/ui/domInteraction.js"></script>
+    {{ super() }}
+    <title> {% block title %} Servers {% endblock title %} </title>
+    <!-- Communication and interaction scripts. Only used on this page. -->
+    <script type="text/javascript" src="scripts/ui/domInteraction.js"></script>
+    <script type="text/javascript" src="scripts/ui/eventHandler.js"></script>
+    <script type="text/javascript" src="scripts/serverComms.js"></script>
 
 {% endblock head %}
 
 {% block container %}
 <div id="content">
     <div class="section">
+			  <div class="content_module">
+				    <div class="module_title">
+					      <h2>Servers List</h2>
+				    </div>
+				    <ul id="serverNamesList" class="device_list">
+				    </ul>
+			  </div>
         <div class="content_module" onload="">
             <div class="module_title">
                 <h2>Add server</h2>
@@ -29,17 +37,14 @@
                     <input type="submit" value="Add Server">
                 </form>
             </div>
+        </div>
     </div>
-</div>
 {% endblock container %}
 
 {% block afterBody %}
 	<script>
 		beginAuth().then(user =>{
-			getUserServers(firebase, user).then(servers =>{
-				console.log(user.displayName+" has servers: ");
-				console.log(servers);
-			});
+			updateServerList(false);
 		});
 	</script>
 {% endblock afterBody %}

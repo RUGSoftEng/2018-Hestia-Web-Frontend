@@ -61,7 +61,7 @@
 {% block afterBody %}
     <script>
         beginAuth().then(function(user){
-            updateServerList();
+            updateServerList(true);
             //document.body.onchange = updateDeviceList();
         });
     </script>
