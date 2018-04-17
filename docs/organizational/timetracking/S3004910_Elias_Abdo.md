@@ -10,5 +10,6 @@
 | *14-03-2018* | 2 | Set up client API and tried it out |
 | *17-03-2018* | 3 | Played around with the API of HESTIA. Did some tests, read more about it
 | *20-03-2018* | 1 | Web meeting on campus
-| *23-03-2018* | 8 | Friday work meeting. Made functionality for the project|
+| *23-03-2018* | 8 | Friday work meeting. Made functionality for the project, Implementing JS functions into html pages.|
 | *27-03-2018* | 1 | Final touches and short meeting.
+| *14-04-2018* | 2 | Cathing up with all new functionalities and testing after the exams
