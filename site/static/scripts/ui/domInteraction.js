@@ -239,7 +239,7 @@ function populateDevices(data){
 
         var renameButton = document.createElement("BUTTON");
         renameButton.innerText = "Rename";
-        renameButton.onclick = domRenameDevice()
+        renameButton.onclick = submitRenameDevice;
         elem.appendChild(renameButton);
 
 
@@ -327,14 +327,14 @@ function submitNewServer(){
     addUserServer(firebase, firebase.auth().currentUser, serverName.toString(), serverAddress.toString());
 }
 
-function domRenameDevice(){
-    var deviceId = SELECTED_DEVICE.id;
+function submitRenameDevice() {
+    var deviceId = this.parentNode.id;
     console.log("Rename Entered with ID:" + deviceId);
-    renameDevice(SELECTED_SERVER, deviceId, "Success")
+    renameDevice(SELECTED_SERVER.address, deviceId, "We get 10?")
 }
 
 function submitDeleteDevice() {
-    var deviceId = SELECTED_DEVICE.id;
+    var deviceId = this.parentNode.id;
     deleteDevice(SELECTED_SERVER.address, deviceId);
 }
 

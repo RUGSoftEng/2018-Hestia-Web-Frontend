@@ -193,6 +193,7 @@ function deleteDevice(serverAddress, deviceId) {
  * @param {} newName
  */
 function renameDevice(serverAddress, deviceId, newName){
+    console.log(serverAddress + deviceId + newName);
 	sendRequest(serverAddress,
 		"/devices/"+deviceId,
 		"PUT",
