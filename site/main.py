@@ -51,8 +51,9 @@ def apiRequestHandler():
     payload = None
     if ("payload" in json):
         payload = json["payload"]
-        if ("state" in payload):
-            payload["state"] /= 1.0
+        if ("state" in payload and "type" in payload):
+            if (payload["type"] == "float"):
+                payload["state"] /= 1.0
     return routeRequest(method, url, payload)
 
 
