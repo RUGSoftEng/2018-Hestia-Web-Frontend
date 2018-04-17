@@ -22,4 +22,4 @@
 | *01/04/2018* | 14:30-15:30| Looking through the presentations in best practices and reading about presentation guidelines.|
 | *02/04/2018* | 10:00-11:30| Determining the subjects to discus durring the presentation and the structure of the presentation.|
 | *03/04/2018* | 8:30-12:30| Presentation preparation and the presentations.|
-| *17/04/2018* | 11:30-17:30| First meeting up with the group and later on making the feature frontend branch with Troy. Also doing research on vue.|
+| *17/04/2018* | 11:30-17:30| First meeting up with the group and later on making the feature frontend branch with Troy. Also doing research on vue. [Tutorial](https://codeburst.io/full-stack-single-page-application-with-vue-js-and-flask-b1e036315532)|
