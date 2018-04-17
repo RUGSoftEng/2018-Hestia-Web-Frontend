@@ -136,6 +136,7 @@ ul {
     position: relative;
     float: right;
     top: 20px;
+    color: #ff8f40;
 }
 
 .menu_button.current {
