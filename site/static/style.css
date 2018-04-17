@@ -132,6 +132,39 @@ ul {
     top: 5px;
 }
 
+#signout_button{
+    position: relative;
+    float: right;
+    top: 40px;
+    color: #fff;
+    position: relative;
+    font-size: 18pt;
+    font-weight: bold;
+    border-radius: 3px;
+    border: none;
+    -webkit-box-sizing: border-box;
+    background-color: #ff8f40;
+    -webkit-transition: all .05s;
+    text-align: center;
+}
+
+#signout_button:hover{
+    position: relative;
+    float: right;
+    top: 40px;
+    color: #ff8f40;
+    position: relative;
+    font-size: 18pt;
+    font-weight: bold;
+    border-radius: 3px;
+    border: none;
+    -webkit-box-sizing: border-box;
+    background-color: #fff;
+    -webkit-transition: all .05s;
+    text-align: center;
+}
+
+
 .menu_button.current {
     color: #ff8f40;
 }

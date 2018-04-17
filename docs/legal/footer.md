@@ -1,0 +1,2 @@
+This will be the footer, probably of the format "Copyright © Rugged Software / Hestia (current year)", along with whatever contact information we want to include.
+If we use google analytics, we have to have a privacy policy

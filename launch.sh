@@ -20,5 +20,5 @@ fi
 
 source ${VIRTUALENV_ROOT}/bin/activate
 
-export FLASK_APP=flask/main.py
+export FLASK_APP=site/main.py
 python -m flask run

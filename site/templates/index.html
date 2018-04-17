@@ -1,0 +1,26 @@
+{% extends "utils/layout.html" %}
+
+{% block head %}
+	{{ super() }}
+	<title>	{% block title %} Dashboard {% endblock title %} </title>
+{% endblock head %}
+
+{% block container %}
+    <div id="content">
+        <div class="section">
+            <div class="content_module">
+                <div class="module_title">
+                    <h2>My Hestia</h2>
+                </div>
+            </div>
+            <div class="content_module">
+                <div class="module_title">
+                    <h2>Quick Navigation</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock container %}
+
+{% block afterBody %}
+{% endblock afterBody %}
