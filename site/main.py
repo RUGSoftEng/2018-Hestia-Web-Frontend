@@ -9,7 +9,7 @@ app = Flask(__name__,
             static_folder='static')
 
 #Timeout for requests.
-TIMEOUT = 0.01
+TIMEOUT = 1.00
 
 # Create endpoints
 

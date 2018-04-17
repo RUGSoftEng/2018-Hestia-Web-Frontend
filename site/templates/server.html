@@ -14,6 +14,13 @@
 {% block container %}
 <div id="content">
     <div class="section">
+			  <div class="content_module">
+				    <div class="module_title">
+					      <h2>Servers List</h2>
+				    </div>
+				    <ul id="serverNamesList" class="device_list">
+				    </ul>
+			  </div>
         <div class="content_module" onload="">
             <div class="module_title">
                 <h2>Add server</h2>
@@ -29,8 +36,8 @@
                     <input type="submit" value="Add Server">
                 </form>
             </div>
+        </div>
     </div>
-</div>
 {% endblock container %}
 
 {% block afterBody %}
