@@ -6606,6 +6606,14 @@ semantic-ui-css@^2.3.1:
   dependencies:
     jquery x.*
 
+semantic-ui-vue@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/semantic-ui-vue/-/semantic-ui-vue-0.2.6.tgz#a62d3d26e881130923367191e40ebaee50fdd033"
+  dependencies:
+    babel-helper-vue-jsx-merge-props "^2.0.2"
+    babel-runtime "^6.26.0"
+    lodash "^4.17.4"
+
 "semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.3.0, semver@^5.4.1:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.5.0.tgz#dc4bbc7a6ca9d916dee5d43516f0092b58f7b8ab"
