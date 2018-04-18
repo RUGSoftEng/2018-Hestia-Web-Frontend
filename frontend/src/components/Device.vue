@@ -20,7 +20,7 @@ export default {
   },
   data () {
     return {
-      name: 'MyName',
+      name: 'DeviceName',
       IPAddress: '0.0.0.0'
     }
   }

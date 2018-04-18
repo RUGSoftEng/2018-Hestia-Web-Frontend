@@ -20,7 +20,7 @@ export default {
   name: 'Activator',
   data () {
     return {
-      name: 'MyName',
+      name: 'ActivatorName',
       type: 'bool',
       state: false
     }

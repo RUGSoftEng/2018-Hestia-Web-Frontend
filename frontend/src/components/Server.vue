@@ -26,7 +26,7 @@ export default {
   },
   data () {
     return {
-      name: 'MyName',
+      name: 'ServerName',
       IPAddress: '0.0.0.0',
       port: '5000'
     }
