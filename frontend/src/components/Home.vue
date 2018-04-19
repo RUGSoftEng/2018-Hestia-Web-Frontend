@@ -1,117 +1,79 @@
 <template>
   <div class="home">
-    <h1>{{ msg }}</h1>
-    <h2>Example Buttons</h2>
-    <sui-button>Click Here</sui-button>
-    <sui-button content="Content as a prop" />
-    <div is="sui-button">This is a div</div>
-    <h2>Essential Links</h2>
-    <ul>
-      <li>
-        <a
-          href="https://vuejs.org"
-          target="_blank"
-        >
-          Core Docs
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://forum.vuejs.org"
-          target="_blank"
-        >
-          Forum
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://chat.vuejs.org"
-          target="_blank"
-        >
-          Community Chat
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://twitter.com/vuejs"
-          target="_blank"
-        >
-          Twitter
-        </a>
-      </li>
-      <br>
-      <li>
-        <a
-          href="http://vuejs-templates.github.io/webpack/"
-          target="_blank"
-        >
-          Docs for This Template
-        </a>
-      </li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li>
-        <a
-          href="http://router.vuejs.org/"
-          target="_blank"
-        >
-          vue-router
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vuex.vuejs.org/"
-          target="_blank"
-        >
-          vuex
-        </a>
-      </li>
-      <li>
-        <a
-          href="http://vue-loader.vuejs.org/"
-          target="_blank"
-        >
-          vue-loader
-        </a>
-      </li>
-      <li>
-        <a
-          href="https://github.com/vuejs/awesome-vue"
-          target="_blank"
-        >
-          awesome-vue
-        </a>
-      </li>
-    </ul>
+    <sui-breadcrumb>
+      <sui-breadcrumb-section active>
+        Servers
+      </sui-breadcrumb-section>
+    </sui-breadcrumb>
+    <h2 class="title">Check out your servers</h2>
+    <section class="section">
+      <div class="container">
+        <sui-card-group :items-per-row="3" stackable>
+          <sui-card v-for="server in servers" :key="server.name">
+            <sui-card-content>
+              <sui-card-header> {{server.name}}
+                 <!-- settings dropdwon menu -->
+                <sui-dropdown icon="wrench">
+                  <sui-dropdown-menu>
+                    <sui-dropdown-item>
+                      <sui-icon name="chart bar" />Statistics
+                    </sui-dropdown-item>
+                    <sui-dropdown-item>
+                      <sui-icon name="cog"/>
+                      Settings
+                    </sui-dropdown-item>
+                  </sui-dropdown-menu>
+                </sui-dropdown>
+              </sui-card-header>
+              <sui-card-meta> {{server.IPAddress + ':' + server.port}} </sui-card-meta>
+              <sui-divider/>
+              <!--enter server button -->
+              <router-link :to="`Server/${server.id}`">
+                <sui-button animated>
+                  <sui-button-content visible>Enter server</sui-button-content>
+                  <sui-button-content hidden>
+                    <sui-icon name="right arrow" />
+                  </sui-button-content>
+                </sui-button>
+              </router-link>
+              <sui-divider/>
+              <!-- preset dropdwon  -->
+              <sui-dropdown
+              text="Select Preset"
+              button
+              search
+              selection
+              multiple
+              :max-selections="1"
+              :options="server.presets"
+              v-model="server.currentPreset"
+              />
+            </sui-card-content>
+          </sui-card>
+        </sui-card-group>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
+import RangeSlider from 'vue-range-slider';
+import 'vue-range-slider/dist/vue-range-slider.css';
+import { mapState } from 'vuex';
+
 export default {
-  name: 'Home',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
-}
+  computed: mapState({
+    servers: state => state.servers,
+  }),
+  components: {
+    RangeSlider,
+  },
+  beforeMount() {
+    this.$store.dispatch('loadServers');
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1, h2 {
-  font-weight: normal;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 </style>

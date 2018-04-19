@@ -1,53 +1,30 @@
-# hestia-frontend
+# frontend
 
-> The frontend for the hestia web server.
-
-The frontend is built using the [vue framework](http://vuejs.org). For the project management we are using [yarn](http://yarnpkg.com). 
-
-## Setting up yarn
-
-Before using yarn you first need to setup node and npm. Install node and npm [here](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions) 
-
-Now install yarn (**make sure to run this as admin**)
-```bash 
-npm install --global yarn
-```
+> whatever
 
 ## Build Setup
-`cd` to the frontend directory. Then you can run the build command you want.
 
-### Quick Start
-```bash
-# you only have to install once unless you change dependencies
-yarn install
-# serve with hot reload at localhost:8080
-yarn start
-```
-
-### Additional build commands
-```bash
+``` bash
 # install dependencies
-yarn install
+npm install
 
 # serve with hot reload at localhost:8080
-yarn start
-
-# run all tests
-yarn test
-
-# run only unit tests
-yarn unit
-
-# run only e2e tests
-yarn e2e
+npm run dev
 
 # build for production with minification
-yarn build
+npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
+
+# run unit tests
+npm run unit
+
+# run e2e tests
+npm run e2e
+
+# run all tests
+npm test
 ```
 
-## Development tools for vue
-Checkout [the vue browser dev tools](https://github.com/vuejs/vue-devtools)
-
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

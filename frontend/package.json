@@ -1,8 +1,8 @@
 {
-  "name": "hestia-frontend",
+  "name": "frontend",
   "version": "1.0.0",
-  "description": "The frontend for the hestia web server.",
-  "author": "Troy Harrison <KuroNoPardalis@gmail.com>",
+  "description": "whatever",
+  "author": "whatever",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -17,7 +17,9 @@
     "semantic-ui-css": "^2.3.1",
     "semantic-ui-vue": "^0.2.6",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-range-slider": "^0.6.0",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -40,13 +42,11 @@
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.28.0",
     "eslint": "^4.15.0",
-    "eslint-config-standard": "^10.2.1",
+    "eslint-config-airbnb-base": "^11.3.0",
     "eslint-friendly-formatter": "^3.0.0",
+    "eslint-import-resolver-webpack": "^0.8.3",
     "eslint-loader": "^1.7.1",
     "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.2.0",
-    "eslint-plugin-promise": "^3.4.0",
-    "eslint-plugin-standard": "^3.0.1",
     "eslint-plugin-vue": "^4.0.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^1.1.4",
