@@ -1,9 +1,7 @@
 # Hestia Webserver
-To run the webserver, clone the repository, and go to the root directory of it, and issue the following commands:
+To run the webserver, please use the following commands:
 
-```
-./dev_setup.sh
-./launch.sh
-```
-
-A flask server will be started, which will host the website.
+First to build a virtual environment in which the Flask server can run:
+`./dev_setup.sh`
+Then to run the server:
+`./launch.sh`

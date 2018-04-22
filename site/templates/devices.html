@@ -1,0 +1,68 @@
+{% extends "utils/layout.html" %}
+
+{% set withoutNormalAuth = true %}
+
+{% block head %}
+    {{ super() }}
+    <title> {% block title %} Devices {% endblock title %} </title>
+
+    <!-- css exclusively for this view. -->
+    <link type="text/css", rel="stylesheet", href="stylesheets/ctrl_slider.css">
+    <link type="text/css", rel="stylesheet", href="stylesheets/ctrl_toggle.css">
+
+    <!-- Communication and interaction scripts. Only used on this page. -->
+    <script type="text/javascript" src="scripts/ui/domInteraction.js"></script>
+    <script type="text/javascript" src="scripts/ui/eventHandler.js"></script>
+    <script type="text/javascript" src="scripts/serverComms.js"></script>
+
+{% endblock head %}
+
+{% block container %}
+    <div id="content">
+        <div class="section">
+            <div class="content_module" onload="">
+                <div class="module_title">
+                    <h2>Servers</h2>
+                </div>
+                <ul id="serverNamesList" class="device_list">
+                </ul>
+            </div>
+            <div class="content_module" onload="">
+                <div class="module_title">
+                    <h2>Devices</h2>
+                </div>
+                <ul id="deviceNamesList" class="device_list">
+                </ul>
+            </div>
+            <div class="content_module" onload="">
+                <div id="activatorsTitle" class="module_title">
+                    <h2>Activators</h2>
+                </div>
+                <div id="activatorsList" class="module_content">
+                </div>
+            </div>
+            <div class="content_module" onload="">
+                <div class="module_title">
+                    <h2>Add device</h2>
+                </div>
+                <div class="module_content">
+                    <select id="serverCollectionsSelect" onchange="updatePluginsSelect()">
+                    </select>
+                    <select id="pluginsSelect" onchange="updateAddDeviceForm()">
+                    </select>
+                    <form id="addDeviceForm" onsubmit="submitNewDevice(); return false;">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock container %}
+
+{% block afterBody %}
+    <script>
+        beginAuth().then(function(user){
+            updateServerList();
+            //document.body.onchange = updateDeviceList();
+        });
+    </script>
+{% endblock afterBody %}
