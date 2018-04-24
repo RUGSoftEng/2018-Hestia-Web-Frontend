@@ -19,12 +19,32 @@ const actions = {
 
 
   loadServers(context) {
+    // eslint-disable-next-line
+    console.log('loadServers');
     return fetchServers()
       .then(response => context.commit('setServers', { servers: response }));
   },
   loadServer(context, { id }) {
+    // eslint-disable-next-line
+    console.log('loadServer');
     return fetchServer(id)
       .then(response => context.commit('setServer', { server: response }));
+  },
+  onActivatorChange(context, { deviceID, activatorID, newValue }) {
+    const newServers = context.state.servers;
+    newServers.forEach((server, index1) => {
+      server.devices.forEach((device, index2) => {
+        if (device.deviceID === deviceID) {
+          device.activators.forEach((activator, index3) => {
+            if (activator.activatorID === activatorID) {
+              newServers[index1].devices[index2].activators[index3].state = newValue;
+              // eslint-disable-next-line
+              console.log(newServers);
+            }
+          });
+        }
+      });
+    });
   },
 };
 
@@ -32,6 +52,8 @@ const mutations = {
   // isolated data mutations
   // eslint-disable-next-line
   setServers(state, payload) {
+    // eslint-disable-next-line
+    console.log("setServers");    
     state.servers = payload.servers;
   },
   // for each server declare memory for each atribute.
