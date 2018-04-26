@@ -1,5 +1,8 @@
 <template>
   <sui-card :key="device.deviceID">
+    <sui-dimmer :active="dimmerActive" inverted>
+      <sui-loader>Changing device state</sui-loader>
+    </sui-dimmer>
     <sui-card-content>
       <sui-card-meta>
         {{ device.deviceID }}
@@ -58,13 +61,23 @@ export default{
   components: {
     Activator,
   },
+  data() {
+    return {
+      dimmerActive: false,
+    };
+  },
+  // beforeMount() {
+  //   this.dimmerActive = 0;
+  // },
   methods: {
     updateActivator(currentActivator) {
+      this.dimmerActive = true;
       this.$store.dispatch('activatorUpdate',
         { activator: currentActivator, deviceID: this.device.deviceID }).then(
         (response) => {
           // eslint-disable-next-line
           console.log(response);
+          this.dimmerActive = false;
         }, (error) => {
           // eslint-disable-next-line
           console.log(error);
