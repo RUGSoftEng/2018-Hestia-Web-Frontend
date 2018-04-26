@@ -39,76 +39,22 @@
     <h2> {{server.IPAddress}} </h2>
     <h3>I'm a Server Component</h3>
 
-    <sui-card-group :items-per-row="3" stackable>
-      <sui-card v-for="device in server.devices" :key="device.deviceID">
-        <sui-card-content>
-          <sui-card-meta> {{device.deviceID}} </sui-card-meta>
-          <sui-card-header fluid>
-            {{device.name}}
-            <sui-dropdown icon="wrench">
-              <sui-dropdown-menu>
-                <sui-dropdown-item>
-                  <sui-icon name="chart bar" />Statistics
-                </sui-dropdown-item>
-                <sui-dropdown-item>
-                  <sui-icon name="cog"/>
-                  Settings
-                </sui-dropdown-item>
-              </sui-dropdown-menu>
-            </sui-dropdown>
-          </sui-card-header>
-          <sui-card-meta> {{device.type}} </sui-card-meta>
+    <DeviceGroup :server="this.server">
 
-          <sui-divider horizontal>
-            <h5 is="sui-header">
-              <i class="plug icon"></i>
-              Activators
-            </h5>
-          </sui-divider>
-          <div class="ui-form">
-            <div class="grouped fields">
-              <div class="fields" v-for="activator in device.activators"
-              :key="activator.activatorID">
-              <div v-if="activator.type === 'bool'">
-                <sui-checkbox :label = activator.name toggle
-                v-model="activator.state"
-                @click="changeState(device.deviceID, activator.activatorID)" />
-              </div>
-              <div v-else-if="activator.type === 'float'">
-                <range-slider
-                class="slider"
-                min="0"
-                max="1"
-                step="0.05"
-                v-model="activator.state" @change=
-                "changeState(device.deviceID, activator.activatorID)">
-              </range-slider>
-              {{activator.name}}
-            </div>
-            <div v-else>
-              <sui-message
-              icon="exclamation triangle icon"
-              :header=activator.name
-              content="Activator unknown">
-              <br/>
-              <sui-button icon="paper plane" content="Contact us" />
-            </sui-message>
-          </div>
-        </div>
-      </div>
-    </div>
-  </sui-card-content>
-</sui-card>
-</sui-card-group>
+    </DeviceGroup>
+
 </div>
 </template>
 
 <script>
-import RangeSlider from 'vue-range-slider';
 import 'vue-range-slider/dist/vue-range-slider.css';
 import { mapState } from 'vuex';
+import DeviceGroup from './DeviceGroup';
 
 export default {
+  components: {
+    DeviceGroup,
+  },
   data() {
     return {
       current: null,
@@ -127,29 +73,6 @@ export default {
       },
       ],
     };
-  },
-  methods: {
-    changeState(deviceID, activatorID) {
-      // The state is already saved in the model.
-      // Only need deviceID and activatorID to get the state out of the model.
-      // Now the state can be send to the server.
-      // No need to worry about the type of activator.
-
-      // eslint-disable-next-line
-      console.log(deviceID, activatorID, this.server.devices[1].activators[0].state, this.$store.state.servers[1].devices[1].activators[0].state);
-    },
-    presetChange(value) {
-      // eslint-disable-next-line
-      console.log(value);
-      // this.presets.forEach((preset) => {
-      //   if (preset.value === value) {
-      //     this.current = preset.text;
-      //   }
-      // });
-    },
-  },
-  components: {
-    RangeSlider,
   },
   beforeMount() {
     this.$store.dispatch('loadServer', { id: this.$route.params.id });
