@@ -1,9 +1,3 @@
-props: [
-  'server',
-],
-template: `
-`,
-
 <template>
   <sui-card-group :item-per-row="3" stackable>
     <Device

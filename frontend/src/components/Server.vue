@@ -1,8 +1,19 @@
 <template lang="html">
   <div class="server">
-    <div class="button-group">
+    <!-- The pop up modal when the user wants to add a device -->
+    <sui-modal v-model="modalVisible" dimmer="inverted">
+      <sui-modal-header>Adding a new device to {{ this.server.name }}</sui-modal-header>
+      <sui-modal-content>
+        <sui-input placeholder="Device Name"/>
+        <sui-input placeholder="IP adress"/>
+        <sui-input placeholder="Port Number"/>
+      </sui-modal-content>
 
-        <sui-button>Add Device</sui-button>
+    </sui-modal>
+
+    <!-- The button menu -->
+    <div class="button-group">
+        <sui-button @click="this.displayModal">Add Device</sui-button>
         <sui-dropdown
           placeholder="Select a preset"
           selection
@@ -23,6 +34,7 @@
 
     </div>
 
+    <!-- The sui-breadcrumb -->
     <sui-breadcrumb>
       <sui-breadcrumb-section link>
         <router-link to="/">
@@ -58,6 +70,7 @@ export default {
   data() {
     return {
       current: null,
+      modalVisible: false,
       presets: [{
         text: 'my favourite',
         value: 1,
@@ -81,6 +94,15 @@ export default {
   computed: mapState({
     server: state => state.currentServer,
   }),
+  methods: {
+    displayModal() {
+      this.modalVisible = !this.modalVisible;
+    },
+    presetChange(value) {
+      // eslint-disable-next-line
+      console.log(value);
+    },
+  },
 };
 </script>
 
