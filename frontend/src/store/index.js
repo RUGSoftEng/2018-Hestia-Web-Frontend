@@ -30,20 +30,20 @@ const actions = {
     return fetchServer(id)
       .then(response => context.commit('setServer', { server: response }));
   },
-  onActivatorChange(context, { deviceID, activatorID, newValue }) {
-    const newServers = context.state.servers;
-    newServers.forEach((server, index1) => {
-      server.devices.forEach((device, index2) => {
-        if (device.deviceID === deviceID) {
-          device.activators.forEach((activator, index3) => {
-            if (activator.activatorID === activatorID) {
-              newServers[index1].devices[index2].activators[index3].state = newValue;
-              // eslint-disable-next-line
-              console.log(newServers);
-            }
-          });
+  activatorUpdate(context, { activator, deviceID }) {
+    return new Promise((resolve, reject) => {
+      // mock ajax request
+      setTimeout(() => {
+        // try making the AJAX request
+        // is there anything to check there??
+        // maybe check by retrieving the devices and check the activator state?
+        if (resolve) {
+          context.commit('setActivator', { curActivator: activator, curDeviceID: deviceID });
+          resolve('Succesfull');
+        } else {
+          reject('Could not establish a server connection. Please try again.');
         }
-      });
+      }, 3000);
     });
   },
 };
@@ -53,13 +53,26 @@ const mutations = {
   // eslint-disable-next-line
   setServers(state, payload) {
     // eslint-disable-next-line
-    console.log("setServers");    
+    console.log("setServers");
     state.servers = payload.servers;
   },
   // for each server declare memory for each atribute.
   // eslint-disable-next-line
   setServer(state, payload) {
     state.currentServer = payload.server;
+  },
+  // eslint-disable-next-line
+  setActivator(state, payload){
+    state.currentServer.devices.forEach((device, index1) => {
+      if (device.deviceID === payload.curdeviceID) {
+        device.activators.forEach((activator, index2) => {
+          if (activator.activatorID === payload.curActivator.activatorID) {
+            // eslint-disable-next-line
+            state.currentServer.devices[index1].activators[index2].state = payload.curActivator.state;
+          }
+        });
+      }
+    });
   },
 };
 

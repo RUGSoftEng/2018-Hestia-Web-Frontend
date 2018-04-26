@@ -1,0 +1,55 @@
+<template>
+  <div class="field">
+    <div v-if="activator.type === 'bool'">
+      <sui-checkbox :label = activator.name toggle
+      v-model="activatorState"
+      />
+    </div>
+    <div v-else-if="activator.type === 'float'">
+      <range-slider
+        class="slider"
+        min="0"
+        max="1"
+        step="0.05"
+        v-model="activatorState"
+      >
+      </range-slider>
+      {{ activator.name }}
+    </div>
+    <div v-else>
+      <sui-message
+        icon="exclamation triangle icon"
+        :header=activator.name
+        content="Activator unknown">
+        <br/>
+        <sui-button icon="paper plane" content="Contact us" />
+      </sui-message>
+    </div>
+  </div>
+</template>
+
+<script>
+import RangeSlider from 'vue-range-slider';
+
+export default{
+  props: {
+    activator: {
+      type: Object,
+      required: true,
+    },
+  },
+  components: {
+    RangeSlider,
+  },
+  computed: {
+    activatorState: {
+      get() {
+        return this.activator.state;
+      },
+      set() {
+        this.$emit('activatorChange', this.activator);
+      },
+    },
+  },
+};
+</script>
