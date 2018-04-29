@@ -1,4 +1,5 @@
-# Timelog for Philip Oetinger (S2966018)
+
+|# Timelog for Philip Oetinger (S2966018)
 
 | Date         |   Hours     | Description                                                                                                        |
 | :---:        |       :---: | :---                                                                                                               |
@@ -16,3 +17,7 @@
 | *23-03-2018* | 6 | Friday work meeting. Refined Git, created Git plan for after sprint. Experimented with javascript for displaying devices. More research into web developement|
 | *25-03-2018* | 2 | Research for flask, trying to get flask server running on windows. JavaScript practice|
 | *27-03-2018* | 1 | Reviewing code before and after ethics presentations.|
+| *14-03-2018* | 3 | Research into Vue.js and React.js.|
+| *15-03-2018* | 2 | Tutorials and learning projects in Javascript|
+| *17-04-2018* | 6 | Catch up, added server deletion, discussed Vue.js with Troy, planned new backend with RESTplus, research RESTplus, setup Vue.js|
+| *17-04-2018* | 3 | Fixed bugs, added renaming, fixed deletion, enabled auto refresh, git cleanup|
