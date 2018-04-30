@@ -1,3 +1,7 @@
+# TODO
+1. add axios for asyncronous calls
+
+
 # hestia-frontend
 
 > The frontend for the hestia web server.
