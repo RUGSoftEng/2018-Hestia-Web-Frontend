@@ -19,10 +19,10 @@ We have:
         servers: a list with server addresses, server names, presets. !! Right now the devices are already in the servers data element because of our test data, but as soon as we hook up with the backend this will not be the case anymore!!!
         currentServer: This is the JSON object you would get from a hesia localserver with all the devices installed on that server.
 
-### Actions; this are setter functions for the state
+### Mutations; this are setter functions for the state
         These functions are actually changing the state. So there should be no direct changes of store data elements.
 
-### Mutations; all asynchronous requests that can be made to the store.
+### Actions; all asynchronous requests that can be made to the store.
         A mutation is called on an input event, from this mutation we call an action and later on need to update the server.
 
 ### Getters; getter functions.
