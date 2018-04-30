@@ -33,11 +33,12 @@ This is the folder where the actual html pages are stored. Each file has a HTML 
 Right now we have 2 actual ‘pages’ Home and Server. Home.vue and Server.vue are loaded into App.vue in the browser via the vue-router.
 
 # Todo:
-1 I have not paid any attention to css yet. So it looks okay, but it is not close to being Hestia representable.
-2 Home.vue and Server.vue both used Sui-cards, but for state management we had to move the Sui-cards out of Server.vue into Device.vue, now the cards in Server.vue are not automatically adaptive any more. I think this is because in DeviceGroup.vue there is the Sui-cardgroup element with the automatic width element call, but there is no direct Sui-card in the card group anymore. Right now there is a Device in the Sui-cardgroup which contains a Sui-card. We need a solution for this.
-3 I added a menu in the Server.vue file, with the add device and logout button and a preset select dropdown. The dropdown should have the same appearance as the buttons eventually. 
-4 When clicking the add device button a modal is triggered. This modal should contain all the fields necessary to add a device and look good.
-5 404 pages
-6 Making the fetch requests to the server. I have not looked at the new flask backend yet, so I think it is a good idea to talk this over on Monday 30-04 or Tuesday 1-05
-7 There are probably more things, but can't think of them right now.
+1. I have not paid any attention to css yet. So it looks okay, but it is not close to being Hestia representable.
+2. Home.vue and Server.vue both used Sui-cards, but for state management we had to move the Sui-cards out of Server.vue into 
+Device.vue, now the cards in Server.vue are not automatically adaptive any more. I think this is because in DeviceGroup.vue there is the Sui-cardgroup element with the automatic width element call, but there is no direct Sui-card in the card group anymore. Right now there is a Device in the Sui-cardgroup which contains a Sui-card. We need a solution for this.
+3. I added a menu in the Server.vue file, with the add device and logout button and a preset select dropdown. The dropdown should have the same appearance as the buttons eventually. 
+4. When clicking the add device button a modal is triggered. This modal should contain all the fields necessary to add a device and look good.
+5. 404 pages CSS.
+6. Making the fetch requests to the server. I have not looked at the new flask backend yet, so I think it is a good idea to talk this over on Monday 30-04 or Tuesday 1-05
+7. There are probably more things, but can't think of them right now.
 
