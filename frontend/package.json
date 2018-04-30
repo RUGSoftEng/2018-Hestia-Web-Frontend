@@ -11,9 +11,12 @@
     "e2e": "node test/e2e/runner.js",
     "test": "npm run unit && npm run e2e",
     "lint": "eslint --ext .js,.vue src test/unit test/e2e/specs",
+    "lint-fix": "eslint --ext .js,.vue src test/unit test/e2e/specs --fix",
     "build": "node build/build.js"
   },
   "dependencies": {
+    "auth0-js": "^9.5.1",
+    "eventemitter3": "^3.1.0",
     "semantic-ui-css": "^2.3.1",
     "semantic-ui-vue": "^0.2.6",
     "vue": "^2.5.2",

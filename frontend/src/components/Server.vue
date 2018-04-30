@@ -30,7 +30,9 @@
             </sui-dropdown-item>
           </sui-dropdown-menu>
         </sui-dropdown>
-        <sui-button>Logout</sui-button>
+        <sui-button
+        @click="login()"
+        >Logout</sui-button>
 
     </div>
 
@@ -64,6 +66,9 @@ import { mapState } from 'vuex';
 import DeviceGroup from './DeviceGroup';
 
 export default {
+  props: [
+    'auth', 'authenticated',
+  ],
   components: {
     DeviceGroup,
   },

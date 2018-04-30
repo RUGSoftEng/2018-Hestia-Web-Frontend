@@ -7,6 +7,8 @@ import 'vue-range-slider/dist/vue-range-slider.css';
 import App from './App';
 import router from './router';
 import store from './store';
+// eslint-disable-next-line
+import 'auth0-js';
 
 Vue.use(SuiVue);
 Vue.config.productionTip = false;
