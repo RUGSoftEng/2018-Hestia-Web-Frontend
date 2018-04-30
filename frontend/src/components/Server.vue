@@ -89,7 +89,6 @@ export default {
   },
   beforeMount() {
     this.$store.dispatch('loadServer', { id: this.$route.params.id });
-    this.$store.dispatch('loadServers');
   },
   computed: mapState({
     server: state => state.currentServer,
