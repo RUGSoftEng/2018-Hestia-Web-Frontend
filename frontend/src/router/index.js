@@ -11,7 +11,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/',
+      path: '/Home',
       name: 'Home',
       component: Home,
     }, {
@@ -22,6 +22,9 @@ export default new Router({
       path: '/callback',
       name: 'Callback',
       component: Callback,
+    }, {
+      path: '/',
+      redirect: '/Home',
     }, {
       path: '/*',
       name: 'Page not found',
