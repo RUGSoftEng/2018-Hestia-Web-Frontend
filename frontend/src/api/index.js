@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 const servers = [{
   name: 'Localhost',
   id: '1',
@@ -128,5 +130,23 @@ export function fetchServer(serverid) {
         reject(Error('Server does not exist'));
       }
     }, 300);
+  });
+}
+
+export function getServers() {
+  const url = 'http://localhost:5000/servers';
+  // eslint-disable-next-line
+  console.log('getServers in API bitches')
+  return axios.get(url);
+}
+
+export function getServer(serverid, payload) {
+  const url = `http://localhost:5000/servers/${serverid}/request`;
+  // eslint-disable-next-line
+  console.log(payload);
+  return axios({
+    method: 'POST',
+    url: `${url}`,
+    data: `${payload}`,
   });
 }

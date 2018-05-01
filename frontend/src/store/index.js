@@ -4,7 +4,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 // imports of AJAX functions
-import { fetchServers, fetchServer } from '@/api';
+import { getServer, getServers } from '@/api';
 
 Vue.use(Vuex);
 
@@ -17,18 +17,36 @@ const state = {
 const actions = {
   // asynchronous operations
 
-
   loadServers(context) {
     // eslint-disable-next-line
     console.log('loadServers');
-    return fetchServers()
-      .then(response => context.commit('setServers', { servers: response }));
+    return getServers()
+      .then((response) => {
+        context.commit('setServers', { servers: response.data });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        alert(error)
+      });
   },
-  loadServer(context, { id }) {
+  loadServer(context, { serverid, payload }) {
     // eslint-disable-next-line
     console.log('loadServer');
-    return fetchServer(id)
-      .then(response => context.commit('setServer', { server: response }));
+    // eslint-disable-next-line
+    console.log(serverid);
+    return getServer(serverid, payload)
+      .then(response => context.commit('setServer', { server: response }))
+      // eslint-disable-next-line
+      .catch(error => {
+        // eslint-disable-next-line
+        alert(error);
+        // eslint-disable-next-line
+      console.log(error.response.object);
+        // eslint-disable-next-line
+      console.log(error.response.status);
+        // eslint-disable-next-line
+      console.log(error.response.headera);
+      });
   },
   activatorUpdate(context, { activator, deviceID }) {
     return new Promise((resolve, reject) => {

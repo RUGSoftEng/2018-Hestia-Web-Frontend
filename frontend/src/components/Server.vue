@@ -76,6 +76,7 @@ export default {
     return {
       current: null,
       modalVisible: false,
+      payload: {},
       presets: [{
         text: 'my favourite',
         value: 1,
@@ -93,7 +94,14 @@ export default {
     };
   },
   beforeMount() {
-    this.$store.dispatch('loadServer', { id: this.$route.params.id });
+    // eslint-disable-next-line
+    console.log(this.$route.params.id);
+    this.payload = {
+      requestType: 'GET',
+      endpoint: '/devices',
+      optionalPayload: {},
+    };
+    this.$store.dispatch('loadServer', { serverid: this.$route.params.id, payload: JSON.stringify(this.payload) });
   },
   computed: mapState({
     server: state => state.currentServer,

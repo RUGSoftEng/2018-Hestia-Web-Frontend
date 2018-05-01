@@ -9,9 +9,9 @@
     <section class="section">
       <div class="container">
         <sui-card-group :items-per-row="3" stackable>
-          <sui-card v-for="server in servers" :key="server.name">
+          <sui-card v-for="server in servers" :key="server.server_name">
             <sui-card-content>
-              <sui-card-header> {{server.name}}
+              <sui-card-header> {{server.server_name}}
                  <!-- settings dropdwon menu -->
                 <sui-dropdown icon="wrench">
                   <sui-dropdown-menu>
@@ -25,10 +25,10 @@
                   </sui-dropdown-menu>
                 </sui-dropdown>
               </sui-card-header>
-              <sui-card-meta> {{server.IPAddress + ':' + server.port}} </sui-card-meta>
+              <sui-card-meta> {{server.server_address + ':' + server.server_port}} </sui-card-meta>
               <sui-divider/>
               <!--enter server button -->
-              <router-link :to="`Server/${server.id}`">
+              <router-link :to="`Server/${server.server_id}`">
                 <sui-button animated>
                   <sui-button-content visible>Enter server</sui-button-content>
                   <sui-button-content hidden>
