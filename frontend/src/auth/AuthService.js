@@ -30,8 +30,6 @@ export default class AuthService {
   }
 
   handleAuthentication() {
-    // eslint-disable-next-line
-    console.log("Whateradths")
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
