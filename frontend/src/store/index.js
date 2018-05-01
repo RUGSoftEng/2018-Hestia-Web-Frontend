@@ -39,7 +39,7 @@ const actions = {
         // maybe check by retrieving the devices and check the activator state?
         if (resolve) {
           context.commit('setActivator', { curActivator: activator, curDeviceID: deviceID });
-          resolve('Succesfull');
+          resolve('Successful');
         } else {
           reject('Could not establish a server connection. Please try again.');
         }
