@@ -4,48 +4,57 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 // imports of AJAX functions
-import { getServer, getServers } from '@/api/webAPIInteraction';
+import { httpGetServers, httpPostServerRequest, httpPostServers } from '@/api/dispatch';
+import { preparePayloadPostServer } from '@/api/beforeDispatch';
 
 Vue.use(Vuex);
 
 const state = {
   // single source of data
-  servers: [],
+  serversList: [],
   currentServer: {},
 };
 
 const actions = {
   // asynchronous operations
 
-  loadServers(context) {
+  loadServersList(context) {
     // eslint-disable-next-line
-    console.log('loadServers');
-    return getServers()
+    console.log('loadServersList');
+    return httpGetServers()
       .then((response) => {
-        context.commit('setServers', { servers: response.data });
+        context.commit('setServersList', { serversList: response.data });
       })
       .catch((error) => {
         // eslint-disable-next-line
         alert(error)
       });
   },
-  loadServer(context, { serverid, payload }) {
+  addServer(context, { serverID, userID, serverName, serverAddress, serverPort }) {
+    const payload = preparePayloadPostServer(
+      serverID,
+      userID,
+      serverName,
+      serverAddress,
+      serverPort);
+    return httpPostServers(payload)
+      .then(setTimeout(
+        context.dispatch('loadServersList'), 1000,
+      ),
+      )
+      .catch((error) => {
+        // eslint-disable-next-line
+          alert(error)
+      });
+  },
+  loadServer(context, { serverid }) {
     // eslint-disable-next-line
     console.log('loadServer');
-    // eslint-disable-next-line
-    console.log(serverid);
-    return getServer(serverid, payload)
+    return httpPostServerRequest(serverid)
       .then(response => context.commit('setServer', { server: response }))
-      // eslint-disable-next-line
-      .catch(error => {
+      .catch((error) => {
         // eslint-disable-next-line
         alert(error);
-        // eslint-disable-next-line
-      console.log(error.response.object);
-        // eslint-disable-next-line
-      console.log(error.response.status);
-        // eslint-disable-next-line
-      console.log(error.response.headera);
       });
   },
   activatorUpdate(context, { activator, deviceID }) {
@@ -69,10 +78,12 @@ const actions = {
 const mutations = {
   // isolated data mutations
   // eslint-disable-next-line
-  setServers(state, payload) {
+  setServersList(state, payload) {
     // eslint-disable-next-line
     console.log("setServers");
-    state.servers = payload.servers;
+    // eslint-disable-next-line
+    console.log(payload.serversList);
+    state.serversList = payload.serversList;
   },
   // for each server declare memory for each atribute.
   // eslint-disable-next-line

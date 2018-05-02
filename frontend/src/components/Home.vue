@@ -9,7 +9,7 @@
     <section class="section">
       <div class="container">
         <sui-card-group :items-per-row="3" stackable>
-          <sui-card v-for="server in servers" :key="server.server_name">
+          <sui-card v-for="server in servers" :key="server.server_id">
             <sui-card-content>
               <sui-card-header> {{server.server_name}}
                  <!-- settings dropdwon menu -->
@@ -63,13 +63,13 @@ import { mapState } from 'vuex';
 
 export default {
   computed: mapState({
-    servers: state => state.servers,
+    servers: state => state.serversList,
   }),
   components: {
     RangeSlider,
   },
   beforeMount() {
-    this.$store.dispatch('loadServers');
+    this.$store.dispatch('loadServersList');
   },
 };
 </script>

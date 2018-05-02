@@ -101,7 +101,7 @@ export default {
       endpoint: '/devices/',
       optionalPayload: {},
     };
-    this.$store.dispatch('loadServer', { serverid: this.$route.params.id, payload: this.payload });
+    this.$store.dispatch('loadServer', { serverid: this.$route.params.id });
   },
   computed: mapState({
     server: state => state.currentServer,

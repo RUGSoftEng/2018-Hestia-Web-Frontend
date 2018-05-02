@@ -10,6 +10,8 @@ import store from './store';
 // eslint-disable-next-line
 import 'auth0-js';
 
+// eslint-disable-next-line
+console.log(Vue.http);
 Vue.use(SuiVue);
 Vue.config.productionTip = false;
 
