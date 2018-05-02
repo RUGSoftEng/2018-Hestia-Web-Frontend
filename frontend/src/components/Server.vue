@@ -98,10 +98,10 @@ export default {
     console.log(this.$route.params.id);
     this.payload = {
       requestType: 'GET',
-      endpoint: '/devices',
+      endpoint: '/devices/',
       optionalPayload: {},
     };
-    this.$store.dispatch('loadServer', { serverid: this.$route.params.id, payload: JSON.stringify(this.payload) });
+    this.$store.dispatch('loadServer', { serverid: this.$route.params.id, payload: this.payload });
   },
   computed: mapState({
     server: state => state.currentServer,

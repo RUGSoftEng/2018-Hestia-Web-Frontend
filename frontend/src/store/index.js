@@ -4,7 +4,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 // imports of AJAX functions
-import { getServer, getServers } from '@/api';
+import { getServer, getServers } from '@/api/webAPIInteraction';
 
 Vue.use(Vuex);
 
@@ -77,6 +77,8 @@ const mutations = {
   // for each server declare memory for each atribute.
   // eslint-disable-next-line
   setServer(state, payload) {
+    // eslint-disable-next-line
+    console.log(JSON.stringify(payload.server.data));
     state.currentServer = payload.server;
   },
   // eslint-disable-next-line
