@@ -4,8 +4,14 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 // imports of AJAX functions
-import { httpGetServers, httpPostServerRequest, httpPostServers } from '@/api/dispatch';
+import {
+  httpGetServers,
+  httpPostServerRequest,
+  httpPostServers,
+  httpDeleteServer,
+} from '@/api/dispatch';
 import { preparePayloadPostServer } from '@/api/beforeDispatch';
+
 
 Vue.use(Vuex);
 
@@ -38,6 +44,17 @@ const actions = {
       serverAddress,
       serverPort);
     return httpPostServers(payload)
+      .then(setTimeout(
+        context.dispatch('loadServersList'), 1000,
+      ),
+      )
+      .catch((error) => {
+        // eslint-disable-next-line
+          alert(error)
+      });
+  },
+  deleteServer(context, { serverID }) {
+    return httpDeleteServer(serverID)
       .then(setTimeout(
         context.dispatch('loadServersList'), 1000,
       ),

@@ -12,6 +12,14 @@
           </sui-button>
 
           <sui-button
+            @click="$store.dispatch('deleteServer', {
+              serverID: '2yTe6u2xRUubgNwXGF8YlQ',
+               });"
+          >
+            Delete server
+          </sui-button>
+
+          <sui-button
             class="btn btn-primary btn-margin"
             v-if="!authenticated"
             @click="login()">
