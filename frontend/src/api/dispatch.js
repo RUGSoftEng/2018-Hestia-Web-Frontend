@@ -55,6 +55,17 @@ export function httpDeleteServer(serverid) {
   });
 }
 
+export function httpGetServer(serverid) {
+  const url = `${WEB_API_CONFIG.url}/servers/`.concat(serverid);
+  return axios({
+    method: 'GET',
+    url,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
 export function httpPostServerRequest(serverid, method, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}/request`;
   return axios({

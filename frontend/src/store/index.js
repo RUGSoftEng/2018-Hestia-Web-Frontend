@@ -9,6 +9,7 @@ import {
   httpPostServerRequest,
   httpPostServers,
   httpDeleteServer,
+  httpGetServer,
 } from '@/api/dispatch';
 import { preparePayloadPostServer } from '@/api/beforeDispatch';
 
@@ -55,6 +56,18 @@ const actions = {
   },
   deleteServer(context, { serverID }) {
     return httpDeleteServer(serverID)
+      .then(setTimeout(
+        context.dispatch('loadServersList'), 1000,
+      ),
+      )
+      .catch((error) => {
+        // eslint-disable-next-line
+          alert(error)
+      });
+  },
+  getServer(context, { serverID }) {
+    // eslint-disable-next-line
+    return httpGetServer(serverID)
       .then(setTimeout(
         context.dispatch('loadServersList'), 1000,
       ),
