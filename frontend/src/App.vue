@@ -1,6 +1,17 @@
 <template>
   <div id="app">
           <sui-button
+            @click="$store.dispatch('addServer', {
+              serverID: '25',
+              userID: 'string',
+              serverName: 'new',
+              serverAddress: 'hoi',
+              serverPort: '1234' });"
+          >
+            Add server
+          </sui-button>
+
+          <sui-button
             class="btn btn-primary btn-margin"
             v-if="!authenticated"
             @click="login()">

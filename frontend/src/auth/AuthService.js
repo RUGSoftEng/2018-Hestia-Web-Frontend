@@ -4,6 +4,7 @@ import auth0 from 'auth0-js';
 import EventEmitter from 'eventemitter3';
 import AUTH_CONFIG from './auth0-variables';
 import router from './../router';
+import { httpPostUsers } from './../api/dispatch';
 
 export default class AuthService {
   authenticated = this.isAuthenticated()
@@ -20,7 +21,7 @@ export default class AuthService {
     domain: AUTH_CONFIG.domain,
     clientID: AUTH_CONFIG.clientId,
     redirectUri: AUTH_CONFIG.callbackUrl,
-    audience: `https://${AUTH_CONFIG.domain}/userinfo`,
+    audience: AUTH_CONFIG.apiUrl,
     responseType: 'token id_token',
     scope: 'openid',
   })
@@ -33,6 +34,7 @@ export default class AuthService {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
         this.setSession(authResult);
+        httpPostUsers();
         router.replace('/');
       } else if (err) {
         router.replace('/');
