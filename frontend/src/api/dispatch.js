@@ -4,7 +4,7 @@
 import axios from 'axios';
 
 /**
- * config for the endpoint
+ * Config for the endpoint
  */
 const WEB_API_CONFIG = {
   url: 'http://localhost:5000',
@@ -13,7 +13,7 @@ const WEB_API_CONFIG = {
 /**
  * createAuthorizationHeader - Provides the header for authorizing a user.
  *
- * @return {String}  returns header to be added to the http requests.
+ * @return {String}  Returns header to be added to the http requests.
  */
 function createAuthorizationHeader() {
   const token = localStorage.getItem('access_token');
@@ -24,9 +24,9 @@ function createAuthorizationHeader() {
 }
 
 /**
- * httpPostUsers - The function adds a user.
+ * httpPostUsers - Adds a user.
  *
- * @return {type}  returns the promise,
+ * @return {type}  Returns the promise,
  *                 either containing the response of the server or an error.
  */
 export function httpPostUsers() {
@@ -41,9 +41,9 @@ export function httpPostUsers() {
 }
 
 /**
- * httpGetServers - This function get all the servers.
+ * httpGetServers - Get all the servers.
  *
- * @return {type}  returns the promise,
+ * @return {type}  Returns the promise,
  *                 either containing the response of the server or an error.
  */
 export function httpGetServers() {
@@ -54,11 +54,11 @@ export function httpGetServers() {
 }
 
 /**
- * httpPostServers - This function will add a server.
+ * httpPostServers -  Add a server.
  *
  * @param  {type} payload Payload that describes a server to be added.
- * @return {type}         returns the promise,
- *                         either containing the response of the server or an error.
+ * @return {type}         Returns the promise,
+ *                        either containing the response of the server or an error.
  */
 export function httpPostServers(payload) {
   // eslint-disable-next-line
@@ -75,10 +75,10 @@ export function httpPostServers(payload) {
 }
 
 /**
- * httpDeleteServer - This function will delete a server.
+ * httpDeleteServer -  Delete a server.
  *
  * @param  {String} serverid ID of the server.
- * @return {type}          returns the promise,
+ * @return {type}          Returns the promise,
  *                         either containing the response of the server or an error.
  */
 export function httpDeleteServer(serverid) {
@@ -93,10 +93,10 @@ export function httpDeleteServer(serverid) {
 }
 
 /**
- * httpGetServer - This function will get the information of the server.
+ * httpGetServer -  Get the information of the server.
  *
  * @param  {String} serverid ID of the server.
- * @return {Promise}          returns the promise,
+ * @return {Promise}       Returns the promise,
  *                         either containing the response of the server or an error.
  */
 export function httpGetServer(serverid) {
@@ -111,11 +111,11 @@ export function httpGetServer(serverid) {
 }
 
 /**
- * httpPostServerRequest - This function will send a request to be forwarded to the server.
+ * httpPostServerRequest -  Send a request to be forwarded to the server.
  *
  * @param  {String} serverid ID of the server.
  * @param  {type} payload  the payload to be forwarded.
- * @return {Promise}          returns the promise,
+ * @return {Promise}       Returns the promise,
  *                         either containing the response of the server or an error.
  */
 export function httpPostServerRequest(serverid, payload) {
