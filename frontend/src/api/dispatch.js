@@ -66,11 +66,14 @@ export function httpGetServer(serverid) {
   });
 }
 
-export function httpPostServerRequest(serverid, method, payload) {
+export function httpPostServerRequest(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}/request`;
   return axios({
-    method,
+    method: 'POST',
     url,
     data: payload,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
   });
 }
