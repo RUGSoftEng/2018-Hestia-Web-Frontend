@@ -45,7 +45,7 @@ export function httpPostServers(payload) {
 }
 
 export function httpDeleteServer(serverid) {
-  const url = `${WEB_API_CONFIG.url}/servers/`.concat(serverid);
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}`;
   return axios({
     method: 'DELETE',
     url,
@@ -56,7 +56,7 @@ export function httpDeleteServer(serverid) {
 }
 
 export function httpGetServer(serverid) {
-  const url = `${WEB_API_CONFIG.url}/servers/`.concat(serverid);
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}`;
   return axios({
     method: 'GET',
     url,
