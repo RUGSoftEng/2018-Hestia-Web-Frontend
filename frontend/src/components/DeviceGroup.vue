@@ -1,9 +1,9 @@
 <template>
   <sui-card-group :item-per-row="3" stackable>
     <Device
-      v-for="device in server.devices"
+      v-for="device in server"
       :device="device"
-      :key="device.deviceID"
+      :key="device.deviceId"
     >
 
     </Device>

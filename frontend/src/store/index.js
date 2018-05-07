@@ -11,7 +11,11 @@ import {
   httpDeleteServer,
   httpGetServer,
 } from '@/api/dispatch';
-import { preparePayloadPostServer } from '@/api/beforeDispatch';
+import {
+  preparePayloadPostServer,
+  preparePayloadGetServerDevices,
+  preparePayloadPostServerDevicesActivator,
+} from '@/api/beforeDispatch';
 
 
 Vue.use(Vuex);
@@ -77,31 +81,29 @@ const actions = {
           alert(error)
       });
   },
-  loadServer(context, { serverid }) {
-    // eslint-disable-next-line
-    console.log('loadServer');
-    return httpPostServerRequest(serverid)
+  getServerDevices(context, { serverid }) {
+    const payload = preparePayloadGetServerDevices();
+    return httpPostServerRequest(serverid, payload)
       .then(response => context.commit('setServer', { server: response }))
       .catch((error) => {
         // eslint-disable-next-line
         alert(error);
       });
   },
-  activatorUpdate(context, { activator, deviceID }) {
-    return new Promise((resolve, reject) => {
-      // mock ajax request
-      setTimeout(() => {
-        // try making the AJAX request
-        // is there anything to check there??
-        // maybe check by retrieving the devices and check the activator state?
-        if (resolve) {
-          context.commit('setActivator', { curActivator: activator, curDeviceID: deviceID });
-          resolve('Successful');
-        } else {
-          reject('Could not establish a server connection. Please try again.');
-        }
-      }, 3000);
-    });
+  activatorUpdate(context, { activator, deviceID, serverID }) {
+    // eslint-disable-next-line
+    console.log('activatorUpdate in store');
+    const payload = preparePayloadPostServerDevicesActivator(activator, deviceID);
+    // eslint-disable-next-line
+    console.log(JSON.stringify(payload));
+    return httpPostServerRequest(serverID, payload)
+      .then(() => {
+        context.dispatch('getServerDevices', { serverid: serverID });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        alert(error);
+      });
   },
 };
 
@@ -119,8 +121,8 @@ const mutations = {
   // eslint-disable-next-line
   setServer(state, payload) {
     // eslint-disable-next-line
-    console.log(JSON.stringify(payload.server.data));
-    state.currentServer = payload.server;
+    console.log(JSON.stringify(payload.server.data[0]));
+    state.currentServer = payload.server.data;
   },
   // eslint-disable-next-line
   setActivator(state, payload){

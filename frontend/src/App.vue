@@ -5,8 +5,8 @@
               serverID: '25',
               userID: 'string',
               serverName: 'new',
-              serverAddress: 'hoi',
-              serverPort: '1234' });"
+              serverAddress: 'https://0.0.0.0',
+              serverPort: '8000' });"
           >
             Add server
           </sui-button>

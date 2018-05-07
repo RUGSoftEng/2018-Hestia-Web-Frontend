@@ -1,11 +1,11 @@
 <template>
-  <sui-card :key="device.deviceID">
+  <sui-card :key="device.deviceId">
     <sui-dimmer :active="dimmerActive" inverted>
       <sui-loader>Changing device state</sui-loader>
     </sui-dimmer>
     <sui-card-content>
       <sui-card-meta>
-        {{ device.deviceID }}
+        {{ device.deviceId }}
       </sui-card-meta>
       <sui-card-header fluid>
         {{ device.name }}
@@ -37,7 +37,7 @@
           <Activator
           v-for="activator in device.activators"
           :activator="activator"
-          :key="activator.activatorID"
+          :key="activator.activatorId"
           v-on:activatorChange="updateActivator"
           >
         </Activator>
@@ -73,8 +73,10 @@ export default{
     updateActivator(currentActivator) {
       this.dimmerActive = true;
       this.$store.dispatch('activatorUpdate',
-        { activator: currentActivator, deviceID: this.device.deviceID }).then(
-        (response) => {
+        { activator: currentActivator,
+          deviceID: this.device.deviceId,
+          serverID: this.$route.params.id })
+        .then((response) => {
           // eslint-disable-next-line
           console.log(response);
           this.dimmerActive = false;
@@ -82,7 +84,7 @@ export default{
           // eslint-disable-next-line
           console.log(error);
         },
-      );
+        );
     },
   },
 };

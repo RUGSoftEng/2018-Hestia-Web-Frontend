@@ -23,3 +23,21 @@ export function preparePayloadPostServer(serverID, userID, serverName, serverAdd
 export function hallo() {
   return 'hallo';
 }
+
+export function preparePayloadGetServerDevices() {
+  return {
+    requestType: 'GET',
+    endpoint: '/devices/',
+    optionalPayload: {},
+  };
+}
+
+export function preparePayloadPostServerDevicesActivator(activator, deviceID) {
+  return {
+    requestType: 'POST',
+    enpoint: `/devices/${deviceID}/activators/${activator.activatorId}`,
+    optionalPayload: {
+      state: activator.state,
+    },
+  };
+}
