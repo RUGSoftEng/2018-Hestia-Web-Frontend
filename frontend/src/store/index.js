@@ -21,7 +21,6 @@ const state = {
   serversList: [],
   currentServer: {},
 };
-
 const actions = {
   // asynchronous operations
 
@@ -45,8 +44,9 @@ const actions = {
       serverAddress,
       serverPort);
     return httpPostServers(payload)
-      .then(setTimeout(
-        context.dispatch('loadServersList'), 1000,
+      .then(setTimeout(() => {
+        context.dispatch('loadServersList');
+      }, 1000,
       ),
       )
       .catch((error) => {

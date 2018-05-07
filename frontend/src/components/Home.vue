@@ -15,8 +15,10 @@
                  <!-- settings dropdwon menu -->
                 <sui-dropdown icon="wrench">
                   <sui-dropdown-menu>
-                    <sui-dropdown-item>
-                      <sui-icon name="chart bar" />Statistics
+                    <sui-dropdown-item
+                      @click="deleteButton(server.server_id)"
+                    >
+                      <sui-icon name="chart bar" />Delete server
                     </sui-dropdown-item>
                     <sui-dropdown-item>
                       <sui-icon name="cog"/>
@@ -70,6 +72,13 @@ export default {
   },
   beforeMount() {
     this.$store.dispatch('loadServersList');
+  },
+  methods: {
+    deleteButton(serverID) {
+      // eslint-disable-next-line
+      console.log('delete!!')
+      this.$store.dispatch('deleteServer', { serverID });
+    },
   },
 };
 </script>

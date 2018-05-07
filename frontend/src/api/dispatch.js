@@ -18,8 +18,6 @@ const WEB_API_CONFIG = {
 function createAuthorizationHeader() {
   const token = localStorage.getItem('access_token');
   const header = 'Bearer '.concat(token);
-  // eslint-disable-next-line
-  console.log(header);
   return header;
 }
 
