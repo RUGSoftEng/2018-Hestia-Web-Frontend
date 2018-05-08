@@ -29,6 +29,14 @@ function createAuthorizationHeader() {
  */
 export function httpPostUsers() {
   const url = `${WEB_API_CONFIG.url}/users/`;
+  // eslint-disable-next-line
+  console.log(JSON.stringify({
+    method: 'POST',
+    url,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  }));
   return axios({
     method: 'POST',
     url,
@@ -118,6 +126,8 @@ export function httpGetServer(serverid) {
  */
 export function httpPostServerRequest(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}/request`;
+  // eslint-disable-next-line
+  console.log(url);
   return axios({
     method: 'POST',
     url,

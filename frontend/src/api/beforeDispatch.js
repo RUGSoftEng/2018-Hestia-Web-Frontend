@@ -32,6 +32,30 @@ export function preparePayloadGetServerDevices() {
   };
 }
 
+export function preparePayloadGetServerPlugins() {
+  return {
+    requestType: 'GET',
+    endpoint: '/plugins/',
+    optionalPayload: {},
+  };
+}
+
+export function preparePayloadGetServerPluginsCollections(collection) {
+  return {
+    requestType: 'GET',
+    endpoint: `/plugins/${collection}`,
+    optionalPayload: {},
+  };
+}
+
+export function preparePayloadGetServerPluginsCollectionDevice(collection, device) {
+  return {
+    requestType: 'GET',
+    endpoint: `/plugins/${collection}/plugins/${device}`,
+    optionalPayload: {},
+  };
+}
+
 export function preparePayloadPostServerDevicesActivator(activator, deviceID) {
   return {
     requestType: 'POST',

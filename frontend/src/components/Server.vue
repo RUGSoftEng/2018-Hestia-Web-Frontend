@@ -2,12 +2,60 @@
   <div class="server">
     <!-- The pop up modal when the user wants to add a device -->
     <sui-modal v-model="modalVisible" dimmer="inverted">
-      <sui-modal-header>Adding a new device to {{ this.server.name }}</sui-modal-header>
+      <sui-modal-header>Adding a new device to {{ this.$route.params.id }}</sui-modal-header>
       <sui-modal-content>
-        <sui-input placeholder="Device Name"/>
-        <sui-input placeholder="IP adress"/>
-        <sui-input placeholder="Port Number"/>
+        <div v-for="atribute in currentPluginAtributes" :key="atribute[0]">
+          {{ atribute[0] }}
+          <br>
+          {{ atribute[1] }}
+          <br>
+          <sui-input
+          v-model="atribute[1]"
+          :key="atribute[0]"
+          >
+          </sui-input>
+          <br>
+        </div>
+        <sui-button
+        v-if="currentCollectionDevice != -1"
+        @click="postDevice()"
+        >
+        Add the new device
+        </sui-button>
+
+        <select
+        v-model="currentCollection"
+        required
+        >
+          <option value="-1" disabled selected hidden>Select a collection</option>
+          <option
+          v-for="plugin in plugins"
+          :key="plugin.key"
+          :value="plugin.key"
+          @click="pluginCollectionClicked()"
+          >
+          {{ plugin.collectionName }}
+          </option>
+        </select>
+
+        <select
+        v-model="currentCollectionDevice"
+        v-if="currentCollection != -1"
+        required
+        >
+          <option value="-1" disabled selected hidden>Select a device</option>
+          <option
+          v-for="collection in pluginsCollections"
+          :key="collection.key"
+          :value="collection.value"
+          @click="pluginCollectionDeviceClicked()"
+          >
+          {{ collection.deviceName }}
+          </option>
+        </select>
+        {{ currentPluginAtributes }}
       </sui-modal-content>
+
 
     </sui-modal>
 
@@ -15,11 +63,9 @@
     <div class="button-group">
         <sui-button @click="this.displayModal">Add Device</sui-button>
         <sui-dropdown
-          placeholder="Select a preset"
           selection
-          v-model="this.current"
         >
-          <sui-dropdown-menu v-model="this.current">
+          <sui-dropdown-menu v-model="this.currentPreset">
             <sui-dropdown-item
             v-for="preset in this.presets"
             :value="preset.value"
@@ -62,7 +108,6 @@
 
 <script>
 import 'vue-range-slider/dist/vue-range-slider.css';
-import { mapState } from 'vuex';
 import DeviceGroup from './DeviceGroup';
 
 export default {
@@ -74,8 +119,12 @@ export default {
   },
   data() {
     return {
-      current: null,
+      currentPreset: null,
+      currentCollection: -1,
+      currentCollectionDevice: -1,
+      currentPluginAtributes: null,
       modalVisible: false,
+      presetPlaceholder: 'select a preset',
       presets: [{
         text: 'my favourite',
         value: 1,
@@ -95,19 +144,48 @@ export default {
   beforeMount() {
     // eslint-disable-next-line
     console.log(this.$route.params.id);
-    this.$store.dispatch('getServerDevices', { serverid: this.$route.params.id });
+    this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
   },
-  computed: mapState({
-    server: state => state.currentServer,
-  }),
+  computed: {
+    server() {
+      return this.$store.state.currentServer;
+    },
+    pluginsCollections() {
+      return this.$store.state.currentServerPluginsCollections;
+    },
+    plugins() {
+      return this.$store.state.currentServerPlugins;
+    },
+  },
   methods: {
     displayModal() {
+      this.$store.dispatch('getServerPlugins', { serverID: this.$route.params.id });
       this.modalVisible = !this.modalVisible;
     },
     presetChange(value) {
       // eslint-disable-next-line
       console.log(value);
     },
+    pluginCollectionClicked() {
+      /* eslint-disable */
+      this.$store.dispatch('getServerPluginsCollections',
+        {
+          serverID: this.$route.params.id,
+          collection: this.$store.state.currentServerPlugins[this.currentCollection].collectionName,
+        });
+    },
+    pluginCollectionDeviceClicked() {
+      // eslint-disable-next-line
+      console.log('pluginCollectionDeviceClicked');
+      this.$store.dispatch('getServerPluginCollectionDevice', {
+        serverID: this.$route.params.id,
+        collection: this.$store.state.currentServerPlugins[this.currentCollection].collectionName,
+        device: this.$store.state.currentServerPluginsCollections[this.currentCollectionDevice].deviceName,
+      })
+    setTimeout(() => {
+      this.currentPluginAtributes = Object.entries(this.$store.state.currentPluginAtributes.required_info);
+    }, 1000)}
+    /* eslint-enable */
   },
 };
 </script>

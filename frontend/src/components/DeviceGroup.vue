@@ -17,7 +17,6 @@ import Device from './Device';
 export default {
   props: {
     server: {
-      type: Object,
       required: true,
     },
   },

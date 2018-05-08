@@ -14,6 +14,9 @@ import {
 import {
   preparePayloadPostServer,
   preparePayloadGetServerDevices,
+  preparePayloadGetServerPlugins,
+  preparePayloadGetServerPluginsCollections,
+  preparePayloadGetServerPluginsCollectionDevice,
   preparePayloadPostServerDevicesActivator,
 } from '@/api/beforeDispatch';
 
@@ -24,6 +27,9 @@ const state = {
   // single source of data
   serversList: [],
   currentServer: {},
+  currentServerPlugins: [],
+  currentServerPluginsCollections: [],
+  currentPluginAtributes: {},
 };
 const actions = {
   // asynchronous operations
@@ -81,13 +87,42 @@ const actions = {
           alert(error)
       });
   },
-  getServerDevices(context, { serverid }) {
+  getServerDevices(context, { serverID }) {
     const payload = preparePayloadGetServerDevices();
-    return httpPostServerRequest(serverid, payload)
+    return httpPostServerRequest(serverID, payload)
       .then(response => context.commit('setServer', { server: response }))
       .catch((error) => {
         // eslint-disable-next-line
         alert(error);
+      });
+  },
+  getServerPlugins(context, { serverID }) {
+    const payload = preparePayloadGetServerPlugins();
+    return httpPostServerRequest(serverID, payload)
+      .then(response => context.commit('setServerPlugins', { plugins: response }))
+      .catch((error) => {
+        // eslint-disable-next-line
+        alert(error);
+      });
+  },
+  getServerPluginsCollections(context, { serverID, collection }) {
+    const payload = preparePayloadGetServerPluginsCollections(collection);
+    return httpPostServerRequest(serverID, payload)
+      .then(response => context.commit('setServerPluginsCollections', { collections: response, collection }))
+      .catch((error) => {
+        // eslint-disable-next-line
+        alert(error);
+      });
+  },
+  getServerPluginCollectionDevice(context, { serverID, collection, device }) {
+    const payload = preparePayloadGetServerPluginsCollectionDevice(collection, device);
+    return httpPostServerRequest(serverID, payload)
+      .then(response => context.commit('setServerPluginCollectionDevice', {
+        atributes: response,
+      }))
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.log(error);
       });
   },
   activatorUpdate(context, { activator, deviceID, serverID }) {
@@ -96,6 +131,8 @@ const actions = {
     const payload = preparePayloadPostServerDevicesActivator(activator, deviceID);
     // eslint-disable-next-line
     console.log(JSON.stringify(payload));
+    // eslint-disable-next-line
+    console.log(JSON.stringify(serverID));
     return httpPostServerRequest(serverID, payload)
       .then(() => {
         context.dispatch('getServerDevices', { serverid: serverID });
@@ -117,15 +154,44 @@ const mutations = {
     console.log(payload.serversList);
     state.serversList = payload.serversList;
   },
-  // for each server declare memory for each atribute.
   // eslint-disable-next-line
   setServer(state, payload) {
-    // eslint-disable-next-line
-    console.log(JSON.stringify(payload.server.data[0]));
     state.currentServer = payload.server.data;
   },
   // eslint-disable-next-line
-  setActivator(state, payload){
+  setServerPlugins(state, payload) {
+    const plugins = [];
+    let i = 0;
+    payload.plugins.data.forEach((element) => {
+      plugins.push({
+        collectionName: element,
+        key: i,
+        value: i,
+      });
+      i += 1;
+    });
+    state.currentServerPlugins = plugins;
+  },
+  // eslint-disable-next-line
+  setServerPluginsCollections(state, payload) {
+    const collections = [];
+    let i = 0;
+    payload.collections.data.forEach((element) => {
+      collections.push({
+        deviceName: element,
+        key: i,
+        value: i,
+      });
+      i += 1;
+    });
+    state.currentServerPluginsCollections = collections;
+  },
+  // eslint-disable-next-line
+  setServerPluginCollectionDevice(state, payload) {
+    state.currentPluginAtributes = payload.atributes.data;
+  },
+  // eslint-disable-next-line
+  setActivator(state, payload) {
     state.currentServer.devices.forEach((device, index1) => {
       if (device.deviceID === payload.curdeviceID) {
         device.activators.forEach((activator, index2) => {
