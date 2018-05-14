@@ -5,12 +5,11 @@
               serverID: '25',
               userID: 'string',
               serverName: 'new',
-              serverAddress: 'https://0.0.0.0',
+              serverAddress: 'https://94.212.164.28',
               serverPort: '8000' });"
           >
             Add server
           </sui-button>
-
           <sui-button
             @click="$store.dispatch('deleteServer', {
               serverID: '2yTe6u2xRUubgNwXGF8YlQ',
