@@ -1,19 +1,15 @@
-# TODO
-1. add axios for asyncronous calls
-
-
 # hestia-frontend
 
 > The frontend for the hestia web server.
 
-The frontend is built using the [vue framework](http://vuejs.org). For the project management we are using [yarn](http://yarnpkg.com). 
+The frontend is built using the [vue framework](http://vuejs.org). For the project management we are using [yarn](http://yarnpkg.com).
 
 ## Setting up yarn
 
-Before using yarn you first need to setup node and npm. Install node and npm [here](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions) 
+Before using yarn you first need to setup node and npm. Install node and npm [here](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions)
 
 Now install yarn (**make sure to run this as admin**)
-```bash 
+```bash
 npm install --global yarn
 ```
 
@@ -23,7 +19,10 @@ npm install --global yarn
 ### Quick Start
 ```bash
 # you only have to install once unless you change dependencies
-yarn install
+npm install
+```
+Select all automatic installation options.
+```bash
 # serve with hot reload at localhost:8080
 yarn start
 ```

@@ -7,7 +7,7 @@ import axios from 'axios';
  * Config for the endpoint
  */
 const WEB_API_CONFIG = {
-  url: 'http://localhost:5000',
+  url: 'https://fathomless-reef-69954.herokuapp.com',
 };
 
 /**
