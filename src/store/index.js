@@ -153,13 +153,10 @@ const actions = {
     // eslint-disable-next-line
     console.log('activatorUpdate in store');
     const payload = preparePayloadPostServerDevicesActivator(activator, deviceID);
-    // eslint-disable-next-line
-    console.log(JSON.stringify(payload));
-    // eslint-disable-next-line
-    console.log(JSON.stringify(serverID));
+    const test = `${serverID}`;
     return httpPostServerRequest(serverID, payload)
       .then(() => {
-        context.dispatch('getServerDevices', { serverid: serverID });
+        context.dispatch('getServerDevices', { serverID: test });
       })
       .catch((error) => {
         // eslint-disable-next-line
@@ -219,17 +216,22 @@ const mutations = {
     state.currentPluginAtributes = payload.atributes.data;
   },
   // eslint-disable-next-line
-  setActivator(state, payload) {
-    state.currentServer.devices.forEach((device, index1) => {
-      if (device.deviceID === payload.curdeviceID) {
+  setActivatorState(state, payload) {
+    // eslint-disable-next-line
+    console.log('setActivator');
+    // eslint-disable-next-line
+    console.log('Before local state change');
+    state.currentServer.forEach((device, index1) => {
+      if (device.deviceId === payload.deviceId) {
         device.activators.forEach((activator, index2) => {
-          if (activator.activatorID === payload.curActivator.activatorID) {
-            // eslint-disable-next-line
-            state.currentServer.devices[index1].activators[index2].state = payload.curActivator.state;
+          if (activator.activatorId === payload.currentActivator.activatorId) {
+            state.currentServer[index1].activators[index2].state = payload.activatorState;
           }
         });
       }
     });
+    // eslint-disable-next-line
+    console.log(JSON.stringify('After local state change'));
   },
 };
 

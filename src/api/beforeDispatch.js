@@ -59,7 +59,7 @@ export function preparePayloadGetServerPluginsCollectionDevice(collection, devic
 export function preparePayloadPostServerDevicesActivator(activator, deviceID) {
   return {
     requestType: 'POST',
-    enpoint: `/devices/${deviceID}/activators/${activator.activatorId}`,
+    endpoint: `/devices/${deviceID}/activators/${activator.activatorId}`,
     optionalPayload: {
       state: activator.state,
     },

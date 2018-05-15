@@ -38,7 +38,8 @@
           v-for="activator in device.activators"
           :activator="activator"
           :key="activator.activatorId"
-          v-on:activatorChange="updateActivator"
+          v-on:activatorChange="updateActivatorLocal"
+          v-on:activatorClick="updateActivatorGlobal"
           >
         </Activator>
         </div>
@@ -66,16 +67,28 @@ export default{
       dimmerActive: false,
     };
   },
-  // beforeMount() {
-  //   this.dimmerActive = 0;
-  // },
   methods: {
-    updateActivator(currentActivator) {
+    updateActivatorLocal(payload) {
+      // eslint-disable-next-line
+      console.log(JSON.stringify(payload));
+      this.$store.commit('setActivatorState',
+        {
+          deviceId: this.device.deviceId,
+          currentActivator: payload.currentActivator,
+          activatorState: payload.activatorState,
+        });
+    },
+    updateActivatorGlobal(payload) {
+      // eslint-disable-next-line
+      console.log(payload.activator);
+      // eslint-disable-next-line
+      console.log('hoi');
       this.dimmerActive = true;
       this.$store.dispatch('activatorUpdate',
-        { activator: currentActivator,
+        { activator: payload.activator,
           deviceID: this.device.deviceId,
-          serverID: this.$route.params.id })
+          serverID: this.$route.params.id,
+        })
         .then((response) => {
           // eslint-disable-next-line
           console.log(response);

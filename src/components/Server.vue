@@ -4,17 +4,20 @@
     <sui-modal v-model="modalVisible" dimmer="inverted">
       <sui-modal-header>Adding a new device to {{ this.$route.params.id }}</sui-modal-header>
       <sui-modal-content>
-        <div v-for="atribute in Object.keys(currentPluginAtributes)" :key="atribute">
-          {{ atribute }}
-          <br>
-          {{ atribute }}
-          <br>
-          <sui-input
-          v-model="currentPluginAtributes[atribute]"
-          >
-          </sui-input>
-          <br>
+        <div v-if="currentPluginAtributes != null">
+          <div v-for="atribute in Object.keys(currentPluginAtributes)" :key="atribute">
+            {{ atribute }}
+            <br>
+            {{ atribute }}
+            <br>
+            <sui-input
+            v-model="currentPluginAtributes[atribute]"
+            >
+            </sui-input>
+            <br>
+          </div>
         </div>
+
         <sui-button
         v-if="currentCollectionDevice != -1"
         @click="postDevice()"
