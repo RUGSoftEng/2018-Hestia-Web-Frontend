@@ -20,15 +20,49 @@ export function preparePayloadPostServer(serverID, userID, serverName, serverAdd
   };
 }
 
+export function preparePayloadPutServer(serverName, serverAddress, serverPort) {
+  return {
+    server_name: serverName,
+    server_address: serverAddress,
+    server_port: serverPort,
+  };
+}
+
 export function hallo() {
   return 'hallo';
 }
 
-export function preparePayloadGetServerDevices() {
+export function preparePayloadGetServerDevice() {
   return {
     requestType: 'GET',
     endpoint: '/devices/',
     optionalPayload: {},
+  };
+}
+
+export function perparePayloadDeleteServerDevice(deviceId) {
+  return {
+    requestType: 'POST',
+    endpoint: `/devices/${deviceId}`,
+    optionalPayload: {},
+  };
+}
+
+export function preparePayloadPutServerDevice(deviceId, deviceName) {
+  return {
+    requestType: 'PUT',
+    endpoint: `/devices/${deviceId}`,
+    optionalPayload: {
+      name: deviceName,
+    },
+  };
+}
+
+export function preparePayloadPostServerDevice(deviceInfo) {
+  return {
+    requestType: 'POST',
+    endpoint: '/devices/',
+    optionalPayload: deviceInfo,
   };
 }
 

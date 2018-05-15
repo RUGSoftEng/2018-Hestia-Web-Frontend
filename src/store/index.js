@@ -9,11 +9,16 @@ import {
   httpPostServerRequest,
   httpPostServers,
   httpDeleteServer,
+  httpPutServer,
   httpGetServer,
 } from '@/api/dispatch';
 import {
   preparePayloadPostServer,
-  preparePayloadGetServerDevices,
+  preparePayloadPutServer,
+  preparePayloadGetServerDevice,
+  perparePayloadDeleteServerDevice,
+  preparePayloadPutServerDevice,
+  preparePayloadPostServerDevice,
   preparePayloadGetServerPlugins,
   preparePayloadGetServerPluginsCollections,
   preparePayloadGetServerPluginsCollectionDevice,
@@ -103,13 +108,53 @@ const actions = {
           alert(error)
       });
   },
+  putServer(context, { serverID, serverName, serverPort, serverAddress }) {
+    const payload = preparePayloadPutServer(serverName, serverAddress, serverPort);
+    return httpPutServer(serverID, payload)
+      .then(setTimeout(
+        context.dispatch('loadServersList'), 1000,
+      ),
+      )
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error);
+      });
+  },
   getServerDevices(context, { serverID }) {
-    const payload = preparePayloadGetServerDevices();
+    const payload = preparePayloadGetServerDevice();
     return httpPostServerRequest(serverID, payload)
       .then(response => context.commit('setServer', { server: response }))
       .catch((error) => {
         // eslint-disable-next-line
         alert(error);
+      });
+  },
+  deleteServerDevice(context, { serverID, deviceID }) {
+    const payload = perparePayloadDeleteServerDevice(deviceID);
+    return httpPostServerRequest(serverID, payload)
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error);
+      });
+  },
+  putServerDevice(context, { serverID, deviceID, deviceName }) {
+    const payload = preparePayloadPutServerDevice(deviceID, deviceName);
+    return httpPostServerRequest(serverID, payload)
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error);
+      });
+  },
+  postServerDevice(context, { serverID, deviceInfo }) {
+    // eslint-disable-next-line
+    console.log(JSON.stringify(deviceInfo));
+    const payload = preparePayloadPostServerDevice(deviceInfo);
+    // eslint-disable-next-line
+    console.log(JSON.stringify(payload));
+    return httpPostServerRequest(serverID, payload)
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error);
       });
   },
   getServerPlugins(context, { serverID }) {

@@ -4,7 +4,8 @@ Put servers
 Post devices
 Put devices
 Delete devices
-Post devicesActivators - is there but not working.
+
+Post server has to be in the beforeDispatch.
 
 
 

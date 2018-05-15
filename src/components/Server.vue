@@ -187,6 +187,14 @@ export default {
       });
     /* eslint-enable */
     },
+    postDevice() {
+      const payloadtest = this.$store.state.currentPluginAtributes;
+      this.$store.dispatch('postServerDevice',
+        {
+          serverID: this.$route.params.id,
+          deviceInfo: payloadtest,
+        });
+    },
   },
 };
 </script>
