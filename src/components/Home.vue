@@ -1,29 +1,39 @@
 <template>
   <div class="home">
-    <sui-breadcrumb>
+    <sui-breadcrumb class="ui raised segment breadcrumbs">
       <sui-breadcrumb-section active>
-        Servers
+        <h2>Servers</h2>
       </sui-breadcrumb-section>
     </sui-breadcrumb>
-    <h2 class="title">Check out your servers</h2>
-    <section class="section">
-      <div class="container">
-        <sui-card-group :items-per-row="3" stackable>
+    <section class="ui section">
+      <div class="ui container">
+        <sui-card-group :items-per-row="3" stackable raised>
+            <sui-card class="add_card">
+              <sui-card-content>
+                <sui-card-content>
+                  <br><sui-icon name="add" size="massive" class="center add_icon" />
+                </sui-card-content>
+                <sui-card-content extra>
+                  Add Server
+                </sui-card-content>
+              </sui-card-content>
+            </sui-card>
           <sui-card v-for="server in servers" :key="server.server_id">
             <sui-card-content>
               <sui-card-header> {{server.server_name}}
                  <!-- settings dropdwon menu -->
-                <sui-dropdown icon="wrench">
+                <sui-dropdown icon="angle down">
                   <sui-dropdown-menu>
-                    <sui-dropdown-item
-                      @click="deleteButton(server.server_id)"
-                    >
-                      <sui-icon name="chart bar" />Delete server
-                    </sui-dropdown-item>
                     <sui-dropdown-item>
                       <sui-icon name="cog"/>
                       Settings
                     </sui-dropdown-item>
+                    <sui-dropdown-item
+                      @click="deleteButton(server.server_id)"
+                    >
+                      <sui-icon name="trash" />Delete server
+                    </sui-dropdown-item>
+                    
                   </sui-dropdown-menu>
                 </sui-dropdown>
               </sui-card-header>
@@ -31,7 +41,7 @@
               <sui-divider/>
               <!--enter server button -->
               <router-link :to="`Server/${server.server_id}`">
-                <sui-button animated>
+                <sui-button primary animated>
                   <sui-button-content visible>Enter server</sui-button-content>
                   <sui-button-content hidden>
                     <sui-icon name="right arrow" />
@@ -84,5 +94,18 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
+  .breadcrumbs {
+    width: 70%;
+    margin-bottom:25px !important;
+    text-align: left;
+  }
+
+  .add_card {
+    background:none !important;
+    border:5px dashed #FFFFFF !important;
+    box-shadow:none !important;
+    color:#FFFFFF;
+    font-weight:bold;
+  }
 </style>

@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-          <sui-button
+          <div class="logo_header">
+            <img class="ui bottom aligned small image" src="../src/assets/hestia.png">
+          </div>
+          <!--<sui-button
             @click="$store.dispatch('addServer', {
               serverID: '25',
               userID: 'string',
@@ -9,7 +12,7 @@
               serverPort: '8000' });"
           >
             Add server
-          </sui-button>
+          </sui-button><!--
           <sui-button
             @click="$store.dispatch('deleteServer', {
               serverID: '2yTe6u2xRUubgNwXGF8YlQ',
@@ -17,20 +20,20 @@
           >
             Delete server
           </sui-button>
-
+          -->
           <sui-button
             class="btn btn-primary btn-margin"
             v-if="!authenticated"
             @click="login()">
               Log In
           </sui-button>
-
+          <!--
           <sui-button
             class="btn btn-primary btn-margin"
             v-if="authenticated"
             @click="logout()">
               Log Out
-          </sui-button>
+          </sui-button>-->
     <div class="container">
       <router-view
         :auth="auth"
@@ -66,17 +69,29 @@ export default {
 </script>
 
 <style>
+body {
+  background-repeat: no-repeat !important;
+  background-attachment: fixed !important;
+}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 0px;
 }
 
-img {
-  width: 200px;
-  height: 50px;
+.logo_header {
+  margin-top:-7.5em !important;
+  margin-bottom: 25px !important;
+  padding-top:9em;
+  width:50%;
+  height:14em;
+  margin:0 auto;
+  background-color:#FFFFFF;
+  border-radius:0% 0% 500% 500%;
 }
+
 </style>

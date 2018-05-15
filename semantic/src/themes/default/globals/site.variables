@@ -51,11 +51,11 @@
     Brand Colors
 --------------------*/
 
-@primaryColor        : @blue;
-@secondaryColor      : @black;
+@primaryColor        : #ff6a00;
+@secondaryColor      : #0032c4;
 
-@lightPrimaryColor   : @lightBlue;
-@lightSecondaryColor : @lightBlack;
+@lightPrimaryColor   : #ff8c3a;
+@lightSecondaryColor : #4064cb;
 
 /*--------------
   Page Heading
@@ -121,7 +121,7 @@
         Page
 --------------------*/
 
-@pageBackground      : #FFFFFF;
+@pageBackground      : linear-gradient(135deg, #ffa043, #ff6a00);
 @pageOverflowX       : hidden;
 
 @lineHeight          : 1.4285em;

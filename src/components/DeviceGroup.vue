@@ -1,13 +1,15 @@
 <template>
-  <sui-card-group :item-per-row="3" stackable>
-    <Device
-      v-for="device in server"
-      :device="device"
-      :key="device.deviceId"
-    >
+  <div class="ui container">
+    <sui-card-group :items-per-row="3" stackable>
+      <Device
+        v-for="device in server"
+        :device="device"
+        :key="device.deviceId"
+      >
 
-    </Device>
-  </sui-card-group>
+      </Device>
+    </sui-card-group>
+  </div>
 
 </template>
 
@@ -26,3 +28,7 @@ export default {
 };
 
 </script>
+
+<style scoped>
+
+</style>

@@ -59,8 +59,32 @@
 
     </sui-modal>
 
+    
+
+    <!-- The sui-breadcrumb -->
+    <sui-container class="ui raised segment breadcrumbs">
+      <sui-breadcrumb><h2>
+        <sui-breadcrumb-section link>
+          <router-link to="/">
+            Servers
+          </router-link>
+        </sui-breadcrumb-section>
+        <sui-breadcrumb-divider />
+        <sui-breadcrumb-section active>
+            {{this.$route.params.id}}
+        </sui-breadcrumb-section>
+      </h2></sui-breadcrumb>
+    </sui-container>
+
+
+    <h2> {{server.IPAddress}} </h2>
+
+    <DeviceGroup :server="this.server">
+
+    </DeviceGroup>
+
     <!-- The button menu -->
-    <div class="button-group">
+    <div class="ui container button-group">
         <sui-button @click="this.displayModal">Add Device</sui-button>
         <sui-dropdown
           selection
@@ -76,32 +100,11 @@
             </sui-dropdown-item>
           </sui-dropdown-menu>
         </sui-dropdown>
-        <sui-button
+        <!--<sui-button
         @click="login()"
-        >Logout</sui-button>
+        >Logout</sui-button>-->
 
     </div>
-
-    <!-- The sui-breadcrumb -->
-    <sui-breadcrumb>
-      <sui-breadcrumb-section link>
-        <router-link to="/">
-          Servers
-        </router-link>
-      </sui-breadcrumb-section>
-      <sui-breadcrumb-divider />
-      <sui-breadcrumb-section active>
-          {{server.name}}
-      </sui-breadcrumb-section>
-    </sui-breadcrumb>
-
-
-    <h2> {{server.IPAddress}} </h2>
-    <h3>I'm a Server Component</h3>
-
-    <DeviceGroup :server="this.server">
-
-    </DeviceGroup>
 
 </div>
 </template>
@@ -191,9 +194,5 @@ export default {
 </script>
 
 <style>
-.button-group{
-  float: right;
-  margin-right: 2em;
-}
 
 </style>
