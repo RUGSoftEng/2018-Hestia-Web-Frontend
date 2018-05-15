@@ -34,6 +34,12 @@ const state = {
 const actions = {
   // asynchronous operations
 
+  /**
+   * Dispatches a function that loads all the servers linked to your account.
+   * On succesfull response the servers inforamtion is loaded into the store.
+   * @param  {[type]} context [description]
+   * @return {JSON}         [description]
+   */
   loadServersList(context) {
     // eslint-disable-next-line
     console.log('loadServersList');
@@ -46,6 +52,16 @@ const actions = {
         alert(error)
       });
   },
+  /**
+   * Dispatches the httpPostServers and refreshes the servers list
+   * after succesfully adding the server to your account.
+   * @param {[type]} context       [description]
+   * @param {[type]} serverID      [description]
+   * @param {[type]} userID        [description]
+   * @param {[type]} serverName    [description]
+   * @param {[type]} serverAddress [description]
+   * @param {[type]} serverPort    [description]
+   */
   addServer(context, { serverID, userID, serverName, serverAddress, serverPort }) {
     const payload = preparePayloadPostServer(
       serverID,
@@ -125,6 +141,14 @@ const actions = {
         console.log(error);
       });
   },
+  /**
+   * This function is not working yet!
+   * @param  {[type]} context   [description]
+   * @param  {[type]} activator [description]
+   * @param  {[type]} deviceID  [description]
+   * @param  {[type]} serverID  [description]
+   * @return {[type]}           [description]
+   */
   activatorUpdate(context, { activator, deviceID, serverID }) {
     // eslint-disable-next-line
     console.log('activatorUpdate in store');
@@ -188,6 +212,10 @@ const mutations = {
   },
   // eslint-disable-next-line
   setServerPluginCollectionDevice(state, payload) {
+    // eslint-disable-next-line
+    console.log("setServerPlguinCollectionDevice");
+    // eslint-disable-next-line
+    console.log(JSON.stringify(payload.atributes.data.required_info));
     state.currentPluginAtributes = payload.atributes.data;
   },
   // eslint-disable-next-line

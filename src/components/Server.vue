@@ -4,14 +4,13 @@
     <sui-modal v-model="modalVisible" dimmer="inverted">
       <sui-modal-header>Adding a new device to {{ this.$route.params.id }}</sui-modal-header>
       <sui-modal-content>
-        <div v-for="atribute in currentPluginAtributes" :key="atribute[0]">
-          {{ atribute[0] }}
+        <div v-for="atribute in Object.keys(currentPluginAtributes)" :key="atribute">
+          {{ atribute }}
           <br>
-          {{ atribute[1] }}
+          {{ atribute }}
           <br>
           <sui-input
-          v-model="atribute[1]"
-          :key="atribute[0]"
+          v-model="currentPluginAtributes[atribute]"
           >
           </sui-input>
           <br>
@@ -122,7 +121,6 @@ export default {
       currentPreset: null,
       currentCollection: -1,
       currentCollectionDevice: -1,
-      currentPluginAtributes: null,
       modalVisible: false,
       presetPlaceholder: 'select a preset',
       presets: [{
@@ -156,6 +154,9 @@ export default {
     plugins() {
       return this.$store.state.currentServerPlugins;
     },
+    currentPluginAtributes() {
+      return this.$store.state.currentPluginAtributes.required_info;
+    },
   },
   methods: {
     displayModal() {
@@ -175,17 +176,14 @@ export default {
         });
     },
     pluginCollectionDeviceClicked() {
-      // eslint-disable-next-line
       console.log('pluginCollectionDeviceClicked');
       this.$store.dispatch('getServerPluginCollectionDevice', {
         serverID: this.$route.params.id,
         collection: this.$store.state.currentServerPlugins[this.currentCollection].collectionName,
         device: this.$store.state.currentServerPluginsCollections[this.currentCollectionDevice].deviceName,
-      })
-    setTimeout(() => {
-      this.currentPluginAtributes = Object.entries(this.$store.state.currentPluginAtributes.required_info);
-    }, 1000)}
+      });
     /* eslint-enable */
+    },
   },
 };
 </script>
