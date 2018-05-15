@@ -9,11 +9,16 @@ import {
   httpPostServerRequest,
   httpPostServers,
   httpDeleteServer,
+  httpPutServer,
   httpGetServer,
 } from '@/api/dispatch';
 import {
   preparePayloadPostServer,
-  preparePayloadGetServerDevices,
+  preparePayloadPutServer,
+  preparePayloadGetServerDevice,
+  perparePayloadDeleteServerDevice,
+  preparePayloadPutServerDevice,
+  preparePayloadPostServerDevice,
   preparePayloadGetServerPlugins,
   preparePayloadGetServerPluginsCollections,
   preparePayloadGetServerPluginsCollectionDevice,
@@ -34,6 +39,12 @@ const state = {
 const actions = {
   // asynchronous operations
 
+  /**
+   * Dispatches a function that loads all the servers linked to your account.
+   * On succesfull response the servers inforamtion is loaded into the store.
+   * @param  {[type]} context [description]
+   * @return {JSON}         [description]
+   */
   loadServersList(context) {
     // eslint-disable-next-line
     console.log('loadServersList');
@@ -46,6 +57,16 @@ const actions = {
         alert(error)
       });
   },
+  /**
+   * Dispatches the httpPostServers and refreshes the servers list
+   * after succesfully adding the server to your account.
+   * @param {[type]} context       [description]
+   * @param {[type]} serverID      [description]
+   * @param {[type]} userID        [description]
+   * @param {[type]} serverName    [description]
+   * @param {[type]} serverAddress [description]
+   * @param {[type]} serverPort    [description]
+   */
   addServer(context, { serverID, userID, serverName, serverAddress, serverPort }) {
     const payload = preparePayloadPostServer(
       serverID,
@@ -87,13 +108,53 @@ const actions = {
           alert(error)
       });
   },
+  putServer(context, { serverID, serverName, serverPort, serverAddress }) {
+    const payload = preparePayloadPutServer(serverName, serverAddress, serverPort);
+    return httpPutServer(serverID, payload)
+      .then(setTimeout(
+        context.dispatch('loadServersList'), 1000,
+      ),
+      )
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error);
+      });
+  },
   getServerDevices(context, { serverID }) {
-    const payload = preparePayloadGetServerDevices();
+    const payload = preparePayloadGetServerDevice();
     return httpPostServerRequest(serverID, payload)
       .then(response => context.commit('setServer', { server: response }))
       .catch((error) => {
         // eslint-disable-next-line
         alert(error);
+      });
+  },
+  deleteServerDevice(context, { serverID, deviceId }) {
+    const payload = perparePayloadDeleteServerDevice(deviceId);
+    return httpPostServerRequest(serverID, payload)
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error);
+      });
+  },
+  putServerDevice(context, { serverID, deviceID, deviceName }) {
+    const payload = preparePayloadPutServerDevice(deviceID, deviceName);
+    return httpPostServerRequest(serverID, payload)
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error);
+      });
+  },
+  postServerDevice(context, { serverID, deviceInfo }) {
+    // eslint-disable-next-line
+    console.log(JSON.stringify(deviceInfo));
+    const payload = preparePayloadPostServerDevice(deviceInfo);
+    // eslint-disable-next-line
+    console.log(JSON.stringify(payload));
+    return httpPostServerRequest(serverID, payload)
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error);
       });
   },
   getServerPlugins(context, { serverID }) {
@@ -125,17 +186,22 @@ const actions = {
         console.log(error);
       });
   },
+  /**
+   * This function is not working yet!
+   * @param  {[type]} context   [description]
+   * @param  {[type]} activator [description]
+   * @param  {[type]} deviceID  [description]
+   * @param  {[type]} serverID  [description]
+   * @return {[type]}           [description]
+   */
   activatorUpdate(context, { activator, deviceID, serverID }) {
     // eslint-disable-next-line
     console.log('activatorUpdate in store');
     const payload = preparePayloadPostServerDevicesActivator(activator, deviceID);
-    // eslint-disable-next-line
-    console.log(JSON.stringify(payload));
-    // eslint-disable-next-line
-    console.log(JSON.stringify(serverID));
+    const test = `${serverID}`;
     return httpPostServerRequest(serverID, payload)
       .then(() => {
-        context.dispatch('getServerDevices', { serverid: serverID });
+        context.dispatch('getServerDevices', { serverID: test });
       })
       .catch((error) => {
         // eslint-disable-next-line
@@ -188,20 +254,29 @@ const mutations = {
   },
   // eslint-disable-next-line
   setServerPluginCollectionDevice(state, payload) {
+    // eslint-disable-next-line
+    console.log("setServerPlguinCollectionDevice");
+    // eslint-disable-next-line
+    console.log(JSON.stringify(payload.atributes.data.required_info));
     state.currentPluginAtributes = payload.atributes.data;
   },
   // eslint-disable-next-line
-  setActivator(state, payload) {
-    state.currentServer.devices.forEach((device, index1) => {
-      if (device.deviceID === payload.curdeviceID) {
+  setActivatorState(state, payload) {
+    // eslint-disable-next-line
+    console.log('setActivator');
+    // eslint-disable-next-line
+    console.log('Before local state change');
+    state.currentServer.forEach((device, index1) => {
+      if (device.deviceId === payload.deviceId) {
         device.activators.forEach((activator, index2) => {
-          if (activator.activatorID === payload.curActivator.activatorID) {
-            // eslint-disable-next-line
-            state.currentServer.devices[index1].activators[index2].state = payload.curActivator.state;
+          if (activator.activatorId === payload.currentActivator.activatorId) {
+            state.currentServer[index1].activators[index2].state = payload.activatorState;
           }
         });
       }
     });
+    // eslint-disable-next-line
+    console.log(JSON.stringify('After local state change'));
   },
 };
 

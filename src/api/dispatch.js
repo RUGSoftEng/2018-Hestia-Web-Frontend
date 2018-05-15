@@ -116,6 +116,18 @@ export function httpGetServer(serverid) {
   });
 }
 
+
+export function httpPutServer(serverid, payload) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}`;
+  return axios({
+    mehtod: 'PUT',
+    url,
+    data: payload,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
 /**
  * httpPostServerRequest -  Send a request to be forwarded to the server.
  *

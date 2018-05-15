@@ -1,3 +1,13 @@
+# todo
+All http requests are there except for:
+Put servers
+Put devices
+Delete devices
+
+Post server has to be in the beforeDispatch.
+
+
+
 # hestia-frontend
 
 > The frontend for the hestia web server.
@@ -16,7 +26,19 @@ npm install --global yarn
 ## Build Setup
 `cd` to the frontend directory. Then you can run the build command you want.
 
-### Quick Start
+## Quick Start
+2 terminals are needed to run the frontend.
+
+### first terminal
+cd into semantic/
+```bash
+gulp build
+# if you are going to change the theming files in the semantic folder
+# you will need to run the next command to keep auto refresh.
+gulp watch
+```
+
+### second terminal
 ```bash
 # you only have to install once unless you change dependencies
 npm install
