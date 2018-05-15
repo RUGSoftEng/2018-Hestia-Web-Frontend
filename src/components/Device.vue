@@ -11,8 +11,10 @@
         {{ device.name }}
         <sui-dropdown icon="wrench">
           <sui-dropdown-menu>
-            <sui-dropdown-item>
-              <sui-icon name="chart bar" />Statistics
+            <sui-dropdown-item
+              @click="deleteButton(device.deviceId)"
+            >
+              <sui-icon name="chart bar" />Delete
             </sui-dropdown-item>
             <sui-dropdown-item>
               <sui-icon name="cog"/>
@@ -98,6 +100,9 @@ export default{
           console.log(error);
         },
         );
+    },
+    deleteButton(deviceID) {
+      this.$store.dispatch('deleteServerDevice', { serverID: this.$route.params.id, deviceId: deviceID });
     },
   },
 };

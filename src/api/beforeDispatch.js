@@ -42,7 +42,7 @@ export function preparePayloadGetServerDevice() {
 
 export function perparePayloadDeleteServerDevice(deviceId) {
   return {
-    requestType: 'POST',
+    requestType: 'DELETE',
     endpoint: `/devices/${deviceId}`,
     optionalPayload: {},
   };

@@ -1,7 +1,6 @@
 # todo
 All http requests are there except for:
 Put servers
-Post devices
 Put devices
 Delete devices
 

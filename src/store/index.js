@@ -129,8 +129,8 @@ const actions = {
         alert(error);
       });
   },
-  deleteServerDevice(context, { serverID, deviceID }) {
-    const payload = perparePayloadDeleteServerDevice(deviceID);
+  deleteServerDevice(context, { serverID, deviceId }) {
+    const payload = perparePayloadDeleteServerDevice(deviceId);
     return httpPostServerRequest(serverID, payload)
       .catch((error) => {
       // eslint-disable-next-line
