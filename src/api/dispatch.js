@@ -119,6 +119,12 @@ export function httpGetServer(serverid) {
 
 export function httpPutServer(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}`;
+  // eslint-disable-next-line
+  console.log('httpPutServer');
+  // eslint-disable-next-line
+  console.log(JSON.stringify(payload));
+  // eslint-disable-next-line
+  console.log(serverid);
   return axios({
     mehtod: 'PUT',
     url,

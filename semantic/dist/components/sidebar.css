@@ -135,7 +135,8 @@ body.pushable {
   z-index: 2;
 }
 body.pushable > .pusher {
-  background: #FFFFFF;
+  background: -webkit-linear-gradient(315deg, #ffa043, #ff6a00);
+  background: linear-gradient(135deg, #ffa043, #ff6a00);
 }
 
 /* Pusher should inherit background from context */
