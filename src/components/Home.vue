@@ -5,16 +5,16 @@
       <sui-modal-header>Adding a Server</sui-modal-header>
       <sui-modal-content>
         Server Name<br>
-        <input v-model="addServerName">
-        </input><br><br>
+        <input v-model="addServerName"/>
+        <br><br>
 
         Server IP<br>
-        <input v-model="addServerIp">
-        </input><br><br>
+        <input v-model="addServerIp"/>
+        <br><br>
 
         Server Port<br>
-        <input v-model="addServerPort">
-        </input><br><br>
+        <input v-model="addServerPort"/>
+        <br><br>
 
         <sui-button @click="this.confirmAddServer">
         Add Server
@@ -50,7 +50,7 @@
           Servers
         </sui-breadcrumb-section>
       </h2></sui-breadcrumb>
-    </sui-container>      
+    </sui-container>
 
     <section class="ui section">
       <div class="ui container">
@@ -80,7 +80,7 @@
                     >
                       <sui-icon name="trash" />Delete server
                     </sui-dropdown-item>
-                    
+
                   </sui-dropdown-menu>
                 </sui-dropdown>
               </sui-card-header>
@@ -156,19 +156,20 @@ export default {
               serverID: '25',
               userID: 'string',
               serverName: this.addServerName,
-              serverAddress: 'https://' + this.addServerIp,
+              serverAddress: 'https://'${this.addServerIp},
               serverPort: this.addServerPort });
       this.addModalVisible = !this.addModalVisible;
-    }
+    },
     confirmEditServer() {
       this.$store.dispatch('addServer', {
               serverID: '25',
               userID: 'string',
               serverName: this.editServerName,
-              serverAddress: 'https://' + this.editServerIp,
+              serverAddress: 'https://'${this.editServerIp},
               serverPort: this.editServerPort });
       this.editModalVisible = !this.editModalVisible;
-    }
+
+    },
   },
 };
 </script>

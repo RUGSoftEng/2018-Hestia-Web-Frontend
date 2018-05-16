@@ -7,7 +7,6 @@
           <div v-for="atribute in Object.keys(currentPluginAtributes)" :key="atribute">
             {{ atribute }}
             <br>
-            {{ atribute }}
             <br>
             <sui-input
             v-model="currentPluginAtributes[atribute]"
@@ -184,5 +183,4 @@ export default {
     color:#FFFFFF;
     font-weight:bold;
   }
-
 </style>

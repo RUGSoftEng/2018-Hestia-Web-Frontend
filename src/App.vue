@@ -28,7 +28,7 @@
               serverPort: '8000' });"
           >
             Add server
-          </sui-button><!--
+          </sui-button>
           <sui-button
             @click="$store.dispatch('deleteServer', {
               serverID: '2yTe6u2xRUubgNwXGF8YlQ',
@@ -37,7 +37,7 @@
             Delete server
           </sui-button>
           -->
-          
+
     <div class="container">
       <router-view
         :auth="auth"
