@@ -17,7 +17,6 @@
             >
               <sui-icon name="trash" />Delete device
             </sui-dropdown-item>
-            
           </sui-dropdown-menu>
         </sui-dropdown>
       </sui-card-header>
