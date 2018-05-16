@@ -23,7 +23,7 @@
     </sui-modal>
 
     <sui-modal v-model="editModalVisible" dimmer="inverted">
-      <sui-modal-header>Adding a Server</sui-modal-header>
+      <sui-modal-header>Edit Server</sui-modal-header>
       <sui-modal-content>
         Server Name<br>
         <input v-model="editServerName">
@@ -71,8 +71,8 @@
                  <!-- settings dropdwon menu -->
                 <sui-dropdown icon="angle down">
                   <sui-dropdown-menu>
-                    <sui-dropdown-item>
-                      <sui-icon name="cog" v-on:click="this.displayEditModal"/>
+                    <sui-dropdown-item @click="displayEditModal()">
+                      <sui-icon name="cog" />
                       Settings
                     </sui-dropdown-item>
                     <sui-dropdown-item
@@ -134,6 +134,9 @@ export default {
       addServerIp: '',
       addServerPort: '',
       editModalVisible: false,
+      editServerName: '',
+      editServerIp: '',
+      editServerPort: '',
     };
   },
   beforeMount() {
@@ -146,17 +149,17 @@ export default {
       this.$store.dispatch('deleteServer', { serverID });
     },
     displayAddModal() {
-      this.modalVisible = !this.modalVisible;
+      this.addModalVisible = !this.addModalVisible;
     },
     displayEditModal() {
-      this.modalVisible = !this.modalVisible;
+      this.editModalVisible = !this.editModalVisible;
     },
     confirmAddServer() {
       this.$store.dispatch('addServer', {
               serverID: '25',
               userID: 'string',
               serverName: this.addServerName,
-              serverAddress: 'https://'${this.addServerIp},
+              serverAddress: 'https://' + this.addServerIp,
               serverPort: this.addServerPort });
       this.addModalVisible = !this.addModalVisible;
     },
@@ -165,7 +168,7 @@ export default {
               serverID: '25',
               userID: 'string',
               serverName: this.editServerName,
-              serverAddress: 'https://'${this.editServerIp},
+              serverAddress: 'https://' + this.editServerIp,
               serverPort: this.editServerPort });
       this.editModalVisible = !this.editModalVisible;
 
