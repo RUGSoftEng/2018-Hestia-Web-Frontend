@@ -1,5 +1,5 @@
 <template>
-   <sui-card :key="device.deviceId"> 
+   <sui-card :key="device.deviceId">
     <sui-modal v-model="modalVisible" dimmer="inverted">
       <sui-modal-header>Edit device</sui-modal-header>
       <sui-modal-content>
@@ -58,7 +58,6 @@
     </sui-modal>
 
 
-    
       <sui-dimmer :active="dimmerActive" inverted>
         <sui-loader>Changing device state</sui-loader>
       </sui-dimmer>

@@ -215,9 +215,9 @@ const mutations = {
   // eslint-disable-next-line
   setServersList(state, payload) {
     // eslint-disable-next-line
-    console.log("setServers");
+    console.log("setServersList");
     // eslint-disable-next-line
-    console.log(payload.serversList);
+    console.log(JSON.stringify(payload.serversList));
     state.serversList = payload.serversList;
   },
   // eslint-disable-next-line

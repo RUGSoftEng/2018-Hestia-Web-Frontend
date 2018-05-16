@@ -26,16 +26,16 @@
       <sui-modal-header>Edit Server</sui-modal-header>
       <sui-modal-content>
         Server Name<br>
-        <input v-model="editServerName">
-        </input><br><br>
+        <input v-model="editServerName"/>
+        <br><br>
 
         Server IP<br>
-        <input v-model="editServerIp">
-        </input><br><br>
+        <input v-model="editServerIp"/>
+        <br><br>
 
         Server Port<br>
-        <input v-model="editServerPort">
-        </input><br><br>
+        <input v-model="editServerPort"/>
+        <br><br>
 
         <sui-button @click="this.confirmEditServer">
         Edit Server
@@ -71,7 +71,7 @@
                  <!-- settings dropdwon menu -->
                 <sui-dropdown icon="angle down">
                   <sui-dropdown-menu>
-                    <sui-dropdown-item @click="displayEditModal()">
+                    <sui-dropdown-item @click="displayEditModal(server.server_id)">
                       <sui-icon name="cog" />
                       Settings
                     </sui-dropdown-item>
@@ -134,6 +134,7 @@ export default {
       addServerIp: '',
       addServerPort: '',
       editModalVisible: false,
+      editServerID: '',
       editServerName: '',
       editServerIp: '',
       editServerPort: '',
@@ -151,27 +152,26 @@ export default {
     displayAddModal() {
       this.addModalVisible = !this.addModalVisible;
     },
-    displayEditModal() {
+    displayEditModal(serverId) {
       this.editModalVisible = !this.editModalVisible;
+      this.editServerID = serverId;
     },
     confirmAddServer() {
       this.$store.dispatch('addServer', {
-              serverID: '25',
-              userID: 'string',
-              serverName: this.addServerName,
-              serverAddress: 'https://' + this.addServerIp,
-              serverPort: this.addServerPort });
+        serverName: this.addServerName,
+        serverAddress: `https://${this.addServerIp}`,
+        serverPort: this.addServerPort });
       this.addModalVisible = !this.addModalVisible;
     },
     confirmEditServer() {
-      this.$store.dispatch('addServer', {
-              serverID: '25',
-              userID: 'string',
-              serverName: this.editServerName,
-              serverAddress: 'https://' + this.editServerIp,
-              serverPort: this.editServerPort });
+      // eslint-disable-next-line
+      console.log('jajaja');
+      this.$store.dispatch('putServer', {
+        serverID: this.editServerID,
+        serverName: this.editServerName,
+        serverAddress: `https://${this.editServerIp}`,
+        serverPort: this.editServerPort });
       this.editModalVisible = !this.editModalVisible;
-
     },
   },
 };
