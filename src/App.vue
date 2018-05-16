@@ -1,7 +1,23 @@
 <template>
   <div id="app">
+    <router-link to="/">
           <div class="logo_header">
             <img class="ui bottom aligned small image" src="../src/assets/hestia.png">
+          </div>
+    </router-link>
+          <div class="auth_header">
+            <sui-button
+            class="btn btn-primary btn-margin"
+            v-if="!authenticated"
+            @click="login()">
+              Log In
+          </sui-button>
+          <sui-button
+            class="btn btn-primary btn-margin"
+            v-if="authenticated"
+            @click="logout()">
+              Log Out
+          </sui-button>
           </div>
           <!--<sui-button
             @click="$store.dispatch('addServer', {
@@ -21,19 +37,7 @@
             Delete server
           </sui-button>
           -->
-          <sui-button
-            class="btn btn-primary btn-margin"
-            v-if="!authenticated"
-            @click="login()">
-              Log In
-          </sui-button>
-          <!--
-          <sui-button
-            class="btn btn-primary btn-margin"
-            v-if="authenticated"
-            @click="logout()">
-              Log Out
-          </sui-button>-->
+          
     <div class="container">
       <router-view
         :auth="auth"
@@ -86,12 +90,27 @@ body {
 .logo_header {
   margin-top:-7.5em !important;
   margin-bottom: 25px !important;
-  padding-top:9em;
+  padding-top:8.75em;
   width:50%;
   height:14em;
   margin:0 auto;
   background-color:#FFFFFF;
   border-radius:0% 0% 500% 500%;
+}
+
+.logo_header:hover {
+  padding-top:9em !important;
+  transition:all .2s;
+  -webkit-transition:all .2s;
+  -moz-osx-transition:all .2s;
+}
+
+.auth_header {
+  position:fixed;
+  top:0 !important;
+  right:0 !important;
+  margin:0 !important;
+  padding:0 !important;
 }
 
 </style>

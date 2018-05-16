@@ -5,20 +5,18 @@
       <sui-modal-header>Adding a Server</sui-modal-header>
       <sui-modal-content>
         Server Name<br>
-        <sui-input>
-        </sui-input><br><br>
+        <input v-model="addServerName">
+        </input><br><br>
 
         Server IP<br>
-        <sui-input>
-        </sui-input><br><br>
+        <input v-model="addServerIp">
+        </input><br><br>
 
         Server Port<br>
-        <sui-input>
-        </sui-input><br><br>
+        <input v-model="addServerPort">
+        </input><br><br>
 
-        <sui-button
-        @click="this.addServer"
-        >
+        <sui-button @click="this.confirmAddServer">
         Add Server
         </sui-button>
       </sui-modal-content>
@@ -109,6 +107,9 @@ export default {
   data() {
     return {
       modalVisible: false,
+      addServerName: '',
+      addServerIp: '',
+      addServerPort: '',
     };
   },
   beforeMount() {
@@ -123,13 +124,13 @@ export default {
     displayModal() {
       this.modalVisible = !this.modalVisible;
     },
-    addServer() {
+    confirmAddServer() {
       this.$store.dispatch('addServer', {
               serverID: '25',
               userID: 'string',
-              serverName: 'new',
-              serverAddress: 'https://94.212.164.28',
-              serverPort: '8000' });
+              serverName: this.addServerName,
+              serverAddress: 'https://' + this.addServerIp,
+              serverPort: this.addServerPort });
       this.modalVisible = !this.modalVisible;
     }
   },
@@ -150,5 +151,6 @@ export default {
     box-shadow:none !important;
     color:#FFFFFF;
     font-weight:bold;
+    cursor:pointer;
   }
 </style>
