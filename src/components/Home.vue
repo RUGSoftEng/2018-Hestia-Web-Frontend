@@ -1,7 +1,7 @@
 <template>
   <div class="home">
 
-    <sui-modal v-model="modalVisible" dimmer="inverted">
+    <sui-modal v-model="addModalVisible" dimmer="inverted">
       <sui-modal-header>Adding a Server</sui-modal-header>
       <sui-modal-content>
         Server Name<br>
@@ -22,6 +22,27 @@
       </sui-modal-content>
     </sui-modal>
 
+    <sui-modal v-model="editModalVisible" dimmer="inverted">
+      <sui-modal-header>Adding a Server</sui-modal-header>
+      <sui-modal-content>
+        Server Name<br>
+        <input v-model="editServerName">
+        </input><br><br>
+
+        Server IP<br>
+        <input v-model="editServerIp">
+        </input><br><br>
+
+        Server Port<br>
+        <input v-model="editServerPort">
+        </input><br><br>
+
+        <sui-button @click="this.confirmEditServer">
+        Edit Server
+        </sui-button>
+      </sui-modal-content>
+    </sui-modal>
+
 
     <sui-container class="ui raised segment breadcrumbs">
       <sui-breadcrumb><h2>
@@ -34,7 +55,7 @@
     <section class="ui section">
       <div class="ui container">
         <sui-card-group :items-per-row="3" stackable raised>
-            <sui-card class="add_card" v-on:click="this.displayModal">
+            <sui-card class="add_card" v-on:click="this.displayAddModal">
               <sui-card-content>
                 <sui-card-content>
                   <br><sui-icon name="add" size="massive" class="center add_icon" />
@@ -51,7 +72,7 @@
                 <sui-dropdown icon="angle down">
                   <sui-dropdown-menu>
                     <sui-dropdown-item>
-                      <sui-icon name="cog"/>
+                      <sui-icon name="cog" v-on:click="this.displayEditModal"/>
                       Settings
                     </sui-dropdown-item>
                     <sui-dropdown-item
@@ -108,10 +129,11 @@ export default {
   },
   data() {
     return {
-      modalVisible: false,
+      addModalVisible: false,
       addServerName: '',
       addServerIp: '',
       addServerPort: '',
+      editModalVisible: false,
     };
   },
   beforeMount() {
@@ -123,7 +145,10 @@ export default {
       console.log('delete!!')
       this.$store.dispatch('deleteServer', { serverID });
     },
-    displayModal() {
+    displayAddModal() {
+      this.modalVisible = !this.modalVisible;
+    },
+    displayEditModal() {
       this.modalVisible = !this.modalVisible;
     },
     confirmAddServer() {
@@ -133,7 +158,16 @@ export default {
               serverName: this.addServerName,
               serverAddress: 'https://' + this.addServerIp,
               serverPort: this.addServerPort });
-      this.modalVisible = !this.modalVisible;
+      this.addModalVisible = !this.addModalVisible;
+    }
+    confirmEditServer() {
+      this.$store.dispatch('addServer', {
+              serverID: '25',
+              userID: 'string',
+              serverName: this.editServerName,
+              serverAddress: 'https://' + this.editServerIp,
+              serverPort: this.editServerPort });
+      this.editModalVisible = !this.editModalVisible;
     }
   },
 };
