@@ -27,6 +27,7 @@
         <sui-button icon="paper plane" content="Contact us" />
       </sui-message>
     </div>
+    <sui-divider></sui-divider>
   </div>
 </template>
 
@@ -62,3 +63,9 @@ export default{
   },
 };
 </script>
+
+<style>
+.range-slider-fill {
+  background-color:#4064cb !important;
+}
+</style>

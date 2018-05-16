@@ -1,5 +1,31 @@
 <template>
   <div class="home">
+
+    <sui-modal v-model="modalVisible" dimmer="inverted">
+      <sui-modal-header>Adding a Server</sui-modal-header>
+      <sui-modal-content>
+        Server Name<br>
+        <sui-input>
+        </sui-input><br><br>
+
+        Server IP<br>
+        <sui-input>
+        </sui-input><br><br>
+
+        Server Port<br>
+        <sui-input>
+        </sui-input><br><br>
+
+        <sui-button
+        @click="this.addServer"
+        >
+        Add Server
+        </sui-button>
+      </sui-modal-content>
+    </sui-modal>
+
+
+
     <sui-breadcrumb class="ui raised segment breadcrumbs">
       <sui-breadcrumb-section active>
         <h2>Servers</h2>
@@ -8,7 +34,7 @@
     <section class="ui section">
       <div class="ui container">
         <sui-card-group :items-per-row="3" stackable raised>
-            <sui-card class="add_card">
+            <sui-card class="add_card" v-on:click="this.displayModal">
               <sui-card-content>
                 <sui-card-content>
                   <br><sui-icon name="add" size="massive" class="center add_icon" />
@@ -50,7 +76,7 @@
               </router-link>
               <sui-divider/>
               <!-- preset dropdwon  -->
-              <sui-dropdown
+              <!--<sui-dropdown
               text="Select Preset"
               button
               search
@@ -59,7 +85,7 @@
               :max-selections="1"
               :options="server.presets"
               v-model="server.currentPreset"
-              />
+              />-->
             </sui-card-content>
           </sui-card>
         </sui-card-group>
@@ -80,6 +106,11 @@ export default {
   components: {
     RangeSlider,
   },
+  data() {
+    return {
+      modalVisible: false,
+    };
+  },
   beforeMount() {
     this.$store.dispatch('loadServersList');
   },
@@ -89,6 +120,18 @@ export default {
       console.log('delete!!')
       this.$store.dispatch('deleteServer', { serverID });
     },
+    displayModal() {
+      this.modalVisible = !this.modalVisible;
+    },
+    addServer() {
+      this.$store.dispatch('addServer', {
+              serverID: '25',
+              userID: 'string',
+              serverName: 'new',
+              serverAddress: 'https://94.212.164.28',
+              serverPort: '8000' });
+      this.modalVisible = !this.modalVisible;
+    }
   },
 };
 </script>

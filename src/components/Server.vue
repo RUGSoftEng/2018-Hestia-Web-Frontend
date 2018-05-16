@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="server">
-    <!-- The pop up modal when the user wants to add a device -->
+    <!-- The pop up modal when the user wants to add a device
     <sui-modal v-model="modalVisible" dimmer="inverted">
       <sui-modal-header>Adding a new device to {{ this.$route.params.id }}</sui-modal-header>
       <sui-modal-content>
@@ -59,7 +59,7 @@
       </sui-modal-content>
 
 
-    </sui-modal>
+    </sui-modal>-->
 
     
 
@@ -86,7 +86,7 @@
     </DeviceGroup>
 
     <!-- The button menu -->
-    <div class="ui container button-group">
+    <!--<div class="ui container button-group">
         <sui-button @click="this.displayModal">Add Device</sui-button>
         <sui-dropdown
           selection
@@ -102,7 +102,7 @@
             </sui-dropdown-item>
           </sui-dropdown-menu>
         </sui-dropdown>
-        <!--<sui-button
+        <sui-button
         @click="login()"
         >Logout</sui-button>-->
 
@@ -203,5 +203,9 @@ export default {
 </script>
 
 <style>
-
+.breadcrumbs {
+    width: 70%;
+    margin-bottom:25px !important;
+    text-align: left;
+  }
 </style>

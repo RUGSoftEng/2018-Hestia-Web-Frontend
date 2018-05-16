@@ -9,17 +9,18 @@
       </sui-card-meta>
       <sui-card-header fluid>
         {{ device.name }}
-        <sui-dropdown icon="wrench">
+        <sui-dropdown icon="angle down">
           <sui-dropdown-menu>
-            <sui-dropdown-item
-              @click="deleteButton(device.deviceId)"
-            >
-              <sui-icon name="chart bar" />Delete
-            </sui-dropdown-item>
             <sui-dropdown-item>
               <sui-icon name="cog"/>
               Settings
             </sui-dropdown-item>
+            <sui-dropdown-item
+              @click="deleteButton(device.deviceId)"
+            >
+              <sui-icon name="trash" />Delete Device
+            </sui-dropdown-item>
+            
           </sui-dropdown-menu>
         </sui-dropdown>
       </sui-card-header>
@@ -44,6 +45,7 @@
           v-on:activatorClick="updateActivatorGlobal"
           >
         </Activator>
+        
         </div>
       </div>
     </sui-card-content>
