@@ -17,7 +17,7 @@
           </div>
         </div>
 
-        <sui-button
+        <sui-button primary
         v-if="currentCollectionDevice != -1"
         @click="postDevice()"
         >
@@ -56,9 +56,9 @@
         </select>
         {{ currentPluginAtributes }}
       </sui-modal-content>
-
-
     </sui-modal>
+
+
     <div class="ui container">
       <sui-card-group :items-per-row="3" stackable>
         <sui-card class="add_card" v-on:click="this.displayModal">
@@ -102,6 +102,7 @@ export default {
       currentCollection: -1,
       currentCollectionDevice: -1,
       modalVisible: false,
+      dimmerActive: false,
       presetPlaceholder: 'select a preset',
       presets: [{
         text: 'my favourite',
@@ -125,9 +126,6 @@ export default {
     this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
   },
   computed: {
-    server() {
-      return this.$store.state.currentServer;
-    },
     pluginsCollections() {
       return this.$store.state.currentServerPluginsCollections;
     },

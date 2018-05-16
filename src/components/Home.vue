@@ -23,12 +23,14 @@
     </sui-modal>
 
 
+    <sui-container class="ui raised segment breadcrumbs">
+      <sui-breadcrumb><h2>
+        <sui-breadcrumb-section active>
+          Servers
+        </sui-breadcrumb-section>
+      </h2></sui-breadcrumb>
+    </sui-container>      
 
-    <sui-breadcrumb class="ui raised segment breadcrumbs">
-      <sui-breadcrumb-section active>
-        <h2>Servers</h2>
-      </sui-breadcrumb-section>
-    </sui-breadcrumb>
     <section class="ui section">
       <div class="ui container">
         <sui-card-group :items-per-row="3" stackable raised>
@@ -141,6 +143,7 @@ export default {
 <style>
   .breadcrumbs {
     width: 70%;
+    height:4em;
     margin-bottom:25px !important;
     text-align: left;
   }
