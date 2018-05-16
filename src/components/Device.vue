@@ -4,9 +4,6 @@
       <sui-loader>Changing device state</sui-loader>
     </sui-dimmer>
     <sui-card-content>
-      <sui-card-meta>
-        {{ device.deviceId }}
-      </sui-card-meta>
       <sui-card-header fluid>
         {{ device.name }}
         <sui-dropdown icon="angle down">
@@ -18,15 +15,18 @@
             <sui-dropdown-item
               @click="deleteButton(device.deviceId)"
             >
-              <sui-icon name="trash" />Delete Device
+              <sui-icon name="trash" />Delete device
             </sui-dropdown-item>
             
           </sui-dropdown-menu>
         </sui-dropdown>
       </sui-card-header>
       <sui-card-meta>
-       {{ device.type }}
+        <strong>{{ device.type }}</strong> - {{ device.deviceId }}
       </sui-card-meta>
+      <!--<sui-card-meta>
+       {{ device.type }}
+      </sui-card-meta>-->
 
       <sui-divider horizontal>
         <h5 is="sui-header">
@@ -35,7 +35,7 @@
         </h5>
       </sui-divider>
 
-      <div class="ui-from">
+      <div class="ui form">
         <div class="grouped fields">
           <Activator
           v-for="activator in device.activators"
@@ -45,7 +45,7 @@
           v-on:activatorClick="updateActivatorGlobal"
           >
         </Activator>
-        
+
         </div>
       </div>
     </sui-card-content>

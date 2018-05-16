@@ -64,10 +64,10 @@
         <sui-card class="add_card" v-on:click="this.displayModal">
           <sui-card-content>
             <sui-card-content>
-              <br><br><sui-icon name="add" size="massive" class="center add_icon" />
+              <br><sui-icon name="add" size="massive" class="center add_icon" />
             </sui-card-content>
             <sui-card-content extra>
-              Add Devices
+              Add Device
             </sui-card-content>
           </sui-card-content>
         </sui-card>
