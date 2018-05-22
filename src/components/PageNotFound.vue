@@ -1,3 +1,5 @@
+require 'htmlbeautifier'
+beautiful = HtmlBeautifier.beautify(messy)
 <template>
   <div>
     <h1>
@@ -13,21 +15,19 @@
     </p>
   </div>
 </template>
-
-
 <script>
-export default{
-  computed: {
-    pageName() {
-      // removing the first slash from the URL path
-      return (this.$route.path).substring(1, (this.$route.path).length);
+  export default{
+    computed: {
+      pageName() {
+        // removing the first slash from the URL path
+        return (this.$route.path).substring(1, (this.$route.path).length);
+      },
     },
-  },
-  methods: {
-    routerGo() {
-      this.$router.push({ path: '/' });
-      // (window.history.length > 1 ? this.$router.back() : this.$router.go('/'));
+    methods: {
+      routerGo() {
+        this.$router.push({ path: '/' });
+        // (window.history.length > 1 ? this.$router.back() : this.$router.go('/'));
+      },
     },
-  },
-};
+  };
 </script>
