@@ -116,7 +116,13 @@ export function httpGetServer(serverid) {
   });
 }
 
-
+/**
+ * httpPutServer -  Change the inforamtion of the server.
+ * @param  {String} serverid Id of the server.
+ * @param  {Object} payload  payload containing the information to be changed.
+ * @return {Promise}         Returns the promise,
+ *                         either containing the response of the server or an error.
+ */
 export function httpPutServer(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}`;
   // eslint-disable-next-line
