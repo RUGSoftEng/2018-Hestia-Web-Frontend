@@ -5,7 +5,6 @@
         <img class="ui bottom aligned small image" src="../src/assets/hestia.png">
       </div>
     </router-link>
-<<<<<<< HEAD
           <div class="auth_header">
             <sui-button
             class="btn btn-primary btn-margin"
@@ -27,7 +26,6 @@
       </router-view>
     </div>
   </div>
-=======
     <div class="auth_header">
       <sui-button
       class="btn btn-primary btn-margin"
@@ -50,7 +48,6 @@
 </router-view>
 </div>
 </div>
->>>>>>> 08232fd67d26a82043a86e3c141762bf1708b3ad
 </template>
 
 <script>
