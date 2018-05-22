@@ -1,4 +1,4 @@
-template>
+<template>
 <div class="DeviceGroup">
   <sui-modal v-model="modalVisible" dimmer="inverted">
     <sui-modal-header>Adding a new device to {{ this.$route.params.id }}</sui-modal-header>
