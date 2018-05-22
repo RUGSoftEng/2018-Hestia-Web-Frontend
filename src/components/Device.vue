@@ -1,5 +1,3 @@
-require 'htmlbeautifier'
-beautiful = HtmlBeautifier.beautify(messy)
 <template>
   <sui-card :key="device.deviceId">
     <sui-modal v-model="modalVisible" dimmer="inverted">

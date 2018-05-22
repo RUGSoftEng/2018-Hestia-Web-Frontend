@@ -1,5 +1,3 @@
-require 'htmlbeautifier'
-beautiful = HtmlBeautifier.beautify(messy)
 <template lang="html">
   <div class="server">
     <!-- The sui-breadcrumb -->

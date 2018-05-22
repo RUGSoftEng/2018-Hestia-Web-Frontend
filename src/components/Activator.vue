@@ -1,5 +1,3 @@
-require 'htmlbeautifier'
-beautiful = HtmlBeautifier.beautify(messy)
 <template>
   <div class="field">
     <div v-if="activator.type === 'bool'">
