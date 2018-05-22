@@ -39,7 +39,9 @@ const state = {
 /**
  * actions -  Asynchronous operations
  * The functions are invoked by input events on the website.
- * All functions interect with
+ * All functions interect with the backend via http GET, POST, PUT and DELETE.
+ * After a succesfull interaction with the backend. The response data is parsed
+ * into the store by the mutations defined in this file.
  * @type {Object}
  */
 const actions = {
