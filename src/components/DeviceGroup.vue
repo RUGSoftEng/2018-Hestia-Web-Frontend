@@ -77,68 +77,68 @@ v-for="collection in pluginsCollections"
 </div>
 </template>
 <script>
-  import Device from './Device';
+import Device from './Device';
 
-  export default {
-    props: {
-      server: {
-        required: true,
+export default {
+  props: {
+    server: {
+      required: true,
+    },
+  },
+  components: {
+    Device,
+  },
+  data() {
+    return {
+      currentPreset: null,
+      currentCollection: -1,
+      currentCollectionDevice: -1,
+      modalVisible: false,
+      dimmerActive: false,
+      presetPlaceholder: 'select a preset',
+      presets: [{
+        text: 'my favourite',
+        value: 1,
+        key: 1,
+      }, {
+        text: 'goomba stomp special',
+        value: 2,
+        key: 2,
+      }, {
+        text: 'dwarf fortress surprise',
+        value: 3,
+        key: 3,
       },
-    },
-    components: {
-      Device,
-    },
-    data() {
-      return {
-        currentPreset: null,
-        currentCollection: -1,
-        currentCollectionDevice: -1,
-        modalVisible: false,
-        dimmerActive: false,
-        presetPlaceholder: 'select a preset',
-        presets: [{
-          text: 'my favourite',
-          value: 1,
-          key: 1,
-        }, {
-          text: 'goomba stomp special',
-          value: 2,
-          key: 2,
-        }, {
-          text: 'dwarf fortress surprise',
-          value: 3,
-          key: 3,
-        },
-        ],
-      };
-    },
-    beforeMount() {
-      // eslint-disable-next-line
+      ],
+    };
+  },
+  beforeMount() {
+    // eslint-disable-next-line
       console.log(this.$route.params.id);
-      this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
+    this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
+  },
+  computed: {
+    pluginsCollections() {
+      return this.$store.state.currentServerPluginsCollections;
     },
-    computed: {
-      pluginsCollections() {
-        return this.$store.state.currentServerPluginsCollections;
-      },
-      plugins() {
-        return this.$store.state.currentServerPlugins;
-      },
-      currentPluginAtributes() {
-        return this.$store.state.currentPluginAtributes.required_info;
-      },
+    plugins() {
+      return this.$store.state.currentServerPlugins;
     },
-    methods: {
-      displayModal() {
-          this.$store.dispatch('getServerPlugins', { serverID: this.$route.params.id });
-        this.modalVisible = !this.modalVisible;
-      },
-      presetChange(value) {
-        // eslint-disable-next-line
+    currentPluginAtributes() {
+      return this.$store.state.currentPluginAtributes.required_info;
+    },
+  },
+  methods: {
+    displayModal() {
+      this.$store.dispatch('getServerPlugins', { serverID: this.$route.params.id });
+      this.modalVisible = !this.modalVisible;
+    },
+    presetChange(value) {
+      // eslint-disable-next-line
         console.log(value);
-      },
-      pluginCollectionClicked() {
-        /* eslint-disable */
+    },
+    pluginCollectionClicked() {
+      /* eslint-disable */
         this.$store.dispatch('getServerPluginsCollections',
         {
           serverID: this.$route.params.id,
@@ -153,18 +153,18 @@ v-for="collection in pluginsCollections"
           device: this.$store.state.currentServerPluginsCollections[this.currentCollectionDevice].deviceName,
         });
         /* eslint-enable */
-      },
-      postDevice() {
-        const payloadtest = this.$store.state.currentPluginAtributes;
-        this.$store.dispatch('postServerDevice',
+    },
+    postDevice() {
+      const payloadtest = this.$store.state.currentPluginAtributes;
+      this.$store.dispatch('postServerDevice',
         {
           serverID: this.$route.params.id,
           deviceInfo: payloadtest,
         });
-        this.modalVisible = !this.modalVisible;
-      },
+      this.modalVisible = !this.modalVisible;
     },
-  };
+  },
+};
 </script>
 <style scoped>
 .add_card {

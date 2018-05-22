@@ -74,7 +74,8 @@
                     </sui-dropdown-menu>
                   </sui-dropdown>
                 </sui-card-header>
-                <sui-card-meta> {{server.server_address + ':' + server.server_port}} </sui-card-meta>
+                <sui-card-meta> {{server.server_address + ':' + server.server_port}}
+                </sui-card-meta>
                 <sui-divider/>
                 <!--enter server button -->
                 <router-link :to="`Server/${server.server_id}`">
@@ -93,36 +94,36 @@
       </section>
     </div>
   </template>
-  <script>
-    import RangeSlider from 'vue-range-slider';
-    import 'vue-range-slider/dist/vue-range-slider.css';
-    import { mapState } from 'vuex';
+<script>
+import RangeSlider from 'vue-range-slider';
+import 'vue-range-slider/dist/vue-range-slider.css';
+import { mapState } from 'vuex';
 
-    export default {
-      computed: mapState({
-        servers: state => state.serversList,
-      }),
-      components: {
-        RangeSlider,
-      },
-      data() {
-        return {
-          addModalVisible: false,
-          addServerName: '',
-          addServerIp: '',
-          addServerPort: '',
-          editModalVisible: false,
-          editServerID: '',
-          editServerName: '',
-          editServerIp: '',
-          editServerPort: '',
-        };
-      },
-      beforeMount() {
-        this.$store.dispatch('loadServersList');
-      },
-      methods: {
-        deleteButton(serverID) {
+export default {
+  computed: mapState({
+    servers: state => state.serversList,
+  }),
+  components: {
+    RangeSlider,
+  },
+  data() {
+    return {
+      addModalVisible: false,
+      addServerName: '',
+      addServerIp: '',
+      addServerPort: '',
+      editModalVisible: false,
+      editServerID: '',
+      editServerName: '',
+      editServerIp: '',
+      editServerPort: '',
+    };
+  },
+  beforeMount() {
+    this.$store.dispatch('loadServersList');
+  },
+  methods: {
+    deleteButton(serverID) {
       // eslint-disable-next-line
       console.log('delete!!')
       this.$store.dispatch('deleteServer', { serverID });

@@ -103,69 +103,69 @@ Confirm
 </sui-card>
 </template>
 <script>
-  import Activator from './Activator';
+import Activator from './Activator';
 
-  export default{
-    props: {
-      device: {
-        type: Object,
-        required: true,
-      },
+export default{
+  props: {
+    device: {
+      type: Object,
+      required: true,
     },
-    components: {
-      Activator,
+  },
+  components: {
+    Activator,
+  },
+  data() {
+    return {
+      dimmerActive: false,
+      modalVisible: false,
+    };
+  },
+  methods: {
+    displayModal() {
+      this.$store.dispatch('getServerPlugins', { serverID: this.$route.params.id });
+      this.modalVisible = !this.modalVisible;
     },
-    data() {
-      return {
-        dimmerActive: false,
-        modalVisible: false,
-      };
-    },
-    methods: {
-      displayModal() {
-        this.$store.dispatch('getServerPlugins', { serverID: this.$route.params.id });
-        this.modalVisible = !this.modalVisible;
-      },
-      updateActivatorLocal(payload) {
-            // eslint-disable-next-line
+    updateActivatorLocal(payload) {
+      // eslint-disable-next-line
             console.log(JSON.stringify(payload));
-            this.$store.commit('setActivatorState',
-            {
-              deviceId: this.device.deviceId,
-              currentActivator: payload.currentActivator,
-              activatorState: payload.activatorState,
-            });
-          },
-          updateActivatorGlobal(payload) {
-            // eslint-disable-next-line
+      this.$store.commit('setActivatorState',
+        {
+          deviceId: this.device.deviceId,
+          currentActivator: payload.currentActivator,
+          activatorState: payload.activatorState,
+        });
+    },
+    updateActivatorGlobal(payload) {
+      // eslint-disable-next-line
             console.log(payload.activator);
-            // eslint-disable-next-line
+      // eslint-disable-next-line
             console.log('hoi');
-            this.dimmerActive = true;
-            this.$store.dispatch('activatorUpdate',
-              { activator: payload.activator,
-                deviceID: this.device.deviceId,
-                serverID: this.$route.params.id,
-              })
-            .then((response) => {
-                // eslint-disable-next-line
+      this.dimmerActive = true;
+      this.$store.dispatch('activatorUpdate',
+        { activator: payload.activator,
+          deviceID: this.device.deviceId,
+          serverID: this.$route.params.id,
+        })
+        .then((response) => {
+          // eslint-disable-next-line
                 console.log(response);
-                this.dimmerActive = false;
-              }, (error) => {
-                // eslint-disable-next-line
+          this.dimmerActive = false;
+        }, (error) => {
+          // eslint-disable-next-line
                 console.log(error);
-              },
-              );
-          },
-          deleteButton(deviceID) {
-            this.$store.dispatch('deleteServerDevice', { serverID: this.$route.params.id, deviceId: deviceID });
-          },
-          presetChange(value) {
-            // eslint-disable-next-line
+        },
+        );
+    },
+    deleteButton(deviceID) {
+      this.$store.dispatch('deleteServerDevice', { serverID: this.$route.params.id, deviceId: deviceID });
+    },
+    presetChange(value) {
+      // eslint-disable-next-line
             console.log(value);
-          },
-          pluginCollectionClicked() {
-            /* eslint-disable */
+    },
+    pluginCollectionClicked() {
+      /* eslint-disable */
             this.$store.dispatch('getServerPluginsCollections',
             {
               serverID: this.$route.params.id,
@@ -180,16 +180,16 @@ Confirm
               device: this.$store.state.currentServerPluginsCollections[this.currentCollectionDevice].deviceName,
             });
             /* eslint-enable */
-          },
-          postDevice() {
-            const payloadtest = this.$store.state.currentPluginAtributes;
-            this.$store.dispatch('postServerDevice',
-            {
-              serverID: this.$route.params.id,
-              deviceInfo: payloadtest,
-            });
-            this.modalVisible = !this.modalVisible;
-          },
-        },
-      };
-    </script>
+    },
+    postDevice() {
+      const payloadtest = this.$store.state.currentPluginAtributes;
+      this.$store.dispatch('postServerDevice',
+        {
+          serverID: this.$route.params.id,
+          deviceInfo: payloadtest,
+        });
+      this.modalVisible = !this.modalVisible;
+    },
+  },
+};
+</script>

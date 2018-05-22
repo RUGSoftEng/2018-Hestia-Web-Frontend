@@ -24,34 +24,34 @@ beautiful = HtmlBeautifier.beautify(messy)
   </div>
 </template>
 <script>
-  import 'vue-range-slider/dist/vue-range-slider.css';
-  import DeviceGroup from './DeviceGroup';
+import 'vue-range-slider/dist/vue-range-slider.css';
+import DeviceGroup from './DeviceGroup';
 
-  export default {
-    props: [
+export default {
+  props: [
     'auth', 'authenticated',
-    ],
-    components: {
-      DeviceGroup,
-    },
-    beforeMount() {
-        // eslint-disable-next-line
+  ],
+  components: {
+    DeviceGroup,
+  },
+  beforeMount() {
+    // eslint-disable-next-line
         console.log(this.$route.params.id);
-        this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
-      },
-      computed: {
-        server() {
-          return this.$store.state.currentServer;
-        },
-      },
-      methods: {
-        presetChange(value) {
-          // eslint-disable-next-line
+    this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
+  },
+  computed: {
+    server() {
+      return this.$store.state.currentServer;
+    },
+  },
+  methods: {
+    presetChange(value) {
+      // eslint-disable-next-line
           console.log(value);
-        },
-      },
-    };
-  </script>
+    },
+  },
+};
+</script>
   <style>
   .breadcrumbs {
     width: 70%;
