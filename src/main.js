@@ -15,6 +15,7 @@ console.log(Vue.http);
 Vue.use(SuiVue);
 Vue.config.productionTip = false;
 
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

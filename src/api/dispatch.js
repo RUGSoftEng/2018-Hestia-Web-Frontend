@@ -55,7 +55,7 @@ export function httpPostUsers() {
 export function httpGetServers() {
   const url = `${WEB_API_CONFIG.url}/servers/`;
   // eslint-disable-next-line
-  console.log('getServers in API bitches')
+  console.log('httpGetServers')
   return axios.get(url, { headers: { Authorization: createAuthorizationHeader() } });
 }
 
