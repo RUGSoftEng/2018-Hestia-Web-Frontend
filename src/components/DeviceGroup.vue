@@ -112,11 +112,6 @@ export default {
       ],
     };
   },
-  beforeMount() {
-    // eslint-disable-next-line
-      console.log(this.$route.params.id);
-    this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
-  },
   computed: {
     pluginsCollections() {
       return this.$store.state.currentServerPluginsCollections;
