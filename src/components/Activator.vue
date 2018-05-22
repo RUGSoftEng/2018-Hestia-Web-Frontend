@@ -1,3 +1,5 @@
+require 'htmlbeautifier'
+beautiful = HtmlBeautifier.beautify(messy)
 <template>
   <div class="field">
     <div v-if="activator.type === 'bool'">
@@ -8,29 +10,28 @@
     </div>
     <div v-else-if="activator.type === 'float'">
       <range-slider
-        class="slider"
-        min="0"
-        max="1"
-        step="0.05"
-        v-model="activatorState"
-        @change="activatorClicked"
+      class="slider"
+      min="0"
+      max="1"
+      step="0.05"
+      v-model="activatorState"
+      @change="activatorClicked"
       >
-      </range-slider>
-      {{ activator.name }}
-    </div>
-    <div v-else>
-      <sui-message
-        icon="exclamation triangle icon"
-        :header=activator.name
-        content="Activator unknown">
-        <br/>
-        <sui-button icon="paper plane" content="Contact us" />
-      </sui-message>
-    </div>
-    <sui-divider></sui-divider>
+    </range-slider>
+    {{ activator.name }}
   </div>
+  <div v-else>
+    <sui-message
+    icon="exclamation triangle icon"
+    :header=activator.name
+    content="Activator unknown">
+    <br/>
+    <sui-button icon="paper plane" content="Contact us" />
+  </sui-message>
+</div>
+<sui-divider></sui-divider>
+</div>
 </template>
-
 <script>
 import RangeSlider from 'vue-range-slider';
 
@@ -57,15 +58,14 @@ export default{
   methods: {
     activatorClicked() {
       // eslint-disable-next-line
-      console.log(this);
+            console.log(this);
       this.$emit('activatorClick', { activator: this.activator });
     },
   },
 };
 </script>
-
-<style>
-.range-slider-fill {
-  background-color:#4064cb !important;
-}
-</style>
+    <style>
+    .range-slider-fill {
+      background-color:#4064cb !important;
+    }
+  </style>

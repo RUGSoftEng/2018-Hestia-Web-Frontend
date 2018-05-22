@@ -1,120 +1,99 @@
 <template>
   <div class="home">
-
     <sui-modal v-model="addModalVisible" dimmer="inverted">
       <sui-modal-header>Adding a Server</sui-modal-header>
       <sui-modal-content>
         Server Name<br>
         <input v-model="addServerName"/>
-        <br><br>
-
+        <br>
+        <br>
         Server IP<br>
         <input v-model="addServerIp"/>
-        <br><br>
-
+        <br>
+        <br>
         Server Port<br>
         <input v-model="addServerPort"/>
-        <br><br>
-
+        <br>
+        <br>
         <sui-button @click="this.confirmAddServer">
-        Add Server
+          Add Server
         </sui-button>
       </sui-modal-content>
     </sui-modal>
-
     <sui-modal v-model="editModalVisible" dimmer="inverted">
       <sui-modal-header>Edit Server</sui-modal-header>
       <sui-modal-content>
-        Server Name<br>
+        Server Name
+        <br>
         <input v-model="editServerName"/>
-        <br><br>
-
-        Server IP<br>
+        <br>
+        <br>
+        Server IP
+        <br>
         <input v-model="editServerIp"/>
-        <br><br>
-
+        <br>
+        <br>
         Server Port<br>
         <input v-model="editServerPort"/>
-        <br><br>
-
-        <sui-button @click="this.confirmEditServer">
-        Edit Server
-        </sui-button>
+        <br>
+        <br>
+        <sui-button @click="this.confirmEditServer"> Edit Server </sui-button>
       </sui-modal-content>
     </sui-modal>
-
-
     <sui-container class="ui raised segment breadcrumbs">
-      <sui-breadcrumb><h2>
-        <sui-breadcrumb-section active>
-          Servers
-        </sui-breadcrumb-section>
-      </h2></sui-breadcrumb>
+      <sui-breadcrumb>
+        <h2>
+          <sui-breadcrumb-section active> Servers </sui-breadcrumb-section>
+        </h2>
+      </sui-breadcrumb>
     </sui-container>
-
     <section class="ui section">
       <div class="ui container">
         <sui-card-group :items-per-row="3" stackable raised>
-            <sui-card class="add_card" v-on:click="this.displayAddModal">
+          <sui-card class="add_card" v-on:click="this.displayAddModal">
+            <sui-card-content>
               <sui-card-content>
-                <sui-card-content>
-                  <br><sui-icon name="add" size="massive" class="center add_icon" />
-                </sui-card-content>
-                <sui-card-content extra>
-                  Add Server
-                </sui-card-content>
+                <br>
+                <sui-icon name="add" size="massive" class="center add_icon" /> </sui-card-content>
+                <sui-card-content extra> Add Server </sui-card-content>
               </sui-card-content>
             </sui-card>
-          <sui-card v-for="server in servers" :key="server.server_id">
-            <sui-card-content>
-              <sui-card-header> {{server.server_name}}
-                 <!-- settings dropdwon menu -->
-                <sui-dropdown icon="angle down">
-                  <sui-dropdown-menu>
-                    <sui-dropdown-item @click="displayEditModal(server.server_id)">
-                      <sui-icon name="cog" />
-                      Settings
-                    </sui-dropdown-item>
-                    <sui-dropdown-item
-                      @click="deleteButton(server.server_id)"
-                    >
-                      <sui-icon name="trash" />Delete server
-                    </sui-dropdown-item>
-
-                  </sui-dropdown-menu>
-                </sui-dropdown>
-              </sui-card-header>
-              <sui-card-meta> {{server.server_address + ':' + server.server_port}} </sui-card-meta>
-              <sui-divider/>
-              <!--enter server button -->
-              <router-link :to="`Server/${server.server_id}`">
-                <sui-button primary animated>
-                  <sui-button-content visible>Enter server</sui-button-content>
-                  <sui-button-content hidden>
-                    <sui-icon name="right arrow" />
-                  </sui-button-content>
-                </sui-button>
-              </router-link>
-              <sui-divider/>
-              <!-- preset dropdwon  -->
-              <!--<sui-dropdown
-              text="Select Preset"
-              button
-              search
-              selection
-              multiple
-              :max-selections="1"
-              :options="server.presets"
-              v-model="server.currentPreset"
-              />-->
-            </sui-card-content>
-          </sui-card>
-        </sui-card-group>
-      </div>
-    </section>
-  </div>
-</template>
-
+            <sui-card v-for="server in servers" :key="server.server_id">
+              <sui-card-content>
+                <sui-card-header> {{server.server_name}}
+                  <!-- settings dropdwon menu -->
+                  <sui-dropdown icon="angle down">
+                    <sui-dropdown-menu>
+                      <sui-dropdown-item @click="displayEditModal(server.server_id)">
+                        <sui-icon name="cog" />
+                        Settings
+                      </sui-dropdown-item>
+                      <sui-dropdown-item @click="deleteButton(server.server_id)">
+                        <sui-icon name="trash" /> Delete server
+                      </sui-dropdown-item>
+                    </sui-dropdown-menu>
+                  </sui-dropdown>
+                </sui-card-header>
+                <sui-card-meta> {{server.server_address + ':' + server.server_port}}
+                </sui-card-meta>
+                <sui-divider/>
+                <!--enter server button -->
+                <router-link :to="`Server/${server.server_id}`">
+                  <sui-button primary animated>
+                    <sui-button-content visible>Enter server</sui-button-content>
+                    <sui-button-content hidden>
+                      <sui-icon name="right arrow" />
+                    </sui-button-content>
+                  </sui-button>
+                </router-link>
+                <sui-divider/>
+              </sui-card-content>
+            </sui-card>
+          </sui-card-group>
+        </div>
+      </section>
+    </div>
+  </template>
 <script>
 import RangeSlider from 'vue-range-slider';
 import 'vue-range-slider/dist/vue-range-slider.css';
@@ -172,22 +151,21 @@ export default {
   },
 };
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style>
-  .breadcrumbs {
-    width: 70%;
-    height:4em;
-    margin-bottom:25px !important;
-    text-align: left;
-  }
+.breadcrumbs {
+width: 70%;
+height:4em;
+margin-bottom:25px !important;
+text-align: left;
+}
 
-  .add_card {
-    background:none !important;
-    border:5px dashed #FFFFFF !important;
-    box-shadow:none !important;
-    color:#FFFFFF;
-    font-weight:bold;
-    cursor:pointer;
-  }
+.add_card {
+background:none !important;
+border:5px dashed #FFFFFF !important;
+box-shadow:none !important;
+color:#FFFFFF;
+font-weight:bold;
+cursor:pointer;
+}
 </style>
