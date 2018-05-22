@@ -145,8 +145,6 @@ export default {
   },
   methods: {
     deleteButton(serverID) {
-      // eslint-disable-next-line
-      console.log('delete!!')
       this.$store.dispatch('deleteServer', { serverID });
     },
     displayAddModal() {
@@ -164,8 +162,6 @@ export default {
       this.addModalVisible = !this.addModalVisible;
     },
     confirmEditServer() {
-      // eslint-disable-next-line
-      console.log('jajaja');
       this.$store.dispatch('putServer', {
         serverID: this.editServerID,
         serverName: this.editServerName,

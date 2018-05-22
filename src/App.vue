@@ -19,25 +19,6 @@
               Log Out
           </sui-button>
           </div>
-          <!--<sui-button
-            @click="$store.dispatch('addServer', {
-              serverID: '25',
-              userID: 'string',
-              serverName: 'new',
-              serverAddress: 'https://94.212.164.28',
-              serverPort: '8000' });"
-          >
-            Add server
-          </sui-button>
-          <sui-button
-            @click="$store.dispatch('deleteServer', {
-              serverID: '2yTe6u2xRUubgNwXGF8YlQ',
-               });"
-          >
-            Delete server
-          </sui-button>
-          -->
-
     <div class="container">
       <router-view
         :auth="auth"
