@@ -19,27 +19,6 @@
         Log Out
       </sui-button>
     </div>
-    <div class="container">
-      <router-view
-        :auth="auth"
-        :authenticated="authenticated">
-      </router-view>
-    </div>
-
-    <div class="auth_header">
-      <sui-button
-      class="btn btn-primary btn-margin"
-      v-if="!authenticated"
-      @click="login()">
-        Log In
-      </sui-button>
-      <sui-button
-      class="btn btn-primary btn-margin"
-      v-if="authenticated"
-      @click="logout()">
-        Log Out
-      </sui-button>
-    </div>
 
     <div class="container">
       <router-view
