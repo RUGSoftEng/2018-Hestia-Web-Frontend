@@ -28,10 +28,6 @@ export function preparePayloadPutServer(serverName, serverAddress, serverPort) {
   };
 }
 
-export function hallo() {
-  return 'hallo';
-}
-
 export function preparePayloadGetServerDevice() {
   return {
     requestType: 'GET',
