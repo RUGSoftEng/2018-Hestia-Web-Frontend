@@ -126,10 +126,19 @@ const actions = {
   putServer(context, { serverID, serverName, serverPort, serverAddress }) {
     const payload = preparePayloadPutServer(serverName, serverAddress, serverPort);
     return httpPutServer(serverID, payload)
-      .then(setTimeout(
-        context.dispatch('loadServersList'), 1000,
-      ),
-      )
+      .then((response) => {
+        // eslint-disable-next-line
+        console.log("putServer");
+        // eslint-disable-next-line
+        console.log(serverID);
+        // eslint-disable-next-line
+        console.log(serverName);
+        // eslint-disable-next-line
+        console.log(JSON.stringify(response.data));
+        setTimeout(
+          context.dispatch('loadServersList'), 1000,
+        );
+      })
       .catch((error) => {
       // eslint-disable-next-line
       alert(error);

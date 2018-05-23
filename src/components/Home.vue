@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+
+    <!-- Modal for adding a new server -->
     <sui-modal v-model="addModalVisible" dimmer="inverted">
       <sui-modal-header>Adding a Server</sui-modal-header>
       <sui-modal-content>
@@ -20,6 +22,8 @@
         </sui-button>
       </sui-modal-content>
     </sui-modal>
+
+    <!-- Modal for editing server information -->
     <sui-modal v-model="editModalVisible" dimmer="inverted">
       <sui-modal-header>Edit Server</sui-modal-header>
       <sui-modal-content>
@@ -40,6 +44,8 @@
         <sui-button @click="this.confirmEditServer"> Edit Server </sui-button>
       </sui-modal-content>
     </sui-modal>
+
+
     <sui-container class="ui raised segment breadcrumbs">
       <sui-breadcrumb>
         <h2>
