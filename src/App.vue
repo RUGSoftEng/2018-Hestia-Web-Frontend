@@ -1,29 +1,29 @@
 <template>
   <div id="app">
     <router-link to="/">
-          <div class="logo_header">
-            <img class="ui bottom aligned small image" src="../src/assets/hestia.png">
-          </div>
+      <div class="logo_header">
+        <img class="ui bottom aligned small image" src="../src/assets/hestia.png">
+      </div>
     </router-link>
-          <div class="auth_header">
-            <sui-button
-            class="btn btn-primary btn-margin"
-            v-if="!authenticated"
-            @click="login()">
-              Log In
-          </sui-button>
-          <sui-button
-            class="btn btn-primary btn-margin"
-            v-if="authenticated"
-            @click="logout()">
-              Log Out
-          </sui-button>
-          </div>
+    <div class="auth_header">
+      <sui-button
+      class="btn btn-primary btn-margin"
+      v-if="!authenticated"
+      @click="login()">
+        Log In
+      </sui-button>
+      <sui-button
+      class="btn btn-primary btn-margin"
+      v-if="authenticated"
+      @click="logout()">
+        Log Out
+      </sui-button>
+    </div>
 
     <div class="container">
       <router-view
-        :auth="auth"
-        :authenticated="authenticated">
+      :auth="auth"
+      :authenticated="authenticated">
       </router-view>
     </div>
   </div>

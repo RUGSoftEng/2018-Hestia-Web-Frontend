@@ -8,13 +8,11 @@
       <sui-button
       @click="routerGo"
       >
-        Home.
-      </sui-button>
-    </p>
-  </div>
+      Home.
+    </sui-button>
+  </p>
+</div>
 </template>
-
-
 <script>
 export default{
   computed: {
