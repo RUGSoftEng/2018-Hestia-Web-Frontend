@@ -1,6 +1,29 @@
 <template>
 <div class="DeviceGroup">
 
+  <!-- Modal for adding a new server -->
+  <sui-modal v-model="deviceSettingsModalVisible" dimmer="inverted">
+    <sui-modal-header>Device settings modal test</sui-modal-header>
+    <!-- <sui-modal-content>
+      Server Name<br>
+      <input v-model="addServerName"/>
+      <br>
+      <br>
+      Server IP<br>
+      <input v-model="addServerIp"/>
+      <br>
+      <br>
+      Server Port<br>
+      <input v-model="addServerPort"/>
+      <br>
+      <br>
+      <sui-button @click="this.confirmAddServer">
+        Add Server
+      </sui-button>
+    </sui-modal-content> -->
+  </sui-modal>
+
+
   <!-- Modal for adding a new device -->
   <sui-modal v-model="modalVisible" dimmer="inverted">
     <sui-modal-header>Adding a new device to {{ this.$route.params.id }}</sui-modal-header>
@@ -13,69 +36,72 @@
           <sui-input
           v-model="currentPluginAtributes[atribute]"
           >
-        </sui-input>
-        <br>
-      </div>
-    </div>
-    <sui-button primary
-    v-if="currentCollectionDevice != -1"
-    @click="postDevice()"
-    >
-    Add the new device
-  </sui-button>
-  <select
-  v-model="currentCollection"
-  required
-  >
-  <option value="-1" disabled selected hidden>Select a collection</option>
-  <option
-  v-for="plugin in plugins"
-  :key="plugin.key"
-  :value="plugin.key"
-  @click="pluginCollectionClicked()"
-  >
-  {{ plugin.collectionName }}
-</option>
-</select>
-<select
-v-model="currentCollectionDevice"
-v-if="currentCollection != -1"
-required
->
-<option value="-1" disabled selected hidden>Select a device</option>
-<option
-v-for="collection in pluginsCollections"
-:key="collection.key"
-:value="collection.value"
-@click="pluginCollectionDeviceClicked()"
->
-{{ collection.deviceName }}
-</option>
-</select>
-{{ currentPluginAtributes }}
-</sui-modal-content>
-</sui-modal>
-<div class="ui container">
-  <sui-card-group :items-per-row="3" stackable>
-    <sui-card class="add_card" v-on:click="this.displayModal">
-      <sui-card-content>
-        <sui-card-content>
+          </sui-input>
           <br>
-          <sui-icon name="add" size="massive" class="center add_icon" />
+        </div>
+      </div>
+      <sui-button primary
+      v-if="currentCollectionDevice != -1"
+      @click="postDevice()"
+      >
+        Add the new device
+      </sui-button>
+      <select
+      v-model="currentCollection"
+      required
+      >
+        <option value="-1" disabled selected hidden>Select a collection</option>
+          <option
+            v-for="plugin in plugins"
+            :key="plugin.key"
+            :value="plugin.key"
+            @click="pluginCollectionClicked()"
+          >
+            {{ plugin.collectionName }}
+          </option>
+        </select>
+        <select
+        v-model="currentCollectionDevice"
+        v-if="currentCollection != -1"
+        required
+        >
+          <option value="-1" disabled selected hidden>Select a device</option>
+          <option
+          v-for="collection in pluginsCollections"
+          :key="collection.key"
+          :value="collection.value"
+          @click="pluginCollectionDeviceClicked()"
+          >
+            {{ collection.deviceName }}
+          </option>
+        </select>
+        {{ currentPluginAtributes }}
+      </sui-modal-content>
+    </sui-modal>
+
+
+  <div class="ui container">
+    <sui-card-group :items-per-row="3" stackable>
+      <sui-card class="add_card" v-on:click="this.displayModal">
+        <sui-card-content>
+          <sui-card-content>
+            <br>
+            <sui-icon name="add" size="massive" class="center add_icon" />
+          </sui-card-content>
+          <sui-card-content extra>
+            Add Device
+          </sui-card-content>
         </sui-card-content>
-        <sui-card-content extra>
-          Add Device
-        </sui-card-content>
-      </sui-card-content>
-    </sui-card>
-    <Device
-    v-for="device in server"
-    :device="device"
-    :key="device.deviceId"
-    >
-  </Device>
-</sui-card-group>
-</div>
+      </sui-card>
+      <Device
+      v-for="device in server"
+      :device="device"
+      :key="device.deviceId"
+      v-on:deviceSettingsModalActivated="displayDeviceSettingsModal"
+      >
+      </Device>
+    </sui-card-group>
+  </div>
 </div>
 </template>
 <script>
@@ -95,6 +121,7 @@ export default {
       currentPreset: null,
       currentCollection: -1,
       currentCollectionDevice: -1,
+      deviceSettingsModalVisible: false,
       modalVisible: false,
       dimmerActive: false,
       presetPlaceholder: 'select a preset',
@@ -129,6 +156,12 @@ export default {
     displayModal() {
       this.$store.dispatch('getServerPlugins', { serverID: this.$route.params.id });
       this.modalVisible = !this.modalVisible;
+    },
+    displayDeviceSettingsModal(payload) {
+      const dev = payload.device;
+      this.deviceSettingsModalVisible = !this.deviceSettingsModalVisible;
+      // eslint-disable-next-line
+      console.log(dev);
     },
     presetChange(value) {
       // eslint-disable-next-line
