@@ -2,14 +2,7 @@
  * @file Manages dispatching the http requests to the web api.
  */
 import axios from 'axios';
-
-/**
- * Config for the endpoint
- */
-const WEB_API_CONFIG = {
-  url: 'https://arcane-fortress-19747.herokuapp.com',
-};
-
+import WEB_API_CONFIG from './config';
 /**
  * createAuthorizationHeader - Provides the header for authorizing a user.
  *
