@@ -7,7 +7,7 @@ import axios from 'axios';
  * Config for the endpoint
  */
 const WEB_API_CONFIG = {
-  url: 'https://arcane-fortress-19747.herokuapp.com/',
+  url: 'https://arcane-fortress-19747.herokuapp.com',
 };
 
 /**
