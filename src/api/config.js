@@ -9,7 +9,5 @@ const API_URLS = {
  * Config for the endpoint
  */
 export default{
-  WEB_API_CONFIG: {
-    url: API_URLS.development,
-  },
+  url: API_URLS.development,
 };
