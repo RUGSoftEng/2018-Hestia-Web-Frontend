@@ -16,11 +16,9 @@ Vue.use(SuiVue);
 Vue.config.productionTip = false;
 
 
-/* eslint-disable no-new */
+/* eslint-disable */
 new Vue({
-  el: '#app',
   router,
   store,
-  components: { App },
-  template: '<App/>',
-});
+  render: h => h(App)
+}).$mount('#app')
