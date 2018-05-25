@@ -29,14 +29,6 @@ function createAuthorizationHeader() {
  */
 export function httpPostUsers() {
   const url = `${WEB_API_CONFIG.url}/users/`;
-  // eslint-disable-next-line
-  console.log(JSON.stringify({
-    method: 'POST',
-    url,
-    headers: {
-      Authorization: createAuthorizationHeader(),
-    },
-  }));
   return axios({
     method: 'POST',
     url,
@@ -54,8 +46,6 @@ export function httpPostUsers() {
  */
 export function httpGetServers() {
   const url = `${WEB_API_CONFIG.url}/servers/`;
-  // eslint-disable-next-line
-  console.log('getServers in API bitches')
   return axios.get(url, { headers: { Authorization: createAuthorizationHeader() } });
 }
 
@@ -116,15 +106,15 @@ export function httpGetServer(serverid) {
   });
 }
 
-
+/**
+ * httpPutServer -  Change the inforamtion of the server.
+ * @param  {String} serverid Id of the server.
+ * @param  {Object} payload  payload containing the information to be changed.
+ * @return {Promise}         Returns the promise,
+ *                         either containing the response of the server or an error.
+ */
 export function httpPutServer(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}`;
-  // eslint-disable-next-line
-  console.log('httpPutServer');
-  // eslint-disable-next-line
-  console.log(JSON.stringify(payload));
-  // eslint-disable-next-line
-  console.log(serverid);
   return axios({
     mehtod: 'PUT',
     url,
@@ -144,8 +134,6 @@ export function httpPutServer(serverid, payload) {
  */
 export function httpPostServerRequest(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}/request`;
-  // eslint-disable-next-line
-  console.log(url);
   return axios({
     method: 'POST',
     url,

@@ -1,7 +1,6 @@
 <template>
   <sui-loader active/>
 </template>
-
 <script>
 export default {
   name: 'callback',
@@ -12,6 +11,4 @@ export default {
   },
 };
 </script>
-
-<style>
-</style>
+<style></style>

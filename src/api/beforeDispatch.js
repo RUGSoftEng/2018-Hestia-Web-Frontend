@@ -1,15 +1,9 @@
 /**
-  @file Declares the translation layer between the web API and the local API
+  @file Declares the translation layer between the web API and the local API.
+  All payloads necessary to make GET, POST, PUT and DELETE requestType are
+  generated here. Each function returns a payload for the request specified
+  in the function name. The payload needs the paramaters in the function.
 */
-/**
- * [preparePayloadPostServer description]
- * @param  {string} serverID      [description]
- * @param  {string} userID        [description]
- * @param  {string} serverName    [description]
- * @param  {string} serverAddress [description]
- * @param  {string} serverPort    [description]
- * @return {object} Payload
- */
 export function preparePayloadPostServer(serverID, userID, serverName, serverAddress, serverPort) {
   return {
     server_id: serverID,
@@ -26,10 +20,6 @@ export function preparePayloadPutServer(serverName, serverAddress, serverPort) {
     server_address: serverAddress,
     server_port: serverPort,
   };
-}
-
-export function hallo() {
-  return 'hallo';
 }
 
 export function preparePayloadGetServerDevice() {
