@@ -39,21 +39,31 @@ const router = new Router({
  * Check whether the current time is past the access token's expiry time.
  * @return {Boolean}
  */
-function isAuthenticated() {
-  const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
-  return new Date().getTime() < expiresAt;
-}
+// function isAuthenticated() {
+//   const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+//   return new Date().getTime() < expiresAt;
+// }
 
 /*
  * Redirects the user to the login page if the user is not authenticated.
  */
+// router.beforeEach((to, from, next) => {
+//   if (to.path !== '/login' && to.path !== '/callback') {
+//     if (!isAuthenticated()) {
+//       next('/login');
+//     }
+//   }
+//   next();
+// });
+
 router.beforeEach((to, from, next) => {
-  if (to.path !== '/login' && to.path !== '/callback') {
-    if (!isAuthenticated()) {
-      next('/login');
-    }
+  if (to.name === '/callback') { // check if "to"-route is "callback" and allow access
+    next();
+  } else if (router.app.$auth.isAuthenticated()) { // if authenticated allow access
+    next();
+  } else { // trigger auth0 login
+    router.app.$auth.login();
   }
-  next();
 });
 
 
