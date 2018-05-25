@@ -57,11 +57,9 @@ const actions = {
    */
   loadServersList(context) {
     // eslint-disable-next-line
-    console.log('loadServersList'); 
+    console.log('loadServersList');
     return httpGetServers()
       .then((response) => {
-        // eslint-disable-next-line
-        console.log(response);
         context.commit('setServersList', { serversList: response.data });
       })
       .catch((error) => {
