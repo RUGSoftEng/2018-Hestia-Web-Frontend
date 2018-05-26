@@ -120,6 +120,39 @@ export function httpPutServer(serverid, payload) {
   );
 }
 
+export function httpGetServerPresets(serverid) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/presets/`;
+  return axios({
+    method: 'GET',
+    url,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
+export function httpPostServerPresets(serverid, payload) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/presets/`;
+  return axios({
+    method: 'POST',
+    url,
+    data: payload,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
+export function httpDeleteServerPreset(serverid, presetid) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/presets/${presetid}`;
+  return axios({
+    method: 'DELETE',
+    url,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
 /**
  * httpPostServerRequest -  Send a request to be forwarded to the server.
  *

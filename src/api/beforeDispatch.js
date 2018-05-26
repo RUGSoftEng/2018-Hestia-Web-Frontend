@@ -1,5 +1,5 @@
 /**
-  @file Declares the translation layer between the web API and the local API.
+  @file Declares the translation layer between the local API and the web API.
   All payloads necessary to make GET, POST, PUT and DELETE requestType are
   generated here. Each function returns a payload for the request specified
   in the function name. The payload needs the paramaters in the function.
@@ -87,5 +87,11 @@ export function preparePayloadPostServerDevicesActivator(activator, deviceID) {
     optionalPayload: {
       state: activator.state,
     },
+  };
+}
+
+export function preparePayloadPostServerPreset(name) {
+  return {
+    preset_name: name,
   };
 }
