@@ -7,9 +7,13 @@ import Vuex from 'vuex';
 import {
   httpGetServers,
   httpPostServerRequest,
+  httpGetServer,
   httpPostServers,
   httpDeleteServer,
   httpPutServer,
+  httpGetServerPresets,
+  httpDeleteServerPreset,
+  httpPostServerPresets,
 } from '@/api/dispatch';
 import {
   preparePayloadPostServer,
@@ -22,8 +26,11 @@ import {
   preparePayloadGetServerPluginsCollections,
   preparePayloadGetServerPluginsCollectionDevice,
   preparePayloadPostServerDevicesActivator,
+  preparePayloadPostServerPreset,
 } from '@/api/beforeDispatch';
-
+import {
+  insertServerPresets,
+} from '@/api/afterDispatch';
 
 Vue.use(Vuex);
 
@@ -34,6 +41,7 @@ Vue.use(Vuex);
 const state = {
   serversList: [],
   currentServer: {},
+  currentServerDevices: {},
   currentServerPlugins: [],
   currentServerPluginsCollections: [],
   currentPluginAtributes: {},
@@ -144,6 +152,18 @@ const actions = {
       alert(error);
       });
   },
+  getServer(context, { serverID }) {
+    // eslint-disable-next-line
+    console.log('serverID')
+    return httpGetServer(serverID)
+      .then((response) => {
+        context.commit('setServer', { server: response.data });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        alert(error);
+      });
+  },
   /**
    * Dispatches the httpPostServerRequest function with the payload generated
    * by the preparePayloadGetServerDevice function.
@@ -154,7 +174,7 @@ const actions = {
   getServerDevices(context, { serverID }) {
     const payload = preparePayloadGetServerDevice();
     return httpPostServerRequest(serverID, payload)
-      .then(response => context.commit('setServer', { server: response }))
+      .then(response => context.commit('setServerDevices', { server: response }))
       .catch((error) => {
         // eslint-disable-next-line
         alert(error);
@@ -165,7 +185,7 @@ const actions = {
     return httpPostServerRequest(serverID, payload)
       .catch((error) => {
       // eslint-disable-next-line
-      alert(error + "raar");
+      alert(error);
       });
   },
   putServerDevice(context, { serverID, deviceID, deviceName }) {
@@ -239,6 +259,33 @@ const actions = {
         alert(error);
       });
   },
+  getServerPresets(context, { serverID }) {
+    // eslint-disable-next-line
+    console.log(serverID);
+    return httpGetServerPresets(serverID)
+      .then((response) => {
+        context.commit('setServerPresets', { presets: response.data });
+      })
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error + "Presets could not be retrieved.");
+      });
+  },
+  postServerPreset(context, { serverID, presetName }) {
+    const payload = preparePayloadPostServerPreset(presetName);
+    return httpPostServerPresets(serverID, payload)
+      .catch((error) => {
+        // eslint-disable-next-line
+        alert(error + "Preset could not be added to the server.");
+      });
+  },
+  deleteServerPreset(context, { serverID, presetID }) {
+    return httpDeleteServerPreset(serverID, presetID)
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error + "Preset could not be removed.");
+      });
+  },
 };
 /**
  * mutations -  All function modifying the data in the store.
@@ -253,7 +300,13 @@ const mutations = {
   },
   // eslint-disable-next-line
   setServer(state, payload) {
-    state.currentServer = payload.server.data;
+    // eslint-disable-next-line
+    console.log('setServer into store');
+    state.currentServer = payload.server;
+  },
+  // eslint-disable-next-line
+  setServerDevices(state, payload) {
+    state.currentServerDevices = payload.server.data;
   },
   // eslint-disable-next-line
   setServerPlugins(state, payload) {
@@ -302,6 +355,10 @@ const mutations = {
         });
       }
     });
+  },
+  // eslint-disable-next-line
+  setServerPresets(state, payload) {
+    state.currentServer = insertServerPresets(state.currentServer, payload.presets);
   },
 };
 

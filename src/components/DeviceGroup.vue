@@ -111,7 +111,6 @@ export default {
   },
   data() {
     return {
-      currentPreset: null,
       currentCollection: -1,
       currentCollectionDevice: -1,
       deviceSettingsModalVisible: false,
