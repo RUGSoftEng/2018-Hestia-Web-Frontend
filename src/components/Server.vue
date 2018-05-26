@@ -17,7 +17,9 @@
       </sui-breadcrumb>
     </sui-container>
     <h2> {{server.IPAddress}} </h2>
-    <DeviceGroup :server="this.server">
+    <DeviceGroup
+    :server="this.server"
+    v-on:deviceGroupChange="serverDeviceSynchronize">
     </DeviceGroup>
   </div>
 </template>
@@ -33,11 +35,18 @@ export default {
     DeviceGroup,
   },
   beforeMount() {
-    this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
+    this.serverDeviceSynchronize();
   },
   computed: {
     server() {
       return this.$store.state.currentServer;
+    },
+  },
+  methods: {
+    serverDeviceSynchronize() {
+      // eslint-disable-next-line
+      console.log('serverDeviceSynchronize');
+      this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
     },
   },
 };

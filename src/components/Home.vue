@@ -130,10 +130,10 @@ export default {
     this.$store.dispatch('loadServersList');
   },
   methods: {
-    validServerAddress() {
+    validServerAddress(Ip, port) {
       const serverRegex = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/g;
-      const resultIp = this.addServerIp.match(serverRegex);
-      const resultPort = Number(this.addServerPort);
+      const resultIp = Ip.match(serverRegex);
+      const resultPort = Number(port);
       // eslint-disable-next-line
       console.log('validServerAddress');
       if (resultIp !== null && resultPort >= 0 && resultPort <= 65535) {
@@ -152,7 +152,7 @@ export default {
       this.editServerID = serverId;
     },
     confirmAddServer() {
-      if (this.validServerAddress()) {
+      if (this.validServerAddress(this.addServerIp, this.addServerPort)) {
         this.$store.dispatch('addServer', {
           serverName: this.addServerName,
           serverAddress: `https://${this.addServerIp}`,
@@ -161,12 +161,14 @@ export default {
       }
     },
     confirmEditServer() {
-      this.$store.dispatch('putServer', {
-        serverID: this.editServerID,
-        serverName: this.editServerName,
-        serverAddress: `https://${this.editServerIp}`,
-        serverPort: this.editServerPort });
-      this.editModalVisible = !this.editModalVisible;
+      if (this.validServerAddress(this.editServerIp, this.editServerPort)) {
+        this.$store.dispatch('putServer', {
+          serverID: this.editServerID,
+          serverName: this.editServerName,
+          serverAddress: `https://${this.editServerIp}`,
+          serverPort: this.editServerPort });
+        this.editModalVisible = !this.editModalVisible;
+      }
     },
   },
 };

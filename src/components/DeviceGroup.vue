@@ -1,26 +1,18 @@
 <template>
 <div class="DeviceGroup">
 
-  <!-- Modal for adding a new server -->
+  <!-- Modal for changing a server name -->
   <sui-modal v-model="deviceSettingsModalVisible" dimmer="inverted">
-    <sui-modal-header>Device settings modal test</sui-modal-header>
-    <!-- <sui-modal-content>
-      Server Name<br>
-      <input v-model="addServerName"/>
+    <sui-modal-header>{{ deviceSettingsDevice.name }} - Device Settings</sui-modal-header>
+    <sui-modal-content>
+      New device name<br>
+      <input v-model="deviceSettingsDevice.name"/>
       <br>
       <br>
-      Server IP<br>
-      <input v-model="addServerIp"/>
-      <br>
-      <br>
-      Server Port<br>
-      <input v-model="addServerPort"/>
-      <br>
-      <br>
-      <sui-button @click="this.confirmAddServer">
+      <sui-button @click="confirmPutDeviceName">
         Add Server
       </sui-button>
-    </sui-modal-content> -->
+    </sui-modal-content>
   </sui-modal>
 
 
@@ -98,6 +90,7 @@
       :device="device"
       :key="device.deviceId"
       v-on:deviceSettingsModalActivated="displayDeviceSettingsModal"
+      v-on:deviceChange="deviceChange"
       >
       </Device>
     </sui-card-group>
@@ -122,6 +115,7 @@ export default {
       currentCollection: -1,
       currentCollectionDevice: -1,
       deviceSettingsModalVisible: false,
+      deviceSettingsDevice: {},
       modalVisible: false,
       dimmerActive: false,
       presetPlaceholder: 'select a preset',
@@ -153,15 +147,24 @@ export default {
     },
   },
   methods: {
+    deviceChange() {
+      this.$emit('deviceGroupChange');
+    },
     displayModal() {
       this.$store.dispatch('getServerPlugins', { serverID: this.$route.params.id });
       this.modalVisible = !this.modalVisible;
     },
     displayDeviceSettingsModal(payload) {
-      const dev = payload.device;
+      this.deviceSettingsDevice = payload.device;
       this.deviceSettingsModalVisible = !this.deviceSettingsModalVisible;
-      // eslint-disable-next-line
-      console.log(dev);
+    },
+    confirmPutDeviceName() {
+      this.$store.dispatch('putServerDevice', {
+        serverID: this.$route.params.id,
+        deviceID: this.deviceSettingsDevice.deviceId,
+        deviceName: this.deviceSettingsDevice.name,
+      });
+      this.deviceSettingsModalVisible = !this.deviceSettingsModalVisible;
     },
     presetChange(value) {
       // eslint-disable-next-line
@@ -191,6 +194,7 @@ export default {
           serverID: this.$route.params.id,
           deviceInfo: payloadtest,
         });
+      this.deviceChange();
       this.modalVisible = !this.modalVisible;
     },
   },

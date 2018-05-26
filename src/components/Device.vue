@@ -63,6 +63,9 @@ export default{
     };
   },
   methods: {
+    deviceChange() {
+      this.$emit('deviceChange');
+    },
     displayDeviceSettingsModal(device) {
       this.$emit('deviceSettingsModalActivated', { device });
     },
@@ -76,6 +79,8 @@ export default{
     },
     updateActivatorGlobal(payload) {
       this.dimmerActive = true;
+      // eslint-disable-next-line
+      console.log("hier");
       this.$store.dispatch('activatorUpdate',
         { activator: payload.activator,
           deviceID: this.device.deviceId,
@@ -83,40 +88,20 @@ export default{
         })
         .then(() => {
           this.dimmerActive = false;
+          // eslint-disable-next-line
+          console.log("nu");
+          this.deviceChange();
         }, (error) => {
           // eslint-disable-next-line
-                console.log(error);
+          console.log(error);
         },
         );
     },
     deleteButton(deviceID) {
-      this.$store.dispatch('deleteServerDevice', { serverID: this.$route.params.id, deviceId: deviceID });
-    },
-    pluginCollectionClicked() {
-      /* eslint-disable */
-            this.$store.dispatch('getServerPluginsCollections',
-            {
-              serverID: this.$route.params.id,
-              collection: this.$store.state.currentServerPlugins[this.currentCollection].collectionName,
-            });
-          },
-          pluginCollectionDeviceClicked() {
-            console.log('pluginCollectionDeviceClicked');
-            this.$store.dispatch('getServerPluginCollectionDevice', {
-              serverID: this.$route.params.id,
-              collection: this.$store.state.currentServerPlugins[this.currentCollection].collectionName,
-              device: this.$store.state.currentServerPluginsCollections[this.currentCollectionDevice].deviceName,
-            });
-            /* eslint-enable */
-    },
-    postDevice() {
-      const payloadtest = this.$store.state.currentPluginAtributes;
-      this.$store.dispatch('postServerDevice',
-        {
-          serverID: this.$route.params.id,
-          deviceInfo: payloadtest,
+      this.$store.dispatch('deleteServerDevice', { serverID: this.$route.params.id, deviceId: deviceID })
+        .then(() => {
+          this.deviceChange();
         });
-      this.modalVisible = !this.modalVisible;
     },
   },
 };

@@ -165,7 +165,7 @@ const actions = {
     return httpPostServerRequest(serverID, payload)
       .catch((error) => {
       // eslint-disable-next-line
-      alert(error);
+      alert(error + "raar");
       });
   },
   putServerDevice(context, { serverID, deviceID, deviceName }) {
@@ -229,7 +229,9 @@ const actions = {
     const payload = preparePayloadPostServerDevicesActivator(activator, deviceID);
     const test = `${serverID}`;
     return httpPostServerRequest(serverID, payload)
-      .then(() => {
+      .then((response) => {
+        // eslint-disable-next-line
+        console.log(JSON.stringify(response));
         context.dispatch('getServerDevices', { serverID: test });
       })
       .catch((error) => {
