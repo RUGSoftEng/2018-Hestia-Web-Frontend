@@ -14,6 +14,7 @@ import {
   httpGetServerPresets,
   httpDeleteServerPreset,
   httpPostServerPresets,
+  httpPostServerBatchRequest,
 } from '@/api/dispatch';
 import {
   preparePayloadPostServer,
@@ -27,6 +28,7 @@ import {
   preparePayloadGetServerPluginsCollectionDevice,
   preparePayloadPostServerDevicesActivator,
   preparePayloadPostServerPreset,
+  preparePayloadPostServerBatchRequest,
 } from '@/api/beforeDispatch';
 import {
   insertServerPresets,
@@ -249,9 +251,7 @@ const actions = {
     const payload = preparePayloadPostServerDevicesActivator(activator, deviceID);
     const test = `${serverID}`;
     return httpPostServerRequest(serverID, payload)
-      .then((response) => {
-        // eslint-disable-next-line
-        console.log(JSON.stringify(response));
+      .then(() => {
         context.dispatch('getServerDevices', { serverID: test });
       })
       .catch((error) => {
@@ -296,6 +296,18 @@ const actions = {
             server.presets = response2.data;
             context.commit('setServer', { server });
           });
+      });
+  },
+  postServerBatchRequest(context, { serverID, presetID }) {
+    const payload = preparePayloadPostServerBatchRequest(presetID);
+    // eslint-disable-next-line
+    console.log(JSON.stringify(payload));
+    return httpPostServerBatchRequest(serverID, payload)
+      .catch((error) => {
+        // eslint-disable-next-line
+        console.log(error.data);
+        // eslint-disable-next-line
+        alert(error);
       });
   },
 };
@@ -358,11 +370,11 @@ const mutations = {
   setActivatorState(state, payload) {
     // eslint-disable-next-line
     console.log('setActivatorState');
-    state.currentServer.forEach((device, index1) => {
+    state.currentServerDevices.forEach((device, index1) => {
       if (device.deviceId === payload.deviceId) {
         device.activators.forEach((activator, index2) => {
           if (activator.activatorId === payload.currentActivator.activatorId) {
-            state.currentServer[index1].activators[index2].state = payload.activatorState;
+            state.currentServerDevices[index1].activators[index2].state = payload.activatorState;
           }
         });
       }

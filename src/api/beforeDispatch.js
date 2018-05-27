@@ -95,3 +95,9 @@ export function preparePayloadPostServerPreset(name) {
     preset_name: name,
   };
 }
+
+export function preparePayloadPostServerBatchRequest(presetID) {
+  return {
+    preset_id: presetID,
+  };
+}

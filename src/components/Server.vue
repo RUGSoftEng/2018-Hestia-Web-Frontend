@@ -15,6 +15,9 @@
           </sui-breadcrumb-section>
         </h2>
       </sui-breadcrumb>
+    </sui-container>
+
+    <div class="presetsContainer">
       <select
       v-model="currentPreset"
       required
@@ -24,12 +27,20 @@
         v-for="preset in server.presets"
         :key="preset.preset_id"
         :value="preset.preset_id"
-        @click="presetChange()"
+        @click="presetChange(preset.preset_id)"
         >
           {{ preset.preset_name }}
         </option>
         </select>
-    </sui-container>
+        <input v-model="newPresetName"/>
+
+        <sui-button
+        @click="createNewPreset()"
+        >
+          New preset
+        </sui-button>
+    </div>
+
     <!-- <h2> {{server.IPAddress}} </h2> -->
     <DeviceGroup
     :server="this.serverDevices"
@@ -45,6 +56,7 @@ export default {
   data() {
     return {
       currentPreset: -1,
+      newPresetName: '',
     };
   },
   props: [
@@ -71,8 +83,17 @@ export default {
       console.log('serverDeviceSynchronize');
       this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
     },
-    presetChange() {
-
+    presetChange(presetID) {
+      // eslint-disable-next-line
+      console.log(presetID);
+      this.$store.dispatch('postServerBatchRequest', { serverID: this.$route.params.id, presetID });
+    },
+    createNewPreset() {
+      this.$store.dispatch('postServerPreset', {
+        serverID: this.$route.params.id,
+        presetName: this.newPresetName,
+      });
+      this.newPresetName = '';
     },
   },
 };

@@ -153,6 +153,21 @@ export function httpDeleteServerPreset(serverid, presetid) {
     },
   });
 }
+
+export function httpPostServerBatchRequest(serverid, payload) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/batch_request`;
+  // eslint-disable-next-line
+  console.log(url);
+  return axios({
+    method: 'POST',
+    url,
+    data: payload,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
 /**
  * httpPostServerRequest -  Send a request to be forwarded to the server.
  *
