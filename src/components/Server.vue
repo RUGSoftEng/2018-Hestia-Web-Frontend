@@ -18,21 +18,25 @@
     </sui-container>
 
     <div class="presetsContainer">
-      <select
-      v-model="currentPreset"
-      required
-      >
-        <option value="-1" disabled selected hidden>Select a preset</option>
-        <option
-        v-for="preset in server.presets"
-        :key="preset.preset_id"
-        :value="preset.preset_id"
-        @click="presetChange(preset.preset_id)"
+       <sui-dropdown
+          selection
+          :options="presets"
+          placeholder="Select Preset"
+          search
+          required
         >
-          {{ preset.preset_name }}
-        </option>
-        </select>
-        <input v-model="newPresetName"/>
+          <sui-dropdown-menu v-model="currentPreset">
+            <sui-dropdown-item
+            v-for="preset in server.presets"
+            :value="preset.preset_id"
+            :key="preset.preset_id"
+            @click="presetChange(preset.preset_id)"
+            >
+              {{ preset.preset_name}}
+            </sui-dropdown-item>
+          </sui-dropdown-menu>
+        </sui-dropdown>
+        <sui-input placeholder="Preset name" v-model="newPresetName"/>
 
         <sui-button
         @click="createNewPreset()"
