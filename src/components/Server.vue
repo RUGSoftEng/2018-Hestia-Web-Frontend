@@ -54,8 +54,7 @@ export default {
     DeviceGroup,
   },
   beforeMount() {
-    this.$store.dispatch('getServer', { serverID: this.$route.params.id });
-    this.$store.dispatch('getServerPresets', { serverID: this.$route.params.id });
+    this.$store.dispatch('initializeServerInformation', { serverID: this.$route.params.id });
     this.serverDeviceSynchronize();
   },
   computed: {

@@ -286,6 +286,18 @@ const actions = {
       alert(error + "Preset could not be removed.");
       });
   },
+  initializeServerInformation(context, { serverID }) {
+    let server;
+    httpGetServer(serverID)
+      .then((response) => {
+        server = response.data;
+        httpGetServerPresets(serverID)
+          .then((response2) => {
+            server.presets = response2.data;
+            context.commit('setServer', { server });
+          });
+      });
+  },
 };
 /**
  * mutations -  All function modifying the data in the store.
