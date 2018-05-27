@@ -1,5 +1,3 @@
-require 'htmlbeautifier'
-beautiful = HtmlBeautifier.beautify(messy)
 <template lang="html">
   <div class="server">
     <!-- The sui-breadcrumb -->
@@ -35,19 +33,11 @@ export default {
     DeviceGroup,
   },
   beforeMount() {
-    // eslint-disable-next-line
-        console.log(this.$route.params.id);
     this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
   },
   computed: {
     server() {
       return this.$store.state.currentServer;
-    },
-  },
-  methods: {
-    presetChange(value) {
-      // eslint-disable-next-line
-          console.log(value);
     },
   },
 };

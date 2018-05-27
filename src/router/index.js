@@ -4,10 +4,11 @@ import Home from '@/components/Home';
 import Server from '@/components/Server';
 import PageNotFound from '@/components/PageNotFound';
 import Callback from '@/components/Callback';
+import Login from '@/components/Login';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   routes: [
     {
@@ -23,9 +24,37 @@ export default new Router({
       name: 'Callback',
       component: Callback,
     }, {
+      path: '/login',
+      name: 'Login',
+      component: Login,
+    }, {
       path: '/*',
       name: 'Page not found',
       component: PageNotFound,
     },
   ],
 });
+
+/**
+ * Check whether the current time is past the access token's expiry time.
+ * @return {Boolean}
+ */
+function isAuthenticated() {
+  const expiresAt = JSON.parse(localStorage.getItem('expires_at'));
+  return new Date().getTime() < expiresAt;
+}
+
+/*
+ * Redirects the user to the login page if the user is not authenticated.
+ */
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login' && to.path !== '/callback') {
+    if (!isAuthenticated()) {
+      next('/login');
+    }
+  }
+  next();
+});
+
+
+export default router;

@@ -22,8 +22,9 @@
 
     <div class="container">
       <router-view
-      :auth="auth"
-      :authenticated="authenticated">
+        :auth="auth"
+        :authenticated="authenticated"
+      >
       </router-view>
     </div>
   </div>

@@ -27,8 +27,11 @@ import {
 
 Vue.use(Vuex);
 
+/**
+ * state -  All data objects and arrays the store holds.
+ * @type {Object}
+ */
 const state = {
-  // single source of data
   serversList: [],
   currentServer: {},
   currentServerPlugins: [],
@@ -165,11 +168,7 @@ const actions = {
       });
   },
   postServerDevice(context, { serverID, deviceInfo }) {
-    // eslint-disable-next-line
-    console.log(JSON.stringify(deviceInfo));
     const payload = preparePayloadPostServerDevice(deviceInfo);
-    // eslint-disable-next-line
-    console.log(JSON.stringify(payload));
     return httpPostServerRequest(serverID, payload)
       .catch((error) => {
       // eslint-disable-next-line
@@ -239,8 +238,6 @@ const mutations = {
   setServersList(state, payload) {
     // eslint-disable-next-line
     console.log("setServersList");
-    // eslint-disable-next-line
-    console.log(JSON.stringify(payload.serversList));
     state.serversList = payload.serversList;
   },
   // eslint-disable-next-line
@@ -279,16 +276,12 @@ const mutations = {
   setServerPluginCollectionDevice(state, payload) {
     // eslint-disable-next-line
     console.log("setServerPlguinCollectionDevice");
-    // eslint-disable-next-line
-    console.log(JSON.stringify(payload.atributes.data.required_info));
     state.currentPluginAtributes = payload.atributes.data;
   },
   // eslint-disable-next-line
   setActivatorState(state, payload) {
     // eslint-disable-next-line
-    console.log('setActivator');
-    // eslint-disable-next-line
-    console.log('Before local state change');
+    console.log('setActivatorState');
     state.currentServer.forEach((device, index1) => {
       if (device.deviceId === payload.deviceId) {
         device.activators.forEach((activator, index2) => {
@@ -298,8 +291,6 @@ const mutations = {
         });
       }
     });
-    // eslint-disable-next-line
-    console.log(JSON.stringify('After local state change'));
   },
 };
 

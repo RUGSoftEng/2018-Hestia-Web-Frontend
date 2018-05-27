@@ -1,5 +1,3 @@
-require 'htmlbeautifier'
-beautiful = HtmlBeautifier.beautify(messy)
 <template>
   <div>
     <h1>

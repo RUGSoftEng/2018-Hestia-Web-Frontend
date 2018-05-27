@@ -94,6 +94,7 @@
       </section>
     </div>
   </template>
+
 <script>
 import RangeSlider from 'vue-range-slider';
 import 'vue-range-slider/dist/vue-range-slider.css';
@@ -123,6 +124,17 @@ export default {
     this.$store.dispatch('loadServersList');
   },
   methods: {
+    validServerAddress() {
+      const serverRegex = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/g;
+      const resultIp = this.addServerIp.match(serverRegex);
+      const resultPort = Number(this.addServerPort);
+      // eslint-disable-next-line
+      console.log('validServerAddress');
+      if (resultIp !== null && resultPort >= 0 && resultPort <= 65535) {
+        return true;
+      }
+      return false;
+    },
     deleteButton(serverID) {
       this.$store.dispatch('deleteServer', { serverID });
     },
@@ -134,11 +146,13 @@ export default {
       this.editServerID = serverId;
     },
     confirmAddServer() {
-      this.$store.dispatch('addServer', {
-        serverName: this.addServerName,
-        serverAddress: `https://${this.addServerIp}`,
-        serverPort: this.addServerPort });
-      this.addModalVisible = !this.addModalVisible;
+      if (this.validServerAddress()) {
+        this.$store.dispatch('addServer', {
+          serverName: this.addServerName,
+          serverAddress: `https://${this.addServerIp}`,
+          serverPort: this.addServerPort });
+        this.addModalVisible = !this.addModalVisible;
+      }
     },
     confirmEditServer() {
       this.$store.dispatch('putServer', {

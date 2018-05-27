@@ -1,60 +1,5 @@
-require 'htmlbeautifier'
-beautiful = HtmlBeautifier.beautify(messy)
 <template>
   <sui-card :key="device.deviceId">
-    <sui-modal v-model="modalVisible" dimmer="inverted">
-      <sui-modal-header>Edit device</sui-modal-header>
-      <sui-modal-content>
-        <div v-if="currentPluginAtributes != null">
-          <div v-for="atribute in Object.keys(currentPluginAtributes)" :key="atribute">
-            {{ atribute }}
-            <br>
-            <br>
-            <sui-input
-            v-model="currentPluginAtributes[atribute]"
-            >
-          </sui-input>
-          <br>
-        </div>
-      </div>
-      <select
-      v-model="currentCollection"
-      required
-      >
-      <option value="-1" disabled selected hidden>Select a collection</option>
-      <option
-      v-for="plugin in plugins"
-      :key="plugin.key"
-      :value="plugin.key"
-      @click="pluginCollectionClicked()"
-      >
-      {{ plugin.collectionName }}
-    </option>
-  </select>
-  <select
-  v-model="currentCollectionDevice"
-  v-if="currentCollection != -1"
-  required
-  >
-  <option value="-1" disabled selected hidden>Select a device</option>
-  <option
-  v-for="collection in pluginsCollections"
-  :key="collection.key"
-  :value="collection.value"
-  @click="pluginCollectionDeviceClicked()"
-  >
-  {{ collection.deviceName }}
-</option>
-</select>
-{{ currentPluginAtributes }}
-<sui-button primary
-v-if="currentCollectionDevice != -1"
-@click="postDevice()"
->
-Confirm
-</sui-button>
-</sui-modal-content>
-</sui-modal>
 <sui-dimmer :active="dimmerActive" inverted>
   <sui-loader>Changing device state</sui-loader>
 </sui-dimmer>
@@ -127,8 +72,6 @@ export default{
       this.modalVisible = !this.modalVisible;
     },
     updateActivatorLocal(payload) {
-      // eslint-disable-next-line
-            console.log(JSON.stringify(payload));
       this.$store.commit('setActivatorState',
         {
           deviceId: this.device.deviceId,
@@ -137,19 +80,13 @@ export default{
         });
     },
     updateActivatorGlobal(payload) {
-      // eslint-disable-next-line
-            console.log(payload.activator);
-      // eslint-disable-next-line
-            console.log('hoi');
       this.dimmerActive = true;
       this.$store.dispatch('activatorUpdate',
         { activator: payload.activator,
           deviceID: this.device.deviceId,
           serverID: this.$route.params.id,
         })
-        .then((response) => {
-          // eslint-disable-next-line
-                console.log(response);
+        .then(() => {
           this.dimmerActive = false;
         }, (error) => {
           // eslint-disable-next-line
@@ -159,10 +96,6 @@ export default{
     },
     deleteButton(deviceID) {
       this.$store.dispatch('deleteServerDevice', { serverID: this.$route.params.id, deviceId: deviceID });
-    },
-    presetChange(value) {
-      // eslint-disable-next-line
-            console.log(value);
     },
     pluginCollectionClicked() {
       /* eslint-disable */

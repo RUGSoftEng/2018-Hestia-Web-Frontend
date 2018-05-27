@@ -1,5 +1,3 @@
-require 'htmlbeautifier'
-beautiful = HtmlBeautifier.beautify(messy)
 <template>
   <div class="field">
     <div v-if="activator.type === 'bool'">
@@ -57,8 +55,6 @@ export default{
   },
   methods: {
     activatorClicked() {
-      // eslint-disable-next-line
-            console.log(this);
       this.$emit('activatorClick', { activator: this.activator });
     },
   },
