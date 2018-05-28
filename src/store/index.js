@@ -280,6 +280,7 @@ const actions = {
       });
   },
   deleteServerPreset(context, { serverID, presetID }) {
+    context.commit('removeServerPreset', { presetID });
     return httpDeleteServerPreset(serverID, presetID)
       .catch((error) => {
       // eslint-disable-next-line
@@ -288,7 +289,7 @@ const actions = {
   },
   initializeServerInformation(context, { serverID }) {
     let server;
-    httpGetServer(serverID)
+    return httpGetServer(serverID)
       .then((response) => {
         server = response.data;
         httpGetServerPresets(serverID)
@@ -300,12 +301,8 @@ const actions = {
   },
   postServerBatchRequest(context, { serverID, presetID }) {
     const payload = preparePayloadPostServerBatchRequest(presetID);
-    // eslint-disable-next-line
-    console.log(JSON.stringify(payload));
     return httpPostServerBatchRequest(serverID, payload)
       .catch((error) => {
-        // eslint-disable-next-line
-        console.log(error.data);
         // eslint-disable-next-line
         alert(error);
       });
@@ -383,6 +380,16 @@ const mutations = {
   // eslint-disable-next-line
   setServerPresets(state, payload) {
     state.currentServer = insertServerPresets(state.currentServer, payload.presets);
+  },
+  // eslint-disable-next-line
+  removeServerPreset(state, payload) {
+    const newPresets = [];
+    state.currentServer.presets.forEach((preset) => {
+      if (preset.preset_id !== payload.presetID) {
+        newPresets.push(preset);
+      }
+    });
+    state.currentServer.presets = newPresets;
   },
 };
 

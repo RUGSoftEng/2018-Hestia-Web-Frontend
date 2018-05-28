@@ -17,11 +17,13 @@
       </sui-breadcrumb>
     </sui-container>
 
-    <div class="presetsContainer">
+    <sui-container class="presetsContainer">
+      <div class="presetDropdown">
        <sui-dropdown
+          fluid
           selection
-          :options="presets"
-          placeholder="Select Preset"
+          :options="server.presets"
+          text="Apply Preset"
           search
           required
         >
@@ -36,14 +38,61 @@
             </sui-dropdown-item>
           </sui-dropdown-menu>
         </sui-dropdown>
-        <sui-input placeholder="Preset name" v-model="newPresetName"/>
-
+      </div>
+      <div class="presetButton">
         <sui-button
-        @click="createNewPreset()"
+        class="createNewPreset"
+        @click="displayPresetConfigurationModal()"
         >
-          New preset
+          <sui-icon name="cog"/>
+          Preset configurations
         </sui-button>
-    </div>
+      </div>
+    </sui-container>
+
+    <!-- Preset configuration modal -->
+    <sui-modal v-model="presetConfigurationModalVisible" dimmer="inverted">
+      <sui-button
+        id="closeButton"
+        @click="undisplayPresetConfigurationModal()"
+      >
+        <sui-icon name="times"/>
+      </sui-button>
+      <sui-modal-header>
+        Preset Configuration
+      </sui-modal-header>
+      <sui-divider horizontal>
+        Create a new preset
+      </sui-divider>
+        <sui-input placeholder="Preset name" v-model="newPresetName"/>
+        <sui-button
+          @click="createNewPreset()"
+        >
+          Create new preset
+        </sui-button>
+      <sui-divider horizontal>
+        Delete a preset
+      </sui-divider>
+      <sui-dropdown
+         fluid
+         selection
+         :options="server.presets"
+         text="Delete Preset"
+         search
+         required
+       >
+         <sui-dropdown-menu v-model="currentPreset">
+           <sui-dropdown-item
+           v-for="preset in server.presets"
+           :value="preset.preset_id"
+           :key="preset.preset_id"
+           @click="deletePreset(preset.preset_id)"
+           >
+             {{ preset.preset_name}}
+           </sui-dropdown-item>
+         </sui-dropdown-menu>
+       </sui-dropdown>
+    </sui-modal>
 
     <!-- <h2> {{server.IPAddress}} </h2> -->
     <DeviceGroup
@@ -59,8 +108,9 @@ import DeviceGroup from './DeviceGroup';
 export default {
   data() {
     return {
-      currentPreset: -1,
+      currentPreset: null,
       newPresetName: '',
+      presetConfigurationModalVisible: false,
     };
   },
   props: [
@@ -99,13 +149,42 @@ export default {
       });
       this.newPresetName = '';
     },
+    displayPresetConfigurationModal() {
+      this.presetConfigurationModalVisible = !this.presetConfigurationModalVisible;
+    },
+    undisplayPresetConfigurationModal() {
+      this.presetConfigurationModalVisible = !this.presetConfigurationModalVisible;
+    },
+    deletePreset(presetID) {
+      this.$store.dispatch('deleteServerPreset', { serverID: this.$route.params.id, presetID });
+    },
   },
 };
 </script>
   <style>
   .breadcrumbs {
-    width: 70%;
-    margin-bottom:25px !important;
+    margin-bottom:10px !important;
     text-align: left;
+  }
+  .presetsContainer {
+    display: block !important;
+    height: 40px !important;
+    margin-bottom: 15px !important;
+  }
+  .presetDropdown {
+    width: 70% !important;
+    float: left;
+  }
+  .presetButton {
+    width: 30% !important;
+    float: right;
+  }
+  .createNewPreset {
+    float: right !important;
+    margin: 0 !important;
+  }
+  #closeButton {
+    float: right !important;
+    margin: 0 !important;
   }
 </style>
