@@ -10,6 +10,7 @@ import {
   httpPostServers,
   httpDeleteServer,
   httpPutServer,
+  httpPostServerPing,
 } from '@/api/dispatch';
 import {
   preparePayloadPostServer,
@@ -227,6 +228,9 @@ const actions = {
         // eslint-disable-next-line
         alert(error);
       });
+  },
+  postServerPing(context, { serverID }) {
+    return httpPostServerPing(serverID);
   },
 };
 /**

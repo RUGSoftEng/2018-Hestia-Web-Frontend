@@ -136,3 +136,14 @@ export function httpPostServerRequest(serverid, payload) {
     },
   });
 }
+
+export function httpPostServerPing(serverid) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/ping`;
+  return axios({
+    method: 'POST',
+    url,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
