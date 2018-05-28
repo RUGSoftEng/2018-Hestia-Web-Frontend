@@ -229,9 +229,6 @@ const actions = {
         alert(error);
       });
   },
-  postServerPing(context, { serverID }) {
-    return httpPostServerPing(serverID);
-  },
 };
 /**
  * mutations -  All function modifying the data in the store.
