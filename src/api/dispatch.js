@@ -108,8 +108,33 @@ export function httpGetServer(serverid) {
  */
 export function httpPutServer(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}`;
+
+  // eslint-disable-next-line
+  console.log(url);
+  // eslint-disable-next-line
+  console.log(JSON.stringify(payload));
+  return axios.put(
+    url,
+    payload,
+    { headers: { Authorization: createAuthorizationHeader() } },
+  );
+}
+
+export function httpGetServerPresets(serverid) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/presets/`;
   return axios({
-    mehtod: 'PUT',
+    method: 'GET',
+    url,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
+export function httpPostServerPresets(serverid, payload) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/presets/`;
+  return axios({
+    method: 'POST',
     url,
     data: payload,
     headers: {
@@ -117,6 +142,32 @@ export function httpPutServer(serverid, payload) {
     },
   });
 }
+
+export function httpDeleteServerPreset(serverid, presetid) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/presets/${presetid}`;
+  return axios({
+    method: 'DELETE',
+    url,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
+export function httpPostServerBatchRequest(serverid, payload) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/batch_request`;
+  // eslint-disable-next-line
+  console.log(url);
+  return axios({
+    method: 'POST',
+    url,
+    data: payload,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
 /**
  * httpPostServerRequest -  Send a request to be forwarded to the server.
  *
