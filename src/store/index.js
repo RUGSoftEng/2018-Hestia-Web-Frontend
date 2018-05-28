@@ -316,9 +316,29 @@ const actions = {
 const mutations = {
   // eslint-disable-next-line
   setServersList(state, payload) {
-    // eslint-disable-next-line
-    console.log("setServersList");
-    state.serversList = payload.serversList;
+    const servers = payload.serversList;
+    let count = 0;
+    servers.forEach((server, index) => {
+      httpPostServerPing(server.server_id)
+        .then((response) => {
+          count += 1;
+          if (response.data.value) {
+            servers[index].online = true;
+          } else {
+            servers[index].online = false;
+          }
+          if (count === servers.length) {
+            state.serversList = servers;
+          }
+        })
+        .catch(() => {
+          count += 1;
+          servers[index].online = false;
+          if (count === servers.length) {
+            state.serversList = servers;
+          }
+        });
+    });
   },
   // eslint-disable-next-line
   setServer(state, payload) {
