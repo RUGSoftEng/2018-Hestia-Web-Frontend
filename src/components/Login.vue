@@ -5,7 +5,7 @@
     </sui-card-header>
     <sui-card-content>
       <sui-button
-      @click="auth.login()"
+      @click="auth.login()" class="primary"
       >
       login
       </sui-button>

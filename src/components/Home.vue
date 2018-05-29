@@ -2,7 +2,7 @@
   <div class="home">
 
     <!-- Modal for adding a new server -->
-    <sui-modal v-model="addModalVisible" dimmer="inverted">
+    <sui-modal v-model="addModalVisible" dimmer="inverted" closeIcon="true">
       <sui-modal-header>Adding a Server</sui-modal-header>
       <sui-modal-content>
         Server Name<br>
@@ -11,12 +11,14 @@
         <br>
         Server IP<br>
         <input v-model="addServerIp"/>
+        &nbsp;&nbsp;<span style="color:#888;">The <i>https://</i> prefix is added automatically.</span>
         <br>
         <br>
         Server Port<br>
         <input v-model="addServerPort"/>
         <br>
         <br>
+        <!-- <span v-model="invalidAdress" style="color:red;">Please enter a valid IP adress and Port number.</span> -->
         <sui-button @click="this.confirmAddServer">
           Add Server
         </sui-button>
@@ -35,12 +37,14 @@
         Server IP
         <br>
         <input v-model="editServerIp"/>
+        &nbsp;&nbsp;<span style="color:#888;">The <i>https://</i> prefix is added automatically.</span>
         <br>
         <br>
         Server Port<br>
         <input v-model="editServerPort"/>
         <br>
         <br>
+        <sui-label v-model="invalidAdress" style="color:red;">Please enter a valid IP adress and Port number.</sui-label>
         <sui-button @click="this.confirmEditServer"> Edit Server </sui-button>
       </sui-modal-content>
     </sui-modal>
@@ -128,6 +132,7 @@ export default {
       editServerName: '',
       editServerIp: '',
       editServerPort: '',
+      invalidAdress: false,
     };
   },
   beforeMount() {
@@ -157,21 +162,31 @@ export default {
     },
     confirmAddServer() {
       if (this.validServerAddress(this.addServerIp, this.addServerPort)) {
+        invalidAdress = false;
         this.$store.dispatch('addServer', {
           serverName: this.addServerName,
           serverAddress: `https://${this.addServerIp}`,
           serverPort: this.addServerPort });
         this.addModalVisible = !this.addModalVisible;
       }
+      else {
+        this.invalidAdress = true;
+        alert("Please enter a valid IP adress and Port number.");
+      }
     },
     confirmEditServer() {
       if (this.validServerAddress(this.editServerIp, this.editServerPort)) {
+        invalidAdress = false;
         this.$store.dispatch('putServer', {
           serverID: this.editServerID,
           serverName: this.editServerName,
           serverAddress: `https://${this.editServerIp}`,
           serverPort: this.editServerPort });
         this.editModalVisible = !this.editModalVisible;
+      }
+      else {
+        this.invalidAdress = true;
+        alert("Please enter a valid IP adress and Port number.");
       }
     },
   },
@@ -193,5 +208,10 @@ box-shadow:none !important;
 color:#FFFFFF;
 font-weight:bold;
 cursor:pointer;
+}
+
+.ui.modal>.close {
+  color:black !important;
+
 }
 </style>
