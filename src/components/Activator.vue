@@ -3,7 +3,7 @@
     <div v-if="activator.type === 'bool'">
       <sui-checkbox :label = activator.name toggle
       v-model="activatorState"
-      @click="activatorClicked"
+      @change="activatorClicked"
       />
     </div>
     <div v-else-if="activator.type === 'float'">
