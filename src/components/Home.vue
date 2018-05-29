@@ -65,6 +65,10 @@
               </sui-card-content>
             </sui-card>
             <sui-card v-for="server in servers" :key="server.server_id">
+              <sui-card-content v-if="!server.online">
+                <sui-icon name="red power off"/>
+                This server appears to be offline
+              </sui-card-content>
               <sui-card-content>
                 <sui-card-header> {{server.server_name}}
                   <!-- settings dropdwon menu -->
