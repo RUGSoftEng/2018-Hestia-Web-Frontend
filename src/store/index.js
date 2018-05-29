@@ -7,9 +7,15 @@ import Vuex from 'vuex';
 import {
   httpGetServers,
   httpPostServerRequest,
+  httpGetServer,
   httpPostServers,
   httpDeleteServer,
   httpPutServer,
+  httpPostServerPing,
+  httpGetServerPresets,
+  httpDeleteServerPreset,
+  httpPostServerPresets,
+  httpPostServerBatchRequest,
 } from '@/api/dispatch';
 import {
   preparePayloadPostServer,
@@ -22,8 +28,12 @@ import {
   preparePayloadGetServerPluginsCollections,
   preparePayloadGetServerPluginsCollectionDevice,
   preparePayloadPostServerDevicesActivator,
+  preparePayloadPostServerPreset,
+  preparePayloadPostServerBatchRequest,
 } from '@/api/beforeDispatch';
-
+import {
+  insertServerPresets,
+} from '@/api/afterDispatch';
 
 Vue.use(Vuex);
 
@@ -34,6 +44,7 @@ Vue.use(Vuex);
 const state = {
   serversList: [],
   currentServer: {},
+  currentServerDevices: {},
   currentServerPlugins: [],
   currentServerPluginsCollections: [],
   currentPluginAtributes: {},
@@ -126,13 +137,34 @@ const actions = {
   putServer(context, { serverID, serverName, serverPort, serverAddress }) {
     const payload = preparePayloadPutServer(serverName, serverAddress, serverPort);
     return httpPutServer(serverID, payload)
-      .then(setTimeout(
-        context.dispatch('loadServersList'), 1000,
-      ),
-      )
+      .then((response) => {
+        // eslint-disable-next-line
+        console.log("putServer");
+        // eslint-disable-next-line
+        console.log(serverID);
+        // eslint-disable-next-line
+        console.log(serverName);
+        // eslint-disable-next-line
+        console.log(JSON.stringify(response.data));
+        setTimeout(
+          context.dispatch('loadServersList'), 1000,
+        );
+      })
       .catch((error) => {
       // eslint-disable-next-line
       alert(error);
+      });
+  },
+  getServer(context, { serverID }) {
+    // eslint-disable-next-line
+    console.log('serverID')
+    return httpGetServer(serverID)
+      .then((response) => {
+        context.commit('setServer', { server: response.data });
+      })
+      .catch((error) => {
+        // eslint-disable-next-line
+        alert(error);
       });
   },
   /**
@@ -145,7 +177,7 @@ const actions = {
   getServerDevices(context, { serverID }) {
     const payload = preparePayloadGetServerDevice();
     return httpPostServerRequest(serverID, payload)
-      .then(response => context.commit('setServer', { server: response }))
+      .then(response => context.commit('setServerDevices', { server: response }))
       .catch((error) => {
         // eslint-disable-next-line
         alert(error);
@@ -228,6 +260,54 @@ const actions = {
         alert(error);
       });
   },
+  getServerPresets(context, { serverID }) {
+    // eslint-disable-next-line
+    console.log(serverID);
+    return httpGetServerPresets(serverID)
+      .then((response) => {
+        context.commit('setServerPresets', { presets: response.data });
+      })
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error + "Presets could not be retrieved.");
+      });
+  },
+  postServerPreset(context, { serverID, presetName }) {
+    const payload = preparePayloadPostServerPreset(presetName);
+    return httpPostServerPresets(serverID, payload)
+      .catch((error) => {
+        // eslint-disable-next-line
+        alert(error + "Preset could not be added to the server.");
+      });
+  },
+  deleteServerPreset(context, { serverID, presetID }) {
+    context.commit('removeServerPreset', { presetID });
+    return httpDeleteServerPreset(serverID, presetID)
+      .catch((error) => {
+      // eslint-disable-next-line
+      alert(error + "Preset could not be removed.");
+      });
+  },
+  initializeServerInformation(context, { serverID }) {
+    let server;
+    return httpGetServer(serverID)
+      .then((response) => {
+        server = response.data;
+        httpGetServerPresets(serverID)
+          .then((response2) => {
+            server.presets = response2.data;
+            context.commit('setServer', { server });
+          });
+      });
+  },
+  postServerBatchRequest(context, { serverID, presetID }) {
+    const payload = preparePayloadPostServerBatchRequest(presetID);
+    return httpPostServerBatchRequest(serverID, payload)
+      .catch((error) => {
+        // eslint-disable-next-line
+        alert(error);
+      });
+  },
 };
 /**
  * mutations -  All function modifying the data in the store.
@@ -236,13 +316,39 @@ const actions = {
 const mutations = {
   // eslint-disable-next-line
   setServersList(state, payload) {
-    // eslint-disable-next-line
-    console.log("setServersList");
-    state.serversList = payload.serversList;
+    const servers = payload.serversList;
+    let count = 0;
+    servers.forEach((server, index) => {
+      httpPostServerPing(server.server_id)
+        .then((response) => {
+          count += 1;
+          if (response.data.value) {
+            servers[index].online = true;
+          } else {
+            servers[index].online = false;
+          }
+          if (count === servers.length) {
+            state.serversList = servers;
+          }
+        })
+        .catch(() => {
+          count += 1;
+          servers[index].online = false;
+          if (count === servers.length) {
+            state.serversList = servers;
+          }
+        });
+    });
   },
   // eslint-disable-next-line
   setServer(state, payload) {
-    state.currentServer = payload.server.data;
+    // eslint-disable-next-line
+    console.log('setServer into store');
+    state.currentServer = payload.server;
+  },
+  // eslint-disable-next-line
+  setServerDevices(state, payload) {
+    state.currentServerDevices = payload.server.data;
   },
   // eslint-disable-next-line
   setServerPlugins(state, payload) {
@@ -282,15 +388,29 @@ const mutations = {
   setActivatorState(state, payload) {
     // eslint-disable-next-line
     console.log('setActivatorState');
-    state.currentServer.forEach((device, index1) => {
+    state.currentServerDevices.forEach((device, index1) => {
       if (device.deviceId === payload.deviceId) {
         device.activators.forEach((activator, index2) => {
           if (activator.activatorId === payload.currentActivator.activatorId) {
-            state.currentServer[index1].activators[index2].state = payload.activatorState;
+            state.currentServerDevices[index1].activators[index2].state = payload.activatorState;
           }
         });
       }
     });
+  },
+  // eslint-disable-next-line
+  setServerPresets(state, payload) {
+    state.currentServer = insertServerPresets(state.currentServer, payload.presets);
+  },
+  // eslint-disable-next-line
+  removeServerPreset(state, payload) {
+    const newPresets = [];
+    state.currentServer.presets.forEach((preset) => {
+      if (preset.preset_id !== payload.presetID) {
+        newPresets.push(preset);
+      }
+    });
+    state.currentServer.presets = newPresets;
   },
 };
 

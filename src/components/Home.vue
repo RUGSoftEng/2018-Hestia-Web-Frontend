@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+
+    <!-- Modal for adding a new server -->
     <sui-modal v-model="addModalVisible" dimmer="inverted">
       <sui-modal-header>Adding a Server</sui-modal-header>
       <sui-modal-content>
@@ -20,6 +22,8 @@
         </sui-button>
       </sui-modal-content>
     </sui-modal>
+
+    <!-- Modal for editing server information -->
     <sui-modal v-model="editModalVisible" dimmer="inverted">
       <sui-modal-header>Edit Server</sui-modal-header>
       <sui-modal-content>
@@ -40,6 +44,8 @@
         <sui-button @click="this.confirmEditServer"> Edit Server </sui-button>
       </sui-modal-content>
     </sui-modal>
+
+
     <sui-container class="ui raised segment breadcrumbs">
       <sui-breadcrumb>
         <h2>
@@ -59,6 +65,10 @@
               </sui-card-content>
             </sui-card>
             <sui-card v-for="server in servers" :key="server.server_id">
+              <sui-card-content v-if="!server.online">
+                <sui-icon name="red power off"/>
+                This server appears to be offline
+              </sui-card-content>
               <sui-card-content>
                 <sui-card-header> {{server.server_name}}
                   <!-- settings dropdwon menu -->
@@ -124,10 +134,10 @@ export default {
     this.$store.dispatch('loadServersList');
   },
   methods: {
-    validServerAddress() {
+    validServerAddress(Ip, port) {
       const serverRegex = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/g;
-      const resultIp = this.addServerIp.match(serverRegex);
-      const resultPort = Number(this.addServerPort);
+      const resultIp = Ip.match(serverRegex);
+      const resultPort = Number(port);
       // eslint-disable-next-line
       console.log('validServerAddress');
       if (resultIp !== null && resultPort >= 0 && resultPort <= 65535) {
@@ -146,7 +156,7 @@ export default {
       this.editServerID = serverId;
     },
     confirmAddServer() {
-      if (this.validServerAddress()) {
+      if (this.validServerAddress(this.addServerIp, this.addServerPort)) {
         this.$store.dispatch('addServer', {
           serverName: this.addServerName,
           serverAddress: `https://${this.addServerIp}`,
@@ -155,12 +165,14 @@ export default {
       }
     },
     confirmEditServer() {
-      this.$store.dispatch('putServer', {
-        serverID: this.editServerID,
-        serverName: this.editServerName,
-        serverAddress: `https://${this.editServerIp}`,
-        serverPort: this.editServerPort });
-      this.editModalVisible = !this.editModalVisible;
+      if (this.validServerAddress(this.editServerIp, this.editServerPort)) {
+        this.$store.dispatch('putServer', {
+          serverID: this.editServerID,
+          serverName: this.editServerName,
+          serverAddress: `https://${this.editServerIp}`,
+          serverPort: this.editServerPort });
+        this.editModalVisible = !this.editModalVisible;
+      }
     },
   },
 };
