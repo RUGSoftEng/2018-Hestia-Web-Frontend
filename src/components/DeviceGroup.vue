@@ -1,7 +1,7 @@
 <template>
 <div class="DeviceGroup">
 
-  <!-- Modal for changing a server name -->
+  <!-- Modal for changing a device name -->
   <sui-modal v-model="deviceSettingsModalVisible" dimmer="inverted">
     <sui-modal-header>{{ deviceSettingsDevice.name }} - Device Settings</sui-modal-header>
     <sui-modal-content>
@@ -10,7 +10,7 @@
       <br>
       <br>
       <sui-button @click="confirmPutDeviceName">
-        Add Server
+        Change Settings
       </sui-button>
     </sui-modal-content>
   </sui-modal>
