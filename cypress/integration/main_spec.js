@@ -7,4 +7,9 @@ describe('Front End', function () {
     cy.visit('././index.html')
     cy.title().should('include', 'Hestia')
   })
+  it('.should() - assert that <title> is correct', function () {
+
+    cy.visit('././index.html')
+    cy.title().should('include', 'Hestia')
+  })
 })

@@ -1,14 +1,19 @@
 <template>
-  <div>
-    <h1>Login</h1>
-    It turned out you were not authorized yet.<br>
-    We are sorry for the disturbance, but could you pleace login.<br>
-    <sui-button
-    @click="auth.login()"
-    >
-    login
-    </sui-button>
-  </div>
+  <sui-card class="ui centered">
+    <sui-card-header>
+      <h1>Login</h1>
+    </sui-card-header>
+    <sui-card-content>
+      <sui-button
+      @click="auth.login()"
+      >
+      login
+      </sui-button>
+    </sui-card-content>
+    <sui-card-meta>
+      Please log in first.<br>
+    </sui-card-meta>
+  </sui-card>
 </template>
 
 <script>
