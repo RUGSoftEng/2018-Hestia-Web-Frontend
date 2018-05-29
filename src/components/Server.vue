@@ -140,7 +140,8 @@ export default {
     presetChange(presetID) {
       // eslint-disable-next-line
       console.log(presetID);
-      this.$store.dispatch('postServerBatchRequest', { serverID: this.$route.params.id, presetID });
+      this.$store.dispatch('postServerBatchRequest', { serverID: this.$route.params.id, presetID })
+        .then(() => this.serverDeviceSynchronize());
     },
     createNewPreset() {
       this.$store.dispatch('postServerPreset', {
