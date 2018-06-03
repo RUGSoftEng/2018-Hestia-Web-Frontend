@@ -148,9 +148,9 @@ export default {
     this.$store.dispatch('loadServersList');
   },
   methods: {
-    validServerAddress(Ip, port) {
+    validServerAddress(ipAdress, port) {
       const serverRegex = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/g;
-      const resultIp = Ip.match(serverRegex);
+      const resultIp = ipAdress.match(serverRegex);
       const resultPort = Number(port);
       // eslint-disable-next-line
       console.log('validServerAddress');
