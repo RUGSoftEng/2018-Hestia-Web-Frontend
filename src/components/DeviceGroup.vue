@@ -165,10 +165,6 @@ export default {
       });
       this.deviceSettingsModalVisible = !this.deviceSettingsModalVisible;
     },
-    presetChange(value) {
-      // eslint-disable-next-line
-        console.log(value);
-    },
     pluginCollectionClicked() {
       /* eslint-disable */
         this.$store.dispatch('getServerPluginsCollections',
@@ -178,7 +174,6 @@ export default {
         });
       },
       pluginCollectionDeviceClicked() {
-        console.log('pluginCollectionDeviceClicked');
         this.$store.dispatch('getServerPluginCollectionDevice', {
           serverID: this.$route.params.id,
           collection: this.$store.state.currentServerPlugins[this.currentCollection].collectionName,

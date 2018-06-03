@@ -94,7 +94,6 @@
        </sui-dropdown>
     </sui-modal>
 
-    <!-- <h2> {{server.IPAddress}} </h2> -->
     <DeviceGroup
     :server="this.serverDevices"
     v-on:deviceGroupChange="serverDeviceSynchronize">
@@ -138,8 +137,6 @@ export default {
       this.$store.dispatch('getServerDevices', { serverID: this.$route.params.id });
     },
     presetChange(presetID) {
-      // eslint-disable-next-line
-      console.log(presetID);
       this.$store.dispatch('postServerBatchRequest', { serverID: this.$route.params.id, presetID })
         .then(() => this.serverDeviceSynchronize());
     },

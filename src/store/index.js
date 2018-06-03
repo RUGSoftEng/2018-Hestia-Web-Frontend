@@ -67,8 +67,6 @@ const actions = {
    * @return {JSON}         [description]
    */
   loadServersList(context) {
-    // eslint-disable-next-line
-    console.log('loadServersList');
     return httpGetServers()
       .then((response) => {
         context.commit('setServersList', { serversList: response.data });
@@ -137,15 +135,7 @@ const actions = {
   putServer(context, { serverID, serverName, serverPort, serverAddress }) {
     const payload = preparePayloadPutServer(serverName, serverAddress, serverPort);
     return httpPutServer(serverID, payload)
-      .then((response) => {
-        // eslint-disable-next-line
-        console.log("putServer");
-        // eslint-disable-next-line
-        console.log(serverID);
-        // eslint-disable-next-line
-        console.log(serverName);
-        // eslint-disable-next-line
-        console.log(JSON.stringify(response.data));
+      .then(() => {
         setTimeout(
           context.dispatch('loadServersList'), 1000,
         );
@@ -156,8 +146,6 @@ const actions = {
       });
   },
   getServer(context, { serverID }) {
-    // eslint-disable-next-line
-    console.log('serverID')
     return httpGetServer(serverID)
       .then((response) => {
         context.commit('setServer', { server: response.data });
@@ -247,8 +235,6 @@ const actions = {
    * @return {[type]}           [description]
    */
   activatorUpdate(context, { activator, deviceID, serverID }) {
-    // eslint-disable-next-line
-    console.log('activatorUpdate in store');
     const payload = preparePayloadPostServerDevicesActivator(activator, deviceID);
     const test = `${serverID}`;
     return httpPostServerRequest(serverID, payload)
@@ -261,8 +247,6 @@ const actions = {
       });
   },
   getServerPresets(context, { serverID }) {
-    // eslint-disable-next-line
-    console.log(serverID);
     return httpGetServerPresets(serverID)
       .then((response) => {
         context.commit('setServerPresets', { presets: response.data });
@@ -342,8 +326,6 @@ const mutations = {
   },
   // eslint-disable-next-line
   setServer(state, payload) {
-    // eslint-disable-next-line
-    console.log('setServer into store');
     state.currentServer = payload.server;
   },
   // eslint-disable-next-line
@@ -380,14 +362,10 @@ const mutations = {
   },
   // eslint-disable-next-line
   setServerPluginCollectionDevice(state, payload) {
-    // eslint-disable-next-line
-    console.log("setServerPlguinCollectionDevice");
     state.currentPluginAtributes = payload.atributes.data;
   },
   // eslint-disable-next-line
   setActivatorState(state, payload) {
-    // eslint-disable-next-line
-    console.log('setActivatorState');
     state.currentServerDevices.forEach((device, index1) => {
       if (device.deviceId === payload.deviceId) {
         device.activators.forEach((activator, index2) => {

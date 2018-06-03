@@ -79,8 +79,6 @@ export default{
     },
     updateActivatorGlobal(payload) {
       this.dimmerActive = true;
-      // eslint-disable-next-line
-      console.log("hier");
       this.$store.dispatch('activatorUpdate',
         { activator: payload.activator,
           deviceID: this.device.deviceId,
@@ -88,8 +86,6 @@ export default{
         })
         .then(() => {
           this.dimmerActive = false;
-          // eslint-disable-next-line
-          console.log("nu");
           this.deviceChange();
         }, (error) => {
           // eslint-disable-next-line

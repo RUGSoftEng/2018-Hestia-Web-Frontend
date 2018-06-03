@@ -50,8 +50,6 @@ export function httpGetServers() {
  *                        either containing the response of the server or an error.
  */
 export function httpPostServers(payload) {
-  // eslint-disable-next-line
-  console.log('httpPostServers')
   const url = `${WEB_API_CONFIG.url}/servers/`;
   return axios({
     method: 'POST',
@@ -108,11 +106,6 @@ export function httpGetServer(serverid) {
  */
 export function httpPutServer(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}`;
-
-  // eslint-disable-next-line
-  console.log(url);
-  // eslint-disable-next-line
-  console.log(JSON.stringify(payload));
   return axios.put(
     url,
     payload,
@@ -156,8 +149,6 @@ export function httpDeleteServerPreset(serverid, presetid) {
 
 export function httpPostServerBatchRequest(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}/batch_request`;
-  // eslint-disable-next-line
-  console.log(url);
   return axios({
     method: 'POST',
     url,

@@ -24,7 +24,6 @@ export default{
   methods: {
     routerGo() {
       this.$router.push({ path: '/' });
-      // (window.history.length > 1 ? this.$router.back() : this.$router.go('/'));
     },
   },
 };
