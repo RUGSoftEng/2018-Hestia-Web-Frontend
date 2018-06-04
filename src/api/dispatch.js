@@ -50,8 +50,6 @@ export function httpGetServers() {
  *                        either containing the response of the server or an error.
  */
 export function httpPostServers(payload) {
-  // eslint-disable-next-line
-  console.log('httpPostServers')
   const url = `${WEB_API_CONFIG.url}/servers/`;
   return axios({
     method: 'POST',
@@ -108,8 +106,28 @@ export function httpGetServer(serverid) {
  */
 export function httpPutServer(serverid, payload) {
   const url = `${WEB_API_CONFIG.url}/servers/${serverid}`;
+  return axios.put(
+    url,
+    payload,
+    { headers: { Authorization: createAuthorizationHeader() } },
+  );
+}
+
+export function httpGetServerPresets(serverid) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/presets/`;
   return axios({
-    mehtod: 'PUT',
+    method: 'GET',
+    url,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
+export function httpPostServerPresets(serverid, payload) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/presets/`;
+  return axios({
+    method: 'POST',
     url,
     data: payload,
     headers: {
@@ -117,6 +135,30 @@ export function httpPutServer(serverid, payload) {
     },
   });
 }
+
+export function httpDeleteServerPreset(serverid, presetid) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/presets/${presetid}`;
+  return axios({
+    method: 'DELETE',
+    url,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
+export function httpPostServerBatchRequest(serverid, payload) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/batch_request`;
+  return axios({
+    method: 'POST',
+    url,
+    data: payload,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
 /**
  * httpPostServerRequest -  Send a request to be forwarded to the server.
  *
@@ -131,6 +173,17 @@ export function httpPostServerRequest(serverid, payload) {
     method: 'POST',
     url,
     data: payload,
+    headers: {
+      Authorization: createAuthorizationHeader(),
+    },
+  });
+}
+
+export function httpPostServerPing(serverid) {
+  const url = `${WEB_API_CONFIG.url}/servers/${serverid}/ping`;
+  return axios({
+    method: 'POST',
+    url,
     headers: {
       Authorization: createAuthorizationHeader(),
     },
