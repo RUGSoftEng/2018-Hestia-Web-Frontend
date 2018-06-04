@@ -1,8 +1,6 @@
 <template>
   <div>
-    <h1>
-      Page not found
-    </h1>
+    <h1>Page not found</h1>
     <p>
       Sorry we could not find the page <i> {{ pageName }} </i>.<br>
       <sui-button
@@ -24,7 +22,6 @@ export default{
   methods: {
     routerGo() {
       this.$router.push({ path: '/' });
-      // (window.history.length > 1 ? this.$router.back() : this.$router.go('/'));
     },
   },
 };
