@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-
+    <h1>Home</h1>
     <!-- Modal for adding a new server -->
     <sui-modal v-model="addModalVisible" dimmer="inverted" on="true">
       <sui-modal-header>Adding a Server</sui-modal-header>
