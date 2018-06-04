@@ -338,7 +338,7 @@ const mutations = {
     let i = 0;
     payload.plugins.data.forEach((element) => {
       plugins.push({
-        collectionName: element,
+        text: element,
         key: i,
         value: i,
       });
@@ -352,7 +352,7 @@ const mutations = {
     let i = 0;
     payload.collections.data.forEach((element) => {
       collections.push({
-        deviceName: element,
+        text: element,
         key: i,
         value: i,
       });

@@ -20,54 +20,48 @@
   <sui-modal v-model="modalVisible" dimmer="inverted">
     <sui-modal-header>Adding a new device to {{ this.$route.params.id }}</sui-modal-header>
     <sui-modal-content>
-      <div v-if="currentPluginAtributes != null">
-        <div v-for="atribute in Object.keys(currentPluginAtributes)" :key="atribute">
-          {{ atribute }}
-          <br>
-          <br>
-          <sui-input
-          v-model="currentPluginAtributes[atribute]"
-          >
-          </sui-input>
-          <br>
-        </div>
-      </div>
-      <sui-button primary
-      v-if="currentCollectionDevice != -1"
-      @click="postDevice()"
-      >
-        Add the new device
-      </sui-button>
-      <select
-      v-model="currentCollection"
-      required
-      >
-        <option value="-1" disabled selected hidden>Select a collection</option>
-          <option
-            v-for="plugin in plugins"
-            :key="plugin.key"
-            :value="plugin.key"
-            @click="pluginCollectionClicked()"
-          >
-            {{ plugin.collectionName }}
-          </option>
-        </select>
-        <select
-        v-model="currentCollectionDevice"
-        v-if="currentCollection != -1"
-        required
-        >
-          <option value="-1" disabled selected hidden>Select a device</option>
-          <option
-          v-for="collection in pluginsCollections"
-          :key="collection.key"
-          :value="collection.value"
+      <sui-dropdown
+         selection
+         :options="plugins"
+         placeholder="Select a collection"
+         search
+         required
+         v-model="currentCollection"
+         @click="pluginCollectionClicked()"
+       />
+
+       <sui-dropdown
+          selection
+          :options="pluginsCollections"
+          text="Select a device"
+          search
+          required
+          v-model="currentCollectionDevice"
+          v-if="currentCollection != null"
           @click="pluginCollectionDeviceClicked()"
-          >
-            {{ collection.deviceName }}
-          </option>
-        </select>
-        {{ currentPluginAtributes }}
+        />
+
+        <sui-button primary
+        v-if="currentCollectionDevice != null"
+        @click="postDevice()"
+        >
+          Add the new device
+        </sui-button>
+
+        <div v-if="currentPluginAtributes != null">
+          <div v-for="atribute in Object.keys(currentPluginAtributes)" :key="atribute">
+            {{ atribute }}
+            <br>
+            <br>
+            <sui-input
+            v-model="currentPluginAtributes[atribute]"
+            >
+            </sui-input>
+            <br>
+          </div>
+        </div>
+        <br>
+      {{ currentPluginAtributes }}
       </sui-modal-content>
     </sui-modal>
 
@@ -111,27 +105,12 @@ export default {
   },
   data() {
     return {
-      currentCollection: -1,
-      currentCollectionDevice: -1,
+      currentCollection: null,
+      currentCollectionDevice: null,
       deviceSettingsModalVisible: false,
       deviceSettingsDevice: {},
       modalVisible: false,
       dimmerActive: false,
-      presetPlaceholder: 'select a preset',
-      presets: [{
-        text: 'my favourite',
-        value: 1,
-        key: 1,
-      }, {
-        text: 'goomba stomp special',
-        value: 2,
-        key: 2,
-      }, {
-        text: 'dwarf fortress surprise',
-        value: 3,
-        key: 3,
-      },
-      ],
     };
   },
   computed: {
@@ -167,18 +146,22 @@ export default {
     },
     pluginCollectionClicked() {
       /* eslint-disable */
-        this.$store.dispatch('getServerPluginsCollections',
-        {
-          serverID: this.$route.params.id,
-          collection: this.$store.state.currentServerPlugins[this.currentCollection].collectionName,
-        });
+        if (this.currentCollection != null) {
+          this.$store.dispatch('getServerPluginsCollections',
+          {
+            serverID: this.$route.params.id,
+            collection: this.$store.state.currentServerPlugins[this.currentCollection].text,
+          });
+        }
       },
       pluginCollectionDeviceClicked() {
-        this.$store.dispatch('getServerPluginCollectionDevice', {
-          serverID: this.$route.params.id,
-          collection: this.$store.state.currentServerPlugins[this.currentCollection].collectionName,
-          device: this.$store.state.currentServerPluginsCollections[this.currentCollectionDevice].deviceName,
-        });
+        if (this.currentCollection != null && this.currentCollectionDevice != null) {
+          this.$store.dispatch('getServerPluginCollectionDevice', {
+            serverID: this.$route.params.id,
+            collection: this.$store.state.currentServerPlugins[this.currentCollection].text,
+            device: this.$store.state.currentServerPluginsCollections[this.currentCollectionDevice].text,
+          });
+        }
         /* eslint-enable */
     },
     postDevice() {
