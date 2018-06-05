@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <sui-modal v-model="addModalVisible" dimmer="inverted">
+    <h1>Home</h1>
+    <!-- Modal for adding a new server -->
+    <sui-modal v-model="addModalVisible" dimmer="inverted" on="true">
       <sui-modal-header>Adding a Server</sui-modal-header>
       <sui-modal-content>
         Server Name<br>
@@ -9,17 +11,23 @@
         <br>
         Server IP<br>
         <input v-model="addServerIp"/>
+        &nbsp;&nbsp;<span style="color:#888;">The <i>https://</i> prefix is added automatically.</span>
         <br>
         <br>
         Server Port<br>
         <input v-model="addServerPort"/>
         <br>
         <br>
+        <span v-if="invalidAdress" style="color:red;">
+          Please enter a valid IP adress and Port number.
+        </span>
         <sui-button @click="this.confirmAddServer">
           Add Server
         </sui-button>
       </sui-modal-content>
     </sui-modal>
+
+    <!-- Modal for editing server information -->
     <sui-modal v-model="editModalVisible" dimmer="inverted">
       <sui-modal-header>Edit Server</sui-modal-header>
       <sui-modal-content>
@@ -31,15 +39,26 @@
         Server IP
         <br>
         <input v-model="editServerIp"/>
+        &nbsp;&nbsp;
+        <span style="color:#888;">
+          The <i>https://</i> prefix is added automatically.
+        </span>
         <br>
         <br>
         Server Port<br>
         <input v-model="editServerPort"/>
         <br>
         <br>
+        <sui-label
+        v-if="invalidAdress"
+        style="color:red;">
+          Please enter a valid IP adress and Port number.
+        </sui-label>
         <sui-button @click="this.confirmEditServer"> Edit Server </sui-button>
       </sui-modal-content>
     </sui-modal>
+
+
     <sui-container class="ui raised segment breadcrumbs">
       <sui-breadcrumb>
         <h2>
@@ -59,6 +78,10 @@
               </sui-card-content>
             </sui-card>
             <sui-card v-for="server in servers" :key="server.server_id">
+              <sui-card-content v-if="!server.online">
+                <sui-icon name="red power off"/>
+                This server appears to be offline
+              </sui-card-content>
               <sui-card-content>
                 <sui-card-header> {{server.server_name}}
                   <!-- settings dropdwon menu -->
@@ -118,16 +141,17 @@ export default {
       editServerName: '',
       editServerIp: '',
       editServerPort: '',
+      invalidAdress: false,
     };
   },
   beforeMount() {
     this.$store.dispatch('loadServersList');
   },
   methods: {
-    validServerAddress() {
+    validServerAddress(ipAdress, port) {
       const serverRegex = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/g;
-      const resultIp = this.addServerIp.match(serverRegex);
-      const resultPort = Number(this.addServerPort);
+      const resultIp = ipAdress.match(serverRegex);
+      const resultPort = Number(port);
       // eslint-disable-next-line
       console.log('validServerAddress');
       if (resultIp !== null && resultPort >= 0 && resultPort <= 65535) {
@@ -146,21 +170,29 @@ export default {
       this.editServerID = serverId;
     },
     confirmAddServer() {
-      if (this.validServerAddress()) {
+      if (this.validServerAddress(this.addServerIp, this.addServerPort)) {
+        this.invalidAdress = false;
         this.$store.dispatch('addServer', {
           serverName: this.addServerName,
           serverAddress: `https://${this.addServerIp}`,
           serverPort: this.addServerPort });
         this.addModalVisible = !this.addModalVisible;
+      } else {
+        this.invalidAdress = true;
       }
     },
     confirmEditServer() {
-      this.$store.dispatch('putServer', {
-        serverID: this.editServerID,
-        serverName: this.editServerName,
-        serverAddress: `https://${this.editServerIp}`,
-        serverPort: this.editServerPort });
-      this.editModalVisible = !this.editModalVisible;
+      if (this.validServerAddress(this.editServerIp, this.editServerPort)) {
+        this.invalidAdress = false;
+        this.$store.dispatch('putServer', {
+          serverID: this.editServerID,
+          serverName: this.editServerName,
+          serverAddress: `https://${this.editServerIp}`,
+          serverPort: this.editServerPort });
+        this.editModalVisible = !this.editModalVisible;
+      } else {
+        this.invalidAdress = true;
+      }
     },
   },
 };
@@ -181,5 +213,10 @@ box-shadow:none !important;
 color:#FFFFFF;
 font-weight:bold;
 cursor:pointer;
+}
+
+.ui.modal>.close {
+  color:black !important;
+
 }
 </style>

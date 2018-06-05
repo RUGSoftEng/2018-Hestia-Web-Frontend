@@ -66,7 +66,7 @@ export default class AuthService {
     this.authNotifier.emit('authChange', false);
     // navigate to the home route
     // router.replace('home');
-    router.push('/');
+    router.push('/login');
   }
 
   isAuthenticated() {
