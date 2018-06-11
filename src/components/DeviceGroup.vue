@@ -147,6 +147,7 @@ export default {
     pluginCollectionClicked() {
       /* eslint-disable */
         if (this.currentCollection != null) {
+          this.currentCollectionDevice = null;
           this.$store.dispatch('getServerPluginsCollections',
           {
             serverID: this.$route.params.id,
