@@ -11,7 +11,7 @@
           </sui-breadcrumb-section>
           <sui-breadcrumb-divider />
           <sui-breadcrumb-section active>
-            {{this.$route.params.id}}
+            {{this.server.server_name}}
           </sui-breadcrumb-section>
         </h2>
       </sui-breadcrumb>
