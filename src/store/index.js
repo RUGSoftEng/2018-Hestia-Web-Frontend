@@ -259,6 +259,9 @@ const actions = {
   postServerPreset(context, { serverID, presetName }) {
     const payload = preparePayloadPostServerPreset(presetName);
     return httpPostServerPresets(serverID, payload)
+      .then(() => {
+        context.dispatch('getServerPresets', { serverID });
+      })
       .catch((error) => {
         // eslint-disable-next-line
         alert(error + "Preset could not be added to the server.");
